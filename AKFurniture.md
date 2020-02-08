@@ -1,16 +1,16 @@
 ---
-permalink: /AKFurniture/
+Title: Arknights Furniture
 ---
 
 # Image Test
 
-<div id="image1" style="display: none;"><img src="/1386504515108.gif" alt="Renge"></div>
+<div id="image1"><img src="AKFurniture/1386504515108.gif" alt="Renge"></div>
 
-<div id="image2" style="display: none;"><img src="/1387303199177.gif" alt="Renge"></div>
+<div id="image2"><img src="AKFurniture/1387303199177.gif" alt="Renge"></div>
 
-<div id="image3" style="display: none;"><img src="/1388242811666.gif" alt="Not Renge"></div>
+<div id="image3"><img src="AKFurniture/1388242811666.gif" alt="Not Renge"></div>
 
-<div id="image4" style="display: none;"><img src="/1388245357301.gif" alt="Not Renge"></div>
+<div id="image4"><img src="AKFurniture/1388245357301.gif" alt="Not Renge"></div>
 
 <script>
 	document.title = "Arknights Furniture";
