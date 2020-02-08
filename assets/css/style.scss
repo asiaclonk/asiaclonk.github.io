@@ -12,6 +12,10 @@
   border-bottom: 4px solid #434343;
   box-shadow: 0px 1px 3px rgba(0,0,0,.25);
 
+  li.smallnav {
+    display: none;
+  }
+
   nav {
     max-width: 650px;
     margin: 0 auto;
@@ -68,29 +72,21 @@
         font-size: 11px;
       }
     }
-	
-	&.smallnav {
-	  display: none;
-	}
   }
 }
 
 @media print, screen and (max-width: 480px) {
-
-  #header {
-    margin-top: -20px;
-  }
-
-  section {
-    margin-top: 40px;
-  }
-  
-  nav.smallnav {
+  li.smallnav {
 	display: block;
-  }
-  
-  nav.fullnav {
-    display: none;
+	float: right;
+    font-family: 'OpenSansLight', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    list-style: none;
+    display: inline;
+    color: white;
+    line-height: 50px;
+    text-shadow: 0px 1px 0px rgba(0,0,0,.2);
+    font-size: 14px;
   }
 }
 
