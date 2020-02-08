@@ -12,10 +12,6 @@
   border-bottom: 4px solid #434343;
   box-shadow: 0px 1px 3px rgba(0,0,0,.25);
 
-  img.navimg {
-	display: none;
-  }
-
   nav {
     max-width: 650px;
     margin: 0 auto;
@@ -72,6 +68,10 @@
         font-size: 11px;
       }
     }
+	
+	&.smallnav {
+	  display: none;
+	}
   }
 }
 
@@ -85,12 +85,11 @@
     margin-top: 40px;
   }
   
-  img.navimg {
+  nav.smallnav {
 	display: block;
-	float: left;
   }
   
-  nav {
+  nav.fullnav {
     display: none;
   }
 }
