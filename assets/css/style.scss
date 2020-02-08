@@ -1,8 +1,6 @@
 ---
 ---
 
-@import "";
-
 #header {
   z-index: 100;
   left:0;
@@ -73,3 +71,5 @@
     }
   }
 }
+
+@import "{{ site.theme }}";
