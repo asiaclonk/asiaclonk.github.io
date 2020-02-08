@@ -3,8 +3,6 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-{% seo %}
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh" crossorigin="anonymous"></script>
     <script src="{{ '/assets/js/respond.js' | relative_url }}"></script>
@@ -12,18 +10,18 @@
 
   </head>
   <body>
-      <div id="header">
-        <nav>
-		  {% include nav.html %}
-        </nav>
-      </div><!-- end header -->
+    <div id="header">
+	  <image src="assets/images/yuno.png" alt="Icon">
+      <nav>
+	    <li class="navbutton"><a href="/index.html">Home</a></li>
+	    <li class="navbutton"><a href="/AKFurniture.html">Arknights Furniture</a></li>  
+      </nav>
+    </div><!-- end header -->
 
     <div class="wrapper">
-
       <section>
         <div id="title">
-          <h1>{{ site.title | default: site.github.repository_name }}</h1>
-          <p>{{ site.description | default: site.github.project_tagline }}</p>
+          <h1>{{ page.title }}</h1>
           <hr>
           <span class="credits left">Project maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></span>
           <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/mattgraham">mattgraham</a></span>
@@ -32,7 +30,6 @@
         {{ content }}
 
       </section>
-
     </div>
 
     {% if site.google_analytics %}
