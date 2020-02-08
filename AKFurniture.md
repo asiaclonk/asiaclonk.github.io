@@ -3,6 +3,7 @@ title: Arknights Furniture
 ---
 
 # Image Test
+<script src="assets/js/AKFurniture.js"></script>
 <div>
 	<button>Show Image 1</button>
 	<img src="AKFurniture/1386504515108.gif" alt="Renge" style="display: none;">
