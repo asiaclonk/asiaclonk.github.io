@@ -1,5 +1,5 @@
 ---
-Title: asiaclonk's swiss pocketknife
+title: asiaclonk's swiss pocketknife
 ---
 
 ## Welcome to GitHub Pages
