@@ -1,18 +1,40 @@
 ---
 permalink: /AKFurniture/
 ---
-<script src="/script.js"></script>
 
-#Image Test
+# Image Test
 
-<button type="button" onclick="showimage("image1")">Image 1</button>
 <div id="image1" style="display: none;"><img src="/1386504515108.gif" alt="Renge"></div>
 
-<button type="button" onclick="showimage("image2")">Image 2</button>
-<div id="image2" style="display: none;"><img src="/1387303199177.gif" alt="Renge">
+<div id="image2" style="display: none;"><img src="/1387303199177.gif" alt="Renge"></div>
 
-<button type="button" onclick="showimage("image3")">Image 3</button>
 <div id="image3" style="display: none;"><img src="/1388242811666.gif" alt="Not Renge"></div>
 
-<button type="button" onclick="showimage("image4")">Image 4</button>
 <div id="image4" style="display: none;"><img src="/1388245357301.gif" alt="Not Renge"></div>
+
+<script>
+	document.title = "Arknights Furniture";
+	
+	var button1 = $('<button/', {
+	text: 'Image 1',
+	click: function(){ $("#image1").show() }});
+	
+	var button2 = $('<button/', {
+	text: 'Image 2',
+	click: function(){ $("#image2").show() }});
+	
+	var button3 = $('<button/', {
+	text: 'Image 3',
+	click: function(){ $("#image3").show() }});
+	
+	var button4 = $('<button/', {
+	text: 'Image 4',
+	click: function(){ $("#image4").show() }});
+	
+	$("image1").prepend(button1);
+	$("image2").prepend(button2);
+	$("image3").prepend(button3);
+	$("image4").prepend(button4);
+</script>
+
+# Image Test End
