@@ -1,41 +1,18 @@
 ---
 permalink: /AKFurniture/
 ---
+<script src="/script.js"></script>
 
-## Welcome to GitHub Pages
+#Image Test
 
-You can use the [editor on GitHub](https://github.com/asiaclonk/asiaclonk.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+<button type="button" onclick="showimage("image1")">Image 1</button>
+<div id="image1" style="display: none;"><img src="/1386504515108.gif" alt="Renge"></div>
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+<button type="button" onclick="showimage("image2")">Image 2</button>
+<div id="image2" style="display: none;"><img src="/1387303199177.gif" alt="Renge">
 
-### Markdown
+<button type="button" onclick="showimage("image3")">Image 3</button>
+<div id="image3" style="display: none;"><img src="/1388242811666.gif" alt="Not Renge"></div>
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/asiaclonk/asiaclonk.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+<button type="button" onclick="showimage("image4")">Image 4</button>
+<div id="image4" style="display: none;"><img src="/1388245357301.gif" alt="Not Renge"></div>

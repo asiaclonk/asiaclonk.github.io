@@ -39,7 +39,6 @@
         background-color: #93bd20;
         padding: 10px 12px;
         margin-top: 6px;
-		margin-right: 10px;
         line-height:14px;
         font-size:14px;
         display:inline-block;
@@ -53,9 +52,9 @@
         }
       }
 
-      &.fork {
+      &.navbutton {
         float: left;
-        margin-left: 0px;
+        margin-left: 10px;
       }
 
       &.downloads {
