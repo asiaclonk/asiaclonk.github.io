@@ -1,5 +1,5 @@
 ---
-title: asiaclonk's swiss pocketknife
+title: A wide box
 ---
 
 ## Welcome to GitHub Pages
