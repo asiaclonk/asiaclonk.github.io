@@ -14,7 +14,6 @@
 
   nav {
     max-width: 650px;
-    margin: 0 auto;
     padding: 0 10px;
     background: blue;
     margin: 6px auto;
@@ -54,7 +53,7 @@
 
       &.navbutton {
         float: left;
-        margin-left: 10px;
+        margin-right: 10px;
       }
 
       &.downloads {
@@ -68,17 +67,22 @@
         font-size: 11px;
       }
     }
-	
-	&.smallnav {
-	  display: none;
-	}
   }
 }
 
 @media print, screen and (max-width: 480px) {
   #smallnav {
-    display: inline;
+    display: block;
+	li {
+	  line-height: 70px;
+	  
+	  a {
+	    padding: 5px 20px:
+	  }
+	}
   }
+  
+  section
 }
 
 @import "{{ site.theme }}";
