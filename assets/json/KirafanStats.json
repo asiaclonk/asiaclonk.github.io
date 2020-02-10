@@ -1,0 +1,3350 @@
+[
+    {
+        "name": "Ahagon Umiko",
+        "rarity": 3,
+        "series": "NEW GAME!",
+        "attribute": "Water",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Ahagon Umiko",
+        "rarity": 4,
+        "series": "NEW GAME!",
+        "attribute": "Earth",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Ahagon Umiko",
+        "rarity": 5,
+        "series": "NEW GAME!",
+        "attribute": "Wind",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Aikawa Chiho",
+        "rarity": 3,
+        "series": "Yuyushiki",
+        "attribute": "Earth",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Aikawa Chiho",
+        "rarity": 4,
+        "series": "Yuyushiki",
+        "attribute": "Wind",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Aikawa Chiho",
+        "rarity": 5,
+        "series": "Yuyushiki",
+        "attribute": "Earth",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Akiyama Mio",
+        "rarity": 4,
+        "series": "K-ON!",
+        "attribute": "Water",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Alice Cartelet",
+        "rarity": 3,
+        "series": "Kiniro Mosaic",
+        "attribute": "Water",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Alice Cartelet",
+        "rarity": 3,
+        "series": "Kiniro Mosaic",
+        "attribute": "Wind",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Alice Cartelet",
+        "rarity": 4,
+        "series": "Kiniro Mosaic",
+        "attribute": "Fire",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Alice Cartelet",
+        "rarity": 4,
+        "series": "Kiniro Mosaic",
+        "attribute": "Sun",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Alice Cartelet",
+        "rarity": 5,
+        "series": "Kiniro Mosaic",
+        "attribute": "Fire",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Alice\u3010Christmas\u3011",
+        "rarity": 5,
+        "series": "Kiniro Mosaic",
+        "attribute": "Earth",
+        "class": "Mage",
+        "skill name en": "Memoria Spell",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Alice\u3010New Year\u3011",
+        "rarity": 5,
+        "series": "Kiniro Mosaic",
+        "attribute": "Earth",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Amano Miu",
+        "rarity": 3,
+        "series": "Blend S",
+        "attribute": "Earth",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Aoba\u3010Sports Festival\u3011",
+        "rarity": 5,
+        "series": "NEW GAME!",
+        "attribute": "Wind",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Aoi\u3010Swimsuit\u3011",
+        "rarity": 5,
+        "series": "Yuru Camp",
+        "attribute": "Wind",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Archive",
+        "rarity": 5,
+        "series": "Kirara Fantasia",
+        "attribute": "Moon",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Arima Hizume",
+        "rarity": 4,
+        "series": "Anima Yell!",
+        "attribute": "Fire",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Aya\u3010Swimsuit\u3011",
+        "rarity": 5,
+        "series": "Kiniro Mosaic",
+        "attribute": "Sun",
+        "class": "Knight",
+        "skill name en": "Memoria Sunscreen",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Aya\u3010Valentine\u3011",
+        "rarity": 5,
+        "series": "Kiniro Mosaic",
+        "attribute": "Moon",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "\u3010Traveler of the Wasteland\u3011Rin",
+        "rarity": 5,
+        "series": "Yuru Camp",
+        "attribute": "Fire",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Cesame",
+        "rarity": 5,
+        "series": "",
+        "attribute": "Water",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Chino\u3010Swimsuit\u3011",
+        "rarity": 5,
+        "series": "Gochuumon wa Usagi Desu ka?",
+        "attribute": "Earth",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Chiya",
+        "rarity": 3,
+        "series": "Urara Meirochou",
+        "attribute": "Fire",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Chiya",
+        "rarity": 3,
+        "series": "Urara Meirochou",
+        "attribute": "Sun",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Chiya",
+        "rarity": 4,
+        "series": "Urara Meirochou",
+        "attribute": "Moon",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Chiya",
+        "rarity": 5,
+        "series": "Urara Meirochou",
+        "attribute": "Fire",
+        "class": "Knight",
+        "skill name en": "Memoria Edge",
+        "skill evo name en": "One-Day Patrol Trainee"
+    },
+    {
+        "name": "Chiya\u3010Christmas\u3011",
+        "rarity": 5,
+        "series": "Urara Meirochou",
+        "attribute": "Wind",
+        "class": "Priest",
+        "skill name en": "Memoria Heal",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Chiya\u3010Valentine\u3011",
+        "rarity": 4,
+        "series": "Urara Meirochou",
+        "attribute": "Earth",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Chiyoda Momo",
+        "rarity": 4,
+        "series": "",
+        "attribute": "Sun",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Claire\u3010Halloween\u3011",
+        "rarity": 5,
+        "series": "Harukana Receive",
+        "attribute": "Moon",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Clea\u3010Swimsuit\u3011",
+        "rarity": 4,
+        "series": "",
+        "attribute": "Water",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Cocoa\u3010Christmas\u3011",
+        "rarity": 5,
+        "series": "Gochuumon wa Usagi Desu ka?",
+        "attribute": "Fire",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Ebisuzawa Kurumi",
+        "rarity": 3,
+        "series": "Gakkou Gurashi",
+        "attribute": "Earth",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Ebisuzawa Kurumi",
+        "rarity": 3,
+        "series": "Gakkou Gurashi",
+        "attribute": "Sun",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Ebisuzawa Kurumi",
+        "rarity": 4,
+        "series": "Gakkou Gurashi",
+        "attribute": "Wind",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Ebisuzawa Kurumi",
+        "rarity": 5,
+        "series": "Gakkou Gurashi",
+        "attribute": "Earth",
+        "class": "Warrior",
+        "skill name en": "Memoria Strike",
+        "skill evo name en": "A Swing of Despair"
+    },
+    {
+        "name": "Eiko\u3010Sports Festival\u3011",
+        "rarity": 5,
+        "series": "Slow Start",
+        "attribute": "Earth",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Eiko\u3010Swimsuit\u3011",
+        "rarity": 4,
+        "series": "Slow Start",
+        "attribute": "Earth",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Engi Threepiece",
+        "rarity": 5,
+        "series": "",
+        "attribute": "Moon",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Fuda Yumine",
+        "rarity": 3,
+        "series": "Stella no Mahou",
+        "attribute": "Sun",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Fuda Yumine",
+        "rarity": 4,
+        "series": "Stella no Mahou",
+        "attribute": "Wind",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Fujikawa Kayo",
+        "rarity": 3,
+        "series": "Stella No Mahou",
+        "attribute": "Fire",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Fujikawa Kayo",
+        "rarity": 4,
+        "series": "Stella No Mahou",
+        "attribute": "Moon",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Futaba\u3010Christmas\u3011",
+        "rarity": 4,
+        "series": "Sansha Sanyou",
+        "attribute": "Water",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Fuura\u3010Halloween\u3011",
+        "rarity": 4,
+        "series": "",
+        "attribute": "Fire",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Ginger",
+        "rarity": 5,
+        "series": "Kirara Fantasia",
+        "attribute": "Sun",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Goshiki Agiri",
+        "rarity": 3,
+        "series": "Kill Me Baby",
+        "attribute": "Wind",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Goshiki Agiri",
+        "rarity": 4,
+        "series": "Kill Me Baby",
+        "attribute": "Fire",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hajime\u3010Christmas\u3011",
+        "rarity": 5,
+        "series": "NEW GAME!",
+        "attribute": "Water",
+        "class": "Warrior",
+        "skill name en": "Memoria Strike",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hana N. Fountainstand",
+        "rarity": 4,
+        "series": "Hanayamata",
+        "attribute": "Moon",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hana\u3010Flower Blooming in the Wasteland\u3011",
+        "rarity": 4,
+        "series": "Slow Start",
+        "attribute": "Sun",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hana\u3010Swimsuit\u3011",
+        "rarity": 5,
+        "series": "Hanayamata",
+        "attribute": "Sun",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hanakoizumi Anne",
+        "rarity": 5,
+        "series": "Anne Happy",
+        "attribute": "Sun",
+        "class": "Knight",
+        "skill name en": "Memoria Edge",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Haruka\u3010Swimsuit\u3011",
+        "rarity": 4,
+        "series": "Harukana Receive",
+        "attribute": "Earth",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hasegawa Fumi",
+        "rarity": 4,
+        "series": "Yuyushiki",
+        "attribute": "Earth",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hatoya Kohane",
+        "rarity": 4,
+        "series": "Anima Yell!",
+        "attribute": "Sun",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hatoya Kohane",
+        "rarity": 5,
+        "series": "Anima Yell!",
+        "attribute": "Fire",
+        "class": "Mage",
+        "skill name en": "Memoria Yell",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hayama Teru",
+        "rarity": 4,
+        "series": "Sansha Sanyou",
+        "attribute": "Sun",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hazuki Shizuku",
+        "rarity": 4,
+        "series": "",
+        "attribute": "Fire",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hibarigaoka Ruri",
+        "rarity": 4,
+        "series": "Anne Happy",
+        "attribute": "Moon",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hibarigaoka Ruri",
+        "rarity": 5,
+        "series": "Anne Happy",
+        "attribute": "Water",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hibiki\u3010Valentine\u3011",
+        "rarity": 5,
+        "series": "",
+        "attribute": "Moon",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hifumi\u3010Christmas\u3011",
+        "rarity": 5,
+        "series": "NEW GAME!",
+        "attribute": "Fire",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Higa Kanata",
+        "rarity": 4,
+        "series": "Harukana Receive",
+        "attribute": "Water",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Higa Kanata",
+        "rarity": 5,
+        "series": "Harukana Receive",
+        "attribute": "Fire",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hinata Kaho",
+        "rarity": 3,
+        "series": "Blend S",
+        "attribute": "Fire",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hinata Kaho",
+        "rarity": 4,
+        "series": "Blend S",
+        "attribute": "Earth",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hinata Kaho",
+        "rarity": 5,
+        "series": "Blend S",
+        "attribute": "Fire",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hinata Yukari",
+        "rarity": 3,
+        "series": "Yuyushiki",
+        "attribute": "Fire",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hinata Yukari",
+        "rarity": 3,
+        "series": "Yuyushiki",
+        "attribute": "Sun",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hinata Yukari",
+        "rarity": 4,
+        "series": "Yuyushiki",
+        "attribute": "Water",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hinata Yukari",
+        "rarity": 5,
+        "series": "Yuyushiki",
+        "attribute": "Moon",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hinatsuki Mikan",
+        "rarity": 4,
+        "series": "",
+        "attribute": "Wind",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hirasawa Ui",
+        "rarity": 4,
+        "series": "K-ON!",
+        "attribute": "Sun",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hirasawa Yui",
+        "rarity": 3,
+        "series": "K-ON!",
+        "attribute": "Water",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hirasawa Yui",
+        "rarity": 4,
+        "series": "K-ON!",
+        "attribute": "Earth",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hirasawa Yui",
+        "rarity": 5,
+        "series": "K-ON!",
+        "attribute": "Fire",
+        "class": "Warrior",
+        "skill name en": "Memoria Force",
+        "skill evo name en": "C\u266fm Sword Style"
+    },
+    {
+        "name": "Hiro",
+        "rarity": 3,
+        "series": "Hidamari Sketch",
+        "attribute": "Wind",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hiro",
+        "rarity": 4,
+        "series": "Hidamari Sketch",
+        "attribute": "Fire",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hiro",
+        "rarity": 5,
+        "series": "Hidamari Sketch",
+        "attribute": "Sun",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hiroe\u3010New Year\u3011",
+        "rarity": 4,
+        "series": "Slow Start",
+        "attribute": "Earth",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Honda Tamaki",
+        "rarity": 3,
+        "series": "Stella No Mahou",
+        "attribute": "Earth",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Honda Tamaki",
+        "rarity": 3,
+        "series": "Stella No Mahou",
+        "attribute": "Sun",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Honda Tamaki",
+        "rarity": 4,
+        "series": "Stella No Mahou",
+        "attribute": "Water",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Honda Tamaki",
+        "rarity": 5,
+        "series": "Stella No Mahou",
+        "attribute": "Earth",
+        "class": "Mage",
+        "skill name en": "Memoria Spell",
+        "skill evo name en": "Older Men Will Always Be In My Heart"
+    },
+    {
+        "name": "Hoshikawa Hotaru",
+        "rarity": 4,
+        "series": "NEW GAME!",
+        "attribute": "Earth",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hoshikawa Hotaru",
+        "rarity": 5,
+        "series": "NEW GAME!",
+        "attribute": "Water",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hoshikawa Mafuyu",
+        "rarity": 3,
+        "series": "Blend S",
+        "attribute": "Moon",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hoshikawa Mafuyu",
+        "rarity": 4,
+        "series": "Blend S",
+        "attribute": "Water",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hoshikawa Mafuyu",
+        "rarity": 5,
+        "series": "Blend S",
+        "attribute": "Moon",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hosono Harumi",
+        "rarity": 5,
+        "series": "",
+        "attribute": "Fire",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Hoto Cocoa",
+        "rarity": 5,
+        "series": "Gochuumon wa Usagi Desu ka?",
+        "attribute": "Wind",
+        "class": "Warrior",
+        "skill name en": "Memoria Strike",
+        "skill evo name en": "Your International Another World Barista Attorney\u2019s in Town"
+    },
+    {
+        "name": "Hyakutake Teru",
+        "rarity": 4,
+        "series": "Stella No Mahou",
+        "attribute": "Moon",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Ichii Yui",
+        "rarity": 3,
+        "series": "Yuyushiki",
+        "attribute": "Earth",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Ichii Yui",
+        "rarity": 3,
+        "series": "Yuyushiki",
+        "attribute": "Wind",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Ichii Yui",
+        "rarity": 4,
+        "series": "Yuyushiki",
+        "attribute": "Fire",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Ichii Yui",
+        "rarity": 4,
+        "series": "Yuyushiki",
+        "attribute": "Moon",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Ichii Yui",
+        "rarity": 5,
+        "series": "Yuyushiki",
+        "attribute": "Water",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Ichii Yui",
+        "rarity": 5,
+        "series": "Yuyushiki",
+        "attribute": "Wind",
+        "class": "Knight",
+        "skill name en": "Memoria Edge",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Ichinose Hana",
+        "rarity": 4,
+        "series": "Slow Start",
+        "attribute": "Moon",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Ichinose Hana",
+        "rarity": 5,
+        "series": "Slow Start",
+        "attribute": "Water",
+        "class": "Priest",
+        "skill name en": "Memoria Boost",
+        "skill evo name en": "Embrace the Hidden Feelings in your Heart"
+    },
+    {
+        "name": "Iijima Yun",
+        "rarity": 3,
+        "series": "NEW GAME!",
+        "attribute": "Moon",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Iijima Yun",
+        "rarity": 4,
+        "series": "NEW GAME!",
+        "attribute": "Fire",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Iino Minaha",
+        "rarity": 4,
+        "series": "Stella no Mahou",
+        "attribute": "Sun",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Iizuka Yuzu",
+        "rarity": 3,
+        "series": "Sakura Trick",
+        "attribute": "Wind",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Iizuka Yuzu",
+        "rarity": 4,
+        "series": "Sakura Trick",
+        "attribute": "Moon",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Ikeno Kaede",
+        "rarity": 3,
+        "series": "Sakura Trick",
+        "attribute": "Water",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Ikeno Kaede",
+        "rarity": 4,
+        "series": "Sakura Trick",
+        "attribute": "Sun",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Iketani Nono",
+        "rarity": 4,
+        "series": "Stella no Mahou",
+        "attribute": "Moon",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Inokuma Youko",
+        "rarity": 3,
+        "series": "Kiniro Mosaic",
+        "attribute": "Sun",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Inokuma Youko",
+        "rarity": 4,
+        "series": "Kiniro Mosaic",
+        "attribute": "Fire",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Inuyama Aoi",
+        "rarity": 4,
+        "series": "Yuru Camp",
+        "attribute": "Earth",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Inuyama Aoi",
+        "rarity": 5,
+        "series": "Yuru Camp",
+        "attribute": "Water",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Iroi Saku",
+        "rarity": 4,
+        "series": "Urara Meirochou",
+        "attribute": "Wind",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Irokawa Ruki",
+        "rarity": 4,
+        "series": "Comic Girls",
+        "attribute": "Moon",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Isami\u3010New Year\u3011",
+        "rarity": 5,
+        "series": "Kiniro Mosaic",
+        "attribute": "Fire",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Isana\u3010Hinamatsuri\u3011",
+        "rarity": 5,
+        "series": "Yumekui Merry",
+        "attribute": "Water",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kafuu Chino",
+        "rarity": 4,
+        "series": "Gochuumon wa Usagi Desu ka?",
+        "attribute": "Water",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kafuu Chino",
+        "rarity": 5,
+        "series": "Gochuumon wa Usagi Desu ka?",
+        "attribute": "Sun",
+        "class": "Mage",
+        "skill name en": "Memoria Spell",
+        "skill evo name en": "The Taste of Another World Coffee Mage"
+    },
+    {
+        "name": "Kagamihara Nadeshiko",
+        "rarity": 4,
+        "series": "Yuru Camp",
+        "attribute": "Sun",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kagamihara Nadeshiko",
+        "rarity": 5,
+        "series": "Yuru Camp",
+        "attribute": "Fire",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kagamihara Nadeshiko",
+        "rarity": 5,
+        "series": "Yuru Camp",
+        "attribute": "Water",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kaho\u3010New Year\u3011",
+        "rarity": 5,
+        "series": "Blend S",
+        "attribute": "Moon",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kaho\u3010Swimsuit\u3011",
+        "rarity": 5,
+        "series": "Blend S",
+        "attribute": "Water",
+        "class": "Warrior",
+        "skill name en": "Memoria Force",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kanzaki Hideri",
+        "rarity": 3,
+        "series": "Blend S",
+        "attribute": "Fire",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kanzaki Hideri",
+        "rarity": 4,
+        "series": "Blend S",
+        "attribute": "Sun",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kaos\u3010Swimsuit\u3011",
+        "rarity": 5,
+        "series": "Comic Girls",
+        "attribute": "Water",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Karen\u3010A Magician From Overseas\u3011",
+        "rarity": 5,
+        "series": "Kiniro Mosaic",
+        "attribute": "Sun",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Karen\u3010Swimsuit\u3011",
+        "rarity": 4,
+        "series": "Kiniro Mosaic",
+        "attribute": "Wind",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Katsuki Tsubasa",
+        "rarity": 4,
+        "series": "Comic Girls",
+        "attribute": "Water",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kirara\u3010Manga ver.\u3011",
+        "rarity": 5,
+        "series": "",
+        "attribute": "Sun",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kirima Syaro",
+        "rarity": 4,
+        "series": "Gochuumon wa Usagi Desu ka?",
+        "attribute": "Wind",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kirima Syaro",
+        "rarity": 5,
+        "series": "Gochuumon wa Usagi Desu ka?",
+        "attribute": "Fire",
+        "class": "Alchemist",
+        "skill name en": "Memoria Craft",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Koizuka Koyume",
+        "rarity": 4,
+        "series": "Comic Girls",
+        "attribute": "Sun",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Koizuka Koyume",
+        "rarity": 5,
+        "series": "Comic Girls",
+        "attribute": "Earth",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Komichi Aya",
+        "rarity": 3,
+        "series": "Kiniro Mosaic",
+        "attribute": "Water",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Komichi Aya",
+        "rarity": 4,
+        "series": "Kiniro Mosaic",
+        "attribute": "Wind",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kon\u3010Swimsuit\u3011",
+        "rarity": 5,
+        "series": "Urara Meirochou",
+        "attribute": "Wind",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kotetsu\u3010Christmas\u3011",
+        "rarity": 5,
+        "series": "Anima Yell!",
+        "attribute": "Water",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kotobuki Tsumugi",
+        "rarity": 3,
+        "series": "K-ON!",
+        "attribute": "Earth",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kotobuki Tsumugi",
+        "rarity": 4,
+        "series": "K-ON!",
+        "attribute": "Wind",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kotone\u3010Swimsuit\u3011",
+        "rarity": 4,
+        "series": "Sakura Trick",
+        "attribute": "Sun",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kou\u3010Swimsuit\u3011",
+        "rarity": 5,
+        "series": "NEW GAME!",
+        "attribute": "Fire",
+        "class": "Mage",
+        "skill name en": "Memoria Spell",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Koume\u3010Valentine\u3011",
+        "rarity": 5,
+        "series": "Urara Meirochou",
+        "attribute": "Earth",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kujou Karen",
+        "rarity": 3,
+        "series": "Kiniro Mosaic",
+        "attribute": "Earth",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kujou Karen",
+        "rarity": 3,
+        "series": "Kiniro Mosaic",
+        "attribute": "Moon",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kujou Karen",
+        "rarity": 4,
+        "series": "Kiniro Mosaic",
+        "attribute": "Fire",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kujou Karen",
+        "rarity": 5,
+        "series": "Kiniro Mosaic",
+        "attribute": "Moon",
+        "class": "Warrior",
+        "skill name en": "Memoria Rouse",
+        "skill evo name en": "Finishing Eternal Wave Sword"
+    },
+    {
+        "name": "Kumegawa Botan",
+        "rarity": 4,
+        "series": "Anne Happy",
+        "attribute": "Earth",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kuro",
+        "rarity": 4,
+        "series": "Hitsugi Katsugi no Kuro ~Kaichuu Tabi no Wa~",
+        "attribute": "Earth",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kuro",
+        "rarity": 5,
+        "series": "Hitsugi Katsugi no Kuro ~Kaichuu Tabi no Wa~",
+        "attribute": "Moon",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kurumi\u3010Swimsuit\u3011",
+        "rarity": 5,
+        "series": "Gakkou Gurashi",
+        "attribute": "Moon",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Kuzehashi Akari",
+        "rarity": 4,
+        "series": "Kiniro Mosaic",
+        "attribute": "Wind",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Lamp",
+        "rarity": 5,
+        "series": "Kirara Fantasia",
+        "attribute": "Sun",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Lamp\u3010Sports Festival\u3011",
+        "rarity": 4,
+        "series": "Kirara Fantasia",
+        "attribute": "Sun",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Lamp\u3010Swimsuit\u3011",
+        "rarity": 5,
+        "series": "Kirara Fantasia",
+        "attribute": "Sun",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Lilith",
+        "rarity": 4,
+        "series": "",
+        "attribute": "Earth",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Maika\u3010Hinamatsuri\u3011",
+        "rarity": 4,
+        "series": "Blend S",
+        "attribute": "Moon",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Maika\u3010Swimsuit\u3011",
+        "rarity": 5,
+        "series": "Blend S",
+        "attribute": "Water",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Matsubara Honoka",
+        "rarity": 3,
+        "series": "Kiniro Mosaic",
+        "attribute": "Wind",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Matsubara Honoka",
+        "rarity": 4,
+        "series": "Kiniro Mosaic",
+        "attribute": "Water",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Matsubara Honoka",
+        "rarity": 5,
+        "series": "Kiniro Mosaic",
+        "attribute": "Moon",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Matsumoto Yoriko",
+        "rarity": 3,
+        "series": "Yuyushiki",
+        "attribute": "Moon",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Matsumoto Yoriko",
+        "rarity": 4,
+        "series": "Yuyushiki",
+        "attribute": "Earth",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Matsumoto Yoriko",
+        "rarity": 5,
+        "series": "Yuyushiki",
+        "attribute": "Sun",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Maya",
+        "rarity": 4,
+        "series": "",
+        "attribute": "Water",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Maya",
+        "rarity": 5,
+        "series": "",
+        "attribute": "Sun",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Megu",
+        "rarity": 4,
+        "series": "",
+        "attribute": "Water",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Megu",
+        "rarity": 5,
+        "series": "",
+        "attribute": "Sun",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Merry Nightmare",
+        "rarity": 3,
+        "series": "Yumekui Merry",
+        "attribute": "Wind",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Merry Nightmare",
+        "rarity": 4,
+        "series": "Yumekui Merry",
+        "attribute": "Earth",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Merry Nightmare",
+        "rarity": 5,
+        "series": "Yumekui Merry",
+        "attribute": "Moon",
+        "class": "Warrior",
+        "skill name en": "Memoria Strike",
+        "skill evo name en": "Adventures Between Dream and Reality"
+    },
+    {
+        "name": "Merry\u3010Valentine\u3011",
+        "rarity": 5,
+        "series": "Yumekui Merry",
+        "attribute": "Water",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Miho",
+        "rarity": 4,
+        "series": "A-Channel",
+        "attribute": "Water",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Minami Shizuku",
+        "rarity": 3,
+        "series": "Sakura Trick",
+        "attribute": "Fire",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Minami Shizuku",
+        "rarity": 4,
+        "series": "Sakura Trick",
+        "attribute": "Earth",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Mio\u3010Valentine\u3011",
+        "rarity": 5,
+        "series": "K-ON!",
+        "attribute": "Moon",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Miyako",
+        "rarity": 3,
+        "series": "Hidamari Sketch",
+        "attribute": "Earth",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Miyako",
+        "rarity": 3,
+        "series": "Hidamari Sketch",
+        "attribute": "Fire",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Miyako",
+        "rarity": 4,
+        "series": "Hidamari Sketch",
+        "attribute": "Moon",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Miyako",
+        "rarity": 5,
+        "series": "Hidamari Sketch",
+        "attribute": "Sun",
+        "class": "Warrior",
+        "skill name en": "Memoria Charge",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Miyako\u3010Christmas\u3011",
+        "rarity": 5,
+        "series": "Hidamari Sketch",
+        "attribute": "Sun",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Mochizuki Momiji",
+        "rarity": 5,
+        "series": "NEW GAME!",
+        "attribute": "Earth",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Moeta Kaoruko",
+        "rarity": 4,
+        "series": "Comic Girls",
+        "attribute": "Wind",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Moeta Kaoruko",
+        "rarity": 5,
+        "series": "Comic Girls",
+        "attribute": "Earth",
+        "class": "Priest",
+        "skill name en": "Memoria Song",
+        "skill evo name en": "Kaos-sensei\u2019s New Serialization?"
+    },
+    {
+        "name": "Momiji\u3010New Year\u3011",
+        "rarity": 4,
+        "series": "NEW GAME!",
+        "attribute": "Moon",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Momiji\u3010Valentine\u3011",
+        "rarity": 5,
+        "series": "NEW GAME!",
+        "attribute": "Water",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Momo\u3010Christmas\u3011",
+        "rarity": 5,
+        "series": "",
+        "attribute": "Sun",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Momochi Tamate",
+        "rarity": 3,
+        "series": "Slow Start",
+        "attribute": "Fire",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Momochi Tamate",
+        "rarity": 4,
+        "series": "Slow Start",
+        "attribute": "Sun",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Momochi Tamate",
+        "rarity": 5,
+        "series": "Slow Start",
+        "attribute": "Water",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Murakami Shiina",
+        "rarity": 3,
+        "series": "Stella No Mahou",
+        "attribute": "Fire",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Murakami Shiina",
+        "rarity": 3,
+        "series": "Stella No Mahou",
+        "attribute": "Water",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Murakami Shiina",
+        "rarity": 4,
+        "series": "Stella No Mahou",
+        "attribute": "Earth",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Nadesiko\u3010Swimsuit\u3011",
+        "rarity": 5,
+        "series": "Yuru Camp",
+        "attribute": "Wind",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Nagi",
+        "rarity": 3,
+        "series": "A-Channel",
+        "attribute": "Fire",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Nagi",
+        "rarity": 3,
+        "series": "A-Channel",
+        "attribute": "Moon",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Nagi",
+        "rarity": 4,
+        "series": "A-Channel",
+        "attribute": "Wind",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Nagi",
+        "rarity": 5,
+        "series": "A-Channel",
+        "attribute": "Earth",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Nakano Azusa",
+        "rarity": 3,
+        "series": "K-ON!",
+        "attribute": "Earth",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Nakano Azusa",
+        "rarity": 4,
+        "series": "K-ON!",
+        "attribute": "Moon",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Nakano Azusa",
+        "rarity": 5,
+        "series": "K-ON!",
+        "attribute": "Wind",
+        "class": "Mage",
+        "skill name en": "Memoria Sonic",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Naoki Miki",
+        "rarity": 3,
+        "series": "Gakkou Gurashi",
+        "attribute": "Fire",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Naoki Miki",
+        "rarity": 3,
+        "series": "Gakkou Gurashi",
+        "attribute": "Wind",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Naoki Miki",
+        "rarity": 4,
+        "series": "Gakkou Gurashi",
+        "attribute": "Earth",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Naoki Miki",
+        "rarity": 5,
+        "series": "Gakkou Gurashi",
+        "attribute": "Wind",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Narumi Tsubame",
+        "rarity": 5,
+        "series": "NEW GAME!",
+        "attribute": "Earth",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Natsume Nina",
+        "rarity": 4,
+        "series": "Urara Meirochou",
+        "attribute": "Sun",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Natsume Nono",
+        "rarity": 3,
+        "series": "Urara Meirochou",
+        "attribute": "Water",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Natsume Nono",
+        "rarity": 3,
+        "series": "Urara Meirochou",
+        "attribute": "Wind",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Natsume Nono",
+        "rarity": 4,
+        "series": "Urara Meirochou",
+        "attribute": "Earth",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Natsume Nono",
+        "rarity": 5,
+        "series": "Urara Meirochou",
+        "attribute": "Wind",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Nazuna",
+        "rarity": 3,
+        "series": "Hidamari Sketch",
+        "attribute": "Moon",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Nazuna",
+        "rarity": 4,
+        "series": "Hidamari Sketch",
+        "attribute": "Earth",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Nene\u3010Swimsuit\u3011",
+        "rarity": 5,
+        "series": "NEW GAME!",
+        "attribute": "Earth",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Nijou Omi",
+        "rarity": 4,
+        "series": "Urara Meirochou",
+        "attribute": "Moon",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Nishikawa Youko",
+        "rarity": 4,
+        "series": "Sansha Sanyou",
+        "attribute": "Moon",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Nishikawa Youko",
+        "rarity": 5,
+        "series": "Sansha Sanyou",
+        "attribute": "Wind",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Noda Kotone",
+        "rarity": 4,
+        "series": "Sakura Trick",
+        "attribute": "Wind",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Noda Miki",
+        "rarity": 4,
+        "series": "GA Geijutsuka Art Design Class",
+        "attribute": "Earth",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Nono\u3010Halloween\u3011",
+        "rarity": 4,
+        "series": "Urara Meirochou",
+        "attribute": "Water",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Nonohara Yuzuko",
+        "rarity": 3,
+        "series": "Yuyushiki",
+        "attribute": "Fire",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Nonohara Yuzuko",
+        "rarity": 3,
+        "series": "Yuyushiki",
+        "attribute": "Water",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Nonohara Yuzuko",
+        "rarity": 4,
+        "series": "Yuyushiki",
+        "attribute": "Earth",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Nonohara Yuzuko",
+        "rarity": 5,
+        "series": "Yuyushiki",
+        "attribute": "Fire",
+        "class": "Warrior",
+        "skill name en": "Memoria Force",
+        "skill evo name en": "Warrior Yuzuko Still Has A Bit More in Her"
+    },
+    {
+        "name": "Nori",
+        "rarity": 3,
+        "series": "Hidamari Sketch",
+        "attribute": "Water",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Nori",
+        "rarity": 4,
+        "series": "Hidamari Sketch",
+        "attribute": "Wind",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Nozaki Namiko",
+        "rarity": 4,
+        "series": "GA Geijutsuka Art Design Class",
+        "attribute": "Wind",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Odagiri Futaba",
+        "rarity": 4,
+        "series": "Sansha Sanyou",
+        "attribute": "Fire",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Okano Kei",
+        "rarity": 4,
+        "series": "Yuyushiki",
+        "attribute": "Fire",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Omi\u3010New Year\u3011",
+        "rarity": 5,
+        "series": "Urara Meirochou",
+        "attribute": "Wind",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Oogaki Chiaki",
+        "rarity": 4,
+        "series": "Yuru Camp",
+        "attribute": "Wind",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Oogaki Chiaki",
+        "rarity": 5,
+        "series": "Yuru Camp",
+        "attribute": "Water",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Oomichi Miyabi",
+        "rarity": 4,
+        "series": "GA Geijutsuka Art Design Class",
+        "attribute": "Moon",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Oomiya Isami",
+        "rarity": 4,
+        "series": "Kiniro Mosaic",
+        "attribute": "Water",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Oomiya Shinobu",
+        "rarity": 3,
+        "series": "Kiniro Mosaic",
+        "attribute": "Fire",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Oomiya Shinobu",
+        "rarity": 4,
+        "series": "Kiniro Mosaic",
+        "attribute": "Earth",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Oomiya Shinobu",
+        "rarity": 5,
+        "series": "Kiniro Mosaic",
+        "attribute": "Fire",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Ooshiro Akari",
+        "rarity": 4,
+        "series": "",
+        "attribute": "Fire",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Oozora Haruka",
+        "rarity": 4,
+        "series": "Harukana Receive",
+        "attribute": "Water",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Oozora Haruka",
+        "rarity": 5,
+        "series": "Harukana Receive",
+        "attribute": "Fire",
+        "class": "Knight",
+        "skill name en": "Memoria Drive",
+        "skill evo name en": "Strike Back on the Whistle"
+    },
+    {
+        "name": "Oribe Yasuna",
+        "rarity": 3,
+        "series": "",
+        "attribute": "Sun",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Oribe Yasuna",
+        "rarity": 4,
+        "series": "",
+        "attribute": "Water",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Oribe Yasuna",
+        "rarity": 5,
+        "series": "",
+        "attribute": "Earth",
+        "class": "Knight",
+        "skill name en": "Memoria Jammer",
+        "skill evo name en": "Invincible Anti-Sonya Spear"
+    },
+    {
+        "name": "Otokawa Sumi",
+        "rarity": 4,
+        "series": "Sakura Trick",
+        "attribute": "Earth",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Ren\u3010Valentine\u3011",
+        "rarity": 4,
+        "series": "",
+        "attribute": "Water",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Ritsu\u3010Valentine\u3011",
+        "rarity": 4,
+        "series": "K-ON!",
+        "attribute": "Sun",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Rize\u3010Halloween\u3011",
+        "rarity": 5,
+        "series": "Gochuumon wa Usagi Desu ka?",
+        "attribute": "Water",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Ruki\u3010Christmas\u3011",
+        "rarity": 4,
+        "series": "Comic Girls",
+        "attribute": "Wind",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Run",
+        "rarity": 3,
+        "series": "A-Channel",
+        "attribute": "Earth",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Run",
+        "rarity": 3,
+        "series": "A-Channel",
+        "attribute": "Water",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Run",
+        "rarity": 4,
+        "series": "A-Channel",
+        "attribute": "Fire",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Run",
+        "rarity": 5,
+        "series": "A-Channel",
+        "attribute": "Sun",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Run\u3010Christmas\u3011",
+        "rarity": 4,
+        "series": "A-Channel",
+        "attribute": "Water",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Run\u3010New Year\u3011",
+        "rarity": 5,
+        "series": "A-Channel",
+        "attribute": "Wind",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Sae",
+        "rarity": 3,
+        "series": "Hidamari Sketch",
+        "attribute": "Earth",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Sae",
+        "rarity": 4,
+        "series": "Hidamari Sketch",
+        "attribute": "Water",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Saitou Ena",
+        "rarity": 4,
+        "series": "Yuru Camp",
+        "attribute": "Water",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Sakura Megumi",
+        "rarity": 3,
+        "series": "Gakkou Gurashi",
+        "attribute": "Wind",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Sakura Megumi",
+        "rarity": 4,
+        "series": "Gakkou Gurashi",
+        "attribute": "Fire",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Sakura Megumi",
+        "rarity": 5,
+        "series": "Gakkou Gurashi",
+        "attribute": "Water",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Sakura Nene",
+        "rarity": 4,
+        "series": "NEW GAME!",
+        "attribute": "Wind",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Sakuranomiya Maika",
+        "rarity": 3,
+        "series": "Blend S",
+        "attribute": "Water",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Sakuranomiya Maika",
+        "rarity": 4,
+        "series": "Blend S",
+        "attribute": "Wind",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Sakuranomiya Maika",
+        "rarity": 5,
+        "series": "Blend S",
+        "attribute": "Sun",
+        "class": "Mage",
+        "skill name en": "Memoria Spell",
+        "skill evo name en": "Disdainful Smile"
+    },
+    {
+        "name": "Salt",
+        "rarity": 5,
+        "series": "",
+        "attribute": "Wind",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Sasame Yaya",
+        "rarity": 4,
+        "series": "Hanayamata",
+        "attribute": "Water",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Sawatari Uki",
+        "rarity": 4,
+        "series": "Anima Yell!",
+        "attribute": "Wind",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Seki Ayame",
+        "rarity": 3,
+        "series": "Stella No Mahou",
+        "attribute": "Wind",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Seki Ayame",
+        "rarity": 4,
+        "series": "Stella No Mahou",
+        "attribute": "Fire",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Sekiya Naru",
+        "rarity": 4,
+        "series": "Hanayamata",
+        "attribute": "Earth",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Sekiya Naru",
+        "rarity": 5,
+        "series": "Hanayamata",
+        "attribute": "Sun",
+        "class": "Priest",
+        "skill name en": "Memoria Divine",
+        "skill evo name en": "Sacred Flower Clap"
+    },
+    {
+        "name": "Sengoku Kamuri",
+        "rarity": 3,
+        "series": "Slow Start",
+        "attribute": "Wind",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Sengoku Kamuri",
+        "rarity": 4,
+        "series": "Slow Start",
+        "attribute": "Water",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Sengoku Kamuri",
+        "rarity": 5,
+        "series": "Slow Start",
+        "attribute": "Sun",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Shiina\u3010Valentine\u3011",
+        "rarity": 5,
+        "series": "Stella No Mahou",
+        "attribute": "Wind",
+        "class": "Warrior",
+        "skill name en": "Memoria Strike",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Shima Rin",
+        "rarity": 4,
+        "series": "Yuru Camp",
+        "attribute": "Wind",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Shima Rin",
+        "rarity": 5,
+        "series": "Yuru Camp",
+        "attribute": "Water",
+        "class": "Mage",
+        "skill name en": "Memoria Spell",
+        "skill evo name en": "Occupation: Another World Camper"
+    },
+    {
+        "name": "Shinobu\u3010New Year\u3011",
+        "rarity": 4,
+        "series": "Kiniro Mosaic",
+        "attribute": "Water",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Shinoda Hajime",
+        "rarity": 3,
+        "series": "NEW GAME!",
+        "attribute": "Water",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Shinoda Hajime",
+        "rarity": 4,
+        "series": "NEW GAME!",
+        "attribute": "Wind",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Shizuku\u3010Swimsuit\u3011",
+        "rarity": 5,
+        "series": "Sakura Trick",
+        "attribute": "Wind",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Sonoda Yuu",
+        "rarity": 3,
+        "series": "Sakura Trick",
+        "attribute": "Water",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Sonoda Yuu",
+        "rarity": 4,
+        "series": "Sakura Trick",
+        "attribute": "Water",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Sonoda Yuu",
+        "rarity": 5,
+        "series": "Sakura Trick",
+        "attribute": "Sun",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Sonya",
+        "rarity": 3,
+        "series": "",
+        "attribute": "Water",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Sonya",
+        "rarity": 4,
+        "series": "",
+        "attribute": "Moon",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Sonya",
+        "rarity": 5,
+        "series": "",
+        "attribute": "Earth",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Sonya\u3010Christmas\u3011",
+        "rarity": 4,
+        "series": "",
+        "attribute": "Sun",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Sugar",
+        "rarity": 5,
+        "series": "Kirara Fantasia",
+        "attribute": "Earth",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Suzukaze Aoba",
+        "rarity": 3,
+        "series": "NEW GAME!",
+        "attribute": "Earth",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Suzukaze Aoba",
+        "rarity": 3,
+        "series": "NEW GAME!",
+        "attribute": "Wind",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Suzukaze Aoba",
+        "rarity": 4,
+        "series": "NEW GAME!",
+        "attribute": "Fire",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Suzukaze Aoba",
+        "rarity": 4,
+        "series": "NEW GAME!",
+        "attribute": "Fire",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Suzukaze Aoba",
+        "rarity": 5,
+        "series": "NEW GAME!",
+        "attribute": "Wind",
+        "class": "Mage",
+        "skill name en": "Memoria Spell",
+        "skill evo name en": "Sneaking Working"
+    },
+    {
+        "name": "Tachibana Isana",
+        "rarity": 4,
+        "series": "Yumekui Merry",
+        "attribute": "Sun",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Tachibana Isana",
+        "rarity": 5,
+        "series": "Yumekui Merry",
+        "attribute": "Wind",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Tainaka Ritsu",
+        "rarity": 3,
+        "series": "K-ON!",
+        "attribute": "Sun",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Tainaka Ritsu",
+        "rarity": 4,
+        "series": "K-ON!",
+        "attribute": "Earth",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Takayama Haruka",
+        "rarity": 3,
+        "series": "Sakura Trick",
+        "attribute": "Water",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Takayama Haruka",
+        "rarity": 4,
+        "series": "Sakura Trick",
+        "attribute": "Sun",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Takayama Haruka",
+        "rarity": 5,
+        "series": "Sakura Trick",
+        "attribute": "Fire",
+        "class": "Priest",
+        "skill name en": "Memoria Rise",
+        "skill evo name en": "Healing Magic of the Mysterious Cherry Blossoms"
+    },
+    {
+        "name": "Takeya Yuki",
+        "rarity": 3,
+        "series": "Gakkou Gurashi",
+        "attribute": "Earth",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Takeya Yuki",
+        "rarity": 3,
+        "series": "Gakkou Gurashi",
+        "attribute": "Water",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Takeya Yuki",
+        "rarity": 4,
+        "series": "Gakkou Gurashi",
+        "attribute": "Fire",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Takeya Yuki",
+        "rarity": 5,
+        "series": "Gakkou Gurashi",
+        "attribute": "Water",
+        "class": "Priest",
+        "skill name en": "Memoria Heal",
+        "skill evo name en": "Gospel of Smiles"
+    },
+    {
+        "name": "Takimoto Hifumi",
+        "rarity": 3,
+        "series": "NEW GAME!",
+        "attribute": "Fire",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Takimoto Hifumi",
+        "rarity": 3,
+        "series": "NEW GAME!",
+        "attribute": "Water",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Takimoto Hifumi",
+        "rarity": 4,
+        "series": "NEW GAME!",
+        "attribute": "Sun",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Takimoto Hifumi",
+        "rarity": 5,
+        "series": "NEW GAME!",
+        "attribute": "Moon",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Tamaki\u3010Christmas\u3011",
+        "rarity": 4,
+        "series": "Stella No Mahou",
+        "attribute": "Wind",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Tatejima Kotetsu",
+        "rarity": 4,
+        "series": "Anima Yell!",
+        "attribute": "Earth",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Tatsumi Kon",
+        "rarity": 3,
+        "series": "Urara Meirochou",
+        "attribute": "Earth",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Tatsumi Kon",
+        "rarity": 3,
+        "series": "Urara Meirochou",
+        "attribute": "Wind",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Tatsumi Kon",
+        "rarity": 4,
+        "series": "Urara Meirochou",
+        "attribute": "Fire",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Tatsumi Kon",
+        "rarity": 5,
+        "series": "Urara Meirochou",
+        "attribute": "Sun",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Tedeza Rize",
+        "rarity": 4,
+        "series": "Gochuumon wa Usagi Desu ka?",
+        "attribute": "Moon",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Tedeza Rize",
+        "rarity": 5,
+        "series": "Gochuumon wa Usagi Desu ka?",
+        "attribute": "Water",
+        "class": "Knight",
+        "skill name en": "Memoria Drive",
+        "skill evo name en": "Midnight All Out"
+    },
+    {
+        "name": "Thomas Claire",
+        "rarity": 4,
+        "series": "Harukana Receive",
+        "attribute": "Earth",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Thomas Emily",
+        "rarity": 4,
+        "series": "Harukana Receive",
+        "attribute": "Earth",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Tokura Eiko",
+        "rarity": 3,
+        "series": "Slow Start",
+        "attribute": "Earth",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Tokura Eiko",
+        "rarity": 4,
+        "series": "Slow Start",
+        "attribute": "Wind",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Tomokane",
+        "rarity": 4,
+        "series": "GA Geijutsuka Art Design Class",
+        "attribute": "Fire",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Tooru",
+        "rarity": 3,
+        "series": "A-Channel",
+        "attribute": "Water",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Tooru",
+        "rarity": 3,
+        "series": "A-Channel",
+        "attribute": "Wind",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Tooru",
+        "rarity": 4,
+        "series": "A-Channel",
+        "attribute": "Sun",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Tooru",
+        "rarity": 5,
+        "series": "A-Channel",
+        "attribute": "Water",
+        "class": "Warrior",
+        "skill name en": "Memoria Strike",
+        "skill evo name en": "Forced Exit Home Run"
+    },
+    {
+        "name": "Tooru\u3010Christmas\u3011",
+        "rarity": 5,
+        "series": "A-Channel",
+        "attribute": "Wind",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Tooru\u3010Swimsuit\u3011",
+        "rarity": 4,
+        "series": "A-Channel",
+        "attribute": "Wind",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Tooyama Rin",
+        "rarity": 3,
+        "series": "NEW GAME!",
+        "attribute": "Moon",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Tooyama Rin",
+        "rarity": 4,
+        "series": "NEW GAME!",
+        "attribute": "Water",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Tooyama Rin",
+        "rarity": 5,
+        "series": "NEW GAME!",
+        "attribute": "Fire",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Tsubame\u3010Valentine\u3011",
+        "rarity": 4,
+        "series": "NEW GAME!",
+        "attribute": "Water",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Ujimatsu Chiya",
+        "rarity": 4,
+        "series": "Gochuumon wa Usagi Desu ka?",
+        "attribute": "Fire",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Ujimatsu Chiya",
+        "rarity": 5,
+        "series": "Gochuumon wa Usagi Desu ka?",
+        "attribute": "Wind",
+        "class": "Priest",
+        "skill name en": "Memoria Song",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Wakasa Yuuri",
+        "rarity": 3,
+        "series": "Gakkou Gurashi",
+        "attribute": "Moon",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Wakasa Yuuri",
+        "rarity": 3,
+        "series": "Gakkou Gurashi",
+        "attribute": "Wind",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Wakasa Yuuri",
+        "rarity": 4,
+        "series": "Gakkou Gurashi",
+        "attribute": "Water",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Wakasa Yuuri",
+        "rarity": 5,
+        "series": "Gakkou Gurashi",
+        "attribute": "Fire",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yagami Kou",
+        "rarity": 3,
+        "series": "NEW GAME!",
+        "attribute": "Water",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yagami Kou",
+        "rarity": 4,
+        "series": "NEW GAME!",
+        "attribute": "Earth",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yamaguchi Kisaragi",
+        "rarity": 4,
+        "series": "",
+        "attribute": "Water",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yamaguchi Kisaragi",
+        "rarity": 5,
+        "series": "",
+        "attribute": "Earth",
+        "class": "Priest",
+        "skill name en": "Memoria Amulet",
+        "skill evo name en": "And The Theme Is Excitement"
+    },
+    {
+        "name": "Yasuna\u3010New Year\u3011",
+        "rarity": 5,
+        "series": "",
+        "attribute": "Fire",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yasuna\u3010Swimsuit\u3011",
+        "rarity": 4,
+        "series": "",
+        "attribute": "Moon",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yoshida Yuko",
+        "rarity": 4,
+        "series": "",
+        "attribute": "Sun",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yoshida Yuko",
+        "rarity": 5,
+        "series": "",
+        "attribute": "Moon",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Youko\u3010Sports Festival\u3011",
+        "rarity": 5,
+        "series": "Kiniro Mosaic",
+        "attribute": "Sun",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yui\u3010Hinamatsuri\u3011",
+        "rarity": 4,
+        "series": "Yuyushiki",
+        "attribute": "Water",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yui\u3010Swimsuit\u3011",
+        "rarity": 5,
+        "series": "K-ON!",
+        "attribute": "Water",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yukimi Koume",
+        "rarity": 3,
+        "series": "Urara Meirochou",
+        "attribute": "Water",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yukimi Koume",
+        "rarity": 3,
+        "series": "Urara Meirochou",
+        "attribute": "Wind",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yukimi Koume",
+        "rarity": 4,
+        "series": "Urara Meirochou",
+        "attribute": "Water",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yukimi Koume",
+        "rarity": 5,
+        "series": "Urara Meirochou",
+        "attribute": "Moon",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yumine\u3010Swimsuit\u3011",
+        "rarity": 4,
+        "series": "Stella no Mahou",
+        "attribute": "Moon",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yun\u3010Hinamatsuri\u3011",
+        "rarity": 5,
+        "series": "NEW GAME!",
+        "attribute": "Earth",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yuno",
+        "rarity": 3,
+        "series": "Hidamari Sketch",
+        "attribute": "Sun",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yuno",
+        "rarity": 3,
+        "series": "Hidamari Sketch",
+        "attribute": "Water",
+        "class": "Alchemist",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yuno",
+        "rarity": 4,
+        "series": "Hidamari Sketch",
+        "attribute": "Wind",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yuno",
+        "rarity": 5,
+        "series": "Hidamari Sketch",
+        "attribute": "Sun",
+        "class": "Priest",
+        "skill name en": "Memoria Rise",
+        "skill evo name en": "Healing Sketch Lecture"
+    },
+    {
+        "name": "Yuno\u3010Christmas\u3011",
+        "rarity": 5,
+        "series": "Hidamari Sketch",
+        "attribute": "Sun",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yutaka",
+        "rarity": 4,
+        "series": "",
+        "attribute": "Water",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yuuko",
+        "rarity": 3,
+        "series": "A-Channel",
+        "attribute": "Sun",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yuuko",
+        "rarity": 3,
+        "series": "A-Channel",
+        "attribute": "Wind",
+        "class": "Warrior",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yuuko",
+        "rarity": 4,
+        "series": "A-Channel",
+        "attribute": "Earth",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yuuko",
+        "rarity": 5,
+        "series": "A-Channel",
+        "attribute": "Earth",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yuuko\u3010Christmas\u3011",
+        "rarity": 5,
+        "series": "A-Channel",
+        "attribute": "Moon",
+        "class": "Knight",
+        "skill name en": "Memoria Edge",
+        "skill evo name en": "Monstrous Strawberry Special Cake"
+    },
+    {
+        "name": "Yuuri\u3010New Year\u3011",
+        "rarity": 5,
+        "series": "Gakkou Gurashi",
+        "attribute": "Earth",
+        "class": "Priest",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yuzuko\u3010New Year\u3011",
+        "rarity": 4,
+        "series": "Yuyushiki",
+        "attribute": "Fire",
+        "class": "Mage",
+        "skill name en": "",
+        "skill evo name en": ""
+    },
+    {
+        "name": "Yuzuko\u3010Swimsuit\u3011",
+        "rarity": 5,
+        "series": "Yuyushiki",
+        "attribute": "Water",
+        "class": "Knight",
+        "skill name en": "",
+        "skill evo name en": ""
+    }
+]
