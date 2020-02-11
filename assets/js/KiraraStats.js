@@ -77,7 +77,9 @@ $(document).ready(function() {
 		yAxes: [{
 		  id: "cardaxis",
 		  stacked: true,
-		  mirror: true,
+		  ticks: {
+			mirror: true,
+		  }
 		}, {
 		  id: "weaponaxis",
 		  stacked: true,
@@ -134,7 +136,9 @@ $(document).ready(function() {
 		yAxes: [{
 		  id: "fiveaxis",
 		  stacked: true,
-		  mirror: true,
+		  ticks: {
+			mirror: true,
+		  }
 		}, {
 		  id: "fouraxis",
 		  stacked: true,
@@ -206,7 +210,9 @@ $(document).ready(function() {
 		yAxes: [{
 		  id: "fireaxis",
 		  stacked: true,
-		  mirror: true,
+		  ticks: {
+			mirror: true,
+		  }
 		}, {
 		  id: "wateraxis",
 		  stacked: true,
@@ -260,21 +266,21 @@ $(document).ready(function() {
 
 	$("#button1").click(function() {
 		kirarachart.type = 'horizontalBar';
-		kirarachart.data = data1.slice();
+		kirarachart.data = JSON.parse(JSON.stringify(data1));
 		kirarachart.options = options1;
 		kirarachart.update();
 	});
 	
 	$("#button2").click(function() {
 		kirarachart.type = 'horizontalBar';
-		kirarachart.data = data2.slice();
+		kirarachart.data = JSON.parse(JSON.stringify(data2));
 		kirarachart.options = options2;
 		kirarachart.update();
 	});
 	
 	$("#button3").click(function() {
 		kirarachart.type = 'horizontalBar';
-		kirarachart.data = data3.slice();
+		kirarachart.data = JSON.parse(JSON.stringify(data3));
 		kirarachart.options = options3;
 		kirarachart.update();
 	});
