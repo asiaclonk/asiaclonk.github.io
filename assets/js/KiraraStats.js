@@ -58,7 +58,7 @@ $(document).ready(function() {
 	  },
 	  title: {
 		display: true,
-		text: '5* Release State Sistribution'
+		text: '5* Release State Distribution'
 	  },
 	  scales: {
 		xAxes: [{
@@ -119,7 +119,7 @@ $(document).ready(function() {
 	  },
 	  title: {
 		display: true,
-		text: 'Card rarity distribution'
+		text: 'Card Rarity Distribution'
 	  },
 	  scales: {
 		xAxes: [{
