@@ -1,4 +1,5 @@
 ---
+layout: blank
 ---
 
 $(document).ready(function() {
