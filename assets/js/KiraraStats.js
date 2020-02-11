@@ -4,7 +4,7 @@ layout: blank
 
 $(document).ready(function() {
 	Chart.defaults.global.defaultFontColor = 'lightgray';
-	Chart.defaults.scale.gridLines.color = 'lightgray';
+	Chart.defaults.scale.gridLines.color = 'gray';
 	
 	$("#button1").click(function() {
 		var json = {{ site.data.KirafanDB | jsonify }}
@@ -42,7 +42,7 @@ $(document).ready(function() {
 		  maintainAspectRatio: false,
 		  layout: {
 			padding: {
-			  left: 150
+			  left: 200
 			}
 		  },
 		  title: {
@@ -123,7 +123,7 @@ $(document).ready(function() {
 		  maintainAspectRatio: false,
 		  layout: {
 			padding: {
-			  left: 150
+			  left: 200
 			}
 		  },
 		  title: {
