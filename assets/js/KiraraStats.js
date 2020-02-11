@@ -6,10 +6,10 @@ $(document).ready(function() {
 	$("#button1").click(function() {
 		var json = {{ site.data.KirafanDB | jsonify }}
 		var fivestar = json.filter(value => value["rarity"] == 5 && value["series"] != "")
-		var series = [...new Set(fivestar.map(value => return value["series"] }))]
-		var cards = series.map(seriesname => return fivestar.filter(value => value["series"] == seriesname).length)
-		var weapons = series.map(seriesname => return fivestar.filter(value => value["series"] == seriesname && value["skill name en"] != "").length)
-		var evos = series.map(seriesname => return fivestar.filter(value => value["series"] == seriesname && value["skill evo name en"] != "").length)
+		var series = [...new Set(fivestar.map(value => value["series"] }))]
+		var cards = series.map(seriesname => fivestar.filter(value => value["series"] == seriesname).length)
+		var weapons = series.map(seriesname => fivestar.filter(value => value["series"] == seriesname && value["skill name en"] != "").length)
+		var evos = series.map(seriesname => fivestar.filter(value => value["series"] == seriesname && value["skill evo name en"] != "").length)
 		var data = {
 		  labels: series,
 		  datasets: [{
