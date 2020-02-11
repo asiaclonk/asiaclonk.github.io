@@ -4,7 +4,7 @@ layout: blank
 
 $(document).ready(function() {
 	$("#button1").click(function() {
-		var json = {{ site.data.KirafanDB }}
+		var json = {{ site.data.KirafanDB | jsonify }}
 		var fivestar = json.filter(value => value["rarity"] == 5 && value["series"] != "")
 		var series = [...new Set(fivestar.map(value => return value["series"] }))]
 		var cards = series.map(seriesname => return fivestar.filter(value => value["series"] == seriesname).length)
