@@ -2,7 +2,9 @@
 title: Kirara Fantasia Charts
 ---
 
-# Some charts that
+# Some charts that reference a snapshot from [the mirahaze wiki.](https://kirarafantasia.miraheze.org/wiki/Main_Page)
+Last updated: 10.02.2020
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 <script src="assets/js/KiraraStats.js"></script>

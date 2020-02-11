@@ -41,7 +41,7 @@ $(document).ready(function() {
 		  maintainAspectRatio: false,
 		  layout: {
 			padding: {
-			  left: 70
+			  left: 150
 			}
 		  },
 		  title: {
@@ -122,7 +122,7 @@ $(document).ready(function() {
 		  maintainAspectRatio: false,
 		  layout: {
 			padding: {
-			  left: 70
+			  left: 150
 			}
 		  },
 		  title: {
