@@ -30,12 +30,12 @@ $(document).ready(function() {
 	})
 	
 	var objectlist3 = series.map(seriesname => ({ series: seriesname,
-												  fire: fivestar.filter(value => value["series"] == seriesname && value["element"] == "Fire").length,
-												  water: fivestar.filter(value => value["series"] == seriesname && value["element"] == "Water").length,
-												  earth: fivestar.filter(value => value["series"] == seriesname && value["element"] == "Earth").length,
-												  wind: fivestar.filter(value => value["series"] == seriesname && value["element"] == "Wind").length,
-												  sun: fivestar.filter(value => value["series"] == seriesname && value["element"] == "Sun").length,
-												  moon: fivestar.filter(value => value["series"] == seriesname && value["element"] == "Moon").length,
+												  fire: fivestar.filter(value => value["series"] == seriesname && value["attribute"] == "Fire").length,
+												  water: fivestar.filter(value => value["series"] == seriesname && value["attribute"] == "Water").length,
+												  earth: fivestar.filter(value => value["series"] == seriesname && value["attribute"] == "Earth").length,
+												  wind: fivestar.filter(value => value["series"] == seriesname && value["attribute"] == "Wind").length,
+												  sun: fivestar.filter(value => value["series"] == seriesname && value["attribute"] == "Sun").length,
+												  moon: fivestar.filter(value => value["series"] == seriesname && value["attribute"] == "Moon").length,
 												}))
 	objectlist3.sort(function(a,b) {
 		return (b["fire"] + b["water"] + b["earth"] + b["wind"] + b["sun"] + b["moon"]) - (a["fire"] + a["water"] + a["earth"] + a["wind"] + a["sun"] + a["moon"]) || b["fire"] - a["fire"] || b["water"] - a["water"] || b["earth"] - a["earth"] || b["wind"] - a["wind"] || b["sun"] - a["sun"] || b["moon"] - a["moon"];
@@ -198,7 +198,7 @@ $(document).ready(function() {
 	  maintainAspectRatio: false,
 	  title: {
 		display: true,
-		text: '5* Element Distribution'
+		text: '5* Attribute Distribution'
 	  },
 	  scales: {
 		xAxes: [{
@@ -265,22 +265,25 @@ $(document).ready(function() {
 		});
 
 	$("#button1").click(function() {
+		var copy = JSON.parse(JSON.stringify(data1));
 		kirarachart.type = 'horizontalBar';
-		kirarachart.data = JSON.parse(JSON.stringify(data1));
+		kirarachart.data = copy;
 		kirarachart.options = options1;
 		kirarachart.update();
 	});
 	
 	$("#button2").click(function() {
+		var copy = JSON.parse(JSON.stringify(data2));
 		kirarachart.type = 'horizontalBar';
-		kirarachart.data = JSON.parse(JSON.stringify(data2));
+		kirarachart.data = copy;
 		kirarachart.options = options2;
 		kirarachart.update();
 	});
 	
 	$("#button3").click(function() {
+		var copy = JSON.parse(JSON.stringify(data3));
 		kirarachart.type = 'horizontalBar';
-		kirarachart.data = JSON.parse(JSON.stringify(data3));
+		kirarachart.data = copy;
 		kirarachart.options = options3;
 		kirarachart.update();
 	});
