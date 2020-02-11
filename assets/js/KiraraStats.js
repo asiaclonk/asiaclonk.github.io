@@ -45,17 +45,17 @@ $(document).ready(function() {
 	  labels: objectlist1.map(value => value["series"]),
 	  datasets: [{
 		label: "Evo 4",
-		backgroundColor: '#FFA50055',
+		backgroundColor: '#FFA50077',
 		data: objectlist1.map(value => value["evos"]),
 		yAxisID: "evoaxis",
 	  }, {
 		label: "Weapons",
-		backgroundColor: '#ADD8E655',
+		backgroundColor: '#ADD8E677',
 		data: objectlist1.map(value => value["weapons"]),
 		yAxisID: "weaponaxis",
 	  }, {
 		label: "Cards",
-		backgroundColor: '#4682B455',
+		backgroundColor: '#4682B477',
 		data: objectlist1.map(value => value["cards"]),
 		yAxisID: "cardaxis",
 	  }]
