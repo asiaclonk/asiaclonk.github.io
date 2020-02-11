@@ -1,5 +1,6 @@
 ---
 title: A wide box
+description: What's in it?
 ---
 
 ## Welcome to GitHub Pages
