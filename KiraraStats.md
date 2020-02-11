@@ -11,7 +11,4 @@ title: Kirara Fantasia Charts
 <div style="width: 100%; margin: 20px auto;">
 	<canvas id="myChart"></canvas>
 </div>
-<script>
-
-</script>
 # JCharts Test End
