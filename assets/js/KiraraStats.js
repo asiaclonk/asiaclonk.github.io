@@ -41,27 +41,27 @@ $(document).ready(function() {
 		return (b["fire"] + b["water"] + b["earth"] + b["wind"] + b["sun"] + b["moon"]) - (a["fire"] + a["water"] + a["earth"] + a["wind"] + a["sun"] + a["moon"]) || b["fire"] - a["fire"] || b["water"] - a["water"] || b["earth"] - a["earth"] || b["wind"] - a["wind"] || b["sun"] - a["sun"] || b["moon"] - a["moon"];
 	})
 	
-	data1 = {
+	data1 = ({
 	  labels: objectlist1.map(value => value["series"]),
 	  datasets: [{
 		label: "Evo 4",
-		backgroundColor: '#FFA500BB',
+		backgroundColor: '#FFA50099',
 		data: objectlist1.map(value => value["evos"]),
 		yAxisID: "evoaxis",
 	  }, {
 		label: "Weapons",
-		backgroundColor: '#ADD8E6BB',
+		backgroundColor: '#ADD8E699',
 		data: objectlist1.map(value => value["weapons"]),
 		yAxisID: "weaponaxis",
 	  }, {
 		label: "Cards",
-		backgroundColor: '#4682B4BB',
+		backgroundColor: '#4682B499',
 		data: objectlist1.map(value => value["cards"]),
 		yAxisID: "cardaxis",
 	  }]
-	};
+	});
 
-	options1 = {
+	options1 = ({
 	  maintainAspectRatio: false,
 	  title: {
 		display: true,
@@ -98,29 +98,29 @@ $(document).ready(function() {
 		  barPercentage: 0.9,
 		}]
 	  }
-	};
+	});
 
-	data2 = {
+	data2 = ({
 	  labels: objectlist2.map(value => value["series"]),
 	  datasets: [{
 		label: "5*",
-		backgroundColor: '#FFD700BB',
+		backgroundColor: '#FFD70099',
 		data: objectlist2.map(value => value["five"]),
 		yAxisID: "fiveaxis",
 	  }, {
 		label: "4*",
-		backgroundColor: '#C0C0C0BB',
+		backgroundColor: '#C0C0C099',
 		data: objectlist2.map(value => value["four"]),
 		yAxisID: "fouraxis",
 	  }, {
 		label: "3*",
-		backgroundColor: '#D2691EBB',
+		backgroundColor: '#D2691E99',
 		data: objectlist2.map(value => value["three"]),
 		yAxisID: "threeaxis",
 	  }]
-	};
+	});
 
-	options2 = {
+	options2 = ({
 	  maintainAspectRatio: false,
 	  title: {
 		display: true,
@@ -157,44 +157,44 @@ $(document).ready(function() {
 		  barPercentage: 0.9,
 		}]
 	  }
-	};
+	});
 
-	data3 = {
+	data3 = ({
 	  labels: objectlist3.map(value => value["series"]),
 	  datasets: [{
 		label: "Fire",
-		backgroundColor: '#FF0000BB',
+		backgroundColor: '#FF000099',
 		data: objectlist3.map(value => value["fire"]),
 		yAxisID: "fireaxis",
 	  }, {
 		label: "Water",
-		backgroundColor: '#4169E1BB',
+		backgroundColor: '#4169E199',
 		data: objectlist3.map(value => value["water"]),
 		yAxisID: "wateraxis",
 	  }, {
 		label: "Earth",
-		backgroundColor: '#8B4513',
+		backgroundColor: '#8B451399',
 		data: objectlist3.map(value => value["earth"]),
 		yAxisID: "earthaxis",
 	  }, {
 		label: "Wind",
-		backgroundColor: '#32CD32BB',
+		backgroundColor: '#32CD3299',
 		data: objectlist3.map(value => value["wind"]),
 		yAxisID: "windaxis",
 	  }, {
 		label: "Sun",
-		backgroundColor: '#FFFF00BB',
+		backgroundColor: '#FFFF0099',
 		data: objectlist3.map(value => value["sun"]),
 		yAxisID: "sunaxis",
 	  }, {
 		label: "Moon",
-		backgroundColor: '#663399BB',
+		backgroundColor: '#66339999',
 		data: objectlist3.map(value => value["moon"]),
 		yAxisID: "moonaxis",
 	  }]
-	};
+	});
 
-	options3 = {
+	options3 = ({
 	  maintainAspectRatio: false,
 	  title: {
 		display: true,
@@ -255,7 +255,7 @@ $(document).ready(function() {
 		  barPercentage: 0.9,
 		}]
 	  }
-	};
+	});
 
 	var ctx = document.getElementById("myChart").getContext("2d");
 	kirarachart = new Chart(ctx, {
