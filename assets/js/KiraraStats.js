@@ -264,6 +264,8 @@ $(document).ready(function() {
 		  data: copy,
 		  options: options1,
 		});
+		
+	$( "#chartArea" ).resizable();
 
 	$("#button1").click(function() {
 		var copy = JSON.parse(JSON.stringify(data1));
