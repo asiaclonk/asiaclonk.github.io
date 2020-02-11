@@ -162,11 +162,13 @@ $(document).ready(function() {
 		kirarachart.type = 'horizontalBar';
 		kirarachart.data = data1;
 		kirarachart.options = options1;
+		kirarachart.update();
 	});
 	
 	$("#button2").click(function() {
 		kirarachart.type = 'horizontalBar';
 		kirarachart.data = data2;
 		kirarachart.options = options2;
+		kirarachart.update();
 	});
 })
