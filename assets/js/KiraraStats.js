@@ -26,7 +26,7 @@ $(document).ready(function() {
 												  three: cards.filter(value => value["series"] == seriesname && value["rarity"] == 3).length,
 												}))
 	objectlist2.sort(function(a,b) {
-		return b["five"] - a["five"] || b["four"] - a["four"] || b["three"] - a["three"];
+		return (b["five"] + b["four"] + b["three"]) - (a["five"] + a["four"] + a["three"]) || b["five"] - a["five"] || b["four"] - a["four"] || b["three"] - a["three"];
 	})
 	
 	data1 = {
