@@ -1,0 +1,3 @@
+crea_mates, characters, character_weapons
+characters.series, crea_mates.name, crea_mates.rarity, crea_mates.attribute, crea_mates.class, character_weapons.skill_name_en, character_weapons.skill_evo_name_en
+crea_mates.id = character_weapons.charaid, crea_mates.alias = characters.name
