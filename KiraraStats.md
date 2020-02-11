@@ -2,7 +2,7 @@
 title: Kirara Fantasia Charts
 ---
 
-# Some charts that reference a snapshot from [the mirahaze wiki.](https://kirarafantasia.miraheze.org/wiki/Main_Page)
+# Some charts that reference a snapshot from [the Mirahaze wiki.](https://kirarafantasia.miraheze.org/wiki/Main_Page)
 Last updated: 10.02.2020
 
 

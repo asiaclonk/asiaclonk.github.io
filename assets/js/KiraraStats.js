@@ -4,6 +4,7 @@ layout: blank
 
 $(document).ready(function() {
 	Chart.defaults.global.defaultFontColor = 'lightgray';
+	Chart.defaults.scale.gridLines.color = 'lightgray';
 	
 	$("#button1").click(function() {
 		var json = {{ site.data.KirafanDB | jsonify }}
