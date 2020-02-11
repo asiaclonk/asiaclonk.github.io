@@ -41,7 +41,7 @@ $(document).ready(function() {
 		return (b["fire"] + b["water"] + b["earth"] + b["wind"] + b["sun"] + b["moon"]) - (a["fire"] + a["water"] + a["earth"] + a["wind"] + a["sun"] + a["moon"]) || b["fire"] - a["fire"] || b["water"] - a["water"] || b["earth"] - a["earth"] || b["wind"] - a["wind"] || b["sun"] - a["sun"] || b["moon"] - a["moon"];
 	})
 	
-	data1 = ({
+	data1 = {
 	  labels: objectlist1.map(value => value["series"]),
 	  datasets: [{
 		label: "Evo 4",
@@ -59,9 +59,9 @@ $(document).ready(function() {
 		data: objectlist1.map(value => value["cards"]),
 		yAxisID: "cardaxis",
 	  }]
-	});
+	};
 
-	options1 = ({
+	options1 = {
 	  maintainAspectRatio: false,
 	  title: {
 		display: true,
@@ -98,9 +98,9 @@ $(document).ready(function() {
 		  barPercentage: 0.9,
 		}]
 	  }
-	});
+	};
 
-	data2 = ({
+	data2 = {
 	  labels: objectlist2.map(value => value["series"]),
 	  datasets: [{
 		label: "5*",
@@ -118,9 +118,9 @@ $(document).ready(function() {
 		data: objectlist2.map(value => value["three"]),
 		yAxisID: "threeaxis",
 	  }]
-	});
+	};
 
-	options2 = ({
+	options2 = {
 	  maintainAspectRatio: false,
 	  title: {
 		display: true,
@@ -157,9 +157,9 @@ $(document).ready(function() {
 		  barPercentage: 0.9,
 		}]
 	  }
-	});
+	};
 
-	data3 = ({
+	data3 = {
 	  labels: objectlist3.map(value => value["series"]),
 	  datasets: [{
 		label: "Fire",
@@ -192,9 +192,9 @@ $(document).ready(function() {
 		data: objectlist3.map(value => value["moon"]),
 		yAxisID: "moonaxis",
 	  }]
-	});
+	};
 
-	options3 = ({
+	options3 = {
 	  maintainAspectRatio: false,
 	  title: {
 		display: true,
@@ -255,12 +255,13 @@ $(document).ready(function() {
 		  barPercentage: 0.9,
 		}]
 	  }
-	});
+	};
 
 	var ctx = document.getElementById("myChart").getContext("2d");
+	var copy = JSON.parse(JSON.stringify(data1));
 	kirarachart = new Chart(ctx, {
 		  type: 'horizontalBar',
-		  data: data1,
+		  data: copy,
 		  options: options1,
 		});
 
