@@ -32,6 +32,7 @@ $(document).ready(function() {
 		};
 
 		var options = {
+		  maintainAspectRatio: false,
 		  title: {
 			display: true,
 			text: '5* release state distribution'

@@ -8,7 +8,7 @@ title: Kirara Fantasia Charts
 <div style="text-align:center">
 	<button id="button1">5* release state</button>
 </div>
-<div style="width: 100%; margin: 20px auto;">
+<div style="width: 100%; height: 400; margin: 20px auto;">
 	<canvas id="myChart"></canvas>
 </div>
 # JCharts Test End
