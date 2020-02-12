@@ -41,6 +41,39 @@ $(document).ready(function() {
 		return (b["fire"] + b["water"] + b["earth"] + b["wind"] + b["sun"] + b["moon"]) - (a["fire"] + a["water"] + a["earth"] + a["wind"] + a["sun"] + a["moon"]) || b["fire"] - a["fire"] || b["water"] - a["water"] || b["earth"] - a["earth"] || b["wind"] - a["wind"] || b["sun"] - a["sun"] || b["moon"] - a["moon"];
 	})
 	
+	var objectlist4 = series.map(seriesname => ({ series: seriesname,
+												  warrior: fivestar.filter(value => value["series"] == seriesname && value["class"] == "Warrior").length,
+												  knight: fivestar.filter(value => value["series"] == seriesname && value["class"] == "Knight").length,
+												  mage: fivestar.filter(value => value["series"] == seriesname && value["class"] == "Mage").length,
+												  priest: fivestar.filter(value => value["series"] == seriesname && value["class"] == "Priest").length,
+												  alchemist: fivestar.filter(value => value["series"] == seriesname && value["class"] == "Alchemist").length,
+												}))
+	objectlist4.sort(function(a,b) {
+		return (b["warrior"] + b["knight"] + b["mage"] + b["priest"] + b["alchemist"]) - (a["warrior"] + a["knight"] + a["mage"] + a["priest"] + a["alchemist"]) || b["warrior"] - a["warrior"] || b["knight"] - a["knight"] || b["mage"] - a["mage"] || b["priest"] - a["priest"] || b["alchemist"] - a["alchemist"];
+	})
+	
+	var objectlist5 = [];
+	var classes = ["Warrior", "Mage", "Knight", "Priest", "Alchemist"];
+	var classcolors = ["#FF0000", "#4169E1", "#8B4513", "#32CD32", "#FFFF00"];
+	var attributes = ["Fire", "Water", "Earth", "Wind", "Sun", "Moon"];
+	var attributecolors = ["#FF000099", "#4169E199", "#8B451399", "#32CD3299", "#FFFF0099", "#66339999"];
+	var attributehovers = ["#FF0000", "#4169E1", "#8B4513", "#32CD32", "#FFFF00", "#663399"];
+	for charclass in classes {
+		for attribute in attributes {
+			var count = fivestar.filter(value => value["class"] == charclass && value["attribute"] == attribute).length
+			if count > 0 {
+				objectlist5.push({ x: classes.indexOf(charclass),
+								   y: attributes.indexOf(attribute),
+								   r: count
+								 });
+			}
+		}
+	}
+	
+	objectlist5.sort(function(a,b) {
+		return b.reduce(function(p,c) { return { p.r + c.r } }).r - a.reduce(function(p,c) { return { p.r + c.r } }).r
+	})
+	
 	data1 = {
 	  labels: objectlist1.map(value => value["series"]),
 	  datasets: [{
@@ -257,6 +290,142 @@ $(document).ready(function() {
 	  }
 	};
 
+	data4 = {
+	  labels: objectlist4.map(value => value["series"]),
+	  datasets: [{
+		label: "Warrior",
+		backgroundColor: '#FF000099',
+		data: objectlist4.map(value => value["warrior"]),
+		yAxisID: "warrioraxis",
+	  }, {
+		label: "Mage",
+		backgroundColor: '#4169E199',
+		data: objectlist4.map(value => value["mage"]),
+		yAxisID: "mageaxis",
+	  }, {
+		label: "Knight",
+		backgroundColor: '#8B451399',
+		data: objectlist4.map(value => value["knight"]),
+		yAxisID: "knightaxis",
+	  }, {
+		label: "Priest",
+		backgroundColor: '#32CD3299',
+		data: objectlist4.map(value => value["priest"]),
+		yAxisID: "priestaxis",
+	  }, {
+		label: "Alchemist",
+		backgroundColor: '#FFFF0099',
+		data: objectlist4.map(value => value["alchemist"]),
+		yAxisID: "alchemistaxis",
+	  }]
+	};
+
+	options4 = {
+	  maintainAspectRatio: false,
+	  title: {
+		display: true,
+		text: '5* Class Distribution'
+	  },
+	  scales: {
+		xAxes: [{
+		  ticks: {
+			beginAtZero: true
+		  },
+		  stacked: true
+		}],
+		yAxes: [{
+		  id: "warrioraxis",
+		  stacked: true,
+		  ticks: {
+			mirror: true,
+		  }
+		}, {
+		  id: "mageaxis",
+		  stacked: true,
+		  display: false,
+		  offset: true,
+		  type: "category",
+		  categoryPercentage: 0.8,
+		  barPercentage: 0.9,
+		}, {
+		  id: "kngihtaxis",
+		  stacked: true,
+		  display: false,
+		  offset: true,
+		  type: "category",
+		  categoryPercentage: 0.8,
+		  barPercentage: 0.9,
+		}, {
+		  id: "priestaxis",
+		  stacked: true,
+		  display: false,
+		  offset: true,
+		  type: "category",
+		  categoryPercentage: 0.8,
+		  barPercentage: 0.9,
+		}, {
+		  id: "alchemistaxis",
+		  stacked: true,
+		  display: false,
+		  offset: true,
+		  type: "category",
+		  categoryPercentage: 0.8,
+		  barPercentage: 0.9,
+		}]
+	  }
+	};
+
+	data5 = {
+	  datasets: [{ data: objectlist5 }],
+	};
+
+	options5 = {
+	  maintainAspectRatio: false,
+	  title: {
+		display: true,
+		text: '5* Cards by Class/Attribute'
+	  },
+	  legend: {
+		display: false,
+	  },
+	  scales: {
+		xAxes: [{
+		  ticks: {
+			beginAtZero: true,
+			stepSize: 1,
+			max: 5,
+			callback: function(value,index,values) { return classes[value]; },
+		  },
+		}],
+		yAxes: [{
+		  ticks: {
+			beginAtZero: true,
+			stepSize: 1,
+			max: 6,
+			callback: function(value,index,values) { return attributes[value]; },
+		  }
+		}]
+	  },
+	  elements: {
+		point: {
+		  borderColor: function(context) {
+			var point = context.dataset.data[context.dataIndex];
+			return classcolors[point.x]
+		  },
+		  backgroundColor: function(context) {
+			var point = context.dataset.data[context.dataIndex];
+			return attributecolors[point.y]
+		  },
+		  hoverBackgroundColor: function(context) {
+			var point = context.dataset.data[context.dataIndex];
+			return attributehovers[point.y]
+		  },
+		  borderWidth: 3,
+		  hoverBorderWidth: 6,
+		}
+	  },
+	};
+
 	var ctx = document.getElementById("myChart").getContext("2d");
 	var copy = JSON.parse(JSON.stringify(data1));
 	kirarachart = new Chart(ctx, {
@@ -265,7 +434,7 @@ $(document).ready(function() {
 		  options: options1,
 		});
 		
-	$( "#chartArea" ).resizable({
+	$("#chartArea").resizable({
 		handles: 's',
 	});
 
@@ -290,6 +459,22 @@ $(document).ready(function() {
 		kirarachart.type = 'horizontalBar';
 		kirarachart.data = copy;
 		kirarachart.options = options3;
+		kirarachart.update();
+	});
+	
+	$("#button4").click(function() {
+		var copy = JSON.parse(JSON.stringify(data4));
+		kirarachart.type = 'horizontalBar';
+		kirarachart.data = copy;
+		kirarachart.options = options4;
+		kirarachart.update();
+	});
+	
+	$("#button5").click(function() {
+		var copy = JSON.parse(JSON.stringify(data5));
+		kirarachart.type = 'bubble';
+		kirarachart.data = copy;
+		kirarachart.options = options5;
 		kirarachart.update();
 	});
 })
