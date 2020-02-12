@@ -64,7 +64,7 @@ $(document).ready(function() {
 			if (count > 0) {
 				objectlist5.push({ x: i,
 								   y: j,
-								   r: count
+								   r: count*5
 								 });
 			}
 		}
@@ -384,7 +384,7 @@ $(document).ready(function() {
 	  maintainAspectRatio: false,
 	  title: {
 		display: true,
-		text: '5* Cards by Class/Attribute'
+		text: '5* Cards by Class/Attribute (Actual value is the third one divided by 5)'
 	  },
 	  legend: {
 		display: false,
@@ -393,6 +393,7 @@ $(document).ready(function() {
 		xAxes: [{
 		  ticks: {
 			beginAtZero: true,
+			hidden: false,
 			stepSize: 1,
 			max: 5,
 			callback: function(value,index,values) { return classes[value]; },
@@ -401,6 +402,9 @@ $(document).ready(function() {
 		yAxes: [{
 		  ticks: {
 			beginAtZero: true,
+			hidden: false,
+			type: "linear",
+			offset: false,
 			stepSize: 1,
 			max: 6,
 			callback: function(value,index,values) { return attributes[value]; },
@@ -427,7 +431,7 @@ $(document).ready(function() {
 	  },
 	};
 
-	var ctx = document.getElementById("myChart").getContext("2d");
+	var ctx = $("#myChart").getContext("2d");
 	var copy = JSON.parse(JSON.stringify(data1));
 	kirarachart = new Chart(ctx, {
 		  type: 'horizontalBar',
@@ -441,41 +445,56 @@ $(document).ready(function() {
 
 	$("#button1").click(function() {
 		var copy = JSON.parse(JSON.stringify(data1));
-		kirarachart.type = 'horizontalBar';
-		kirarachart.data = copy;
-		kirarachart.options = options1;
-		kirarachart.update();
+		var ctx = $("#myChart").getContext("2d");
+		kirarachart.destroy();
+		kirarachart = new Chart(ctx, {
+		  type: 'horizontalBar',
+		  data: copy,
+		  options: options1,
+		});
 	});
 	
 	$("#button2").click(function() {
 		var copy = JSON.parse(JSON.stringify(data2));
-		kirarachart.type = 'horizontalBar';
-		kirarachart.data = copy;
-		kirarachart.options = options2;
-		kirarachart.update();
+		var ctx = $("#myChart").getContext("2d");
+		kirarachart.destroy();
+		kirarachart = new Chart(ctx, {
+		  type: 'horizontalBar',
+		  data: copy,
+		  options: options2,
+		});
 	});
 	
 	$("#button3").click(function() {
 		var copy = JSON.parse(JSON.stringify(data3));
-		kirarachart.type = 'horizontalBar';
-		kirarachart.data = copy;
-		kirarachart.options = options3;
-		kirarachart.update();
+		var ctx = $("#myChart").getContext("2d");
+		kirarachart.destroy();
+		kirarachart = new Chart(ctx, {
+		  type: 'horizontalBar',
+		  data: copy,
+		  options: options3,
+		});
 	});
 	
 	$("#button4").click(function() {
 		var copy = JSON.parse(JSON.stringify(data4));
-		kirarachart.type = 'horizontalBar';
-		kirarachart.data = copy;
-		kirarachart.options = options4;
-		kirarachart.update();
+		var ctx = $("#myChart").getContext("2d");
+		kirarachart.destroy();
+		kirarachart = new Chart(ctx, {
+		  type: 'horizontalBar',
+		  data: copy,
+		  options: options4,
+		});
 	});
 	
 	$("#button5").click(function() {
 		var copy = JSON.parse(JSON.stringify(data5));
-		kirarachart.type = 'bubble';
-		kirarachart.data = copy;
-		kirarachart.options = options5;
-		kirarachart.update();
+		var ctx = $("#myChart").getContext("2d");
+		kirarachart.destroy();
+		kirarachart = new Chart(ctx, {
+		  type: 'bubble',
+		  data: copy,
+		  options: options5,
+		});
 	});
 })
