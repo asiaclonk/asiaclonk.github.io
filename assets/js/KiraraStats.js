@@ -60,7 +60,7 @@ $(document).ready(function() {
 	var attributehovers = ["#FF0000", "#4169E1", "#8B4513", "#32CD32", "#FFFF00", "#663399"];
 	for (let i = 0; i < classes.length; i++) {
 		for (let j = 0; j < attributes; j++) {
-			let count = fivestar.filter(value => value["class"] == classes[i] && value["attribute"] == attributes[j]).length
+			var count = fivestar.filter(value => value["class"] == classes[i] && value["attribute"] == attributes[j]).length
 			if (count > 0) {
 				objectlist5.push({ x: i,
 								   y: j,
@@ -348,7 +348,7 @@ $(document).ready(function() {
 		  categoryPercentage: 0.8,
 		  barPercentage: 0.9,
 		}, {
-		  id: "kngihtaxis",
+		  id: "knightaxis",
 		  stacked: true,
 		  display: false,
 		  offset: true,
