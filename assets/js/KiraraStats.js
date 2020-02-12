@@ -376,6 +376,7 @@ $(document).ready(function() {
 	};
 
 	data5 = {
+	  labels: [],
 	  datasets: [{ data: objectlist5 }],
 	};
 
@@ -410,15 +411,15 @@ $(document).ready(function() {
 		point: {
 		  borderColor: function(context) {
 			let point = context.dataset.data[context.dataIndex];
-			return classcolors[point.x]
+			return classcolors[point.x];
 		  },
 		  backgroundColor: function(context) {
 			let point = context.dataset.data[context.dataIndex];
-			return attributecolors[point.y]
+			return attributecolors[point.y];
 		  },
 		  hoverBackgroundColor: function(context) {
 			let point = context.dataset.data[context.dataIndex];
-			return attributehovers[point.y]
+			return attributehovers[point.y];
 		  },
 		  borderWidth: 3,
 		  hoverBorderWidth: 6,

@@ -47,7 +47,7 @@
 					var table = {{ site.data.yuno | jsonify }};
 					var number = Math.floor(Math.random() * table.length);
 					$("#titleicon").attr("src", table[number].image );
-					$("#titleicon").show("Fade")
+					$("#titleicon").show("fade")
 				})
 			</script>
 		    <image src="{{ site.image }}" class="ui-widget-content" id="titleicon" width="50" height="50" style="margin-right: 5px; visibility: hidden" alt="Icon">
