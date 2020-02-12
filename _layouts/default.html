@@ -42,7 +42,13 @@
       <section>
         <div id="title">
           <h1>
-		    <script>$(document).ready(function() { $("#titleicon").attr("src", site.data.yuno[Math.random() * site.data.yuno.length].image) })</script>
+		    <script>$(document).ready(
+				function() {
+					var table = {{ site.data.yuno }};
+					var number = Math.floor(Math.random() * table.length);
+					$("#titleicon").attr("src", table[number].image );
+				})
+			</script>
 		    <image src="{{ site.image }}" id="titleicon" width="50" height="50" style="margin-right: 5px" alt="Icon">
 		    {{ page.title }}
 		  </h1>
