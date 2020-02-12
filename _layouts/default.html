@@ -42,8 +42,8 @@
       <section>
         <div id="title">
           <h1>
-			{% assign randomyuno = site.data.yuno | sample  %}
-		    <image src="{{ randomyuno.image }}" width="50" height="50" style="margin-right: 5px" alt="Icon">
+		    <script>$(document).ready(function() { $("#titleicon").attr("src", site.data.yuno[Math.random() * site.data.yuno.length].image) })</script>
+		    <image src="{{ site.image }}" id="titleicon" width="50" height="50" style="margin-right: 5px" alt="Icon">
 		    {{ page.title }}
 		  </h1>
           <hr>

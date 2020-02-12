@@ -61,7 +61,7 @@ $(document).ready(function() {
 	for (let i = 0; i < classes.length; i++) {
 		for (let j = 0; j < attributes; j++) {
 			let count = fivestar.filter(value => value["class"] == classes[i] && value["attribute"] == attributes[j]).length
-			if count > 0 {
+			if (count > 0) {
 				objectlist5.push({ x: i,
 								   y: j,
 								   r: count
