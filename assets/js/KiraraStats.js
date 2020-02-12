@@ -431,7 +431,7 @@ $(document).ready(function() {
 	  },
 	};
 
-	var ctx = $("#myChart").getContext("2d");
+	var ctx = document.getElementById('myChart').getContext("2d");
 	var copy = JSON.parse(JSON.stringify(data1));
 	kirarachart = new Chart(ctx, {
 		  type: 'horizontalBar',
@@ -445,7 +445,7 @@ $(document).ready(function() {
 
 	$("#button1").click(function() {
 		var copy = JSON.parse(JSON.stringify(data1));
-		var ctx = $("#myChart").getContext("2d");
+		var ctx = document.getElementById('myChart').getContext("2d");
 		kirarachart.destroy();
 		kirarachart = new Chart(ctx, {
 		  type: 'horizontalBar',
@@ -456,7 +456,7 @@ $(document).ready(function() {
 	
 	$("#button2").click(function() {
 		var copy = JSON.parse(JSON.stringify(data2));
-		var ctx = $("#myChart").getContext("2d");
+		var ctx = document.getElementById('myChart').getContext("2d");
 		kirarachart.destroy();
 		kirarachart = new Chart(ctx, {
 		  type: 'horizontalBar',
@@ -467,7 +467,7 @@ $(document).ready(function() {
 	
 	$("#button3").click(function() {
 		var copy = JSON.parse(JSON.stringify(data3));
-		var ctx = $("#myChart").getContext("2d");
+		var ctx = document.getElementById('myChart').getContext("2d");
 		kirarachart.destroy();
 		kirarachart = new Chart(ctx, {
 		  type: 'horizontalBar',
@@ -478,7 +478,7 @@ $(document).ready(function() {
 	
 	$("#button4").click(function() {
 		var copy = JSON.parse(JSON.stringify(data4));
-		var ctx = $("#myChart").getContext("2d");
+		var ctx = document.getElementById('myChart').getContext("2d");
 		kirarachart.destroy();
 		kirarachart = new Chart(ctx, {
 		  type: 'horizontalBar',
@@ -489,7 +489,7 @@ $(document).ready(function() {
 	
 	$("#button5").click(function() {
 		var copy = JSON.parse(JSON.stringify(data5));
-		var ctx = $("#myChart").getContext("2d");
+		var ctx = document.getElementById('myChart').getContext("2d");
 		kirarachart.destroy();
 		kirarachart = new Chart(ctx, {
 		  type: 'bubble',
