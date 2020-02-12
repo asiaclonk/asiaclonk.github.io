@@ -58,12 +58,12 @@ $(document).ready(function() {
 	var attributes = ["Fire", "Water", "Earth", "Wind", "Sun", "Moon"];
 	var attributecolors = ["#FF000099", "#4169E199", "#8B451399", "#32CD3299", "#FFFF0099", "#66339999"];
 	var attributehovers = ["#FF0000", "#4169E1", "#8B4513", "#32CD32", "#FFFF00", "#663399"];
-	for charclass in classes {
-		for attribute in attributes {
-			var count = fivestar.filter(value => value["class"] == charclass && value["attribute"] == attribute).length
+	for (let i = 0; i < classes.length; i++) {
+		for (let j = 0; j < attributes; j++) {
+			let count = fivestar.filter(value => value["class"] == classes[i] && value["attribute"] == attributes[j]).length
 			if count > 0 {
-				objectlist5.push({ x: classes.indexOf(charclass),
-								   y: attributes.indexOf(attribute),
+				objectlist5.push({ x: i,
+								   y: j,
 								   r: count
 								 });
 			}
@@ -409,15 +409,15 @@ $(document).ready(function() {
 	  elements: {
 		point: {
 		  borderColor: function(context) {
-			var point = context.dataset.data[context.dataIndex];
+			let point = context.dataset.data[context.dataIndex];
 			return classcolors[point.x]
 		  },
 		  backgroundColor: function(context) {
-			var point = context.dataset.data[context.dataIndex];
+			let point = context.dataset.data[context.dataIndex];
 			return attributecolors[point.y]
 		  },
 		  hoverBackgroundColor: function(context) {
-			var point = context.dataset.data[context.dataIndex];
+			let point = context.dataset.data[context.dataIndex];
 			return attributehovers[point.y]
 		  },
 		  borderWidth: 3,
