@@ -12,6 +12,6 @@ Last updated: 10.02.2020
 	<button id="button2">Rarities</button>
 	<button id="button3">5* Elements</button>
 </div>
-<div id="chartArea" class="ui-widget-content" style="width: 100%; height: 550px; margin: 20px auto;">
-	<canvas id="myChart"></canvas>
+<div id="chartArea" class="ui-widget-content" style="width: 100%; height: 550px; margin: 10px auto;">
+	<canvas id="myChart" style="margin: 10px"></canvas>
 </div>
