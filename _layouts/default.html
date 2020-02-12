@@ -44,7 +44,7 @@
           <h1>
 		    <script>$(document).ready(
 				function() {
-					var table = {{ site.data.yuno | jsonif }};
+					var table = {{ site.data.yuno | jsonify }};
 					var number = Math.floor(Math.random() * table.length);
 					$("#titleicon").attr("src", table[number].image );
 				})
