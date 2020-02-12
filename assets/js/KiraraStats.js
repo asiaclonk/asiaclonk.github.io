@@ -54,10 +54,10 @@ $(document).ready(function() {
 	
 	var objectlist5 = [];
 	var classes = ["", "Warrior", "Mage", "Knight", "Priest", "Alchemist"];
-	var classcolors = ["#FF0000", "#4169E1", "#8B4513", "#32CD32", "#FFFF00"];
+	var classcolors = ["", "#FF0000", "#4169E1", "#8B4513", "#32CD32", "#FFFF00"];
 	var attributes = ["", "Fire", "Water", "Earth", "Wind", "Sun", "Moon"];
-	var attributecolors = ["#FF000099", "#4169E199", "#8B451399", "#32CD3299", "#FFFF0099", "#66339999"];
-	var attributehovers = ["#FF0000", "#4169E1", "#8B4513", "#32CD32", "#FFFF00", "#663399"];
+	var attributecolors = ["", "#FF000099", "#4169E199", "#8B451399", "#32CD3299", "#FFFF0099", "#66339999"];
+	var attributehovers = ["", "#FF0000", "#4169E1", "#8B4513", "#32CD32", "#FFFF00", "#663399"];
 	for (var i = 1; i < classes.length+1; i++) {
 		for (var j = 1; j < attributes.length+1; j++) {
 			var count = fivestar.filter(value => value["class"] == classes[i] && value["attribute"] == attributes[j]).length
