@@ -47,10 +47,10 @@
 					var table = {{ site.data.yuno | jsonify }};
 					var number = Math.floor(Math.random() * table.length);
 					$("#titleicon").attr("src", table[number].image );
-					$("#titleicon").toggle("fade");
+					$("#titleicon").onload = function() { $("#titleicon").toggle("fade"); };
 				})
 			</script>
-			<div class="ui-widget-content ui-corner-all" width="50" height="50" style="margin-right: 5px; vertical-align: -20%;">
+			<div class="ui-widget-content ui-corner-all" width="50px" height="50px" style="margin-right: 5px; vertical-align: -20%; display: inline-block;">
 				<image src="{{ site.image }}" id="titleicon" alt="Icon" style="display: none">
 			</div>
 		    {{ page.title }}
