@@ -71,7 +71,7 @@ $(document).ready(function() {
 	}
 	
 	objectlist5.sort(function(a,b) {
-		return b.reduce(function(p,c) { return { r: p.r + c.r } }).r - a.reduce(function(p,c) { return { r: p.r + c.r } }).r
+		return b["r"] - a["r"];
 	})
 	
 	data1 = {
