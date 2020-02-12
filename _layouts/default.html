@@ -1,7 +1,3 @@
----
-randomyuno = {{ site.data.yuno | sample }}
----
-
 <!doctype html>
 <html lang="{{ site.lang | default: "en-US" }}">
   <head>
@@ -46,6 +42,7 @@ randomyuno = {{ site.data.yuno | sample }}
       <section>
         <div id="title">
           <h1>
+			{% assign randomyuno = site.data.yuno | sample  %}
 		    <image src="{{ randomyuno.image }}" width="50" height="50" style="margin-right: 5px" alt="Icon">
 		    {{ page.title }}
 		  </h1>
