@@ -431,7 +431,7 @@ $(document).ready(function() {
 			let point = context.dataset.data[context.dataIndex];
 			let image = new Image(point.r, point.r);
 			image.src = classicons[point.x];
-			image.addClass(classcolors[point.y]);
+			image.classList.add(classcolors[point.y]);
 			return image;
 		  },
 		}
