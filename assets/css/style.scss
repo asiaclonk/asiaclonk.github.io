@@ -78,6 +78,30 @@
   color: #ffffff;
 }
 
+.fire-class {
+  filter: hue-rotate(30deg)
+}
+
+.earth-class {
+  filter: hue-rotate(50deg)
+}
+
+.sun-class {
+  filter: hue-rotate(85deg)
+}
+
+.wind-class {
+  filter: hue-rotate(130deg)
+}
+
+.water-class {
+  filter: hue-rotate(240deg)
+}
+
+.moon-class {
+  filter: hue-rotate(300deg)
+}
+
 @media print, screen and (max-width: 480px) {
   #smallnav {
     display: block;
