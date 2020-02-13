@@ -54,19 +54,16 @@ $(document).ready(function() {
 	
 	var objectlist5 = [];
 	var classes = ["", "Warrior", "Mage", "Knight", "Priest", "Alchemist"];
-	var classcolors = ["", "#FF000099", "#4169E199", "#8B451399", "#32CD3299", "#FFFF0099"];
-	var classhovers = ["", "#FF0000", "#4169E1", "#8B4513", "#32CD32", "#FFFF00"];
-	classicons = {{ site.data.classicons | jsonify }}.map(value => { var image = new Image(); image.src = value.image; return image; });
+	classicons = {{ site.data.classicons | jsonify }}.map(value => value.image);
 	var attributes = ["", "Fire", "Water", "Earth", "Wind", "Sun", "Moon"];
-	var attributecolors = ["", "#FF000099", "#4169E199", "#8B451399", "#32CD3299", "#FFFF0099", "#66339999"];
-	var attributehovers = ["", "#FF0000", "#4169E1", "#8B4513", "#32CD32", "#FFFF00", "#663399"];
+	var attributecolors = ["", "#FF0000", "#4169E1", "#8B4513", "#32CD32", "#FFFF00", "#663399"];
 	for (var i = 1; i < classes.length+1; i++) {
 		for (var j = 1; j < attributes.length+1; j++) {
 			var count = fivestar.filter(value => value["class"] == classes[i] && value["attribute"] == attributes[j]).length
 			if (count > 0) {
 				objectlist5.push({ x: i,
 								   y: j,
-								   r: count*5
+								   r: count*10
 								 });
 			}
 		}
@@ -394,7 +391,7 @@ $(document).ready(function() {
 	  tooltips: {
 		callbacks: {
 		  label: function(ttip,data){
-			return ": " + (data.datasets[0].data[ttip.index].r / 5);
+			return ": " + (data.datasets[0].data[ttip.index].r / 10);
 		  }
 		},
 	  },
@@ -422,30 +419,18 @@ $(document).ready(function() {
 	  },
 	  elements: {
 		point: {
-		  borderColor: function(context) {
-			let point = context.dataset.data[context.dataIndex];
-			return attributecolors[point.y];
-		  },
-		  hoverBorderColor: function(context) {
-			let point = context.dataset.data[context.dataIndex];
-			return attributehovers[point.y];
-		  },
 		  backgroundColor: function(context) {
 			let point = context.dataset.data[context.dataIndex];
-			return classcolors[point.x];
-		  },
-		  hoverBackgroundColor: function(context) {
-			let point = context.dataset.data[context.dataIndex];
-			return classhovers[point.x];
+			return attributecolors[point.y];
 		  },
 		  borderWidth: 4,
 		  hoverBorderWidth: 8,
 		  hitRadius: 5,
 		  pointStyle: function(context) {
 			let point = context.dataset.data[context.dataIndex];
-			let image = classicons[point.x];
-			image.width = point.r*2
-			image.height = point.r*2
+			let image = new Image(classicons[point.x]);
+			image.width = point.r
+			image.height = point.r
 			return classicons[point.x];
 		  },
 		}
