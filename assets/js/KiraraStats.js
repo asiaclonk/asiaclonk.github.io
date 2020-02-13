@@ -449,7 +449,7 @@ $(document).ready(function() {
 	  },
 	};
 
-	$("#chartselect").selectmenu();
+	$("#chartselect").selectmenu().val(0).selectmenu("refresh");
 
 	$("#chartarea").resizable({
 		handles: 's',
@@ -474,7 +474,7 @@ $(document).ready(function() {
 		var option = options[$("#chartselect").val()];
 		var type = types[$("#chartselect").val()]
 		var ctx = document.getElementById('myChart').getContext("2d");
-		kirarachart.destroy();
+		if (kirarachart) kirarachart.destroy();
 		kirarachart = new Chart(ctx, {
 		  type: type,
 		  data: copy,
