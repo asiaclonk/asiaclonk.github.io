@@ -13,7 +13,12 @@
 	{% if page.url %}
 	  <meta property="og:url" content="{{ page.url | absolute_url }}">
 	{% endif %}
-	<meta property="og:image" content="{{ page.image | default: site.image }}">
+	{% if page.image %}
+		<meta property="og:image" content="{{ page.image | absolute_url }}">
+	{% else %}
+		<meta property="og:image" content="{{ site.image | absolute_url }}">
+	{% endif %}
+	
 	{% if page.audio %}
 	  <meta property="og:audio" content="{{ page.audio }}">
 	{% endif %}
