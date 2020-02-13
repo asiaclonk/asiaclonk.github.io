@@ -8,7 +8,7 @@ Last updated: 10.02.2020
 
 <script src="assets/js/KiraraStats.js"></script>
 <div style="text-align:center">
-	<label for="chartselect">Select Chart</label>
+	<label for="chartselect">Select Chart: </label>
 	<select id="chartselect">
 		<option value="0" selected="selected">5* Release State</option>
 		<option value="1">Rarities</option>
@@ -21,6 +21,6 @@ Last updated: 10.02.2020
 	<canvas id="myChart"></canvas>
 </div>
 <div style="text-align:center">
-	<button id="chartplus">+</button>
-	<button id="chartminus">-</button>
+	<button id="chartplus" class="ui-icon-triangle-1-s"></button>
+	<button id="chartminus" class="ui-icon-triangle-1-n"></button>
 </div>

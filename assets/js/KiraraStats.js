@@ -446,18 +446,18 @@ $(document).ready(function() {
 	});
 
 	$("#chartplus").click(function() {
-		$("#chartarea").effect("size", { to: { width: $("#chartarea").width, height: $("#chartarea").height + 50 } })
+		$("#chartarea").effect("size", { to: { width: $("#chartarea").width(), height: $("#chartarea").height() + 50 } })
 	})
 	
 	$("#chartminus").click(function() {
-		$("#chartarea").effect("size", { to: { width: $("#chartarea").width, height: $("#chartarea").height - 50 } })
+		$("#chartarea").effect("size", { to: { width: $("#chartarea").width(), height: $("#chartarea").height() - 50 } })
 	})
 
 	datas = [data1,data2,data3,data4,data5];
 	options = [options1,options2,options3,options4,options5];
 	types = ["horizontalBar","horizontalBar","horizontalBar","horizontalBar","bubble"];
 
-	$("#chartselect").change(function(event) {
+	$("#chartselect").on("selectmenuchange", function(event) {
 		var copy = JSON.parse(JSON.stringify(datas[$("#chartselect").val()]));
 		var option = options[$("#chartselect").val()];
 		var type = types[$("#chartselect").val()]
