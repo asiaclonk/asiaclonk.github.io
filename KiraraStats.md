@@ -17,10 +17,10 @@ Last updated: 10.02.2020
 		<option value="4">5* Class/Attribute</option>
 	</select>
 </div>
-<div id="chartarea" class="ui-widget-content" style="width: 100%; height: 600px; margin: 10px auto; border-bottom: 5px solid #FFCC00;">
+<div id="chartarea" class="ui-widget-content" style="width: 100%; min-height: 400px; height: 600px; margin: 10px auto; border-bottom: 5px solid #FFCC00;">
 	<canvas id="myChart"></canvas>
 </div>
 <div style="text-align:center">
-	<button id="chartplus" class="ui-icon-triangle-1-s"></button>
-	<button id="chartminus" class="ui-icon-triangle-1-n"></button>
+	<button id="chartplus"></button>
+	<button id="chartminus"></button>
 </div>

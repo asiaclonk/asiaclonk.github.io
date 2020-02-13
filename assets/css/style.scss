@@ -70,6 +70,14 @@
   }
 }
 
+.ui-button:hover,
+.ui-button:focus {
+  border: 1px solid #FFCC00;
+  background: #CC9900;
+  font-weight: bold;
+  color: #ffffff;
+}
+
 @media print, screen and (max-width: 480px) {
   #smallnav {
     display: block;

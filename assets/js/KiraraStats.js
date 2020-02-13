@@ -54,7 +54,9 @@ $(document).ready(function() {
 	
 	var objectlist5 = [];
 	var classes = ["", "Warrior", "Mage", "Knight", "Priest", "Alchemist"];
-	var classcolors = ["", "#FF0000", "#4169E1", "#8B4513", "#32CD32", "#FFFF00"];
+	var classcolors = ["", "#FF000099", "#4169E199", "#8B451399", "#32CD3299", "#FFFF0099"];
+	var classhovers = ["", "#FF0000", "#4169E1", "#8B4513", "#32CD32", "#FFFF00"];
+	var classicons = {{ site.data.classicons | jsonify }}.map(value => value.image);
 	var attributes = ["", "Fire", "Water", "Earth", "Wind", "Sun", "Moon"];
 	var attributecolors = ["", "#FF000099", "#4169E199", "#8B451399", "#32CD3299", "#FFFF0099", "#66339999"];
 	var attributehovers = ["", "#FF0000", "#4169E1", "#8B4513", "#32CD32", "#FFFF00", "#663399"];
@@ -384,10 +386,17 @@ $(document).ready(function() {
 	  maintainAspectRatio: false,
 	  title: {
 		display: true,
-		text: '5* Cards by Class/Attribute (Actual value is the third one divided by 5)'
+		text: '5* Cards by Class/Attribute'
 	  },
 	  legend: {
 		display: false,
+	  },
+	  tooltips: {
+		callbacks: {
+		  label: function(ttip,data){
+			return ": " + (data.datasets[0].data[ttip.index].r / 5);
+		  }
+		},
 	  },
 	  scales: {
 		xAxes: [{
@@ -415,18 +424,27 @@ $(document).ready(function() {
 		point: {
 		  borderColor: function(context) {
 			let point = context.dataset.data[context.dataIndex];
-			return classcolors[point.x];
-		  },
-		  backgroundColor: function(context) {
-			let point = context.dataset.data[context.dataIndex];
 			return attributecolors[point.y];
 		  },
-		  hoverBackgroundColor: function(context) {
+		  hoverBorderColor: function(context) {
 			let point = context.dataset.data[context.dataIndex];
 			return attributehovers[point.y];
 		  },
-		  borderWidth: 3,
-		  hoverBorderWidth: 6,
+		  backgroundColor: function(context) {
+			let point = context.dataset.data[context.dataIndex];
+			return classcolors[point.x];
+		  },
+		  hoverBackgroundColor: function(context) {
+			let point = context.dataset.data[context.dataIndex];
+			return classhovers[point.x];
+		  },
+		  borderWidth: 4,
+		  hoverBorderWidth: 8,
+		  hitradius: -7,
+		  pointStyle: function(context) {
+			let point = context.dataset.data[context.dataIndex];
+			return classicons[point.x];
+		  },
 		}
 	  },
 	};
@@ -445,12 +463,14 @@ $(document).ready(function() {
 		handles: 's',
 	});
 
+	$("#chartplus").button({ icon: "ui-icon-triangle-1-s" })
 	$("#chartplus").click(function() {
-		$("#chartarea").effect("size", { to: { width: $("#chartarea").width(), height: $("#chartarea").height() + 50 } })
+		$("#chartarea").animate({ height: "+=50" })
 	})
-	
+
+	$("#chartminus").button({ icon: "ui-icon-triangle-1-n" })
 	$("#chartminus").click(function() {
-		$("#chartarea").effect("size", { to: { width: $("#chartarea").width(), height: $("#chartarea").height() - 50 } })
+		$("#chartarea").animate({ height: "-=50" })
 	})
 
 	datas = [data1,data2,data3,data4,data5];
