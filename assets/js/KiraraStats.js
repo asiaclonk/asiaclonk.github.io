@@ -439,7 +439,7 @@ $(document).ready(function() {
 		  options: options1,
 		});
 
-	$("#chartselect").selectMenu();
+	$("#chartselect").selectmenu();
 
 	$("#chartarea").resizable({
 		handles: 's',
