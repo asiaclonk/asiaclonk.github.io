@@ -428,10 +428,9 @@ $(document).ready(function() {
 		  hitRadius: 5,
 		  pointStyle: function(context) {
 			let point = context.dataset.data[context.dataIndex];
-			let image = new Image(classicons[point.x]);
-			image.width = point.r
-			image.height = point.r
-			return classicons[point.x];
+			let image = new Image(point.r, point.r);
+			image.src = classicons[point.x];
+			return image;
 		  },
 		}
 	  },
