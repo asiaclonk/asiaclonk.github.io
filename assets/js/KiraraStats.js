@@ -56,7 +56,7 @@ $(document).ready(function() {
 	var classes = ["", "Warrior", "Mage", "Knight", "Priest", "Alchemist"];
 	var classcolors = ["", "#FF000099", "#4169E199", "#8B451399", "#32CD3299", "#FFFF0099"];
 	var classhovers = ["", "#FF0000", "#4169E1", "#8B4513", "#32CD32", "#FFFF00"];
-	var classicons = {{ site.data.classicons | jsonify }}.map(value => function() { var image = new Image(); image.src = value.image; return image; });
+	classicons = {{ site.data.classicons | jsonify }}.map(value => function() { var image = new Image(); image.src = value.image; return image; });
 	var attributes = ["", "Fire", "Water", "Earth", "Wind", "Sun", "Moon"];
 	var attributecolors = ["", "#FF000099", "#4169E199", "#8B451399", "#32CD3299", "#FFFF0099", "#66339999"];
 	var attributehovers = ["", "#FF0000", "#4169E1", "#8B4513", "#32CD32", "#FFFF00", "#663399"];
@@ -440,7 +440,7 @@ $(document).ready(function() {
 		  },
 		  borderWidth: 4,
 		  hoverBorderWidth: 8,
-		  hitRadius: -7,
+		  hitRadius: 5,
 		  pointStyle: function(context) {
 			let point = context.dataset.data[context.dataIndex];
 			return classicons[point.x];
