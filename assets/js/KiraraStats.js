@@ -55,7 +55,6 @@ $(document).ready(function() {
 	var objectlist5 = [];
 	var classes = ["", "Warrior", "Mage", "Knight", "Priest", "Alchemist"];
 	var classicons = {{ site.data.classicons | jsonify }}.map(value => value.image);
-	var classcolors = ["", "fire-class", "water-class", "earth-class", "wind-class", "sun-class", "moon-class"];
 	var attributes = ["", "Fire", "Water", "Earth", "Wind", "Sun", "Moon"];
 	var attributecolors = ["", "#FF0000", "#4169E1", "#8B4513", "#32CD32", "#FFFF00", "#663399"];
 	for (var i = 1; i < classes.length+1; i++) {
@@ -431,7 +430,6 @@ $(document).ready(function() {
 			let point = context.dataset.data[context.dataIndex];
 			let image = new Image(point.r, point.r);
 			image.src = classicons[point.x];
-			image.classList.add(classcolors[point.y]);
 			return image;
 		  },
 		}
