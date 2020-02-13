@@ -468,6 +468,7 @@ $(document).ready(function() {
 	datas = [data1,data2,data3,data4,data5];
 	options = [options1,options2,options3,options4,options5];
 	types = ["horizontalBar","horizontalBar","horizontalBar","horizontalBar","bubble"];
+	kirarachart = false
 
 	$("#chartselect").on("selectmenuchange", function(event) {
 		var copy = JSON.parse(JSON.stringify(datas[$("#chartselect").val()]));
