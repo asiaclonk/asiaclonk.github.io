@@ -74,7 +74,7 @@ $(document).ready(function() {
 		return b["r"] - a["r"];
 	})
 	
-	data1 = {
+	var data1 = {
 	  labels: objectlist1.map(value => value["series"]),
 	  datasets: [{
 		label: "Evo 4",
@@ -94,7 +94,7 @@ $(document).ready(function() {
 	  }]
 	};
 
-	options1 = {
+	var options1 = {
 	  maintainAspectRatio: false,
 	  title: {
 		display: true,
@@ -133,7 +133,7 @@ $(document).ready(function() {
 	  }
 	};
 
-	data2 = {
+	var data2 = {
 	  labels: objectlist2.map(value => value["series"]),
 	  datasets: [{
 		label: "5*",
@@ -153,7 +153,7 @@ $(document).ready(function() {
 	  }]
 	};
 
-	options2 = {
+	var options2 = {
 	  maintainAspectRatio: false,
 	  title: {
 		display: true,
@@ -192,7 +192,7 @@ $(document).ready(function() {
 	  }
 	};
 
-	data3 = {
+	var data3 = {
 	  labels: objectlist3.map(value => value["series"]),
 	  datasets: [{
 		label: "Fire",
@@ -227,7 +227,7 @@ $(document).ready(function() {
 	  }]
 	};
 
-	options3 = {
+	var options3 = {
 	  maintainAspectRatio: false,
 	  title: {
 		display: true,
@@ -290,7 +290,7 @@ $(document).ready(function() {
 	  }
 	};
 
-	data4 = {
+	var data4 = {
 	  labels: objectlist4.map(value => value["series"]),
 	  datasets: [{
 		label: "Warrior",
@@ -320,7 +320,7 @@ $(document).ready(function() {
 	  }]
 	};
 
-	options4 = {
+	var options4 = {
 	  maintainAspectRatio: false,
 	  title: {
 		display: true,
@@ -375,12 +375,12 @@ $(document).ready(function() {
 	  }
 	};
 
-	data5 = {
+	var data5 = {
 	  labels: [],
 	  datasets: [{ data: objectlist5 }],
 	};
 
-	options5 = {
+	var options5 = {
 	  maintainAspectRatio: false,
 	  title: {
 		display: true,
@@ -438,63 +438,35 @@ $(document).ready(function() {
 		  data: copy,
 		  options: options1,
 		});
-		
-	$("#chartArea").resizable({
+
+	$("#chartselect").selectMenu();
+
+	$("#chartarea").resizable({
 		handles: 's',
 	});
 
-	$("#button1").click(function() {
-		var copy = JSON.parse(JSON.stringify(data1));
-		var ctx = document.getElementById('myChart').getContext("2d");
-		kirarachart.destroy();
-		kirarachart = new Chart(ctx, {
-		  type: 'horizontalBar',
-		  data: copy,
-		  options: options1,
-		});
-	});
+	$("#chartplus").click(function() {
+		$("#chartarea").effect("size", { to: { width: $("#chartarea").width, height: $("#chartarea").height + 50 } })
+	})
 	
-	$("#button2").click(function() {
-		var copy = JSON.parse(JSON.stringify(data2));
+	$("#chartminus").click(function() {
+		$("#chartarea").effect("size", { to: { width: $("#chartarea").width, height: $("#chartarea").height - 50 } })
+	})
+
+	datas = [data1,data2,data3,data4,data5];
+	options = [options1,options2,options3,options4,options5];
+	types = ["horizontalBar","horizontalBar","horizontalBar","horizontalBar","bubble"];
+
+	$("#chartselect").change(function(event) {
+		var copy = JSON.parse(JSON.stringify(datas[$("#chartselect").val()]));
+		var option = options[$("#chartselect").val()];
+		var type = types[$("#chartselect").val()]
 		var ctx = document.getElementById('myChart').getContext("2d");
 		kirarachart.destroy();
 		kirarachart = new Chart(ctx, {
-		  type: 'horizontalBar',
+		  type: type,
 		  data: copy,
-		  options: options2,
+		  options: option,
 		});
-	});
-	
-	$("#button3").click(function() {
-		var copy = JSON.parse(JSON.stringify(data3));
-		var ctx = document.getElementById('myChart').getContext("2d");
-		kirarachart.destroy();
-		kirarachart = new Chart(ctx, {
-		  type: 'horizontalBar',
-		  data: copy,
-		  options: options3,
-		});
-	});
-	
-	$("#button4").click(function() {
-		var copy = JSON.parse(JSON.stringify(data4));
-		var ctx = document.getElementById('myChart').getContext("2d");
-		kirarachart.destroy();
-		kirarachart = new Chart(ctx, {
-		  type: 'horizontalBar',
-		  data: copy,
-		  options: options4,
-		});
-	});
-	
-	$("#button5").click(function() {
-		var copy = JSON.parse(JSON.stringify(data5));
-		var ctx = document.getElementById('myChart').getContext("2d");
-		kirarachart.destroy();
-		kirarachart = new Chart(ctx, {
-		  type: 'bubble',
-		  data: copy,
-		  options: options5,
-		});
-	});
+	})
 })

@@ -52,11 +52,18 @@
 					var table = {{ site.data.yuno | jsonify }};
 					var number = Math.floor(Math.random() * table.length);
 					$("#titleicon").attr("src", table[number].image );
-					setTimeout( function() { $("#titleicon").toggle("fade"); }, 1000);
+					setTimeout( function() {
+						$("#titleicon").toggle("fade");
+						$("#titleicon").click(function() {
+							$("#titleicon").toggle("fade");
+							setTimeout( function() { var number = Math.floor(Math.random() * table.length); $("#titleicon").attr("src", table[number].image ); } , 400)
+							setTimeout( function() { $("#titleicon").toggle("fade"); } , 1400)
+						})
+					}, 1000);
 				})
 			</script>
 			<div class="ui-widget-content ui-corner-all" style="width: 50px; height: 50px; margin-right: 5px; display: inline-block;">
-				<image src="{{ site.image }}" id="titleicon" alt="Icon" style="height: 51px; display: none">
+				<image src="{{ site.image }}" id="titleicon" alt="Icon" style="height: 51px; display: none; cursor: pointer;">
 			</div>
 		    <span style="vertical-align: text-top;">{{ page.title }}</span>
 		  </h1>
