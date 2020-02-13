@@ -56,7 +56,7 @@ $(document).ready(function() {
 	var classes = ["", "Warrior", "Mage", "Knight", "Priest", "Alchemist"];
 	var classcolors = ["", "#FF000099", "#4169E199", "#8B451399", "#32CD3299", "#FFFF0099"];
 	var classhovers = ["", "#FF0000", "#4169E1", "#8B4513", "#32CD32", "#FFFF00"];
-	classicons = {{ site.data.classicons | jsonify }}.map(value => function() { var image = new Image(); image.src = value.image; return image; });
+	classicons = {{ site.data.classicons | jsonify }}.map(value => { var image = new Image(); image.src = value.image; return image; });
 	var attributes = ["", "Fire", "Water", "Earth", "Wind", "Sun", "Moon"];
 	var attributecolors = ["", "#FF000099", "#4169E199", "#8B451399", "#32CD3299", "#FFFF0099", "#66339999"];
 	var attributehovers = ["", "#FF0000", "#4169E1", "#8B4513", "#32CD32", "#FFFF00", "#663399"];
@@ -449,14 +449,6 @@ $(document).ready(function() {
 	  },
 	};
 
-	var ctx = document.getElementById('myChart').getContext("2d");
-	var copy = JSON.parse(JSON.stringify(data1));
-	kirarachart = new Chart(ctx, {
-		  type: 'horizontalBar',
-		  data: copy,
-		  options: options1,
-		});
-
 	$("#chartselect").selectmenu();
 
 	$("#chartarea").resizable({
@@ -489,4 +481,5 @@ $(document).ready(function() {
 		  options: option,
 		});
 	})
+	$("#chartselect").trigger("selectmenuchange");
 })
