@@ -12,7 +12,7 @@ Last updated: 10.02.2020
 	<select id="chartselect">
 		<optgroup label="5* Cards">
 			<option value="0">Release State</option>
-			<option value="2">Elements</option>
+			<option value="2">Attributes</option>
 			<option value="3">Classes</option>
 			<option value="4">Class/Attribute</option>
 		</optgroup>

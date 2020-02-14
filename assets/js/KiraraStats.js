@@ -427,10 +427,13 @@ $(document).ready(function() {
 		  hoverBorderWidth: 8,
 		  hitRadius: 5,
 		  pointStyle: function(context) {
-			let point = context.dataset.data[context.dataIndex];
-			let image = new Image(point.r, point.r);
-			image.src = classicons[point.x];
-			return image;
+			if (!context.hover) {
+				let point = context.dataset.data[context.dataIndex];
+				let image = new Image(point.r, point.r);
+				image.src = classicons[point.x];
+				return image;
+			}
+			return;
 		  },
 		}
 	  },
