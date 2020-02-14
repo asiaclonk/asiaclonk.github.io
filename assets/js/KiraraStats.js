@@ -57,6 +57,7 @@ $(document).ready(function() {
 	var classicons = {{ site.data.classicons | jsonify }}.map(value => value.image);
 	var attributes = ["", "Fire", "Water", "Earth", "Wind", "Sun", "Moon"];
 	var attributecolors = ["", "#FF0000", "#4169E1", "#8B4513", "#32CD32", "#FFFF00", "#663399"];
+	var gridlinecolors = ["", "#663399", "#FFFF00", "#32CD32", "#8B4513", "#4169E1", "#FF0000"];
 	for (var i = 1; i < classes.length+1; i++) {
 		for (var j = 1; j < attributes.length+1; j++) {
 			var count = fivestar.filter(value => value["class"] == classes[i] && value["attribute"] == attributes[j]).length
@@ -406,6 +407,9 @@ $(document).ready(function() {
 		  },
 		}],
 		yAxes: [{
+		  gridLines: {
+			color: gridlinecolors,
+		  },
 		  ticks: {
 			beginAtZero: true,
 			hidden: false,
@@ -425,15 +429,11 @@ $(document).ready(function() {
 		  },
 		  borderWidth: 4,
 		  hoverBorderWidth: 8,
-		  hitRadius: 5,
 		  pointStyle: function(context) {
-			if (!context.hover) {
-				let point = context.dataset.data[context.dataIndex];
-				let image = new Image(point.r, point.r);
-				image.src = classicons[point.x];
-				return image;
-			}
-			return;
+			let point = context.dataset.data[context.dataIndex];
+			let image = new Image(point.r, point.r);
+			image.src = classicons[point.x];
+			return image;
 		  },
 		}
 	  },
