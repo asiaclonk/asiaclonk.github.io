@@ -48,8 +48,8 @@ $(document).ready(function() {
 
   $("#foreground").mousemove(function(e) {
     if (mapclick == true) {
-      backcontext.setTransform(xmappix + (e.clientX - dragx) % 512,
-                               ymappix + (e.clientY - dragy) % 32);
+      backcontext.setTransform(0,0,0,0, xmappix + (e.clientX - dragx) % 512,
+                                        ymappix + (e.clientY - dragy) % 32);
       drawmap();
     }
   });
