@@ -18,7 +18,6 @@ description: Something to quickly tile a map with.
 <p style="text-align: center;" id="coordtext">Map</p>
 <div style="width: 100%; overflow: auto">
   <div style="position: relative; width: 640px; height: 640px; margin: auto;">
-    <image id="backgroundtiles" src="assets/images/tilebackground.png" style="width: 512; height: 32; display: none;"></image>
     <canvas id="background" class="backgroundimage" width="640" height="640"></canvas>
     <canvas id="tilemap" class="foregroundimage" width="640" height="640"></canvas>
     <canvas id="foreground" class="forestgroundimage" width="640" height="640"></canvas>

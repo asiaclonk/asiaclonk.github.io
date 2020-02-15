@@ -43,10 +43,13 @@ $(document).ready(function() {
     drawselection(0, 0, false);
   });
 
-  $("#backgroundtiles").on("load", function() {
+  backgroundtiles = new Image(512,32);
+  backgroundtiles.onload = function() {
     backcontext.fillStyle = backcontext.createPattern(backgroundtiles, "repeat");
-    backcontext.fillRect(0, 0, mapdim, mapdim);
-  });
+    backcontext.rect(0, 0, mapdim, mapdim);
+	backcontext.fill();
+  };
+  backgroundtiles.src = "assets/images/tilebackground.png";
 
   $("#foreground").mousedown(function(e) {
     var rect = e.target.getBoundingClientRect();
@@ -137,7 +140,7 @@ function drawmap() {
   );
   tilestodraw.forEach(function(tile) {
     tilecontext.drawImage(tiles, tile.tilex * 32, tile.tiley * 32, dim, dim,
-                         (tile.mapx - xmap) * 32 - (xmap % 32),
-                         (tile.mapy - ymap) * 32 - (ymap % 32), dim, dim);
+                         (tile.mapx - xmap) * 32 - (xmappix % 32),
+                         (tile.mapy - ymap) * 32 - (ymappix % 32), dim, dim);
   });
 }
