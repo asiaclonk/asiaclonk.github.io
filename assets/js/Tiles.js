@@ -27,7 +27,7 @@ $(document).ready(function() {
     var y = Math.floor(e.clientY - rect.top);
     var hoverx = Math.floor(x / dim);
     var hovery = Math.floor(y / dim);
-    drawselection(hoverx, hovery);
+    drawselection(hoverx, hovery, true);
   });
 
   $("#selectmap").click(function(e) {
@@ -36,7 +36,11 @@ $(document).ready(function() {
     var y = Math.floor(e.clientY - rect.top);
     selectedx = Math.floor(x / dim);
     selectedy = Math.floor(y / dim);
-    drawselection(selectedx, selectedy);
+    drawselection(selectedx, selectedy, true);
+  });
+  
+  $("#selectmap").mouseleave(function(e) {
+    drawselection(0, 0, false);
   });
 
   $("#backgroundtiles").on("load", function() {
@@ -62,15 +66,16 @@ $(document).ready(function() {
 	  dragy = starty - y;
       var selectedmapx = Math.floor((xmappix + dragx + x) / 32);
       var selectedmapy = Math.floor((ymappix + dragy + y) / 32);
-      backcontext.setTransform(0,0,0,0, (xmappix + dragx) % 512,
+      backcontext.setTransform(1,0,0,1, (xmappix + dragx) % 512,
                                         (ymappix + dragy) % 32);
+	  backcontext.fill();
       drawmap();
-	  $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + "), Dragging... (X: " + dragx + ", Y: " + dragy + ")");
+	  $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + ")");
     }
 	else {
       var selectedmapx = Math.floor((xmappix + x) / 32);
       var selectedmapy = Math.floor((ymappix + y) / 32);
-      $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + ") Idle");
+      $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + ")");
 	}
   });
   
@@ -101,14 +106,18 @@ $(document).ready(function() {
 	dragx = 0;
 	dragy = 0;
   });
+  
+  drawselection(selectedx, selectedy);
 });
 
-function drawselection(x, y) {
+function drawselection(x, y, draw) {
   selectcontext.clearRect(0, 0, selectcanvas.width, selectcanvas.height);
-  selectcontext.beginPath();
-  selectcontext.strokeStyle = "yellow";
-  selectcontext.rect(x * dim, y * dim, dim, dim);
-  selectcontext.stroke();
+  if(draw) {
+    selectcontext.beginPath();
+    selectcontext.strokeStyle = "yellow";
+    selectcontext.rect(x * dim, y * dim, dim, dim);
+    selectcontext.stroke();
+  }
   selectcontext.beginPath();
   selectcontext.strokeStyle = "lightgreen";
   selectcontext.rect(selectedx * dim, selectedy * dim, dim, dim);
@@ -117,10 +126,10 @@ function drawselection(x, y) {
 
 function drawmap() {
   tilecontext.clearRect(0, 0, mapdim, mapdim);
-  var xmap = Math.floor(xmappix / 32);
-  var xmapmax = Math.floor((xmappix + 640) / 32);
-  var ymap = ymappix / 32;
-  var ymapmax = Math.floor((ymappix + 640) / 32);
+  var xmap = Math.floor((xmappix + dragx) / 32);
+  var xmapmax = Math.floor(((xmappix + dragx + 640)) / 32);
+  var ymap = Math.floor((ymappix + dragy) / 32);
+  var ymapmax = Math.floor(((ymappix + dragy + 640)) / 32);
   var tilestodraw = tilelist.filter((value) => value.mapx >= xmap &&
                                                value.mapx <= xmapmax &&
                                                value.mapy >= ymap &&
