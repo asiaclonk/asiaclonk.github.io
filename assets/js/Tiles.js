@@ -65,10 +65,10 @@ $(document).ready(function() {
     var x = Math.floor(e.clientX - rect.left);
     var y = Math.floor(e.clientY - rect.top);
     if (mapclick == true) {
-	  dragx = startx - x;
-	  dragy = starty - y;
-      var selectedmapx = Math.floor((xmappix + dragx + x) / 32);
-      var selectedmapy = Math.floor((ymappix + dragy + y) / 32);
+	  dragx = startx + x;
+	  dragy = starty + y;
+      var selectedmapx = Math.floor((xmappix + dragx) / 32);
+      var selectedmapy = Math.floor((ymappix + dragy) / 32);
       backcontext.setTransform(1,0,0,1, (xmappix - dragx) % 512,
                                         (ymappix - dragy) % 32);
 	  backcontext.fill();
@@ -102,8 +102,8 @@ $(document).ready(function() {
       drawmap();
     }
     mapclick = false;
-    xmappix += dragx;
-    ymappix += dragy;
+    xmappix -= dragx;
+    ymappix -= dragy;
     startx = 0;
     starty = 0;
 	dragx = 0;
@@ -129,10 +129,10 @@ function drawselection(x, y, draw) {
 
 function drawmap() {
   tilecontext.clearRect(0, 0, mapdim, mapdim);
-  var xmap = Math.floor((xmappix + dragx) / 32);
-  var xmapmax = Math.floor(((xmappix + dragx + 640)) / 32);
-  var ymap = Math.floor((ymappix + dragy) / 32);
-  var ymapmax = Math.floor(((ymappix + dragy + 640)) / 32);
+  var xmap = Math.floor((xmappix - dragx) / 32);
+  var xmapmax = Math.floor(((xmappix - dragx + 640)) / 32);
+  var ymap = Math.floor((ymappix - dragy) / 32);
+  var ymapmax = Math.floor(((ymappix - dragy + 640)) / 32);
   var tilestodraw = tilelist.filter((value) => value.mapx >= xmap &&
                                                value.mapx <= xmapmax &&
                                                value.mapy >= ymap &&
@@ -140,7 +140,7 @@ function drawmap() {
   );
   tilestodraw.forEach(function(tile) {
     tilecontext.drawImage(tiles, tile.tilex * 32, tile.tiley * 32, dim, dim,
-                         (tile.mapx - xmap) * 32 - (xmappix % 32),
-                         (tile.mapy - ymap) * 32 - (ymappix % 32), dim, dim);
+                         (tile.mapx - xmap) * 32 - ((xmappix - dragx) % 32),
+                         (tile.mapy - ymap) * 32 - ((ymappix - dragy) % 32), dim, dim);
   });
 }
