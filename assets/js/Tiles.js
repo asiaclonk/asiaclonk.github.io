@@ -55,7 +55,7 @@ $(document).ready(function() {
 	});
 	
 	$("#foreground").mouseup(function(e) {
-		if (dragx == e.clientX && dragy = e.clientY) {
+		if (dragx == e.clientX && dragy == e.clientY) {
 			var selectedmapx = Math.floor((xmappix + e.clientX) / 32);
 			var selectedmapy = Math.floor((ymappix + e.clientY) / 32);
 			if (selectedx == 0 && selectedy == 0) {
