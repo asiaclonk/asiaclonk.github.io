@@ -18,7 +18,7 @@ $(document).ready(function() {
   backcontext = document.getElementById("background").getContext("2d");
   tilecontext = document.getElementById("tilemap").getContext("2d");
   drawcontext = document.getElementById("foreground").getContext("2d");
-  $("#selectmap").mouseover(function(e) {
+  $("#selectmap").mousemove(function(e) {
     var rect = e.target.getBoundingClientRect();
     var x = e.clientX - rect.left;
     var y = e.clientY - rect.top;
@@ -91,7 +91,7 @@ $(document).ready(function() {
 
 function drawselection() {
   selectcontext.beginPath();
-  selectcontext.strokeStyle = "green";
+  selectcontext.strokeStyle = "lightgreen";
   selectcontext.rect(selectedx * dim, selectedy * dim, dim, dim);
   selectcontext.stroke();
 }
