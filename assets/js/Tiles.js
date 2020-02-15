@@ -23,8 +23,8 @@ $(document).ready(function() {
   
   $("#selectmap").mousemove(function(e) {
     var rect = e.target.getBoundingClientRect();
-    var x = e.clientX - rect.left;
-    var y = e.clientY - rect.top;
+    var x = Math.floor(e.clientX - rect.left);
+    var y = Math.floor(e.clientY - rect.top);
     var hoverx = Math.floor(x / dim);
     var hovery = Math.floor(y / dim);
     drawselection(hoverx, hovery);
@@ -32,8 +32,8 @@ $(document).ready(function() {
 
   $("#selectmap").click(function(e) {
     var rect = e.target.getBoundingClientRect();
-    var x = e.clientX - rect.left;
-    var y = e.clientY - rect.top;
+    var x = Math.floor(e.clientX - rect.left);
+    var y = Math.floor(e.clientY - rect.top);
     selectedx = Math.floor(x / dim);
     selectedy = Math.floor(y / dim);
     drawselection(selectedx, selectedy);
@@ -46,8 +46,8 @@ $(document).ready(function() {
 
   $("#foreground").mousedown(function(e) {
     var rect = e.target.getBoundingClientRect();
-    var x = e.clientX - rect.left;
-    var y = e.clientY - rect.top;
+    var x = Math.floor(e.clientX - rect.left);
+    var y = Math.floor(e.clientY - rect.top);
     startx = x;
     starty = y;
     mapclick = true;
@@ -55,8 +55,8 @@ $(document).ready(function() {
 
   $("#foreground").mousemove(function(e) {
     var rect = e.target.getBoundingClientRect();
-    var x = e.clientX - rect.left;
-    var y = e.clientY - rect.top;
+    var x = Math.floor(e.clientX - rect.left);
+    var y = Math.floor(e.clientY - rect.top);
     if (mapclick == true) {
 	  var dragx = startx - x;
 	  var dragy = starty - y;
@@ -65,7 +65,7 @@ $(document).ready(function() {
       backcontext.setTransform(0,0,0,0, (xmappix + dragx) % 512,
                                         (ymappix + dragy) % 32);
       drawmap();
-	  $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + "), Drag started at (X: " + startx + ", Y: " + starty + ")");
+	  $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + "), Dragging... (X: " + dragx + ", Y: " + dragy + ")");
     }
 	else {
       var selectedmapx = Math.floor((xmappix + x) / 32);
@@ -80,8 +80,8 @@ $(document).ready(function() {
 
   $("#foreground").mouseup(function(e) {
     var rect = e.target.getBoundingClientRect();
-    var x = e.clientX - rect.left;
-    var y = e.clientY - rect.top;
+    var x = Math.floor(e.clientX - rect.left);
+    var y = Math.floor(e.clientY - rect.top);
     if (startx == x && starty == y) {
       var selectedmapx = Math.floor((xmappix + x) / 32);
       var selectedmapy = Math.floor((ymappix + y) / 32);
