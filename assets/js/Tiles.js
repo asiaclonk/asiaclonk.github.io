@@ -93,10 +93,8 @@ $(document).ready(function() {
     if (startx == x && starty == y) {
       var selectedmapx = Math.floor((xmappix + x) / dim);
       var selectedmapy = Math.floor((ymappix + y) / dim);
-      if (selectedx == 0 && selectedy == 0) {
-        tilelist = tilelist.filter((value) => value.mapx != selectedmapx || value.mapy != selectedmapy );
-      }
-      else {
+      tilelist = tilelist.filter((value) => value.mapx != selectedmapx || value.mapy != selectedmapy );
+      if (selectedx != 0 || selectedy != 0) {
         tilelist.push({ tilex: selectedx, tiley: selectedy, mapx: selectedmapx, mapy: selectedmapy });
       }
       drawmap();
