@@ -13,7 +13,7 @@ function drawmap() {
 	var ymapmax = Math.floor((ymappix + 640) / 32);
 	var tilestodraw = tilelist.filter(value => value.mapx >= xmap && value.mapx <= xmapmax && value.mapy >= ymap && value.mapy <= ymapmax);
 	tilestodraw.forEach(tile => {
-		tilecontext.drawImage(tiles, (tile.mapx - xmap) * 32 - (xmap % 32), (tile.mapy - ymap) * 32 - (ymap % 32), dim, dim, tile.tilex * 32, tile.tile.y * 32, dim, dim);
+		tilecontext.drawImage(tiles, (tile.mapx - xmap) * 32 - (xmap % 32), (tile.mapy - ymap) * 32 - (ymap % 32), dim, dim, tile.tilex * 32, tile.tiley * 32, dim, dim);
 	})
 }
 
