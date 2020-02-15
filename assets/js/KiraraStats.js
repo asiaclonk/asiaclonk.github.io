@@ -439,9 +439,9 @@ $(document).ready(function() {
 			let fullimage = document.createElement('canvas');
 			fullimage.width = point.r * 2 + 8;
 			fullimage.height = point.r * 2 + 8;
-			let context = fullimage.getContext("2d");
-			context.drawImage(attributeimage);
-			context.drawImage(classimage,4,4);
+			let canvascontext = fullimage.getContext("2d");
+			canvascontext.drawImage(attributeimage);
+			canvascontext.drawImage(classimage,4,4);
 			return fullimage;
 		  },
 		}
