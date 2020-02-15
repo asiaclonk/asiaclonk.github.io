@@ -67,23 +67,23 @@ $(document).ready(function() {
     if (mapclick == true) {
 	  dragx = x - startx;
 	  dragy = y - starty;
-      var selectedmapx = Math.floor((xmappix + x + dragx) / 32);
-      var selectedmapy = Math.floor((ymappix + y + dragy) / 32);
+      var selectedmapx = Math.floor((xmappix + x + dragx) / dim);
+      var selectedmapy = Math.floor((ymappix + y + dragy) / dim);
       backcontext.setTransform(1,0,0,1, (dragx - xmappix) % 512,
                                         (dragy - ymappix) % 32);
 	  backcontext.fill();
       drawmap();
-	  $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + "), Offset: (X: " + (xmappix - dragx) + ", Y: " + (ymappix - dragy) + ")");
+	  $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + "), Offset: (X: " + Math.floor((xmappix - dragx) / dim) + ", Y: " + Math.floor((ymappix - dragy) / dim)+ ")");
     }
 	else {
-      var selectedmapx = Math.floor((xmappix + x) / 32);
-      var selectedmapy = Math.floor((ymappix + y) / 32);
-      $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + "), Offset: (X: " + xmappix + ", Y: " + ymappix + ")");
+      var selectedmapx = Math.floor((xmappix + x) / dim);
+      var selectedmapy = Math.floor((ymappix + y) / dim);
+      $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + "), Offset: (X: " + Math.floor(xmappix / dim) + ", Y: " + Math.floor(ymappix / dim) + ")");
 	}
   });
   
   $("#foreground").mouseleave(function(e) {
-	  $("#coordtext").html("Offset: (X: " + xmappix + ", Y: " + ymappix + ")");
+	  $("#coordtext").html("Offset: (X: " + Math.floor(xmappix / dim) + ", Y: " + Math.floor(ymappix / dim) + ")");
   });
 
   $("#foreground").mouseup(function(e) {
@@ -91,8 +91,8 @@ $(document).ready(function() {
     var x = Math.floor(e.clientX - rect.left);
     var y = Math.floor(e.clientY - rect.top);
     if (startx == x && starty == y) {
-      var selectedmapx = Math.floor((xmappix + x) / 32);
-      var selectedmapy = Math.floor((ymappix + y) / 32);
+      var selectedmapx = Math.floor((xmappix + x) / dim);
+      var selectedmapy = Math.floor((ymappix + y) / dim);
       if (selectedx == 0 && selectedy == 0) {
         tilelist = tilelist.filter((value) => value.mapx != selectedmapx || value.mapy != selectedmapy );
       }
@@ -129,19 +129,19 @@ function drawselection(x, y, draw) {
 
 function drawmap() {
   tilecontext.clearRect(0, 0, mapdim, mapdim);
-  var xmap = Math.floor((xmappix - dragx) / 32);
-  var xmapmax = Math.floor(((xmappix - dragx + mapdim)) / 32);
-  var ymap = Math.floor((ymappix - dragy) / 32);
-  var ymapmax = Math.floor(((ymappix - dragy + mapdim)) / 32);
+  var xmap = Math.floor((xmappix - dragx) / dim);
+  var xmapmax = Math.floor(((xmappix - dragx + mapdim)) / dim);
+  var ymap = Math.floor((ymappix - dragy) / dim);
+  var ymapmax = Math.floor(((ymappix - dragy + mapdim)) / dim);
   var tilestodraw = tilelist.filter((value) => value.mapx >= xmap &&
                                                value.mapx <= xmapmax &&
                                                value.mapy >= ymap &&
                                                value.mapy <= ymapmax
   );
   tilestodraw.forEach(function(tile) {
-    tilecontext.drawImage(tiles, tile.tilex * 32, tile.tiley * 32, dim, dim,
-                         (tile.mapx - xmap) * 32 - mod(xmappix - dragx, 32),
-                         (tile.mapy - ymap) * 32 - mod(ymappix - dragy, 32), dim, dim);
+    tilecontext.drawImage(tiles, tile.tilex * dim, tile.tiley * dim, dim, dim,
+                         (tile.mapx - xmap) * dim - mod(xmappix - dragx, dim),
+                         (tile.mapy - ymap) * dim - mod(ymappix - dragy, dim), dim, dim);
   });
 }
 
