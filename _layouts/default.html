@@ -35,8 +35,9 @@
   <body>
     <div id="header">
       <nav>
-	    <li class="navbutton"><a href="/index.html">Home</a></li>
-	    <li class="navbutton"><a href="/KiraraStats.html">きらファン Stats</a></li>  
+	  {% for navpage in site.data.pages %}
+	    <li class="navbutton"><a href="{{ navpage.link }}"></a>{{ navpage.text }}</li>
+	  {% endfor %}
       </nav>
 	  <nav id="smallnav">
 	    <li class="navbutton" style="float: right;"><a href="javascript:void(0);" class="dropmenu">&#9776;</a>
