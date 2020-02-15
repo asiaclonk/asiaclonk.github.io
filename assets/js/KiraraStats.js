@@ -432,16 +432,18 @@ $(document).ready(function() {
 		  hoverBorderWidth: 8,
 		  pointStyle: function(context) {
 			let point = context.dataset.data[context.dataIndex];
-			let classimage = new Image(point.r * 2, point.r * 2);
-			let attributeimage = new Image(point.r * 2 + 8, point.r * 2 + 8)
+			let classimage = new Image();
+			let attributeimage = new Image();
 			classimage.src = classicons[point.x];
 			attributeimage.src = attributeicons[point.y];
 			let fullimage = document.createElement('canvas');
-			fullimage.width = point.r * 2 + 8;
-			fullimage.height = point.r * 2 + 8;
+			fullimage.width = 70;
+			fullimage.height = 70;
 			let canvascontext = fullimage.getContext("2d");
 			canvascontext.drawImage(attributeimage,0,0);
-			canvascontext.drawImage(classimage,4,4);
+			canvascontext.drawImage(classimage,4,4,62,62);
+			fullimage.width = point.r * 2 + 8;
+			fullimage.height = point.r * 2 + 8;
 			return fullimage;
 		  },
 		}
