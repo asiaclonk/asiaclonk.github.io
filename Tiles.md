@@ -1,7 +1,6 @@
 ---
 title: Tilemap Editor
 description: Something to quickly tile a map with.
-published: false
 ---
 
 # For a certain Factorio fan
