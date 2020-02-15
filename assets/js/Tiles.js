@@ -81,7 +81,7 @@ $(document).ready(function() {
 				tilelist = tilelist.filter(value => value.mapx != selectedmapx || value.mapy != selectedmapy);
 			}
 			else {
-				tilelist.push({ tilex: selectedx , tiley: selectedy , mapx: selectedmapx, mapy: selectedmapy })
+				tilelist.push({ tilex: selectedx, tiley: selectedy, mapx: selectedmapx, mapy: selectedmapy });
 			}
 			drawmap();
 		}
