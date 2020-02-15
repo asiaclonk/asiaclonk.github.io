@@ -435,6 +435,8 @@ $(document).ready(function() {
 			let classimage = new Image();
 			let attributeimage = new Image();
 			let fullimage = document.createElement('canvas');
+			fullimage.width = point.r * 2;
+			fullimage.height = point.r * 2;
 			let canvascontext = fullimage.getContext("2d");
 			attributeimage.onload = function() {
 				canvascontext.drawImage(attributeimage,0,0,point.r * 2,point.r * 2);
