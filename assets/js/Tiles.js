@@ -69,8 +69,8 @@ $(document).ready(function() {
 	  dragy = y - starty;
       var selectedmapx = Math.floor((xmappix + dragx) / 32);
       var selectedmapy = Math.floor((ymappix + dragy) / 32);
-      backcontext.setTransform(1,0,0,1, (xmappix - dragx) % 512,
-                                        (ymappix - dragy) % 32);
+      backcontext.setTransform(1,0,0,1, (dragx - xmappix) % 512,
+                                        (dragy - ymappix) % 32);
 	  backcontext.fill();
       drawmap();
 	  $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + "), Offset: (X: " + xmappix + ", Y: " + ymappix + ")");
@@ -140,7 +140,7 @@ function drawmap() {
   );
   tilestodraw.forEach(function(tile) {
     tilecontext.drawImage(tiles, tile.tilex * 32, tile.tiley * 32, dim, dim,
-                         (tile.mapx - xmap) * 32 - ((xmappix - dragx) % 32),
-                         (tile.mapy - ymap) * 32 - ((ymappix - dragy) % 32), dim, dim);
+                         (tile.mapx - xmap) * 32 - ((dragx - xmappix) % 32),
+                         (tile.mapy - ymap) * 32 - ((dragy - ymappix) % 32), dim, dim);
   });
 }
