@@ -4,13 +4,19 @@ description: Something to quickly tile a map with.
 published: false
 ---
 
-# Some charts that reference a snapshot from [the Mirahaze wiki.](https://kirarafantasia.miraheze.org/wiki/Main_Page)
-Last updated: 10.02.2020
+# For a certain Factorio fan
 
-<script src="assets/js/KiraraStats.js"></script>
-<div style="text-align:center">
-	<canvas id="selectMap"></canvas>
+<script src="assets/js/Tiles.js"></script>
+<div style="display: none">
+	<image id="tilebackground" src="assets/images/tilebackground.png"></image>
 </div>
-<div style="width: 100%; height: 550px; margin: 20px auto;">
-	<canvas id="tileMap"></canvas>
+<div style="text-align: center; width: 384px; height: 64px">
+	<image id="tiles" src="assets/images/tiles.png" class="backgroundimage"></image>
+	<canvas id="selectmap" class="foregroundimage"></canvas>
+</div>
+
+<div style="width: 100%; height: 640px; margin: 20px auto;">
+	<canvas id="background" class="backgroundimage"></canvas>
+	<canvas id="tilemap" class="foregroundimage"></canvas>
+	<canvas id="foreground" class="forestgroundimage"></canvas>
 </div>

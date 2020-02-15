@@ -58,13 +58,14 @@ $(document).ready(function() {
 	var attributes = ["", "Fire", "Water", "Earth", "Wind", "Sun", "Moon"];
 	var attributecolors = ["", "#FF0000", "#4169E1", "#8B4513", "#32CD32", "#FFFF00", "#663399"];
 	var gridlinecolors = ["", "#663399", "#FFFF00", "#32CD32", "#8B4513", "#4169E1", "#FF0000"];
+	var attributeicons = {{ site.data.attributeicons | jsonify }}.map(value => value.image);
 	for (var i = 1; i < classes.length+1; i++) {
 		for (var j = 1; j < attributes.length+1; j++) {
 			var count = fivestar.filter(value => value["class"] == classes[i] && value["attribute"] == attributes[j]).length
 			if (count > 0) {
 				objectlist5.push({ x: i,
 								   y: j,
-								   r: count*10
+								   r: count*5
 								 });
 			}
 		}
@@ -392,7 +393,7 @@ $(document).ready(function() {
 	  tooltips: {
 		callbacks: {
 		  label: function(ttip,data){
-			return ": " + (data.datasets[0].data[ttip.index].r / 10);
+			return ": " + (data.datasets[0].data[ttip.index].r / 5);
 		  }
 		},
 	  },
@@ -431,9 +432,17 @@ $(document).ready(function() {
 		  hoverBorderWidth: 8,
 		  pointStyle: function(context) {
 			let point = context.dataset.data[context.dataIndex];
-			let image = new Image(point.r, point.r);
-			image.src = classicons[point.x];
-			return image;
+			let classimage = new Image(point.r * 2, point.r * 2);
+			let attributeimage = new Image(point.r * 2 + 8, point.r * 2 + 8)
+			classimage.src = classicons[point.x];
+			attributeimage.src = attributeicons[point.y];
+			let fullimage = document.createElement('canvas');
+			fullimage.width = point.r * 2 + 8;
+			fullimage.height = point.r * 2 + 8;
+			let context = fullimage.getContext("2d");
+			context.drawImage(attributeimage);
+			context.drawImage(classimage,4,4);
+			return fullimage;
 		  },
 		}
 	  },

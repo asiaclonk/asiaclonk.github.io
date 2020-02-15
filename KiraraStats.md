@@ -1,9 +1,9 @@
 ---
 title: Kirara Fantasia Charts
-description: Some charts that reference a snapshot from the Mirahaze wiki.
+description: Some charts that reference a snapshot from the Miraheze wiki.
 ---
 
-# Some charts that reference a snapshot from [the Mirahaze wiki.](https://kirarafantasia.miraheze.org/wiki/Main_Page)
+# Some charts that reference a snapshot from [the Miraheze wiki.](https://kirarafantasia.miraheze.org/wiki/Main_Page)
 Last updated: 10.02.2020
 
 <script src="assets/js/KiraraStats.js"></script>
