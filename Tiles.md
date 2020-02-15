@@ -5,13 +5,18 @@ description: Something to quickly tile a map with.
 
 # For a certain Factorio fan
 
+
+Tiles
 <script src="assets/js/Tiles.js"></script>
-<div style="position: relative; width: 384px; height: 64px">
-	<image id="tiles" src="assets/images/tiles.png" class="backgroundimage"></image>
-	<canvas id="selectmap" class="foregroundimage"></canvas>
+<div style="width: 100%">
+	<div style="position: relative; width: 384px; height: 64px">
+		<image id="tiles" src="assets/images/tiles.png" class="backgroundimage"></image>
+		<canvas id="selectmap" class="foregroundimage"></canvas>
+	</div>
 </div>
 
-<div style="width: 100%; height: 700px; overflow: auto">
+Map
+<div style="width: 100%; overflow: auto">
 	<div style="position: relative; width: 640px; height: 640px;">
 		<image id="backgroundtiles" src="assets/images/tilebackground.png" style="display: none;"></image>
 		<canvas id="background" class="backgroundimage"></canvas>

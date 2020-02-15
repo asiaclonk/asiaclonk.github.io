@@ -1,3 +1,22 @@
+function drawselection() {
+	selectcontext.beginPath();
+	selectcontext.strokeStyle = 'green';
+	selectcontext.rect(selectedx * dim, selectedy * dim, dim, dim);
+	selectcontext.stroke();
+}
+
+function drawmap() {
+	tilecontext.clearRect(0, 0, mapdim, mapdim);
+	var xmap = Math.floor(xmappix / 32);
+	var xmapmax = Math.floor((xmappix + 640) / 32);
+	var ymap = ymappix / 32;
+	var ymapmax = Math.floor((ymappix + 640) / 32);
+	var tilestodraw = tilelist.filter(value => value.mapx >= xmap && value.mapx <= xmapmax && value.mapy >= ymap && value.mapy <= ymapmax);
+	tilestodraw.forEach(tile => {
+		tilecontext.drawImage(tiles, (tile.mapx - xmap) * 32 - (xmap % 32), (tile.mapy - ymap) * 32 - (ymap % 32), dim, dim, tile.tilex * 32, tile.tile.y * 32, dim, dim);
+	})
+}
+
 $(document).ready(function() {
 	tilelist = [];
 	dim = 32;
@@ -72,23 +91,4 @@ $(document).ready(function() {
 		dragx = 0;
 		dragy = 0;
 	});
-}
-
-function drawselection() {
-	context.beginPath();
-	context.strokeStyle = 'green';
-	context.rect(selectedx * dim, selectedy * dim, dim, dim);
-	context.stroke();
-}
-
-function drawmap() {
-	tilecontext.clearRect(0, 0, mapdim, mapdim);
-	var xmap = Math.floor(xmappix / 32);
-	var xmapmax = Math.floor((xmappix + 640) / 32);
-	var ymap = ymappix / 32;
-	var ymapmax = Math.floor((ymappix + 640) / 32);
-	var tilestodraw = tilelist.filter(value => value.mapx >= xmap && value.mapx <= xmapmax && value.mapy >= ymap && value.mapy <= ymapmax);
-	tilestodraw.forEach(tile => {
-		tilecontext.drawImage(tiles, (tile.mapx - xmap) * 32 - (xmap % 32), (tile.mapy - ymap) * 32 - (ymap % 32), dim, dim, tile.tilex * 32, tile.tile.y * 32, dim, dim);
-	})
 }
