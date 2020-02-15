@@ -1,28 +1,3 @@
-function drawselection() {
-  selectcontext.beginPath();
-  selectcontext.strokeStyle = "green";
-  selectcontext.rect(selectedx * dim, selectedy * dim, dim, dim);
-  selectcontext.stroke();
-}
-
-function drawmap() {
-  tilecontext.clearRect(0, 0, mapdim, mapdim);
-  var xmap = Math.floor(xmappix / 32);
-  var xmapmax = Math.floor((xmappix + 640) / 32);
-  var ymap = ymappix / 32;
-  var ymapmax = Math.floor((ymappix + 640) / 32);
-  var tilestodraw = tilelist.filter((value) => value.mapx >= xmap &&
-                                               value.mapx <= xmapmax &&
-                                               value.mapy >= ymap &&
-                                               value.mapy <= ymapmax
-  );
-  tilestodraw.forEach(function(tile) {
-    tilecontext.drawImage(tiles, tile.tilex * 32, tile.tiley * 32, dim, dim,
-                         (tile.mapx - xmap) * 32 - (xmap % 32),
-                         (tile.mapy - ymap) * 32 - (ymap % 32), dim, dim);
-  });
-}
-
 $(document).ready(function() {
   tilelist = [];
   dim = 32;
@@ -40,9 +15,9 @@ $(document).ready(function() {
   selectcanvas = document.getElementById("selectmap");
   selectcontext = selectcanvas.getContext("2d");
   mapdim = 640;
-  backcontext = backcanvas.getContext("2d");
-  tilecontext = tilecontext.getContext("2d");
-  drawcontext = drawcontext.getContext("2d");
+  backcontext = document.getElementById("background").getContext("2d");
+  tilecontext = document.getElementById("tilemap").tilecontext.getContext("2d");
+  drawcontext = document.getElementById("foreground").drawcontext.getContext("2d");
   $("#selectmap").mouseover(function(e) {
     var hoverx = Math.floor(e.clientX / dim);
     var hovery = Math.floor(e.clientY / dim);
@@ -98,3 +73,28 @@ $(document).ready(function() {
     dragy = 0;
   });
 });
+
+function drawselection() {
+  selectcontext.beginPath();
+  selectcontext.strokeStyle = "green";
+  selectcontext.rect(selectedx * dim, selectedy * dim, dim, dim);
+  selectcontext.stroke();
+}
+
+function drawmap() {
+  tilecontext.clearRect(0, 0, mapdim, mapdim);
+  var xmap = Math.floor(xmappix / 32);
+  var xmapmax = Math.floor((xmappix + 640) / 32);
+  var ymap = ymappix / 32;
+  var ymapmax = Math.floor((ymappix + 640) / 32);
+  var tilestodraw = tilelist.filter((value) => value.mapx >= xmap &&
+                                               value.mapx <= xmapmax &&
+                                               value.mapy >= ymap &&
+                                               value.mapy <= ymapmax
+  );
+  tilestodraw.forEach(function(tile) {
+    tilecontext.drawImage(tiles, tile.tilex * 32, tile.tiley * 32, dim, dim,
+                         (tile.mapx - xmap) * 32 - (xmap % 32),
+                         (tile.mapy - ymap) * 32 - (ymap % 32), dim, dim);
+  });
+}
