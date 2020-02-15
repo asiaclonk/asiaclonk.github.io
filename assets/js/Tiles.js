@@ -19,8 +19,11 @@ $(document).ready(function() {
   tilecontext = document.getElementById("tilemap").getContext("2d");
   drawcontext = document.getElementById("foreground").getContext("2d");
   $("#selectmap").mouseover(function(e) {
-    var hoverx = Math.floor(e.clientX / dim);
-    var hovery = Math.floor(e.clientY / dim);
+    var rect = e.target.getBoundingClientRect();
+    var x = e.clientX - rect.left;
+    var y = e.clientY - rect.top;
+    var hoverx = Math.floor(x / dim);
+    var hovery = Math.floor(y / dim);
     selectcontext.clearRect(0, 0, selectcanvas.width, selectcanvas.height);
     selectcontext.beginPath();
     selectcontext.strokeStyle = "red";
@@ -30,8 +33,11 @@ $(document).ready(function() {
   });
 
   $("#selectmap").click(function(e) {
-    selectedx = Math.floor(e.clientX / dim);
-    selectedy = Math.floor(e.clientY / dim);
+    var rect = e.target.getBoundingClientRect();
+    var x = e.clientX - rect.left;
+    var y = e.clientY - rect.top;
+    selectedx = Math.floor(x / dim);
+    selectedy = Math.floor(y / dim);
     drawselection();
   });
 
@@ -41,23 +47,32 @@ $(document).ready(function() {
   });
 
   $("#foreground").mousedown(function(e) {
-    dragx = e.clientX;
-    dragy = e.clientY;
+    var rect = e.target.getBoundingClientRect();
+    var x = e.clientX - rect.left;
+    var y = e.clientY - rect.top;
+    dragx = x;
+    dragy = y;
     mapclick = true;
   });
 
   $("#foreground").mousemove(function(e) {
     if (mapclick == true) {
-      backcontext.setTransform(0,0,0,0, xmappix + (e.clientX - dragx) % 512,
-                                        ymappix + (e.clientY - dragy) % 32);
+      var rect = e.target.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      var y = e.clientY - rect.top;
+      backcontext.setTransform(0,0,0,0, xmappix + (x - dragx) % 512,
+                                        ymappix + (y - dragy) % 32);
       drawmap();
     }
   });
 
   $("#foreground").mouseup(function(e) {
-    if (dragx == e.clientX && dragy == e.clientY) {
-      var selectedmapx = Math.floor((xmappix + e.clientX) / 32);
-      var selectedmapy = Math.floor((ymappix + e.clientY) / 32);
+    var rect = e.target.getBoundingClientRect();
+    var x = e.clientX - rect.left;
+    var y = e.clientY - rect.top;
+    if (dragx == x && dragy == y) {
+      var selectedmapx = Math.floor((xmappix + x) / 32);
+      var selectedmapy = Math.floor((ymappix + y) / 32);
       if (selectedx == 0 && selectedy == 0) {
         tilelist = tilelist.filter((value) => value.mapx != selectedmapx || value.mapy != selectedmapy );
       }
@@ -67,8 +82,8 @@ $(document).ready(function() {
       drawmap();
     }
     mapclick = false;
-    xmappix += (e.clientX - dragx);
-    ymappix += (e.clientY - dragy);
+    xmappix += (x - dragx);
+    ymappix += (y - dragy);
     dragx = 0;
     dragy = 0;
   });
