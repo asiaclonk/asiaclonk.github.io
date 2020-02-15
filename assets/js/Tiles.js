@@ -65,7 +65,7 @@ $(document).ready(function() {
       backcontext.setTransform(0,0,0,0, (xmappix + dragx) % 512,
                                         (ymappix + dragy) % 32);
       drawmap();
-	  $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + ")");
+	  $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + "), Drag started at (X: " + startx + ", Y: " + starty + ")");
     }
 	else {
       var selectedmapx = Math.floor((xmappix + x) / 32);
