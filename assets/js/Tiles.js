@@ -8,7 +8,7 @@ $(document).ready(function() {
   startx = 0;
   starty = 0;
   dragx = 0;
-  starty = 0;
+  dragy = 0;
   mapclick = false;
   isdragging = false;
   tiles = document.getElementById("tiles");
@@ -58,8 +58,8 @@ $(document).ready(function() {
     var x = Math.floor(e.clientX - rect.left);
     var y = Math.floor(e.clientY - rect.top);
     if (mapclick == true) {
-	  var dragx = startx - x;
-	  var dragy = starty - y;
+	  dragx = startx - x;
+	  dragy = starty - y;
       var selectedmapx = Math.floor((xmappix + dragx + x) / 32);
       var selectedmapy = Math.floor((ymappix + dragy + y) / 32);
       backcontext.setTransform(0,0,0,0, (xmappix + dragx) % 512,
