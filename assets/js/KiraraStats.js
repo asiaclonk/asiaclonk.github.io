@@ -434,12 +434,16 @@ $(document).ready(function() {
 			let point = context.dataset.data[context.dataIndex];
 			let classimage = new Image();
 			let attributeimage = new Image();
-			classimage.src = classicons[point.x];
-			attributeimage.src = attributeicons[point.y];
 			let fullimage = document.createElement('canvas');
 			let canvascontext = fullimage.getContext("2d");
-			canvascontext.drawImage(attributeimage,0,0,point.r * 2,point.r * 2);
-			canvascontext.drawImage(classimage,3,3,point.r * 2 - 6,point.r * 2 - 6);
+			attributeimage.on("load", function() {
+				canvascontext.drawImage(attributeimage,0,0,point.r * 2,point.r * 2);
+				classimage.on("load", function() {
+					canvascontext.drawImage(classimage,3,3,point.r * 2 - 6,point.r * 2 - 6);					
+				}
+				classimage.src = classicons[point.x];
+			}
+			attributeimage.src = attributeicons[point.y];
 			return fullimage;
 		  },
 		}
