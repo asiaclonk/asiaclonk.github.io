@@ -73,7 +73,7 @@ $(document).ready(function() {
                                         (dragy - ymappix) % 32);
 	  backcontext.fill();
       drawmap();
-	  $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + "), Offset: (X: " + xmappix + ", Y: " + ymappix + ")");
+	  $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + "), Offset: (X: " + (xmappix - dragx) + ", Y: " + (ymappix - dragy) + ")");
     }
 	else {
       var selectedmapx = Math.floor((xmappix + x) / 32);
@@ -83,7 +83,7 @@ $(document).ready(function() {
   });
   
   $("#foreground").mouseleave(function(e) {
-	  $("#coordtext").html("Map Offset: (X: " + xmappix + ", Y: " + ymappix + ")");
+	  $("#coordtext").html("Offset: (X: " + xmappix + ", Y: " + ymappix + ")");
   });
 
   $("#foreground").mouseup(function(e) {
@@ -130,9 +130,9 @@ function drawselection(x, y, draw) {
 function drawmap() {
   tilecontext.clearRect(0, 0, mapdim, mapdim);
   var xmap = Math.floor((xmappix - dragx) / 32);
-  var xmapmax = Math.floor(((xmappix - dragx + 640)) / 32);
+  var xmapmax = Math.floor(((xmappix - dragx + mapdim)) / 32);
   var ymap = Math.floor((ymappix - dragy) / 32);
-  var ymapmax = Math.floor(((ymappix - dragy + 640)) / 32);
+  var ymapmax = Math.floor(((ymappix - dragy + mapdim)) / 32);
   var tilestodraw = tilelist.filter((value) => value.mapx >= xmap &&
                                                value.mapx <= xmapmax &&
                                                value.mapy >= ymap &&
@@ -140,7 +140,7 @@ function drawmap() {
   );
   tilestodraw.forEach(function(tile) {
     tilecontext.drawImage(tiles, tile.tilex * 32, tile.tiley * 32, dim, dim,
-                         (tile.mapx - xmap) * 32 - ((dragx - xmappix) % 32),
-                         (tile.mapy - ymap) * 32 - ((dragy - ymappix) % 32), dim, dim);
+                         (tile.mapx - xmap) * 32 - ((xmappix - dragx) % 32),
+                         (tile.mapy - ymap) * 32 - ((ymappix - dragy) % 32), dim, dim);
   });
 }
