@@ -16,8 +16,8 @@ $(document).ready(function() {
   selectcontext = selectcanvas.getContext("2d");
   mapdim = 640;
   backcontext = document.getElementById("background").getContext("2d");
-  tilecontext = document.getElementById("tilemap").tilecontext.getContext("2d");
-  drawcontext = document.getElementById("foreground").drawcontext.getContext("2d");
+  tilecontext = document.getElementById("tilemap").getContext("2d");
+  drawcontext = document.getElementById("foreground").getContext("2d");
   $("#selectmap").mouseover(function(e) {
     var hoverx = Math.floor(e.clientX / dim);
     var hovery = Math.floor(e.clientY / dim);
