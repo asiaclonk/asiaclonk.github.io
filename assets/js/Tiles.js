@@ -5,8 +5,10 @@ $(document).ready(function() {
   selectedy = 0;
   xmappix = 0;
   ymappix = 0;
+  startx = 0;
+  starty = 0;
   dragx = 0;
-  dragy = 0;
+  starty = 0;
   mapclick = false;
   isdragging = false;
   tiles = document.getElementById("tiles");
@@ -18,18 +20,14 @@ $(document).ready(function() {
   backcontext = document.getElementById("background").getContext("2d");
   tilecontext = document.getElementById("tilemap").getContext("2d");
   drawcontext = document.getElementById("foreground").getContext("2d");
+  
   $("#selectmap").mousemove(function(e) {
     var rect = e.target.getBoundingClientRect();
     var x = e.clientX - rect.left;
     var y = e.clientY - rect.top;
     var hoverx = Math.floor(x / dim);
     var hovery = Math.floor(y / dim);
-    selectcontext.clearRect(0, 0, selectcanvas.width, selectcanvas.height);
-    selectcontext.beginPath();
-    selectcontext.strokeStyle = "red";
-    selectcontext.rect(hoverx * dim, hovery * dim, dim, dim);
-    selectcontext.stroke();
-    drawselection();
+    drawselection(hoverx, hovery);
   });
 
   $("#selectmap").click(function(e) {
@@ -38,7 +36,7 @@ $(document).ready(function() {
     var y = e.clientY - rect.top;
     selectedx = Math.floor(x / dim);
     selectedy = Math.floor(y / dim);
-    drawselection();
+    drawselection(selectedx, selectedy);
   });
 
   $("#backgroundtiles").on("load", function() {
@@ -50,27 +48,41 @@ $(document).ready(function() {
     var rect = e.target.getBoundingClientRect();
     var x = e.clientX - rect.left;
     var y = e.clientY - rect.top;
-    dragx = x;
-    dragy = y;
+    startx = x;
+    starty = y;
     mapclick = true;
   });
 
   $("#foreground").mousemove(function(e) {
+    var rect = e.target.getBoundingClientRect();
+    var x = e.clientX - rect.left;
+    var y = e.clientY - rect.top;
     if (mapclick == true) {
-      var rect = e.target.getBoundingClientRect();
-      var x = e.clientX - rect.left;
-      var y = e.clientY - rect.top;
-      backcontext.setTransform(0,0,0,0, xmappix + (x - dragx) % 512,
-                                        ymappix + (y - dragy) % 32);
+	  var dragx = startx - x;
+	  var dragy = starty - y;
+      var selectedmapx = Math.floor((xmappix + dragx + x) / 32);
+      var selectedmapy = Math.floor((ymappix + dragy + y) / 32);
+      backcontext.setTransform(0,0,0,0, (xmappix + dragx) % 512,
+                                        (ymappix + dragy) % 32);
       drawmap();
+	  $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + ")");
     }
+	else {
+      var selectedmapx = Math.floor((xmappix + x) / 32);
+      var selectedmapy = Math.floor((ymappix + y) / 32);
+      $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + ") Idle");
+	}
+  });
+  
+  $("#foreground").mouseleave(function(e) {
+	  $("#coordtext").html("Map");
   });
 
   $("#foreground").mouseup(function(e) {
     var rect = e.target.getBoundingClientRect();
     var x = e.clientX - rect.left;
     var y = e.clientY - rect.top;
-    if (dragx == x && dragy == y) {
+    if (startx == x && starty == y) {
       var selectedmapx = Math.floor((xmappix + x) / 32);
       var selectedmapy = Math.floor((ymappix + y) / 32);
       if (selectedx == 0 && selectedy == 0) {
@@ -82,14 +94,21 @@ $(document).ready(function() {
       drawmap();
     }
     mapclick = false;
-    xmappix += (x - dragx);
-    ymappix += (y - dragy);
-    dragx = 0;
-    dragy = 0;
+    xmappix += dragx;
+    ymappix += dragy;
+    startx = 0;
+    starty = 0;
+	dragx = 0;
+	dragy = 0;
   });
 });
 
-function drawselection() {
+function drawselection(x, y) {
+  selectcontext.clearRect(0, 0, selectcanvas.width, selectcanvas.height);
+  selectcontext.beginPath();
+  selectcontext.strokeStyle = "yellow";
+  selectcontext.rect(x * dim, y * dim, dim, dim);
+  selectcontext.stroke();
   selectcontext.beginPath();
   selectcontext.strokeStyle = "lightgreen";
   selectcontext.rect(selectedx * dim, selectedy * dim, dim, dim);

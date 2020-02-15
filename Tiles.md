@@ -6,7 +6,7 @@ description: Something to quickly tile a map with.
 # For a certain Factorio fan
 
 <br>
-<p style="text-aling: center;">Tiles</p>
+<p style="text-align: center;">Tiles</p>
 <script src="assets/js/Tiles.js"></script>
 <div style="width: 100%">
   <div style="position: relative; width: 384px; height: 64px; margin: auto;">
@@ -15,7 +15,7 @@ description: Something to quickly tile a map with.
   </div>
 </div>
 <br>
-<p style="text-aling: center;">Map</p>
+<p style="text-align: center;" id="coordtext">Map</p>
 <div style="width: 100%; overflow: auto">
   <div style="position: relative; width: 640px; height: 640px; margin: auto;">
     <image id="backgroundtiles" src="assets/images/tilebackground.png" style="width: 512; height: 32; display: none;"></image>
