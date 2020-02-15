@@ -437,13 +437,9 @@ $(document).ready(function() {
 			classimage.src = classicons[point.x];
 			attributeimage.src = attributeicons[point.y];
 			let fullimage = document.createElement('canvas');
-			fullimage.width = 70;
-			fullimage.height = 70;
 			let canvascontext = fullimage.getContext("2d");
-			canvascontext.drawImage(attributeimage,0,0);
-			canvascontext.drawImage(classimage,4,4,62,62);
-			fullimage.width = point.r * 2 + 8;
-			fullimage.height = point.r * 2 + 8;
+			canvascontext.drawImage(attributeimage,0,0,point.r * 2,point.r * 2);
+			canvascontext.drawImage(classimage,3,3,point.r * 2 - 6,point.r * 2 - 6);
 			return fullimage;
 		  },
 		}
