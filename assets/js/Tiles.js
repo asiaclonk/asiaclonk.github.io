@@ -67,8 +67,8 @@ $(document).ready(function() {
     if (mapclick == true) {
 	  dragx = x - startx;
 	  dragy = y - starty;
-      var selectedmapx = Math.floor((xmappix + dragx) / 32);
-      var selectedmapy = Math.floor((ymappix + dragy) / 32);
+      var selectedmapx = Math.floor((xmappix + x + dragx) / 32);
+      var selectedmapy = Math.floor((ymappix + y + dragy) / 32);
       backcontext.setTransform(1,0,0,1, (dragx - xmappix) % 512,
                                         (dragy - ymappix) % 32);
 	  backcontext.fill();
@@ -140,7 +140,11 @@ function drawmap() {
   );
   tilestodraw.forEach(function(tile) {
     tilecontext.drawImage(tiles, tile.tilex * 32, tile.tiley * 32, dim, dim,
-                         (tile.mapx - xmap) * 32 - ((xmappix - dragx) % 32),
-                         (tile.mapy - ymap) * 32 - ((ymappix - dragy) % 32), dim, dim);
+                         (tile.mapx - xmap) * 32 - mod(xmappix - dragx, 32),
+                         (tile.mapy - ymap) * 32 - mod(ymappix - dragy, 32), dim, dim);
   });
+}
+
+function mod(n, m) {
+  return ((n % m) + m) % m;
 }
