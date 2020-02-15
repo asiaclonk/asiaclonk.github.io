@@ -65,8 +65,8 @@ $(document).ready(function() {
     var x = Math.floor(e.clientX - rect.left);
     var y = Math.floor(e.clientY - rect.top);
     if (mapclick == true) {
-	  dragx = startx + x;
-	  dragy = starty + y;
+	  dragx = x - startx;
+	  dragy = y - starty;
       var selectedmapx = Math.floor((xmappix + dragx) / 32);
       var selectedmapy = Math.floor((ymappix + dragy) / 32);
       backcontext.setTransform(1,0,0,1, (xmappix - dragx) % 512,
