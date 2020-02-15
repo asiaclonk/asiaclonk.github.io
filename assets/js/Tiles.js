@@ -73,17 +73,17 @@ $(document).ready(function() {
                                         (ymappix - dragy) % 32);
 	  backcontext.fill();
       drawmap();
-	  $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + ")");
+	  $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + "), Offset: (X: " + xmappix + ", Y: " + ymappix + ")");
     }
 	else {
       var selectedmapx = Math.floor((xmappix + x) / 32);
       var selectedmapy = Math.floor((ymappix + y) / 32);
-      $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + ")");
+      $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + "), Offset: (X: " + xmappix + ", Y: " + ymappix + ")");
 	}
   });
   
   $("#foreground").mouseleave(function(e) {
-	  $("#coordtext").html("Map");
+	  $("#coordtext").html("Map Offset: (X: " + xmappix + ", Y: " + ymappix + ")");
   });
 
   $("#foreground").mouseup(function(e) {
