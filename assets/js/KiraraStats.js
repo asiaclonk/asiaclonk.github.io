@@ -440,7 +440,7 @@ $(document).ready(function() {
 			fullimage.width = point.r * 2 + 8;
 			fullimage.height = point.r * 2 + 8;
 			let canvascontext = fullimage.getContext("2d");
-			canvascontext.drawImage(attributeimage);
+			canvascontext.drawImage(attributeimage,0,0);
 			canvascontext.drawImage(classimage,4,4);
 			return fullimage;
 		  },
