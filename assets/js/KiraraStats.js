@@ -436,13 +436,13 @@ $(document).ready(function() {
 			let attributeimage = new Image();
 			let fullimage = document.createElement('canvas');
 			let canvascontext = fullimage.getContext("2d");
-			attributeimage.on("load", function() {
+			attributeimage.onload = function() {
 				canvascontext.drawImage(attributeimage,0,0,point.r * 2,point.r * 2);
-				classimage.on("load", function() {
+				classimage.onload = function() {
 					canvascontext.drawImage(classimage,3,3,point.r * 2 - 6,point.r * 2 - 6);					
-				});
+				};
 				classimage.src = classicons[point.x];
-			});
+			};
 			attributeimage.src = attributeicons[point.y];
 			return fullimage;
 		  },
