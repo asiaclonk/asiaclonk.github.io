@@ -19,7 +19,7 @@ $(document).ready(function() {
   mapdim = 640;
   backcontext = document.getElementById("background").getContext("2d");
   tilecontext = document.getElementById("tilemap").getContext("2d");
-  drawcontext = document.getElementById("foreground").getContext("2d");
+  mapselectcontext = document.getElementById("foreground").getContext("2d");
   
   $("#selectmap").mousemove(function(e) {
     var rect = e.target.getBoundingClientRect();
@@ -59,6 +59,14 @@ $(document).ready(function() {
     starty = y;
     mapclick = true;
   });
+  
+  $("#foreground").contextmenu(function(e) {
+    var selectedmapx = Math.floor((xmappix + x) / dim);
+    var selectedmapy = Math.floor((ymappix + y) / dim);
+    tilelist = tilelist.filter((value) => value.mapx != selectedmapx || value.mapy != selectedmapy );
+	drawmap();
+    e.preventDefault();
+  });
 
   $("#foreground").mousemove(function(e) {
     var rect = e.target.getBoundingClientRect();
@@ -67,8 +75,8 @@ $(document).ready(function() {
     if (mapclick == true) {
 	  dragx = x - startx;
 	  dragy = y - starty;
-      var selectedmapx = Math.floor((xmappix + x + dragx) / dim);
-      var selectedmapy = Math.floor((ymappix + y + dragy) / dim);
+      var selectedmapx = Math.floor((xmappix + x - dragx) / dim);
+      var selectedmapy = Math.floor((ymappix + y - dragy) / dim);
       backcontext.setTransform(1,0,0,1, (dragx - xmappix) % 512,
                                         (dragy - ymappix) % 32);
 	  backcontext.fill();
@@ -78,11 +86,15 @@ $(document).ready(function() {
 	else {
       var selectedmapx = Math.floor((xmappix + x) / dim);
       var selectedmapy = Math.floor((ymappix + y) / dim);
+      var hoverx = Math.floor(x / dim);
+      var hovery = Math.floor(y / dim);
+      drawmapselection(hoverx, hovery, true);
       $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + "), Offset: (X: " + Math.floor(xmappix / dim) + ", Y: " + Math.floor(ymappix / dim) + ")");
 	}
   });
   
   $("#foreground").mouseleave(function(e) {
+	  drawmapselection(0, 0, false);
 	  $("#coordtext").html("Offset: (X: " + Math.floor(xmappix / dim) + ", Y: " + Math.floor(ymappix / dim) + ")");
   });
 
@@ -123,6 +135,16 @@ function drawselection(x, y, draw) {
   selectcontext.strokeStyle = "lightgreen";
   selectcontext.rect(selectedx * dim, selectedy * dim, dim, dim);
   selectcontext.stroke();
+}
+
+function drawmapselection(x, y, draw) {
+  mapselectcontext.clearRect(0, 0, mapdim, mapdim);
+  if(draw) {
+    mapselectcontext.beginPath();
+    mapselectcontext.strokeStyle = "yellow";
+    mapselectcontext.rect(x * dim, y * dim, dim, dim);
+    mapselectcontext.stroke();
+  }
 }
 
 function drawmap() {
