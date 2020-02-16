@@ -87,9 +87,9 @@ $(document).ready(function() {
 	else {
       var selectedmapx = Math.floor((xmappix + x) / dim);
       var selectedmapy = Math.floor((ymappix + y) / dim);
-      var hoverx = Math.floor(x / dim);
-      var hovery = Math.floor(y / dim);
-      drawmapselection(hoverx, hovery, true);
+      var xmap = Math.floor(xmappix / dim);
+      var ymap = Math.floor(ymappix / dim);
+      drawmapselection(selectedmapx - xmap, selectedmapy - ymap, true);
       $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + "), Offset: (X: " + Math.floor(xmappix / dim) + ", Y: " + Math.floor(ymappix / dim) + ")");
 	}
   });
