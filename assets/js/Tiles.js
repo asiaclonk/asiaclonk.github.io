@@ -61,6 +61,9 @@ $(document).ready(function() {
   });
   
   $("#foreground").contextmenu(function(e) {
+    var rect = e.target.getBoundingClientRect();
+    var x = Math.floor(e.clientX - rect.left);
+    var y = Math.floor(e.clientY - rect.top);
     var selectedmapx = Math.floor((xmappix + x) / dim);
     var selectedmapy = Math.floor((ymappix + y) / dim);
     tilelist = tilelist.filter((value) => value.mapx != selectedmapx || value.mapy != selectedmapy );
