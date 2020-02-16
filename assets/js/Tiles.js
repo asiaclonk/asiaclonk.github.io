@@ -81,6 +81,7 @@ $(document).ready(function() {
                                         (dragy - ymappix) % 32);
 	  backcontext.fill();
       drawmap();
+	  drawmapselection(0, 0, false);
 	  $("#coordtext").html("Map (X: " + selectedmapx + ", Y: " + selectedmapy + "), Offset: (X: " + Math.floor((xmappix - dragx) / dim) + ", Y: " + Math.floor((ymappix - dragy) / dim)+ ")");
     }
 	else {
@@ -142,7 +143,8 @@ function drawmapselection(x, y, draw) {
   if(draw) {
     mapselectcontext.beginPath();
     mapselectcontext.strokeStyle = "yellow";
-    mapselectcontext.rect(x * dim, y * dim, dim, dim);
+    mapselectcontext.rect(x * dim - mod(xmappix, dim),
+	                      y * dim - mod(ymappix, dim), dim, dim);
     mapselectcontext.stroke();
   }
 }
