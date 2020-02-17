@@ -8,11 +8,20 @@ description: Something to quickly tile a map with.
 <br>
 <p style="text-align: center;">Tiles</p>
 <script src="assets/js/Tiles.js"></script>
-<div style="width: 100%">
-  <div style="position: relative; width: 384px; height: 64px; margin: auto;">
+<div style="width: 100%; height: 128px;">
+  <div class="ui-widget-content ui-corner-all" style="position: relative; width: auto; display: inline-block">
     <image id="tiles" src="assets/images/tiles.png" class="backgroundimage"></image>
-    <canvas id="selectmap" class="foregroundimage" width="384" height="64"></canvas>
+    <canvas id="selectmap" class="foregroundimage"></canvas>
   </div>
+  <fieldset class="ui-widget-content ui-corner-all" style="width: 70px; display: inline-block;">
+    <legend>Mode</legend>
+    <label for="radiomove">Move</label>
+    <input type="radio" name="mode" id="radiomove">
+    <label for="radiomove">Tile</label>
+    <input type="radio" name="mode" id="radiotile">
+    <label for="radiomove">Copy</label>
+    <input type="radio" name="mode" id="radiocopy">
+  </fieldset>
 </div>
 <br>
 <p style="text-align: center;" id="coordtext">Map</p>
