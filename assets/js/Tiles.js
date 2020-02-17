@@ -30,6 +30,10 @@ $(document).ready(function() {
   selectcanvas = $("#selectmap")[0];
   selectcontext = selectcanvas.getContext("2d");
 
+  if(checkCookie("mapwidth") && checkCookie("mapheight")) {
+    $("#map").width(parseInt(getCookie("mapwidth")));
+    $("#map").height(parseInt(getCookie("mapheight")));
+  }
   mapwidth = 0;
   mapheight = 0;
   backcontext = $("#background")[0].getContext("2d");
@@ -268,6 +272,8 @@ $(document).ready(function() {
     var newwidth = $("#map").width();
     var newheight = $("#map").height();
     if (newwidth != mapwidth || newheight != mapheight) {
+      setCookie("mapwidth", newwidth, 730);
+      setCookie("mapheight", newheight, 730);
       mapwidth = newwidth;
       mapheight = newheight;
       $("#background")[0].width = mapwidth;
