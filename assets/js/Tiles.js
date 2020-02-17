@@ -174,6 +174,8 @@ $(document).ready(function() {
           copy.forEach((value) => {
             placetile(selectedmapx + value.mapx, selectedmapy + value.mapy, false, value.tilex, value.tiley);
           });
+          playsound(2);
+          drawmap();
         }
         else {
           var startmapx = Math.floor((xmappix + startx) / dim);
@@ -298,14 +300,18 @@ function placetile(x, y, clear = false, tilex = -1, tiley = -1) {
     else if (realtilex != selectedtile.tilex || realtiley != selectedtile.tiley) {
       selectedtile.tilex = realtilex;
       selectedtile.tiley = realtiley;
-      playsound(getgroup(realtilex, realtiley).build);
-      drawmap();
+      if (activemode() != 2) {
+        playsound(getgroup(realtilex, realtiley).build);
+        drawmap();
+      }
     }
   }
   else if (!clear && (realtilex != 0 || realtiley != 0)) {
     tilelist.push({ tilex: realtilex, tiley: realtiley, mapx: x, mapy: y });
-    playsound(getgroup(realtilex, realtiley).build);
-    drawmap();
+    if (activemode() != 2) {
+      playsound(getgroup(realtilex, realtiley).build);
+      drawmap();
+    }
   }
 }
 
