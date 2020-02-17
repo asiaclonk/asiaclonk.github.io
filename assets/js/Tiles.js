@@ -19,8 +19,7 @@ $(document).ready(function() {
   starty = 0;
   dragx = 0;
   dragy = 0;
-  mapclick = false;
-  isdragging = false;
+  mapclick = -1;
 
   tiles = $("#tiles")[0];
   backgroundtiles = $("#backgroundtiles")[0];
@@ -74,7 +73,8 @@ $(document).ready(function() {
   backgroundtiles.src = "assets/images/tilebackground.png";
 
   $("#foreground").mousedown(function(e) {
-    mapclick = true;
+	console.log("Move: " + e.button);
+    mapclick = e.button;
     var rect = e.target.getBoundingClientRect();
     var x = Math.floor(e.clientX - rect.left);
     var y = Math.floor(e.clientY - rect.top);
@@ -82,10 +82,11 @@ $(document).ready(function() {
       startx = x;
       starty = y;
     }
-    if (e.button == 1) {
+    if (mapclick == 1) {
       var selectedmapx = Math.floor((xmappix + x) / dim);
       var selectedmapy = Math.floor((ymappix + y) / dim);
       pincette(selectedmapx, selectedmapy);
+      e.preventDefault();
     }
   });
 
@@ -94,7 +95,6 @@ $(document).ready(function() {
   });
 
   $("#foreground").mousemove(function(e) {
-	console.log("Move: " + e.buttons);
     var rect = e.target.getBoundingClientRect();
     var x = Math.floor(e.clientX - rect.left);
     var y = Math.floor(e.clientY - rect.top);
@@ -104,8 +104,8 @@ $(document).ready(function() {
     var ymap = Math.floor(ymappix / dim);
     drawmapselection(selectedmapx - xmap, selectedmapy - ymap);
     writecoords(selectedmapx, selectedmapy);
-    if (e.button != 1 && e.button != 2) {
-      if (activemode() == 0 && mapclick == true) {
+    if (![-1, 1, 2].some((n) => n == mapclick)) {
+      if (activemode() == 0) {
         dragx = x - startx;
         dragy = y - starty;
         selectedmapx = Math.floor((xmappix + x - dragx) / dim);
@@ -118,18 +118,18 @@ $(document).ready(function() {
         writecoords(selectedmapx, selectedmapy);
       }
       else {
-        if (activemode() == 1 && mapclick == true) {
+        if (activemode() == 1) {
           placetile(selectedmapx, selectedmapy);
         }
-        if (activemode() == 2 && mapclick == true) {
+        if (activemode() == 2) {
           drawmapselection(selectedmapx - xmap, selectedmapy - ymap);
         }
       }
     }
-    else if (e.button == 1) {
+    else if (mapclick == 1) {
       pincette(selectedmapx, selectedmapy);
     }
-    else if (e.button == 2) {
+    else if (mapclick == 2) {
       placetile(selectedmapx, selectedmapy, true);
     }
   });
@@ -140,6 +140,7 @@ $(document).ready(function() {
   });
 
   $("#foreground").mouseup(function(e) {
+	console.log("Up: " + e.button);
     var rect = e.target.getBoundingClientRect();
     var x = Math.floor(e.clientX - rect.left);
     var y = Math.floor(e.clientY - rect.top);
@@ -183,7 +184,7 @@ $(document).ready(function() {
       }
     }
 
-    mapclick = false;
+    mapclick = -1;
     startx = 0;
     starty = 0;
     dragx = 0;
