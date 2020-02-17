@@ -45,7 +45,8 @@ $(document).ready(function() {
   selectcanvas = $("#selectmap")[0];
   selectcontext = selectcanvas.getContext("2d");
 
-  mapdim = 640;
+  mapwidth = $("#foreground")[0].width;
+  mapheight = 640;
   backcontext = $("#background")[0].getContext("2d");
   tilecontext = $("#tilemap")[0].getContext("2d");
   mapselectcontext = $("#foreground")[0].getContext("2d");
@@ -98,7 +99,7 @@ $(document).ready(function() {
   backgroundtiles = new Image(512,32);
   backgroundtiles.onload = function() {
     backcontext.fillStyle = backcontext.createPattern(backgroundtiles, "repeat");
-    backcontext.rect(0, 0, mapdim, mapdim);
+    backcontext.rect(0, 0, mapwidth, mapheight);
     backcontext.fill();
   };
   backgroundtiles.src = "assets/images/tilebackground.png";
@@ -218,7 +219,7 @@ $(document).ready(function() {
     starty = 0;
     dragx = 0;
     dragy = 0;
-    drawmapselection(selectedmapx, selecctedy);
+    drawmapselection(selectedmapx, selectedmapy);
   });
 
   $(document).keydown(function(e) {
@@ -325,7 +326,7 @@ function drawselection(x = 0, y = 0, draw = false) {
 }
 
 function drawmapselection(x, y, draw = true) {
-  mapselectcontext.clearRect(0, 0, mapdim, mapdim);
+  mapselectcontext.clearRect(0, 0, mapwidth, mapheight);
   if(draw) {
     if (activemode() == 2 && mapclick == true) {
       var startmapx = ((xmappix + startx) / dim);
@@ -358,11 +359,11 @@ function drawmapselection(x, y, draw = true) {
 }
 
 function drawmap() {
-  tilecontext.clearRect(0, 0, mapdim, mapdim);
+  tilecontext.clearRect(0, 0, mapwidth, mapheight);
   var xmap = Math.floor((xmappix - dragx) / dim);
-  var xmapmax = Math.floor(((xmappix - dragx + mapdim)) / dim);
+  var xmapmax = Math.floor(((xmappix - dragx + mapwidth)) / dim);
   var ymap = Math.floor((ymappix - dragy) / dim);
-  var ymapmax = Math.floor(((ymappix - dragy + mapdim)) / dim);
+  var ymapmax = Math.floor(((ymappix - dragy + mapheight)) / dim);
   var tilestodraw = tilelist.filter((value) => value.mapx >= xmap &&
                                                value.mapx <= xmapmax &&
                                                value.mapy >= ymap &&
@@ -375,7 +376,7 @@ function drawmap() {
   });
 }
 
-function setradios(mode) {
+function setradios(mode = 0) {
   $("#radiomove").checked = mode ? 0 : selectedmode == 0;
   $("#radiotile").checked = mode ? mode == 1 : selectedmode == 1;
   $("#radiocopy").checked = mode ? mode == 2 : selectedmode == 2;
