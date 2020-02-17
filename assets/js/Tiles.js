@@ -1,26 +1,9 @@
-$(document).ready(function() {
-  rotatabletiles = [
-    { id: 0, x: 0, y: 0, count: 1, build: 3 },
-    { id: 1, x: 0, y: 1, count: 1, build: 2 },
-    { id: 2, x: 0, y: 2, count: 1, build: 1 },
-    { id: 3, x: 0, y: 3, count: 1, build: 2 },
-    { id: 4, x: 1, y: 3, count: 1, build: 0 },
-    { id: 5, x: 2, y: 3, count: 1, build: 0 },
+---
+layout: blank
+---
 
-    { id: 6, x: 1, y: 0, count: 2, build: 0 },
-    { id: 7, x: 2, y: 0, count: 2, build: 2 },
-    { id: 8, x: 3, y: 0, count: 4, build: 0 },
-    { id: 9, x: 4, y: 0, count: 4, build: 2 },
-    { id: 10, x: 5, y: 0, count: 4, build: 0 },
-    { id: 11, x: 6, y: 0, count: 4, build: 2 },
-    { id: 12, x: 7, y: 0, count: 4, build: 0 },
-    { id: 13, x: 8, y: 0, count: 4, build: 0 },
-    { id: 14, x: 9, y: 0, count: 4, build: 0 },
-    { id: 15, x: 10, y: 0, count: 4, build: 0 },
-    { id: 16, x: 11, y: 0, count: 4, build: 0 },
-    { id: 17, x: 1, y: 2, count: 1, build: 0 },
-    { id: 18, x: 2, y: 2, count: 1, build: 2 }
-  ];
+$(document).ready(function() {
+  rotatabletiles = {{ site.data.tiles | jsonify }};
   tilelist = [];
   clipboard = [];
 
@@ -51,22 +34,7 @@ $(document).ready(function() {
   tilecontext = $("#tilemap")[0].getContext("2d");
   mapselectcontext = $("#foreground")[0].getContext("2d");
 
-  buildsounds = [
-    new Audio("assets/sound/build-small.mp3"),
-    new Audio("assets/sound/build-medium.mp3"),
-    new Audio("assets/sound/build-large.mp3"),
-    new Audio("assets/sound/cannot-build.mp3")
-  ];
-  buildsounds.forEach((audio) => audio.volume = 0.5);
-  removesounds = [
-    new Audio("assets/sound/deconstruct-small.mp3"),
-    new Audio("assets/sound/deconstruct-large.mp3")
-  ];
-  removesounds.forEach((audio) => audio.volume = 0.5);
-  guiclick = new Audio("assets/sound/gui-click.mp3");
-  guiswitch = new Audio("assets/sound/gui-switch.mp3");
-  guiclick.volume = 0.5;
-  guiswitch.volume = 0.5;
+  sounds = {{ site.data.sounds | jsonify }};
 
   $("#radiomove").click(function() { selectedmode = 0; });
   $("#radiotile").click(function() { selectedmode = 1; });
@@ -88,8 +56,8 @@ $(document).ready(function() {
     selectedx = Math.floor(x / dim);
     selectedy = Math.floor(y / dim);
     drawselection(selectedx, selectedy, true);
-    guiclick.currentTime = 0;
-    guiclick.play();
+    var click = new Audio();
+    playsound(6);
   });
 
   $("#selectmap").mouseleave(function(e) {
@@ -112,13 +80,6 @@ $(document).ready(function() {
       var y = Math.floor(e.clientY - rect.top);
       startx = x;
       starty = y;
-
-      if (activemode() == 1) {
-        $("#foreground").mousemove();
-      }
-    }
-    else {
-      $("#foreground").mousemove();
     }
   });
 
@@ -270,19 +231,19 @@ function placetile(x, y, clear = false, tilex = -1, tiley = -1) {
   if (typeof selectedtile !== "undefined") {
     if (clear || (realtilex == 0 && realtiley == 0)) {
       tilelist.splice(index, 1);
-      playsound(getgroup(selectedtile.tilex, selectedtile.tiley).build, false);
+      playsound(getgroup(selectedtile.tilex, selectedtile.tiley).remove);
       drawmap();
     }
     else if (realtilex != selectedtile.tilex || realtiley != selectedtile.tiley) {
       selectedtile.tilex = realtilex;
       selectedtile.tiley = realtiley;
-      playsound(getgroup(realtilex, realtiley).build, true);
+      playsound(getgroup(realtilex, realtiley).build);
       drawmap();
     }
   }
   else if (realtilex != 0 || realtiley != 0) {
     tilelist.push({ tilex: realtilex, tiley: realtiley, mapx: x, mapy: y });
-    playsound(getgroup(realtilex, realtiley).build, true);
+    playsound(getgroup(realtilex, realtiley).build);
     drawmap();
   }
 }
@@ -294,8 +255,7 @@ function pincette(x, y) {
       selectedx = selectedtile.tilex;
       selectedy = selectedtile.tiley;
       drawselection();
-      guiswitch.currentTime = 0;
-      guiswitch.play();
+      playsound(7);
     }
   }
 }
@@ -307,8 +267,7 @@ function switchitem(e) {
   selectedx = group.x;
   selectedy = (selectedy % group.count) + group.y;
   drawselection();
-  guiswitch.currentTime = 0;
-  guiswitch.play();
+  playsound(7);
 }
 
 function drawselection(x = 0, y = 0, draw = false) {
@@ -400,25 +359,22 @@ function writecoords(x, y, showmouse = true) {
 function getgroup(x, y, delta = 0) {
   if (delta) {
     var id = rotatabletiles.find((value) => value.x == x && y >= value.y && y < value.y + value.count).id;
-    return rotatabletiles.find((value) => value.id == id);
+    return rotatabletiles.find((value) => value.id == id + delta);
   }
   else {
     return rotatabletiles.find((value) => value.x == x && y >= value.y && y < value.y + value.count);
   }
 }
 
-function playsound(index, build) {
-  if (build) {
-    var sound = buildsounds[index];
-    sound.currentTime = 0;
+function playsound(index = 0) {
+  var sound = new Audio();
+  sound.addEventListener("canplaythrough", function() {
+    sound.addEventListener("ended", function() {
+      sound = null;
+    });
+    sound.volume = 0.5;
     sound.play();
-  }
-  else {
-    realindex = index == 2 ? 1 : 0;
-    var sound = removesounds[realindex];
-    sound.currentTime = 0;
-    sound.play();
-  }
+  });
 }
 
 function activemode() {
