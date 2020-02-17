@@ -238,12 +238,12 @@ $(document).ready(function() {
   $("#map").mouseup(function() {
     mapwidth = $("#map").width();
     mapheight = $("#map").height();
-    $("#background").width = mapwidth;
-    $("#tilemap").width = mapwidth;
-    $("#foreground").width = mapwidth;
-    $("#background").height = mapheight;
-    $("#tilemap").height = mapheight;
-    $("#foreground").height = mapheight;
+    $("#background").width(mapwidth);
+    $("#tilemap").width(mapwidth);
+    $("#foreground").width(mapwidth);
+    $("#background").height(mapheight);
+    $("#tilemap").height(mapheight);
+    $("#foreground").height(mapheight);
   });
   $("#map").resizable();
   
