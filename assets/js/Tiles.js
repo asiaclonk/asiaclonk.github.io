@@ -263,6 +263,7 @@ function switchitem(e) {
   selectedy = (selectedy % group.count) + group.y;
   drawselection();
   playsound(7);
+  return false;
 }
 
 function drawselection(x = 0, y = 0, draw = false) {
