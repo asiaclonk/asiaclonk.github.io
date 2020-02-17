@@ -170,10 +170,10 @@ $(document).ready(function() {
           });
         }
         else {
-          var startmapx = Math.floor((xmappix + startx) / dim) - Math.floor(xmappix / dim);
-          var startmapy = Math.floor((ymappix + starty) / dim) - Math.floor(ymappix / dim);
-          var absx = Math.abs(x - startmapx);
-          var absy = Math.abs(y - startmapy);
+          var startmapx = Math.floor((xmappix + startx) / dim);
+          var startmapy = Math.floor((ymappix + starty) / dim);
+          var absx = Math.abs(selectedmapx - startmapx);
+          var absy = Math.abs(selectedmapy - startmapy);
           var offsetx = Math.floor(absx / 2);
           var offsety = Math.floor(absy / 2);
           clipboard = tilelist.filter((value) =>
@@ -325,34 +325,41 @@ function drawselection(x = 0, y = 0, draw = false) {
   selectcontext.stroke();
 }
 
-function drawmapselection(x, y, draw = true) {
+function drawmapselection(localx, localy, draw = true) {
   mapselectcontext.clearRect(0, 0, mapwidth, mapheight);
   if(draw) {
     if (activemode() == 2 && ![-1, 1, 2].some((n) => n == mapclick)) {
-      var startmapx = Math.floor((xmappix + startx) / dim) - Math.floor(xmappix / dim);
-      var startmapy = Math.floor((ymappix + starty) / dim) - Math.floor(ymappix / dim);
-      var absx = Math.abs(x - startmapx);
-      var absy = Math.abs(y - startmapy);
+      var startlocalx = Math.floor((xmappix + startx) / dim) - Math.floor(xmappix / dim);
+      var startlocaly = Math.floor((ymappix + starty) / dim) - Math.floor(ymappix / dim);
+      var absx = Math.abs(localx - startlocalx);
+      var absy = Math.abs(localy - startlocaly);
       mapselectcontext.beginPath();
       mapselectcontext.strokeStyle = "lightgreen";
-      mapselectcontext.rect(Math.min(x, startmapx) * dim - mod(xmappix, dim),
-                            Math.min(y, startmapy) * dim - mod(ymappix, dim), (absx + 1) * dim, (absy + 1) * dim);
+      mapselectcontext.rect(Math.min(localx, startlocalx) * dim - mod(xmappix, dim),
+                            Math.min(localy, startlocaly) * dim - mod(ymappix, dim), (absx + 1) * dim, (absy + 1) * dim);
       mapselectcontext.stroke();
     }
     else if (activemode() == 2 && clipboard.length > 0) {
-      mapselectcontext.beginPath();
-      mapselectcontext.strokeStyle = "yellow";
       clipboard.forEach((value) => {
-        mapselectcontext.rect((x + value.mapx) * dim - mod(xmappix, dim),
-                              (y + value.mapy) * dim - mod(ymappix, dim), dim, dim);
+        mapselectcontext.drawImage(tiles, value.tilex * dim, value.tiley * dim, dim, dim,
+                                  (localx + value.mapx) * dim - mod(xmappix, dim),
+                                  (localy + value.mapy) * dim - mod(ymappix, dim), dim, dim);
+        mapselectcontext.beginPath();
+        mapselectcontext.strokeStyle = "yellow";
+        mapselectcontext.rect((localx + value.mapx) * dim - mod(xmappix, dim),
+                              (localy + value.mapy) * dim - mod(ymappix, dim), dim, dim);
+        mapselectcontext.stroke();
       });
-      mapselectcontext.stroke();
+
     }
     else {
+      mapselectcontext.drawImage(tiles, selectedx * dim, selectedy * dim, dim, dim,
+                                 localx * dim - mod(xmappix, dim),
+                                 localy * dim - mod(ymappix, dim), dim, dim);
       mapselectcontext.beginPath();
       mapselectcontext.strokeStyle = "yellow";
-      mapselectcontext.rect(x * dim - mod(xmappix, dim),
-                            y * dim - mod(ymappix, dim), dim, dim);
+      mapselectcontext.rect(localx * dim - mod(xmappix, dim),
+                            localy * dim - mod(ymappix, dim), dim, dim);
       mapselectcontext.stroke();
     }
   }
@@ -369,10 +376,10 @@ function drawmap() {
                                                value.mapy >= ymap &&
                                                value.mapy <= ymapmax
   );
-  tilestodraw.forEach(function(tile) {
-    tilecontext.drawImage(tiles, tile.tilex * dim, tile.tiley * dim, dim, dim,
-                         (tile.mapx - xmap) * dim - mod(xmappix - dragx, dim),
-                         (tile.mapy - ymap) * dim - mod(ymappix - dragy, dim), dim, dim);
+  tilestodraw.forEach((value) => {
+    tilecontext.drawImage(tiles, value.tilex * dim, value.tiley * dim, dim, dim,
+                         (value.mapx - xmap) * dim - mod(xmappix - dragx, dim),
+                         (value.mapy - ymap) * dim - mod(ymappix - dragy, dim), dim, dim);
   });
 }
 
