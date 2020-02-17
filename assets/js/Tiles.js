@@ -20,6 +20,7 @@ $(document).ready(function() {
   dragx = 0;
   dragy = 0;
   mapclick = -1;
+  mousepos = { x: -1, y: -1 };
 
   tiles = $("#tiles")[0];
   backgroundtiles = $("#backgroundtiles")[0];
@@ -113,6 +114,8 @@ $(document).ready(function() {
     var selectedmapy = Math.floor((ymappix + y) / dim);
     var xmap = Math.floor(xmappix / dim);
     var ymap = Math.floor(ymappix / dim);
+    mousepos.x = selectedmapx - xmap;
+    mousepos.y = selectedmapy - ymap;
     drawmapselection(selectedmapx - xmap, selectedmapy - ymap);
     writecoords(selectedmapx, selectedmapy);
     if (![-1, 1, 2].some((n) => n == mapclick)) {
@@ -143,6 +146,8 @@ $(document).ready(function() {
   });
 
   $("#foreground").mouseleave(function(e) {
+    mousepos.x = -1;
+    mousepos.y = -1;
     drawmapselection(0, 0, false);
     writecoords(0, 0, false);
   });
@@ -177,12 +182,13 @@ $(document).ready(function() {
           var absy = Math.abs(selectedmapy - startmapy);
           var offsetx = Math.floor(absx / 2);
           var offsety = Math.floor(absy / 2);
-          clipboard = tilelist.filter((value) =>
+          var filtered = tilelist.filter((value) =>
             value.mapx >= Math.min(startmapx, selectedmapx) &&
             value.mapx <= Math.min(startmapx, selectedmapx) + absx &&
             value.mapy >= Math.min(startmapy, selectedmapy) &&
             value.mapy <= Math.min(startmapy, selectedmapy) + absy
           );
+          clipboard = _.cloneDeep(filtered);
           clipboard.forEach((value) => {
             value.mapx = value.mapx - Math.min(startmapx, selectedmapx) - offsetx;
             value.mapy = value.mapy - Math.min(startmapy, selectedmapy) - offsety;
@@ -228,6 +234,9 @@ $(document).ready(function() {
       if (typeof group !== "undefined") {
         selectedy = ((selectedy - group.y + 1) % group.count) + group.y;
         drawselection();
+        if (mousepos.x != -1 && mousepos.y != -1) {
+          drawmapselection(mousepos.x, mousepos.y);
+        }
       }
     }
   });
