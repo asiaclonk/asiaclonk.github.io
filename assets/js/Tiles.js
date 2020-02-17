@@ -235,15 +235,25 @@ $(document).ready(function() {
     }
   });
 
-  $("#map").mouseup(function() {
-    mapwidth = $("#map").width();
-    mapheight = $("#map").height();
-    $("#background").width(mapwidth);
-    $("#tilemap").width(mapwidth);
-    $("#foreground").width(mapwidth);
-    $("#background").height(mapheight);
-    $("#tilemap").height(mapheight);
-    $("#foreground").height(mapheight);
+  $("#map").mousemove(function() {
+    var newwidth = $("#map").width();
+    var newheight = $("#map").height();
+    if (newwidth != mapwidth || newheight != mapheight) {
+      mapwidth = newwidth;
+      mapheight = newheight;
+      $("#background").width(mapwidth);
+      $("#background")[0].width = mapwidth;
+      $("#tilemap").width(mapwidth);
+      $("#tilemap")[0].width = mapwidth;
+      $("#foreground").width(mapwidth);
+      $("#foreground")[0].width = mapwidth;
+      $("#background").height(mapheight);
+      $("#background")[0].height = mapheight;
+      $("#tilemap").height(mapheight);
+      $("#tilemap")[0].height = mapheight;
+      $("#foreground").height(mapheight);
+      $("#foreground")[0].height = mapheight;
+    }
   });
   $("#map").resizable();
   
