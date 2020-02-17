@@ -290,6 +290,7 @@ $(document).ready(function() {
   $("#importbutton").click(function() {
     var importtiles = JSON.parse($("#importtext").val());
     tilelist = importtiles;
+    drawmap();
   });
   $("#exportbutton").click(function() {
     var exportstring = JSON.stringify(tilelist);
