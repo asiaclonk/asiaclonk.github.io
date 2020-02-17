@@ -165,7 +165,8 @@ $(document).ready(function() {
       }
       if (activemode() == 2) {
         if (startx == x && starty == y) {
-          clipboard.forEach((value) => {
+          var copy = _.cloneDeep(clipboard);
+          copy.forEach((value) => {
             placetile(selectedmapx + value.mapx, selectedmapy + value.mapy, false, value.tilex, value.tiley);
           });
         }
@@ -353,9 +354,11 @@ function drawmapselection(localx, localy, draw = true) {
 
     }
     else {
-      mapselectcontext.drawImage(tiles, selectedx * dim, selectedy * dim, dim, dim,
-                                 localx * dim - mod(xmappix, dim),
-                                 localy * dim - mod(ymappix, dim), dim, dim);
+      if (activemode() != 2) {
+        mapselectcontext.drawImage(tiles, selectedx * dim, selectedy * dim, dim, dim,
+                                   localx * dim - mod(xmappix, dim),
+                                   localy * dim - mod(ymappix, dim), dim, dim);
+      }
       mapselectcontext.beginPath();
       mapselectcontext.strokeStyle = "yellow";
       mapselectcontext.rect(localx * dim - mod(xmappix, dim),

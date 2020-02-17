@@ -474,7 +474,7 @@ $(document).ready(function() {
   kirarachart = false
 
   $("#chartselect").on("selectmenuchange", function(event) {
-    var copy = JSON.parse(JSON.stringify(datas[$("#chartselect").val()]));
+    var copy = _.cloneDeep(datas[$("#chartselect").val()]);
     var option = options[$("#chartselect").val()];
     var type = types[$("#chartselect").val()]
     var ctx = document.getElementById('myChart').getContext("2d");
