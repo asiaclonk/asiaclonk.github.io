@@ -73,7 +73,6 @@ $(document).ready(function() {
   backgroundtiles.src = "assets/images/tilebackground.png";
 
   $("#foreground").mousedown(function(e) {
-	console.log("Move: " + e.button);
     mapclick = e.button;
     var rect = e.target.getBoundingClientRect();
     var x = Math.floor(e.clientX - rect.left);
@@ -140,7 +139,6 @@ $(document).ready(function() {
   });
 
   $("#foreground").mouseup(function(e) {
-	console.log("Up: " + e.button);
     var rect = e.target.getBoundingClientRect();
     var x = Math.floor(e.clientX - rect.left);
     var y = Math.floor(e.clientY - rect.top);
@@ -241,7 +239,7 @@ function placetile(x, y, clear = false, tilex = -1, tiley = -1) {
   var selectedtile = tilelist.find((value) => value.mapx == x && value.mapy == y);
   if (typeof selectedtile !== "undefined") {
     if (clear || (realtilex == 0 && realtiley == 0)) {
-      var index = tilelist.indexOf((value) => value.mapx == x && value.mapy == y);
+      var index = tilelist.indexOf(selectedtile);
       tilelist.splice(index, 1);
       playsound(getgroup(selectedtile.tilex, selectedtile.tiley).remove);
       drawmap();
@@ -253,7 +251,7 @@ function placetile(x, y, clear = false, tilex = -1, tiley = -1) {
       drawmap();
     }
   }
-  else if (realtilex != 0 || realtiley != 0) {
+  else if (!clear && (realtilex != 0 || realtiley != 0)) {
     tilelist.push({ tilex: realtilex, tiley: realtiley, mapx: x, mapy: y });
     playsound(getgroup(realtilex, realtiley).build);
     drawmap();
