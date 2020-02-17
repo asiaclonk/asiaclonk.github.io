@@ -170,8 +170,8 @@ $(document).ready(function() {
           });
         }
         else {
-          var startmapx = ((xmappix + startx) / dim);
-          var startmapy = ((xmappix + startx) / dim);
+          var startmapx = Math.floor((xmappix + startx) / dim) - Math.floor(xmappix / dim);
+          var startmapy = Math.floor((ymappix + starty) / dim) - Math.floor(ymappix / dim);
           var absx = Math.abs(x - startmapx);
           var absy = Math.abs(y - startmapy);
           var offsetx = Math.floor(absx / 2);
@@ -329,14 +329,14 @@ function drawmapselection(x, y, draw = true) {
   mapselectcontext.clearRect(0, 0, mapwidth, mapheight);
   if(draw) {
     if (activemode() == 2 && ![-1, 1, 2].some((n) => n == mapclick)) {
-      var startmapx = ((xmappix + startx) / dim) - Math.floor(xmappix / dim);
-      var startmapy = ((ymappix + starty) / dim) - Math.floor(ymappix / dim);
+      var startmapx = Math.floor((xmappix + startx) / dim) - Math.floor(xmappix / dim);
+      var startmapy = Math.floor((ymappix + starty) / dim) - Math.floor(ymappix / dim);
       var absx = Math.abs(x - startmapx);
       var absy = Math.abs(y - startmapy);
       mapselectcontext.beginPath();
       mapselectcontext.strokeStyle = "lightgreen";
       mapselectcontext.rect(Math.min(x, startmapx) * dim - mod(xmappix, dim),
-                            Math.min(y, startmapy) * dim - mod(ymappix, dim), absx * dim, absy * dim);
+                            Math.min(y, startmapy) * dim - mod(ymappix, dim), (absx + 1) * dim, (absy + 1) * dim);
       mapselectcontext.stroke();
     }
     else if (activemode() == 2 && clipboard.length > 0) {
