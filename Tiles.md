@@ -22,6 +22,7 @@ This thing is still incomplete and will break.
     <input type="radio" name="mode" id="radiotile">
     <label for="radiocopy">Copy</label>
     <input type="radio" name="mode" id="radiocopy">
+    <button id="clipclearer" style="margin-top: 4px;" disabled>Clear</button>
   </fieldset>
 </div>
 <br>

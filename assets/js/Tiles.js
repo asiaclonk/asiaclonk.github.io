@@ -132,9 +132,6 @@ $(document).ready(function() {
         if (activemode() == 1) {
           placetile(selectedmapx, selectedmapy);
         }
-        if (activemode() == 2) {
-          drawmapselection(selectedmapx - xmap, selectedmapy - ymap);
-        }
       }
     }
     else if (mapclick == 1) {
@@ -189,8 +186,8 @@ $(document).ready(function() {
             value.mapx = value.mapx - Math.min(startmapx, selectedmapx) - offsetx;
             value.mapy = value.mapy - Math.min(startmapy, selectedmapy) - offsety;
           });
+          $("#clipclearer").prop("disabled", false);
         }
-
       }
     }
 
@@ -241,6 +238,11 @@ $(document).ready(function() {
       keymode = 0;
       setradios();
     }
+  });
+
+  $("#clipclearer").click(function() {
+    $("#clipclearer").prop("disabled", true);
+    clipboard = [];
   });
 
   $("#map").resizable();
@@ -325,8 +327,8 @@ function drawmapselection(x, y, draw = true) {
   mapselectcontext.clearRect(0, 0, mapwidth, mapheight);
   if(draw) {
     if (activemode() == 2 && ![-1, 1, 2].some((n) => n == mapclick)) {
-      var startmapx = ((xmappix + startx) / dim);
-      var startmapy = ((xmappix + startx) / dim);
+      var startmapx = ((xmappix + startx) / dim) - Math.floor(xmappix / dim);
+      var startmapy = ((xmappix + startx) / dim) - Math.floor(ymappix / dim);
       var absx = Math.abs(x - startmapx);
       var absy = Math.abs(y - startmapy);
       mapselectcontext.beginPath();
