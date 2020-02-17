@@ -216,6 +216,9 @@ $(document).ready(function() {
     selectedx = group.x;
     selectedy = (selectedy % group.count) + group.y;
     drawselection();
+    if (mousepos.x != -1 && mousepos.y != -1) {
+      drawmapselection(mousepos.x, mousepos.y);
+    }
     playsound(7);
     e.preventDefault();
   });
