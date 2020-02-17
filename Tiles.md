@@ -4,8 +4,15 @@ description: Something to quickly tile a map with.
 ---
 
 # For a certain Factorio fan.
-This thing is still incomplete and will break.
 
+<p style="text-align: center;">
+  This thing is still incomplete and will break.
+  Shift: Tile
+  Ctrl: Copy
+  Mousemiddle: Select
+  Mousewheel: Switch
+  Right: Deconstruct
+</p>
 <br>
 <p style="text-align: center;">Tiles</p>
 <script src="assets/js/Tiles.js"></script>

@@ -186,7 +186,9 @@ $(document).ready(function() {
             value.mapx = value.mapx - Math.min(startmapx, selectedmapx) - offsetx;
             value.mapy = value.mapy - Math.min(startmapy, selectedmapy) - offsety;
           });
-          $("#clipclearer").prop("disabled", false);
+          if (clipboard.length > 0) {
+            $("#clipclearer").prop("disabled", false);
+          }
         }
       }
     }
@@ -328,7 +330,7 @@ function drawmapselection(x, y, draw = true) {
   if(draw) {
     if (activemode() == 2 && ![-1, 1, 2].some((n) => n == mapclick)) {
       var startmapx = ((xmappix + startx) / dim) - Math.floor(xmappix / dim);
-      var startmapy = ((xmappix + startx) / dim) - Math.floor(ymappix / dim);
+      var startmapy = ((ymappix + starty) / dim) - Math.floor(ymappix / dim);
       var absx = Math.abs(x - startmapx);
       var absy = Math.abs(y - startmapy);
       mapselectcontext.beginPath();
