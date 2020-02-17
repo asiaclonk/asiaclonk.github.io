@@ -4,6 +4,7 @@ layout: blank
 
 $(document).ready(function() {
   rotatabletiles = {{ site.data.tiles | jsonify }};
+  intify(rotatabletiles);
   tilelist = [];
   clipboard = [];
 
@@ -352,7 +353,9 @@ function writecoords(x, y, showmouse = true) {
 
 function getgroup(x, y, delta = 0) {
   if (delta != 0) {
+    alert("x is " + x + " and y is " + y + " and delta is " + delta);
     var id = rotatabletiles.find((value) => value.x == x && y >= value.y && y < value.y + value.count).id;
+
     return rotatabletiles.find((value) => value.id == id + delta);
   }
   else {
@@ -370,6 +373,14 @@ function playsound(index = 0) {
     sound.play();
   });
   sound.src = sounds[index].sound;
+}
+
+function intify(array) {
+  array.forEach((value) => {
+    Object.keys(value).forEach((key) => {
+      value[key] = parseInt(value[key]);
+	});
+  });
 }
 
 function activemode() {
