@@ -256,7 +256,6 @@ function pincette(x, y) {
 }
 
 function switchitem(e) {
-  var e = window.event || e;
   var delta = Math.sign(e.deltaY);
   var group = getgroup(selectedx, selectedy, delta);
   selectedx = group.x;
