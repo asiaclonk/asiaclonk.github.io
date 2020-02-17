@@ -66,8 +66,8 @@ $(document).ready(function() {
 
   backgroundtiles = new Image(512,32);
   backgroundtiles.onload = function() {
-    backcontext.fillStyle = backcontext.createPattern(backgroundtiles, "repeat");
     backcontext.beginPath();
+    backcontext.fillStyle = backcontext.createPattern(backgroundtiles, "repeat");
     backcontext.rect(0, 0, mapwidth, mapheight);
     backcontext.fill();
   };
@@ -249,6 +249,7 @@ $(document).ready(function() {
       $("#tilemap")[0].height = mapheight;
       $("#foreground")[0].height = mapheight;
       backcontext.beginPath();
+      backcontext.fillStyle = backcontext.createPattern(backgroundtiles, "repeat");
       backcontext.rect(0, 0, mapwidth, mapheight);
       backcontext.fill();
       drawmap();
@@ -256,7 +257,7 @@ $(document).ready(function() {
   });
   $("#map").resizable();
   
-  $(".wrapper").css("max-width", "");
+  $(".wrapper").removeClass("wrapper");
   $("section").css("max-width", "");
   
   drawselection();
