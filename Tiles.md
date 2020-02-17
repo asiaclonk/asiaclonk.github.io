@@ -3,10 +3,8 @@ title: Tilemap Editor
 description: Something to quickly tile a map with.
 ---
 
-<p style="text-align: center;">
 # For a certain Factorio fan.
 This thing is still incomplete and will break.
-</p>
 
 <br>
 <p style="text-align: center;">Tiles</p>

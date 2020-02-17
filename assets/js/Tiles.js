@@ -36,9 +36,14 @@ $(document).ready(function() {
 
   sounds = {{ site.data.sounds | jsonify }};
 
-  $("#radiomove").click(function() { selectedmode = 0; });
-  $("#radiotile").click(function() { selectedmode = 1; });
-  $("#radiocopy").click(function() { selectedmode = 2; });
+  jqueryradios = [
+    $("#radiomove"),
+    $("#radiotile"),
+    $("#radiocopy")
+  ];
+  jqueryradios[0].click(function() { selectedmode = 0; });
+  jqueryradios[1].click(function() { selectedmode = 1; });
+  jqueryradios[2].click(function() { selectedmode = 2; });
 
   $("#selectmap").mousemove(function(e) {
     var rect = e.target.getBoundingClientRect();
@@ -83,9 +88,11 @@ $(document).ready(function() {
     if (![-1, 1, 2].some((n) => n == mapclick)) {
       startx = x;
       starty = y;
+      if (activemode() == 1) {
+        placetile(selectedmapx, selectedmapy);
+      }
     }
     if (mapclick == 1) {
-
       pincette(selectedmapx, selectedmapy);
       e.preventDefault();
     }
@@ -317,7 +324,7 @@ function drawselection(x = 0, y = 0, draw = false) {
 function drawmapselection(x, y, draw = true) {
   mapselectcontext.clearRect(0, 0, mapwidth, mapheight);
   if(draw) {
-    if (activemode() == 2 && mapclick == true) {
+    if (activemode() == 2 && ![-1, 1, 2].some((n) => n == mapclick)) {
       var startmapx = ((xmappix + startx) / dim);
       var startmapy = ((xmappix + startx) / dim);
       var absx = Math.abs(x - startmapx);
@@ -366,9 +373,8 @@ function drawmap() {
 }
 
 function setradios(mode = 0) {
-  $("#radiomove").checked = mode == 0 ? 0 : selectedmode == 0;
-  $("#radiotile").checked = mode == 0 ? mode == 1 : selectedmode == 1;
-  $("#radiocopy").checked = mode == 0 ? mode == 2 : selectedmode == 2;
+  var realmode = mode == 0 ? selectedmode : mode;
+  jqueryradios[realmode].prop("checked", true);
 }
 
 function writecoords(x, y, showmouse = true) {
