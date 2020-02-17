@@ -28,8 +28,8 @@ $(document).ready(function() {
   selectcanvas = $("#selectmap")[0];
   selectcontext = selectcanvas.getContext("2d");
 
-  mapwidth = $("#map").width();
-  mapheight = $("#map").height();
+  mapwidth = 0;
+  mapheight = 0;
   backcontext = $("#background")[0].getContext("2d");
   tilecontext = $("#tilemap")[0].getContext("2d");
   mapselectcontext = $("#foreground")[0].getContext("2d");
@@ -256,9 +256,9 @@ $(document).ready(function() {
       drawmap();
     }
   });
-  
   $(".wrapper").css("max-width", "100%");
   $("section").css("max-width", "100%");
+  $("#map").mousemove();
   
   drawselection();
 });
