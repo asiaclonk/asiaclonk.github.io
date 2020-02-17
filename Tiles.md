@@ -12,8 +12,19 @@ This thing is still incomplete and will break.
 [Mousemiddle: Select]
 [Mousewheel: Switch]
 [Right: Deconstruct]`
-<p style="text-align: center;">Tiles</p>
 <script src="assets/js/Tiles.js"></script>
+<div style="display: flex; justify-content: center; margin-bottom: 5px;">
+  <fieldset class="ui-widget-content ui-corner-all">
+    <legend>Import</legend>
+    <input type="text" id="importtext">
+    <button id="importbutton">Enter</button>
+  </fieldset>
+  <fieldset class="ui-widget-content ui-corner-all">
+    <legend>Export</legend>
+    <input type="text" id="exporttext">
+    <button id="exportbutton">Create</button>
+  </fieldset>
+</div>
 <div style="display: flex; justify-content: center;">
   <div style="position: relative; width: 384px; height: 128px; overflow: auto;">
     <image id="tiles" src="assets/images/tiles.png" class="backgroundimage" width="384" height="128" style="max-width: none;"></image>

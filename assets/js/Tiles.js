@@ -285,7 +285,16 @@ $(document).ready(function() {
   $(".wrapper").css("max-width", "100%");
   $("section").css("max-width", "100%");
   $("#map").mousemove();
-  
+
+  $("#importbutton").click(function() {
+    var importtiles = JSON.parse($("#importtext").val());
+    tilelist = importtiles;
+  });
+  $("#exportbutton").click(function() {
+    var exportstring = JSON.stringify(tilelist);
+    $("#exporttext").val(exportstring);
+  });
+
   drawselection();
 });
 
