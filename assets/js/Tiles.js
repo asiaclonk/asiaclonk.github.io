@@ -28,8 +28,8 @@ $(document).ready(function() {
   selectcanvas = $("#selectmap")[0];
   selectcontext = selectcanvas.getContext("2d");
 
-  mapwidth = $("#foreground")[0].width;
-  mapheight = $("#foreground")[0].height;
+  mapwidth = $("#map")[0].width;
+  mapheight = $("#map")[0].height;
   backcontext = $("#background")[0].getContext("2d");
   tilecontext = $("#tilemap")[0].getContext("2d");
   mapselectcontext = $("#foreground")[0].getContext("2d");
@@ -236,8 +236,14 @@ $(document).ready(function() {
   });
 
   $("#map").mouseup(function() {
-    mapwidth = $("#foreground")[0].width;
-    mapheight = $("#foreground")[0].height;
+    mapwidth = $("#map")[0].width;
+    mapheight = $("#map")[0].height;
+    $("#background").width = mapwidth;
+    $("#tilemap").width = mapwidth;
+    $("#foreground").width = mapwidth;
+    $("#background").height = mapheight;
+    $("#tilemap").height = mapheight;
+    $("#foreground").height = mapheight;
   });
   $("#map").resizable();
   
