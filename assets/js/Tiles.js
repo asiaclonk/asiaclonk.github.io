@@ -19,7 +19,7 @@ $(document).ready(function() {
     { id: 15, x: 10, y: 0, count: 4, build: 0 },
     { id: 16, x: 11, y: 0, count: 4, build: 0 },
     { id: 17, x: 1, y: 2, count: 1, build: 0 },
-    { id: 18, x: 2, y: 2, count: 1, build: 2 },
+    { id: 18, x: 2, y: 2, count: 1, build: 2 }
   ];
   tilelist = [];
   clipboard = [];
@@ -57,8 +57,8 @@ $(document).ready(function() {
     new Audio("assets/sound/cannot-build.mp3")
   ];
   removesounds = [
-    new Audio("assets/sound/deconstruct-small.mp3");
-    new Audio("assets/sound/deconstruct-large.mp3");
+    new Audio("assets/sound/deconstruct-small.mp3"),
+    new Audio("assets/sound/deconstruct-large.mp3")
   ];
   guiclick = new Audio("assets/sound/gui-click.mp3");
   guiswitch = new Audio("assets/sound/gui-switch.mp3");
@@ -92,7 +92,7 @@ $(document).ready(function() {
     guiclick.currentTime = 0;
     guiclick.play();
   });
-  
+
   $("#selectmap").mouseleave(function(e) {
     drawselection();
   });
@@ -122,7 +122,7 @@ $(document).ready(function() {
       $("#foreground").mousemove();
     }
   });
-  
+
   $("#foreground").contextmenu(function(e) {
     e.preventDefault();
   });
@@ -166,9 +166,8 @@ $(document).ready(function() {
     else if (e.button == 2) {
       placetile(selectedmapx, selectedmapy, true);
     }
-
   });
-  
+
   $("#foreground").mouseleave(function(e) {
     drawmapselection(0, 0, false);
     writecoords(0, 0, false);
@@ -213,7 +212,7 @@ $(document).ready(function() {
             value.mapx = value.mapx - Math.min(startmapx, selectedmapx) - offsetx;
             value.mapy = value.mapy - Math.min(startmapy, selectedmapy) - offsety;
           });
-		}
+        }
 
       }
     }
@@ -225,7 +224,7 @@ $(document).ready(function() {
     dragy = 0;
     drawmapselection(selectedmapx, selecctedy);
   });
-  
+
   $(document).keydown(function(e) {
     if (e.which == 16) {
       keymode = 1;
@@ -239,7 +238,7 @@ $(document).ready(function() {
       var group = rotatabletiles.find((value) => value.x == selectedx &&
                                                  selectedy >= value.y &&
                                                  selectedy < value.y + value.count);
-      if (typeof group !== 'undefined') {
+      if (typeof group !== "undefined") {
         selectedy = ((selectedy - group.y + 1) % group.count) + group.y;
         drawselection();
       }
@@ -249,20 +248,21 @@ $(document).ready(function() {
   $(document).keyup(function(e) {
     if (e.which == 16) {
       keymode = 0;
-	  setradios();
+      setradios();
     }
     if (e.which == 17) {
       keymode = 0;
-	  setradios();
+      setradios();
     }
   });
-  
+
   if ($("#foreground")[0].addEventListener) {
     $("#foreground")[0].addEventListener("mousewheel", switchitem, false);
     $("#foreground")[0].addEventListener("DOMMouseScroll", switchitem, false);
   }
-  else $("#foreground")[0].attachEvent("onmousewheel", switchitem);
-  
+  else {
+    $("#foreground")[0].attachEvent("onmousewheel", switchitem);
+  }
   drawselection();
 });
 
@@ -270,7 +270,7 @@ function placetile(x, y, clear = false, tilex = -1, tiley = -1) {
   var realtilex = tilex == -1 ? selectedx : tilex;
   var realtiley = tiley == -1 ? selectedy : tiley;
   var selectedtile = tilelist.find((value) => value.mapx == x && value.mapy == y);
-  if (typeof selectedtile !== 'undefined') {
+  if (typeof selectedtile !== "undefined") {
     if (clear || (realtilex == 0 && realtiley == 0)) {
       tilelist.splice(index, 1);
       playsound(getgroup(selectedtile.tilex, selectedtile.tiley).build, false);
@@ -292,7 +292,7 @@ function placetile(x, y, clear = false, tilex = -1, tiley = -1) {
 
 function pincette(x, y) {
   var selectedtile = tilelist.find((value) => value.mapx == x && value.mapy == y);
-  if (typeof selectedtile !== 'undefined') {
+  if (typeof selectedtile !== "undefined") {
     if (selectedx != selectedtile.tilex || selectedy != selectedtile.tiley) {
       selectedx = selectedtile.tilex;
       selectedy = selectedtile.tiley;
@@ -339,15 +339,15 @@ function drawmapselection(x, y, draw = true) {
       mapselectcontext.beginPath();
       mapselectcontext.strokeStyle = "lightgreen";
       mapselectcontext.rect(Math.min(x, startmapx) * dim - mod(xmappix, dim),
-	                        Math.min(y, startmapy) * dim - mod(ymappix, dim), absx * dim, absy * dim);
-      mapselectcontext.stroke();      
+                            Math.min(y, startmapy) * dim - mod(ymappix, dim), absx * dim, absy * dim);
+      mapselectcontext.stroke();
     }
     else if (mode == 2 && clipboard.length > 0) {
       mapselectcontext.beginPath();
       mapselectcontext.strokeStyle = "yellow";
       clipboard.forEach((value) => {
         mapselectcontext.rect((x + value.mapx) * dim - mod(xmappix, dim),
-	                          (y + value.mapy) * dim - mod(ymappix, dim), dim, dim);
+                              (y + value.mapy) * dim - mod(ymappix, dim), dim, dim);
       });
       mapselectcontext.stroke();
     }
@@ -355,7 +355,7 @@ function drawmapselection(x, y, draw = true) {
       mapselectcontext.beginPath();
       mapselectcontext.strokeStyle = "yellow";
       mapselectcontext.rect(x * dim - mod(xmappix, dim),
-	                        y * dim - mod(ymappix, dim), dim, dim);
+                            y * dim - mod(ymappix, dim), dim, dim);
       mapselectcontext.stroke();
     }
   }
