@@ -87,7 +87,6 @@ $(document).ready(function() {
     var y = Math.floor(e.clientY - rect.top);
     selectedx = Math.floor(x / dim);
     selectedy = Math.floor(y / dim);
-    selectedgroup = getgroup(selecctedx, selectedy);
     drawselection(selectedx, selectedy, true);
     guiclick.currentTime = 0;
     guiclick.play();
@@ -131,7 +130,6 @@ $(document).ready(function() {
     var rect = e.target.getBoundingClientRect();
     var x = Math.floor(e.clientX - rect.left);
     var y = Math.floor(e.clientY - rect.top);
-    var mode = activemode();
     var selectedmapx = Math.floor((xmappix + x) / dim);
     var selectedmapy = Math.floor((ymappix + y) / dim);
     var xmap = Math.floor(xmappix / dim);
@@ -139,7 +137,7 @@ $(document).ready(function() {
     drawmapselection(selectedmapx - xmap, selectedmapy - ymap);
     writecoords(selectedmapx, selectedmapy);
     if (e.button != 1 && e.button != 2) {
-      if (mode == 0 && mapclick == true) {
+      if (activemode() == 0 && mapclick == true) {
         dragx = x - startx;
         dragy = y - starty;
         selectedmapx = Math.floor((xmappix + x - dragx) / dim);
@@ -152,10 +150,10 @@ $(document).ready(function() {
         writecoords(selectedmapx, selectedmapy);
       }
       else {
-        if (mode == 1 && mapclick == true) {
+        if (activemode() == 1 && mapclick == true) {
           placetile(selectedmapx, selectedmapy);
         }
-        if (mode == 2 && mapclick == true) {
+        if (activemode() == 2 && mapclick == true) {
           drawmapselection(selectedmapx - xmap, selectedmapy - ymap);
         }
       }
@@ -179,17 +177,16 @@ $(document).ready(function() {
     var y = Math.floor(e.clientY - rect.top);
     var selectedmapx = Math.floor((xmappix + x) / dim);
     var selectedmapy = Math.floor((ymappix + y) / dim);
-    var mode = activemode();
 
     if (e.button != 1 && e.button != 2) {
-      if (mode == 0) {
+      if (activemode() == 0) {
         if (startx == x && starty == y) {
           placetile(selectedmapx, selectedmapy);
         }
         xmappix -= dragx;
         ymappix -= dragy;
       }
-      if (mode == 2) {
+      if (activemode() == 2) {
         if (startx == x && starty == y) {
           clipboard.forEach((value) => {
             placetile(selectedmapx + value.mapx, selectedmapy + value.mapy, false, value.tilex, value.tiley);
@@ -307,8 +304,8 @@ function switchitem(e) {
   var e = window.event || e;
   var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
   var group = getgroup(selectedx, selectedy, delta);
-  selectedx = selectedgroup.x;
-  selectedy = (selectedy % selectedgroup.count) + selectedgroup.y;
+  selectedx = group.x;
+  selectedy = (selectedy % group.count) + group.y;
   drawselection();
   guiswitch.currentTime = 0;
   guiswitch.play();
@@ -331,7 +328,7 @@ function drawselection(x = 0, y = 0, draw = false) {
 function drawmapselection(x, y, draw = true) {
   mapselectcontext.clearRect(0, 0, mapdim, mapdim);
   if(draw) {
-    if (mode == 2 && mapclick == true) {
+    if (activemode() == 2 && mapclick == true) {
       var startmapx = ((xmappix + startx) / dim);
       var startmapy = ((xmappix + startx) / dim);
       var absx = Math.abs(x - startmapx);
@@ -342,7 +339,7 @@ function drawmapselection(x, y, draw = true) {
                             Math.min(y, startmapy) * dim - mod(ymappix, dim), absx * dim, absy * dim);
       mapselectcontext.stroke();
     }
-    else if (mode == 2 && clipboard.length > 0) {
+    else if (activemode() == 2 && clipboard.length > 0) {
       mapselectcontext.beginPath();
       mapselectcontext.strokeStyle = "yellow";
       clipboard.forEach((value) => {
@@ -387,9 +384,9 @@ function setradios(mode) {
 
 function writecoords(x, y, showmouse = true) {
   var offsetx = Math.floor(xmappix / dim);
-  var offsety = Math.floor(ymappiy / dim);
+  var offsety = Math.floor(ymappix / dim);
   if (showmouse) {
-    if (mode == 0 && mapclick == true) {
+    if (activemode() == 0 && mapclick == true) {
       offsetx = Math.floor((xmappix - dragx) / dim);
       offsety = Math.floor((ymappix - dragy) / dim);
     }
