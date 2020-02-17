@@ -75,13 +75,17 @@ $(document).ready(function() {
 
   $("#foreground").mousedown(function(e) {
     mapclick = true;
-	console.log("Down: " + e.button);
+    var rect = e.target.getBoundingClientRect();
+    var x = Math.floor(e.clientX - rect.left);
+    var y = Math.floor(e.clientY - rect.top);
     if (e.button != 1 && e.button != 2) {
-      var rect = e.target.getBoundingClientRect();
-      var x = Math.floor(e.clientX - rect.left);
-      var y = Math.floor(e.clientY - rect.top);
       startx = x;
       starty = y;
+    }
+    if (e.button == 1) {
+      var selectedmapx = Math.floor((xmappix + x) / dim);
+      var selectedmapy = Math.floor((ymappix + y) / dim);
+      pincette(selectedmapx, selectedmapy);
     }
   });
 
@@ -90,7 +94,7 @@ $(document).ready(function() {
   });
 
   $("#foreground").mousemove(function(e) {
-	console.log("Move: " + e.button);
+	console.log("Move: " + e.buttons);
     var rect = e.target.getBoundingClientRect();
     var x = Math.floor(e.clientX - rect.left);
     var y = Math.floor(e.clientY - rect.top);
@@ -136,7 +140,6 @@ $(document).ready(function() {
   });
 
   $("#foreground").mouseup(function(e) {
-	console.log("Up: " + e.button);
     var rect = e.target.getBoundingClientRect();
     var x = Math.floor(e.clientX - rect.left);
     var y = Math.floor(e.clientY - rect.top);

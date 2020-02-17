@@ -18,9 +18,9 @@ This thing is still incomplete and will break.
     <legend>Mode</legend>
     <label for="radiomove">Move</label>
     <input type="radio" name="mode" id="radiomove">
-    <label for="radiomove">Tile</label>
+    <label for="radiotile">Tile</label>
     <input type="radio" name="mode" id="radiotile">
-    <label for="radiomove">Copy</label>
+    <label for="radiocopy">Copy</label>
     <input type="radio" name="mode" id="radiocopy">
   </fieldset>
 </div>
