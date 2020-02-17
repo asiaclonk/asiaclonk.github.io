@@ -216,7 +216,15 @@ $(document).ready(function() {
     }
   });
 
-  $("#foreground")[0].addEventListener("wheel", switchitem);
+  $("#foreground")[0].addEventListener("wheel", function (e) {
+    var delta = Math.sign(e.deltaY);
+    var group = getgroup(selectedx, selectedy, delta);
+    selectedx = group.x;
+    selectedy = (selectedy % group.count) + group.y;
+    drawselection();
+    playsound(7);
+    e.preventDefault();
+  });
   drawselection();
 });
 
@@ -254,16 +262,6 @@ function pincette(x, y) {
       playsound(7);
     }
   }
-}
-
-function switchitem(e) {
-  var delta = Math.sign(e.deltaY);
-  var group = getgroup(selectedx, selectedy, delta);
-  selectedx = group.x;
-  selectedy = (selectedy % group.count) + group.y;
-  drawselection();
-  playsound(7);
-  return false;
 }
 
 function drawselection(x = 0, y = 0, draw = false) {
@@ -356,7 +354,7 @@ function getgroup(x, y, delta = 0) {
   if (delta != 0) {
     var id = rotatabletiles.find((value) => value.x == x && y >= value.y && y < value.y + value.count).id;
 
-    return rotatabletiles.find((value) => value.id == (id + delta) % rotatabletiles.length);
+    return rotatabletiles.find((value) => value.id == mod(id + delta, rotatabletiles.length));
   }
   else {
     return rotatabletiles.find((value) => value.x == x && y >= value.y && y < value.y + value.count);
