@@ -56,17 +56,16 @@ $(document).ready(function() {
     new Audio("assets/sound/build-large.mp3"),
     new Audio("assets/sound/cannot-build.mp3")
   ];
+  buildsounds.forEach((audio) => audio.volume = 0.5);
   removesounds = [
     new Audio("assets/sound/deconstruct-small.mp3"),
     new Audio("assets/sound/deconstruct-large.mp3")
   ];
+  removesounds.forEach((audio) => audio.volume = 0.5);
   guiclick = new Audio("assets/sound/gui-click.mp3");
   guiswitch = new Audio("assets/sound/gui-switch.mp3");
-  guistart = new Audio();
-  guistart.addEventListener("canplaythrough", function() {
-    guistart.play();
-  });
-  guistart.src = "assets/sound/main-menu-motif.mp3";
+  guiclick.volume = 0.5;
+  guiswitch.volume = 0.5;
 
   $("#radiomove").click(function() { selectedmode = 0; });
   $("#radiotile").click(function() { selectedmode = 1; });
