@@ -63,7 +63,7 @@ $(document).ready(function() {
   guiclick = new Audio("assets/sound/gui-click.mp3");
   guiswitch = new Audio("assets/sound/gui-switch.mp3");
   guistart = new Audio();
-  guistart.onload(function() {
+  guistart.addEventListener("canplaythrough", function() {
     guistart.play();
   });
   guistart.src = "assets/sound/main-menu-motif.mp3";
