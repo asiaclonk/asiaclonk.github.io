@@ -77,15 +77,19 @@ $(document).ready(function() {
     var rect = e.target.getBoundingClientRect();
     var x = Math.floor(e.clientX - rect.left);
     var y = Math.floor(e.clientY - rect.top);
-    if (e.button != 1 && e.button != 2) {
+    var selectedmapx = Math.floor((xmappix + x) / dim);
+    var selectedmapy = Math.floor((ymappix + y) / dim);
+    if (![-1, 1, 2].some((n) => n == mapclick)) {
       startx = x;
       starty = y;
     }
     if (mapclick == 1) {
-      var selectedmapx = Math.floor((xmappix + x) / dim);
-      var selectedmapy = Math.floor((ymappix + y) / dim);
+
       pincette(selectedmapx, selectedmapy);
       e.preventDefault();
+    }
+    if (mapclick == 2) {
+      placetile(selectedmapx, selectedmapy, true);
     }
   });
 
