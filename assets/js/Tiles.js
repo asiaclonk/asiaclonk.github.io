@@ -236,8 +236,8 @@ $(document).ready(function() {
   });
 
   $("#map").mouseup(function() {
-    mapwidth = $("#map")[0].width;
-    mapheight = $("#map")[0].height;
+    mapwidth = $("#map").width();
+    mapheight = $("#map").height();
     $("#background").width = mapwidth;
     $("#tilemap").width = mapwidth;
     $("#foreground").width = mapwidth;
