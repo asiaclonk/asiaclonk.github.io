@@ -75,6 +75,7 @@ $(document).ready(function() {
 
   $("#foreground").mousedown(function(e) {
     mapclick = true;
+	console.log("Down: " + e.button);
     if (e.button != 1 && e.button != 2) {
       var rect = e.target.getBoundingClientRect();
       var x = Math.floor(e.clientX - rect.left);
@@ -89,6 +90,7 @@ $(document).ready(function() {
   });
 
   $("#foreground").mousemove(function(e) {
+	console.log("Move: " + e.button);
     var rect = e.target.getBoundingClientRect();
     var x = Math.floor(e.clientX - rect.left);
     var y = Math.floor(e.clientY - rect.top);
@@ -134,6 +136,7 @@ $(document).ready(function() {
   });
 
   $("#foreground").mouseup(function(e) {
+	console.log("Up: " + e.button);
     var rect = e.target.getBoundingClientRect();
     var x = Math.floor(e.clientX - rect.left);
     var y = Math.floor(e.clientY - rect.top);
@@ -234,6 +237,7 @@ function placetile(x, y, clear = false, tilex = -1, tiley = -1) {
   var selectedtile = tilelist.find((value) => value.mapx == x && value.mapy == y);
   if (typeof selectedtile !== "undefined") {
     if (clear || (realtilex == 0 && realtiley == 0)) {
+      var index = tilelist.indexOf((value) => value.mapx == x && value.mapy == y);
       tilelist.splice(index, 1);
       playsound(getgroup(selectedtile.tilex, selectedtile.tiley).remove);
       drawmap();
