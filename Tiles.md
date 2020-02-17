@@ -3,18 +3,20 @@ title: Tilemap Editor
 description: Something to quickly tile a map with.
 ---
 
+<p style="text-align: center;">
 # For a certain Factorio fan.
 This thing is still incomplete and will break.
+</p>
 
 <br>
 <p style="text-align: center;">Tiles</p>
 <script src="assets/js/Tiles.js"></script>
-<div style="display: flex;">
-  <div style="position: relative; width: 384px; height: 128px; display: inline-block; margin: auto;">
+<div style="display: flex; justify-content: center;">
+  <div style="position: relative; width: 384px; height: 128px;">
     <image id="tiles" src="assets/images/tiles.png" class="backgroundimage" width="384" height="128"></image>
     <canvas id="selectmap" class="foregroundimage" width="384" height="128"></canvas>
   </div>
-  <fieldset class="ui-widget-content ui-corner-all" style="width: 60px; display: inline-block; margin: auto;">
+  <fieldset class="ui-widget-content ui-corner-all" style="min-width: 60px; max-width: 60px; margin: 0 20px;">
     <legend>Mode</legend>
     <label for="radiomove">Move</label>
     <input type="radio" name="mode" id="radiomove">
@@ -26,8 +28,10 @@ This thing is still incomplete and will break.
 </div>
 <br>
 <p style="text-align: center;" id="coordtext">Map</p>
-<div style="position: relative; max-width: 100%; height: 640px; margin: auto;">
-  <canvas id="background" class="backgroundimage" max-width="100%" width="640" height="640"></canvas>
-  <canvas id="tilemap" class="foregroundimage" max-width="100%" width="640" height="640"></canvas>
-  <canvas id="foreground" class="forestgroundimage" max-width="100%" width="640" height="640"></canvas>
+<div style="display: flex; justify-content: center;">
+  <div id="map" style="position: relative; width: 640px; height: 640px; margin: auto;">
+    <canvas id="background" class="backgroundimage" width="100%" height="100%"></canvas>
+    <canvas id="tilemap" class="foregroundimage" width="100%" height="100%"></canvas>
+    <canvas id="foreground" class="forestgroundimage" width="100%" height="100%"></canvas>
+  </div>
 </div>

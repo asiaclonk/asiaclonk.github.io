@@ -29,7 +29,7 @@ $(document).ready(function() {
   selectcontext = selectcanvas.getContext("2d");
 
   mapwidth = $("#foreground")[0].width;
-  mapheight = 640;
+  mapheight = $("#foreground")[0].height;
   backcontext = $("#background")[0].getContext("2d");
   tilecontext = $("#tilemap")[0].getContext("2d");
   mapselectcontext = $("#foreground")[0].getContext("2d");
@@ -194,6 +194,16 @@ $(document).ready(function() {
     drawmapselection(selectedmapx - xmap, selectedmapy - ymap);
   });
 
+  $("#foreground")[0].addEventListener("wheel", function (e) {
+    var delta = Math.sign(e.deltaY);
+    var group = getgroup(selectedx, selectedy, delta);
+    selectedx = group.x;
+    selectedy = (selectedy % group.count) + group.y;
+    drawselection();
+    playsound(7);
+    e.preventDefault();
+  });
+
   $(document).keydown(function(e) {
     if (e.which == 16) {
       keymode = 1;
@@ -225,15 +235,12 @@ $(document).ready(function() {
     }
   });
 
-  $("#foreground")[0].addEventListener("wheel", function (e) {
-    var delta = Math.sign(e.deltaY);
-    var group = getgroup(selectedx, selectedy, delta);
-    selectedx = group.x;
-    selectedy = (selectedy % group.count) + group.y;
-    drawselection();
-    playsound(7);
-    e.preventDefault();
+  $("#map").mouseup(function() {
+    mapwidth = $("#foreground")[0].width;
+    mapheight = $("#foreground")[0].height;
   });
+  $("#map").resizable();
+  
   drawselection();
 });
 
