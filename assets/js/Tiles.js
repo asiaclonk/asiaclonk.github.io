@@ -353,10 +353,9 @@ function writecoords(x, y, showmouse = true) {
 
 function getgroup(x, y, delta = 0) {
   if (delta != 0) {
-    alert("x is " + x + " and y is " + y + " and delta is " + delta);
     var id = rotatabletiles.find((value) => value.x == x && y >= value.y && y < value.y + value.count).id;
 
-    return rotatabletiles.find((value) => value.id == id + delta);
+    return rotatabletiles.find((value) => value.id == (id + delta) % rotatabletiles.length);
   }
   else {
     return rotatabletiles.find((value) => value.x == x && y >= value.y && y < value.y + value.count);
@@ -369,7 +368,7 @@ function playsound(index = 0) {
     sound.addEventListener("ended", function() {
       sound = null;
     });
-    sound.volume = 0.5;
+    sound.volume = 0.3;
     sound.play();
   });
   sound.src = sounds[index].sound;
