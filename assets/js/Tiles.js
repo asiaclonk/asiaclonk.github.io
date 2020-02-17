@@ -296,6 +296,11 @@ $(document).ready(function() {
     var exportstring = JSON.stringify(tilelist);
     $("#exporttext").val(exportstring);
   });
+  $("#copybutton").click(function() {
+    $("#exporttext")[0].select();
+    $("#exporttext")[0].setSelectionRange(0, 999999);
+    document.execCommand("copy");
+  });
 
   $(document).click(function() {
     if (startup) { playsound(8); startup = false; }

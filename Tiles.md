@@ -4,14 +4,14 @@ description: Something to quickly tile a map with.
 ---
 
 # For a certain Factorio fan.
-This thing is still incomplete and will break.
 <br>
 
 `[Shift: Tile]
 [Ctrl: Copy]
-[Mousemiddle: Select]
-[Mousewheel: Switch]
-[Right: Deconstruct]`
+[R: Rotate Selected]
+[MouseMiddle: Set Selected]
+[MouseWheel: Switch]
+[MouseRight: Deconstruct]`
 <script src="assets/js/Tiles.js"></script>
 <div style="display: flex; justify-content: center; margin-bottom: 5px;">
   <fieldset class="ui-widget-content ui-corner-all">
@@ -23,6 +23,7 @@ This thing is still incomplete and will break.
     <legend>Export</legend>
     <input type="text" id="exporttext">
     <button id="exportbutton">Create</button>
+    <button id="copybutton">Copy</button>
   </fieldset>
 </div>
 <div style="display: flex; justify-content: center;">
