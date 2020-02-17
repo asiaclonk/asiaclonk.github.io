@@ -138,7 +138,8 @@ $(document).ready(function() {
     var y = Math.floor(e.clientY - rect.top);
     var selectedmapx = Math.floor((xmappix + x) / dim);
     var selectedmapy = Math.floor((ymappix + y) / dim);
-
+    var xmap = Math.floor(xmappix / dim);
+    var ymap = Math.floor(ymappix / dim);
     if (e.button != 1 && e.button != 2) {
       if (activemode() == 0) {
         if (startx == x && starty == y) {
@@ -180,7 +181,7 @@ $(document).ready(function() {
     starty = 0;
     dragx = 0;
     dragy = 0;
-    drawmapselection(selectedmapx, selectedmapy);
+    drawmapselection(selectedmapx - xmap, selectedmapy - ymap);
   });
 
   $(document).keydown(function(e) {
@@ -336,9 +337,9 @@ function drawmap() {
 }
 
 function setradios(mode = 0) {
-  $("#radiomove").checked = mode ? 0 : selectedmode == 0;
-  $("#radiotile").checked = mode ? mode == 1 : selectedmode == 1;
-  $("#radiocopy").checked = mode ? mode == 2 : selectedmode == 2;
+  $("#radiomove").checked = mode == 0 ? 0 : selectedmode == 0;
+  $("#radiotile").checked = mode == 0 ? mode == 1 : selectedmode == 1;
+  $("#radiocopy").checked = mode == 0 ? mode == 2 : selectedmode == 2;
 }
 
 function writecoords(x, y, showmouse = true) {
@@ -357,7 +358,7 @@ function writecoords(x, y, showmouse = true) {
 }
 
 function getgroup(x, y, delta = 0) {
-  if (delta) {
+  if (delta != 0) {
     var id = rotatabletiles.find((value) => value.x == x && y >= value.y && y < value.y + value.count).id;
     return rotatabletiles.find((value) => value.id == id + delta);
   }
@@ -375,6 +376,7 @@ function playsound(index = 0) {
     sound.volume = 0.5;
     sound.play();
   });
+  sound.src = sounds[index];
 }
 
 function activemode() {
