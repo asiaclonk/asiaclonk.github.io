@@ -236,6 +236,7 @@ $(document).ready(function() {
     }
   });
 
+  $("#map").resizable();
   $("#map").mousemove(function() {
     var newwidth = $("#map").width();
     var newheight = $("#map").height();
@@ -255,10 +256,9 @@ $(document).ready(function() {
       drawmap();
     }
   });
-  $("#map").resizable();
   
-  $(".wrapper").removeClass("wrapper");
-  $("section").css("max-width", "");
+  $(".wrapper").css("max-width", "100%");
+  $("section").css("max-width", "100%");
   
   drawselection();
 });
@@ -403,7 +403,7 @@ function playsound(index = 0) {
     sound.addEventListener("ended", function() {
       sound = null;
     });
-    sound.volume = 0.3;
+    sound.volume = 0.25;
     sound.play();
   });
   sound.src = sounds[index].sound;
