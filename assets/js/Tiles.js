@@ -8,6 +8,7 @@ $(document).ready(function() {
   tilelist = [];
   clipboard = [];
 
+  startup = true;
   selectedmode = 0;
   keymode = 0;
 
@@ -293,6 +294,10 @@ $(document).ready(function() {
   $("#exportbutton").click(function() {
     var exportstring = JSON.stringify(tilelist);
     $("#exporttext").val(exportstring);
+  });
+
+  $(document).click(function() {
+    if (startup) { playsound(8); startup = false; }
   });
 
   drawselection();
