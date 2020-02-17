@@ -215,13 +215,7 @@ $(document).ready(function() {
     }
   });
 
-  if ($("#foreground")[0].addEventListener) {
-    $("#foreground")[0].addEventListener("mousewheel", switchitem, false);
-    $("#foreground")[0].addEventListener("DOMMouseScroll", switchitem, false);
-  }
-  else {
-    $("#foreground")[0].attachEvent("onmousewheel", switchitem);
-  }
+  $("#foreground")[0].addEventListener("wheel", switchitem);
   drawselection();
 });
 
@@ -263,7 +257,7 @@ function pincette(x, y) {
 
 function switchitem(e) {
   var e = window.event || e;
-  var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+  var delta = Math.sign(e.deltaY);
   var group = getgroup(selectedx, selectedy, delta);
   selectedx = group.x;
   selectedy = (selectedy % group.count) + group.y;
@@ -376,7 +370,7 @@ function playsound(index = 0) {
     sound.volume = 0.5;
     sound.play();
   });
-  sound.src = sounds[index];
+  sound.src = sounds[index].sound;
 }
 
 function activemode() {
