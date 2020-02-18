@@ -294,7 +294,11 @@ $(document).ready(function() {
   $("#map").mousemove();
 
   $("#importbutton").click(function() {
-    var importtiles = JSON.parse($("#importtext").val());
+    $("#importtext")[0].select();
+    document.execCommand("paste");
+    var importtiles = JSON.parse($("#importtext").val(), function(key, value) {
+      return parseInt(value);
+    });
     tilelist = importtiles;
     drawmap();
   });
