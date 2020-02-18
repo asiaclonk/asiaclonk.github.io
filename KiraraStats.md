@@ -3,10 +3,13 @@ title: Kirara Fantasia Charts
 description: Some charts that reference a snapshot from the Miraheze wiki.
 ---
 
+<script src="assets/js/Chart.min.js"></script>
+<script src="assets/js/lodash.min.js"></script>
+<script src="assets/js/KiraraStats.js"></script>
+
 # Some charts that reference a snapshot from [the Miraheze wiki.](https://kirarafantasia.miraheze.org/wiki/Main_Page)
 Last updated: 10.02.2020
 
-<script src="assets/js/KiraraStats.js"></script>
 <div style="text-align:center">
   <label for="chartselect">Select Chart: </label>
   <select id="chartselect">

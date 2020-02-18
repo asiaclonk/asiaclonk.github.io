@@ -3,6 +3,11 @@ title: Tilemap Editor
 description: Something to quickly tile a map with.
 ---
 
+<script src="assets/js/Utilities.js"></script>
+<script src="assets/js/clipboard.min.js"></script>
+<script src="assets/js/lodash.min.js"></script>
+<script src="assets/js/Tiles.js"></script>
+
 # For a certain Factorio fan.
 <br>
 
@@ -12,18 +17,19 @@ description: Something to quickly tile a map with.
 [MouseMiddle: Set Selected]
 [MouseWheel: Switch]
 [MouseRight: Deconstruct]`
-<script src="assets/js/Tiles.js"></script>
+
 <div style="display: flex; justify-content: center; margin-bottom: 5px;">
   <fieldset class="ui-widget-content ui-corner-all">
     <legend>Import</legend>
     <input type="text" id="importtext">
-    <button id="importbutton">Enter</button>
+    <button id="importbutton">Paste</button>
   </fieldset>
   <fieldset class="ui-widget-content ui-corner-all">
     <legend>Export</legend>
     <input type="text" id="exporttext">
-    <button id="exportbutton">Create</button>
-    <button id="copybutton">Copy</button>
+    <button id="copybutton" data-clipboard-target="#exporttext">
+      <image src="assets/images/clippy.svg" alt="Copy">
+    </button>
   </fieldset>
 </div>
 <div style="display: flex; justify-content: center;">

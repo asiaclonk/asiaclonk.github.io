@@ -3,45 +3,109 @@ layout: blank
 ---
 
 $(document).ready(function() {
-  rotatabletiles = {{ site.data.tiles | jsonify }};
-  intify(rotatabletiles);
+  //Tiledata
+  tileset = {{ site.data.tiles | jsonify }};
+  intify(tileset);
   tilelist = [];
   clipboard = [];
 
-  startup = true;
-  selectedmode = 0;
-  keymode = 0;
+  //Mouse coordinates
+  coords = {
+    tile_width: 32,
+    tile_height: 32,
+    map_width: 0,
+    map_height: 0,
+    map_click: -1,
+    get map_leftclick() { return ![-1, 1, 2].some((n) => n == this.map_click) },
+    get map_middleclick() { return this.map_click == 1 },
+    get map_rightclick() { return this.map_click == 2 },
+    mouse: { x: 0, y: 0 },
+    canvas_start: { x: 0, y: 0 },
+    map: { x: 0, y: 0 },
+    active_TILE: { x: 0, y: 0 },
+    set setactive(x) {
+      this.active_TILE.x = this.canvas_TILE.x;
+      this.active_TILE.y = this.canvas_TILE.y;
+	},
+    set start(x) {
+      this.canvas_start.x = this.canvas_map.x;
+      this.canvas_start.y = this.canvas_map.y;
+	},
+    set finish(x) {
+      if (this.map_leftclick) {
+        this.map.x -= this.canvas_drag.x;
+        this.map.y -= this.canvas_drag.y;
+      }
+      this.map_click = -1;
+      this.canvas_start: { x: 0, y: 0 };
+	},
+    get no_drag() { return this.canvas_drag.x == 0 && this.canvas_drag.y == 0; },
+    get MAP() { return { x: Math.floor(this.map / tile_width),
+	                     y: Math.floor(this.map / tile_height) }; },
+    get offset() { return { x: mod(map.x, tile_width),
+	                        y: mod(map.y, tile_height) }; },
 
-  selectedx = 0;
-  selectedy = 0;
-  xmappix = 0;
-  ymappix = 0;
-  startx = 0;
-  starty = 0;
-  dragx = 0;
-  dragy = 0;
-  mapclick = -1;
-  mousepos = { x: -1, y: -1 };
+    get canvas_tile() { var rect = $("#selectmap")[0].getBoundingClientRect();
+                        return { x: this.mouse.x - rect.left,
+					             y: this.mouse.y - rect.top }; },
+    get canvas_TILE() { return { x: Math.floor(this.canvas_tile.x / this.tile_width),
+                                 y: Math.floor(this.canvas_tile.y / this.tile_height) }; },
 
+    get canvas_map() { var rect = $("#foreground")[0].getBoundingClientRect();
+                       return { x: this.mouse.x - rect.left,
+					            y: this.mouse.y - rect.top }; },
+    get canvas_MAP() { { return { x: Math.floor((this.canvas_map.x + offset.x) / this.tile_width),
+                                  y: Math.floor((this.canvas_map.y + offset.y) / this.tile_height) }; },
+    get true_map() { return { x: this.map.x + this.canvas_map.x, y: this.map.y + this.canvas_map.y }; },
+    get true_MAP() { return { x: Math.floor(this.true_map.x / tile_width),
+	                          y: Math.floor(this.true_map.y / tile_height) }; },
+
+    get canvas_drag() { return { x: this.canvas_map.x - this.canvas_start.x,
+	                             y: this.canvas_map.y - this.canvas_start.y }; },
+    get canvas_START() { { return { x: Math.floor((this.canvas_start.x + offset.x) / this.tile_width),
+                                    y: Math.floor((this.canvas_start.y + offset.y) / this.tile_height) }; },
+    get true_start() { return { x: this.map.x + this.canvas_start.x,
+	                            y: this.map.y + this.canvas_start.y }; },
+    get true_START() { return { x: Math.floor(this.true_start.x / tile_width),
+	                            y: Math.floor(this.true_start.y / tile_height) }; },
+  };
+
+  //Images
   tiles = $("#tiles")[0];
   backgroundtiles = $("#backgroundtiles")[0];
 
-  dim = 32;
+  //Tileset canvas
   selectcanvas = $("#selectmap")[0];
   selectcontext = selectcanvas.getContext("2d");
 
-  if(checkCookie("mapwidth") && checkCookie("mapheight")) {
-    $("#map").width(parseInt(getCookie("mapwidth")));
-    $("#map").height(parseInt(getCookie("mapheight")));
+  //Map canvas and size settings
+  $("#map").resizable();
+  $(".wrapper").css("max-width", "100%");
+  $("section").css("max-width", "100%");
+  if(checkCookie("map_width") && checkCookie("map_height")) {
+    $("#map").width(parseInt(getCookie("map_width")));
+    $("#map").height(parseInt(getCookie("map_height")));
   }
-  mapwidth = 0;
-  mapheight = 0;
   backcontext = $("#background")[0].getContext("2d");
   tilecontext = $("#tilemap")[0].getContext("2d");
   mapselectcontext = $("#foreground")[0].getContext("2d");
 
+  //Draw background on load
+  backgroundtiles = new Image(512,32);
+  backgroundtiles.onload = function() {
+    backcontext.beginPath();
+    backcontext.fillStyle = backcontext.createPattern(backgroundtiles, "repeat");
+    backcontext.rect(0, 0, coords.map_width, coords.map_height);
+    backcontext.fill();
+  };
+  backgroundtiles.src = "assets/images/tilebackground.png";
+
+  //Sounds
   sounds = {{ site.data.sounds | jsonify }};
 
+  //Radiobuttons for tilemodes
+  selectedmode = 0;
+  keymode = 0;
   jqueryradios = [
     $("#radiomove"),
     $("#radiotile"),
@@ -50,155 +114,151 @@ $(document).ready(function() {
   jqueryradios[0].click(function() { selectedmode = 0; });
   jqueryradios[1].click(function() { selectedmode = 1; });
   jqueryradios[2].click(function() { selectedmode = 2; });
+  setradios();
 
-  $("#selectmap").mousemove(function(e) {
-    var rect = e.target.getBoundingClientRect();
-    var x = Math.floor(e.clientX - rect.left);
-    var y = Math.floor(e.clientY - rect.top);
-    var hoverx = Math.floor(x / dim);
-    var hovery = Math.floor(y / dim);
-    drawselection(hoverx, hovery, true);
+  //Update mouse position and check mapsize
+  $(document).mousemove(function(e) {
+    //Resize check
+    var newwidth = $("#map").width();
+    var newheight = $("#map").height();
+    if (newwidth != coods.map_width || newheight != coods.map_height) {
+      setCookie("map_width", newwidth, 730);
+      setCookie("map_height", newheight, 730);
+      coords.map_width = newwidth;
+      coords.map_height = newheight;
+      $("#background")[0].width = newwidth;
+      $("#tilemap")[0].width = newwidth;
+      $("#foreground")[0].width = newwidth;
+      $("#background")[0].height = newheight;
+      $("#tilemap")[0].height = newheight;
+      $("#foreground")[0].height = newheight;
+      backcontext.beginPath();
+      backcontext.fillStyle = backcontext.createPattern(backgroundtiles, "repeat");
+      backcontext.rect(0, 0, newwidth, newheight);
+      backcontext.fill();
+      drawmap();
+    }
+
+    //Update mouse
+    if (typeof e !== "undefined") {
+      coords.mouse = { x: e.clientX, y: e.clientY };
+    }
+  })
+
+  //Tileset functions
+  $("#selectmap").mousemove(function() {
+    drawselection(coords.canvas_TILE);
   });
-
-  $("#selectmap").click(function(e) {
-    var rect = e.target.getBoundingClientRect();
-    var x = Math.floor(e.clientX - rect.left);
-    var y = Math.floor(e.clientY - rect.top);
-    selectedx = Math.floor(x / dim);
-    selectedy = Math.floor(y / dim);
-    drawselection(selectedx, selectedy, true);
-    var click = new Audio();
+  $("#selectmap").click(function() {
+    coords.setactive = true;
+    drawselection(coords.active_TILE);
     playsound(6);
   });
+  $("#selectmap").mouseleave(drawselection());
 
-  $("#selectmap").mouseleave(function(e) {
-    drawselection();
-  });
-
-  backgroundtiles = new Image(512,32);
-  backgroundtiles.onload = function() {
-    backcontext.beginPath();
-    backcontext.fillStyle = backcontext.createPattern(backgroundtiles, "repeat");
-    backcontext.rect(0, 0, mapwidth, mapheight);
-    backcontext.fill();
-  };
-  backgroundtiles.src = "assets/images/tilebackground.png";
-
+  //Map functions
   $("#foreground").mousedown(function(e) {
-    mapclick = e.button;
-    var rect = e.target.getBoundingClientRect();
-    var x = Math.floor(e.clientX - rect.left);
-    var y = Math.floor(e.clientY - rect.top);
-    var selectedmapx = Math.floor((xmappix + x) / dim);
-    var selectedmapy = Math.floor((ymappix + y) / dim);
-    if (![-1, 1, 2].some((n) => n == mapclick)) {
-      startx = x;
-      starty = y;
+    //Update button
+    coords.map_click = e.button;
+
+    if (coords.map_leftclick) {
+      //Start drag
+      coords.start = true;
       if (activemode() == 1) {
-        placetile(selectedmapx, selectedmapy);
+        placetile(coords.true_MAP, coords.active_TILE);
       }
     }
-    if (mapclick == 1) {
-      pincette(selectedmapx, selectedmapy);
+    if (coords.map_middleclick) {
+      //Copy tile selection, no scroller
+      pincette(coords.true_MAP);
       e.preventDefault();
     }
-    if (mapclick == 2) {
-      placetile(selectedmapx, selectedmapy, true);
+    if (map_click == 2) {
+      //Remove tile
+      placetile(coords.true_MAP);
     }
   });
-
   $("#foreground").contextmenu(function(e) {
+    //No context menu
     e.preventDefault();
   });
-
-  $("#foreground").mousemove(function(e) {
-    var rect = e.target.getBoundingClientRect();
-    var x = Math.floor(e.clientX - rect.left);
-    var y = Math.floor(e.clientY - rect.top);
-    var selectedmapx = Math.floor((xmappix + x) / dim);
-    var selectedmapy = Math.floor((ymappix + y) / dim);
-    var xmap = Math.floor(xmappix / dim);
-    var ymap = Math.floor(ymappix / dim);
-    mousepos.x = selectedmapx - xmap;
-    mousepos.y = selectedmapy - ymap;
-    drawmapselection(selectedmapx - xmap, selectedmapy - ymap);
-    writecoords(selectedmapx, selectedmapy);
-    if (![-1, 1, 2].some((n) => n == mapclick)) {
+  $("#foreground").mousemove(function() {
+    writecoords(coords.true_MAP);
+    if (coords.map_leftclick) {
       if (activemode() == 0) {
-        dragx = x - startx;
-        dragy = y - starty;
-        selectedmapx = Math.floor((xmappix + x - dragx) / dim);
-        selectedmapy = Math.floor((ymappix + y - dragy) / dim);
-        backcontext.setTransform(1,0,0,1, (dragx - xmappix) % 512,
-                                          (dragy - ymappix) % 32);
+        //Drag map
+        $("#foreground").css("cursor", "move");
+        backcontext.setTransform(1,0,0,1, (coords.canvas_drag.x - coords.map.x) % 512,
+                                          (coords.canvas_drag.y - coords.map.y) % 32);
         backcontext.fill();
         drawmap();
-        drawmapselection(0, 0, false);
-        writecoords(selectedmapx, selectedmapy);
+        drawmapselection();
+        writecoords(coords.true_START);
       }
       else {
         if (activemode() == 1) {
-          placetile(selectedmapx, selectedmapy);
+          //Tile the map
+          placetile(coords.true_MAP, coords.active_TILE);
+          drawmapselection(coords.canvas_MAP);
+        }
+        if (activemode() == 2) {
+          //Show copy selection
+          drawmapselection(coords.canvas_MAP);
         }
       }
     }
-    else if (mapclick == 1) {
-      pincette(selectedmapx, selectedmapy);
+    else if (coords.map_middleclick) {
+      //Copy tile selection
+      pincette(coords.true_MAP);
+      drawmapselection(coords.canvas_MAP);
     }
-    else if (mapclick == 2) {
-      placetile(selectedmapx, selectedmapy, true);
+    else if (coords.map_rightclick) {
+      //Remove tiles
+      placetile(coords.true_MAP);
+      drawmapselection(coords.canvas_MAP);
     }
   });
-
-  $("#foreground").mouseleave(function(e) {
-    mousepos.x = -1;
-    mousepos.y = -1;
-    drawmapselection(0, 0, false);
-    writecoords(0, 0, false);
+  $("#foreground").mouseleave(function() {
+    drawmapselection();
+    writecoords();
   });
-
   $("#foreground").mouseup(function(e) {
-    var rect = e.target.getBoundingClientRect();
-    var x = Math.floor(e.clientX - rect.left);
-    var y = Math.floor(e.clientY - rect.top);
-    var selectedmapx = Math.floor((xmappix + x) / dim);
-    var selectedmapy = Math.floor((ymappix + y) / dim);
-    var xmap = Math.floor(xmappix / dim);
-    var ymap = Math.floor(ymappix / dim);
-    if (e.button != 1 && e.button != 2) {
+    if (coords.map_leftclick) {
       if (activemode() == 0) {
-        if (startx == x && starty == y) {
-          placetile(selectedmapx, selectedmapy);
+        //Stop drag
+        $("#foreground").css("cursor", "default");
+        if (coords.no_drag) {
+          //If no drag took place, place down tile instead
+          placetile(coords.true_MAP, coords.active_TILE);
         }
-        xmappix -= dragx;
-        ymappix -= dragy;
       }
       if (activemode() == 2) {
-        if (startx == x && starty == y) {
+        if (coords.no_drag) {
+          //No drag? Place down your clipboard
           var copy = _.cloneDeep(clipboard);
           copy.forEach((value) => {
-            placetile(selectedmapx + value.mapx, selectedmapy + value.mapy, false, value.tilex, value.tiley);
+            placetile({ x: coords.true_MAP.x + value.mapx, y: coords.true_MAP.y + value.mapy },
+                      { x: value.tilex, y: value.tiley });
           });
+          $("#exporttext").val(JSON.stringify(tilelist));
           playsound(2);
           drawmap();
         }
         else {
-          var startmapx = Math.floor((xmappix + startx) / dim);
-          var startmapy = Math.floor((ymappix + starty) / dim);
-          var absx = Math.abs(selectedmapx - startmapx);
-          var absy = Math.abs(selectedmapy - startmapy);
+          //Else copy selection
+          var absx = Math.abs(coords.true_MAP.x - coords.true_START.x);
+          var absy = Math.abs(coords.true_MAP.y - coords.true_START.y);
           var offsetx = Math.floor(absx / 2);
           var offsety = Math.floor(absy / 2);
+          var minx = Math.min(coords.true_START.x, coords.true_MAP.x);
+          var miny = Math.min(coords.true_START.y, coords.true_MAP.y);
           var filtered = tilelist.filter((value) =>
-            value.mapx >= Math.min(startmapx, selectedmapx) &&
-            value.mapx <= Math.min(startmapx, selectedmapx) + absx &&
-            value.mapy >= Math.min(startmapy, selectedmapy) &&
-            value.mapy <= Math.min(startmapy, selectedmapy) + absy
-          );
+            value.mapx >= minx && value.mapx <= minx + absx &&
+            value.mapy >= miny && value.mapy <= miny + absy);
           clipboard = _.cloneDeep(filtered);
           clipboard.forEach((value) => {
-            value.mapx = value.mapx - Math.min(startmapx, selectedmapx) - offsetx;
-            value.mapy = value.mapy - Math.min(startmapy, selectedmapy) - offsety;
+            value.mapx = value.mapx - minx - offsetx;
+            value.mapy = value.mapy - miny - offsety;
           });
           if (clipboard.length > 0) {
             $("#clipclearer").prop("disabled", false);
@@ -206,29 +266,23 @@ $(document).ready(function() {
         }
       }
     }
-
-    mapclick = -1;
-    startx = 0;
-    starty = 0;
-    dragx = 0;
-    dragy = 0;
-    drawmapselection(selectedmapx - xmap, selectedmapy - ymap);
+    coords.finish = true;
+    drawmapselection(coords.canvas_MAP);
   });
-
   $("#foreground")[0].addEventListener("wheel", function (e) {
+    //Select next tile
     var delta = Math.sign(e.deltaY);
-    var group = getgroup(selectedx, selectedy, delta);
-    selectedx = group.x;
-    selectedy = (selectedy % group.count) + group.y;
+    var group = getgroup(coords.active_TILE.x, coords.active_TILE.y, delta);
+    coords.active_TILE.x = group.x;
+    coords.active_TILE.y = (coords.active_TILE.y % group.count) + group.y;
     drawselection();
-    if (mousepos.x != -1 && mousepos.y != -1) {
-      drawmapselection(mousepos.x, mousepos.y);
-    }
+    drawmapselection(coords.canvas_MAP);
     playsound(7);
     e.preventDefault();
   });
 
   $(document).keydown(function(e) {
+    //Quick select tilemode
     if (e.which == 16) {
       keymode = 1;
       setradios(1);
@@ -238,20 +292,20 @@ $(document).ready(function() {
       setradios(2);
     }
     if (e.which == 82) {
-      var group = rotatabletiles.find((value) => value.x == selectedx &&
-                                                 selectedy >= value.y &&
-                                                 selectedy < value.y + value.count);
+      //Or rotate tile
+      var group = tileset.find((value) => coords.active_TILE.x == value.x &&
+                                          coords.active_TILE.y >= value.y &&
+                                          coords.active_TILE.y <  value.y + value.count);
       if (typeof group !== "undefined") {
-        selectedy = ((selectedy - group.y + 1) % group.count) + group.y;
+        coords.active_TILE.y = ((coords.active_TILE.y - group.y + 1) % group.count) + group.y;
         drawselection();
-        if (mousepos.x != -1 && mousepos.y != -1) {
-          drawmapselection(mousepos.x, mousepos.y);
-        }
+        drawmapselection(coords.canvas_MAP);
       }
     }
   });
 
   $(document).keyup(function(e) {
+    //Finish quick select
     if (e.which == 16) {
       keymode = 0;
       setradios();
@@ -263,170 +317,171 @@ $(document).ready(function() {
   });
 
   $("#clipclearer").click(function() {
+    //Clear clipboard
     $("#clipclearer").prop("disabled", true);
     clipboard = [];
   });
 
-  $("#map").resizable();
-  $("#map").mousemove(function() {
-    var newwidth = $("#map").width();
-    var newheight = $("#map").height();
-    if (newwidth != mapwidth || newheight != mapheight) {
-      setCookie("mapwidth", newwidth, 730);
-      setCookie("mapheight", newheight, 730);
-      mapwidth = newwidth;
-      mapheight = newheight;
-      $("#background")[0].width = mapwidth;
-      $("#tilemap")[0].width = mapwidth;
-      $("#foreground")[0].width = mapwidth;
-      $("#background")[0].height = mapheight;
-      $("#tilemap")[0].height = mapheight;
-      $("#foreground")[0].height = mapheight;
-      backcontext.beginPath();
-      backcontext.fillStyle = backcontext.createPattern(backgroundtiles, "repeat");
-      backcontext.rect(0, 0, mapwidth, mapheight);
-      backcontext.fill();
-      drawmap();
-    }
-  });
-  $(".wrapper").css("max-width", "100%");
-  $("section").css("max-width", "100%");
-  $("#map").mousemove();
-
   $("#importbutton").click(function() {
+    //Load map
     var importtiles = JSON.parse($("#importtext").val());
     tilelist = importtiles;
     drawmap();
   });
-  $("#exportbutton").click(function() {
-    var exportstring = JSON.stringify(tilelist);
-    $("#exporttext").val(exportstring);
-  });
   $("#copybutton").click(function() {
+    //Export map
     $("#exporttext")[0].select();
-    $("#exporttext")[0].setSelectionRange(0, 999999);
     document.execCommand("copy");
   });
 
   $(document).click(function() {
-    if (startup) { playsound(8); startup = false; }
+    //Welcome
+    playsound(8);
+    $(document).unbind("click");
   });
 
   drawselection();
 });
 
-function placetile(x, y, clear = false, tilex = -1, tiley = -1) {
-  var realtilex = tilex == -1 ? selectedx : tilex;
-  var realtiley = tiley == -1 ? selectedy : tiley;
-  var selectedtile = tilelist.find((value) => value.mapx == x && value.mapy == y);
+function placetile(map_tile, tile = false) {
+  var selectedtile = tilelist.find((value) => value.mapx == map_tile.x &&
+                                              value.mapy == map_tile.y);
   if (typeof selectedtile !== "undefined") {
-    if (clear || (realtilex == 0 && realtiley == 0)) {
+    if (tile === false)) {
+      //No tile given? Clear it
       var index = tilelist.indexOf(selectedtile);
       tilelist.splice(index, 1);
+      $("#exporttext").val(JSON.stringify(tilelist));
       playsound(getgroup(selectedtile.tilex, selectedtile.tiley).remove);
       drawmap();
     }
-    else if (realtilex != selectedtile.tilex || realtiley != selectedtile.tiley) {
-      selectedtile.tilex = realtilex;
-      selectedtile.tiley = realtiley;
+    else if (tile.x != selectedtile.tilex || tile.y != selectedtile.tiley) {
+      //Or replace
+      selectedtile.tilex = tile.x;
+      selectedtile.tiley = tile.y;
       if (activemode() != 2) {
-        playsound(getgroup(realtilex, realtiley).build);
+        $("#exporttext").val(JSON.stringify(tilelist));
+        playsound(getgroup(tile.x, tile.y).build);
         drawmap();
       }
     }
   }
-  else if (!clear && (realtilex != 0 || realtiley != 0)) {
-    tilelist.push({ tilex: realtilex, tiley: realtiley, mapx: x, mapy: y });
+  else if (tile !== false)) {
+    //Place down a new tile
+    tilelist.push({ tilex: tile.x, tiley: tile.y, mapx: map_tile.x, mapy: map_tile.y });
     if (activemode() != 2) {
-      playsound(getgroup(realtilex, realtiley).build);
+      $("#exporttext").val(JSON.stringify(tilelist));
+      playsound(getgroup(tile.x, tile.y).build);
       drawmap();
     }
   }
 }
 
-function pincette(x, y) {
-  var selectedtile = tilelist.find((value) => value.mapx == x && value.mapy == y);
+function pincette(map_tile) {
+  var selectedtile = tilelist.find((value) => value.mapx == map_tile.x && value.mapy == map_tile.y);
   if (typeof selectedtile !== "undefined") {
-    if (selectedx != selectedtile.tilex || selectedy != selectedtile.tiley) {
-      selectedx = selectedtile.tilex;
-      selectedy = selectedtile.tiley;
+    if (coords.active_TILE.x != selectedtile.tilex || coords.active_TILE.y != selectedtile.tiley) {
+      coords.active_TILE.x = selectedtile.tilex;
+      coords.active_TILE.y = selectedtile.tiley;
       drawselection();
       playsound(7);
     }
   }
 }
 
-function drawselection(x = 0, y = 0, draw = false) {
+function drawselection(tile = false) {
   selectcontext.clearRect(0, 0, selectcanvas.width, selectcanvas.height);
-  if(draw) {
+  if(tile !== false) {
     selectcontext.beginPath();
     selectcontext.strokeStyle = "yellow";
-    selectcontext.rect(x * dim, y * dim, dim, dim);
+    selectcontext.rect(tile.x * coords.tile_width, tile.y * coords.tile_height,
+                       coords.tile_width, coords.tile_height);
     selectcontext.stroke();
   }
   selectcontext.beginPath();
   selectcontext.strokeStyle = "lightgreen";
-  selectcontext.rect(selectedx * dim, selectedy * dim, dim, dim);
+  selectcontext.rect(coords.active_TILE.x * coords.tile_width,
+                     coords.active_TILE.y * coords.tile_height,
+                     coords.tile_width, coords.tile_height);
   selectcontext.stroke();
 }
 
-function drawmapselection(localx, localy, draw = true) {
-  mapselectcontext.clearRect(0, 0, mapwidth, mapheight);
-  if(draw) {
-    if (activemode() == 2 && ![-1, 1, 2].some((n) => n == mapclick)) {
-      var startlocalx = Math.floor((xmappix + startx) / dim) - Math.floor(xmappix / dim);
-      var startlocaly = Math.floor((ymappix + starty) / dim) - Math.floor(ymappix / dim);
-      var absx = Math.abs(localx - startlocalx);
-      var absy = Math.abs(localy - startlocaly);
+function drawmapselection(map_tile = false) {
+  mapselectcontext.clearRect(0, 0, map_width, map_height);
+  if(map_tile !== false) {
+    if (activemode() == 2 && coords.map_leftclick) {
+      //Draw the copy selection
+      var absx = Math.abs(coords.canvas_MAP.x - coords.canvas_START.x);
+      var absy = Math.abs(coords.canvas_MAP.y - coords.canvas_START.y);
+      var minx = Math.min(coords.canvas_MAP.x, coords.canvas_START.x);
+      var miny = Math.min(coords.canvas_MAP.y, coords.canvas_START.y);
       mapselectcontext.beginPath();
       mapselectcontext.strokeStyle = "lightgreen";
-      mapselectcontext.rect(Math.min(localx, startlocalx) * dim - mod(xmappix, dim),
-                            Math.min(localy, startlocaly) * dim - mod(ymappix, dim), (absx + 1) * dim, (absy + 1) * dim);
+      mapselectcontext.rect(minx * coords.tile_width - coords.offset.x,
+                            miny * coords.tile_height - coords.offset.y,
+                            (absx + 1) * coords.tile_width, (absy + 1) * coords.tile_height);
       mapselectcontext.stroke();
     }
     else if (activemode() == 2 && clipboard.length > 0) {
+      //Draw the copied selection
       clipboard.forEach((value) => {
-        mapselectcontext.drawImage(tiles, value.tilex * dim, value.tiley * dim, dim, dim,
-                                  (localx + value.mapx) * dim - mod(xmappix, dim),
-                                  (localy + value.mapy) * dim - mod(ymappix, dim), dim, dim);
+        mapselectcontext.drawImage(
+          tiles, value.tilex * coords.tile_width, value.tiley * coords.tile_height,
+          coords.tile_width, coords.tile_height,
+          (map_tile.x + value.mapx) * coords.tile_width - coords.offset.x,
+          (map_tile.y + value.mapy) * coords.tile_height - coords.offset.y,
+          coords.tile_width, coords.tile_height);
         mapselectcontext.beginPath();
         mapselectcontext.strokeStyle = "yellow";
-        mapselectcontext.rect((localx + value.mapx) * dim - mod(xmappix, dim),
-                              (localy + value.mapy) * dim - mod(ymappix, dim), dim, dim);
+        mapselectcontext.rect(
+          (map_tile.x + value.mapx) * coords.tile_width - coords.offset.x,
+          (map_tile.y + value.mapy) * coords.tile_height - coords.offset.y,
+          coords.tile_width, coords.tile_height);
         mapselectcontext.stroke();
       });
-
     }
     else {
+      //Or just draw one tile if not in copy mode
       if (activemode() != 2) {
-        mapselectcontext.drawImage(tiles, selectedx * dim, selectedy * dim, dim, dim,
-                                   localx * dim - mod(xmappix, dim),
-                                   localy * dim - mod(ymappix, dim), dim, dim);
+        mapselectcontext.drawImage(
+          tiles, coords.active_TILE.x * coords.tile_width, coords.active_TILE.y * coords.tile_height,
+		  coords.tile_width, coords.tile_height,
+          map_tile.x * coords.tile_width - coords.offset.x,
+          map_tile.y * coords.tile_height - coords.offset.y,
+          coords.tile_width, coords.tile_height);
       }
       mapselectcontext.beginPath();
       mapselectcontext.strokeStyle = "yellow";
-      mapselectcontext.rect(localx * dim - mod(xmappix, dim),
-                            localy * dim - mod(ymappix, dim), dim, dim);
+      mapselectcontext.rect(map_tile.x * coords.tile_width - coords.offset.x,
+                            map_tile.y * coords.tile_height - coords.offset.y,
+                            coords.tile_width, coords.tile_height);
       mapselectcontext.stroke();
     }
   }
 }
 
 function drawmap() {
-  tilecontext.clearRect(0, 0, mapwidth, mapheight);
-  var xmap = Math.floor((xmappix - dragx) / dim);
-  var xmapmax = Math.floor(((xmappix - dragx + mapwidth)) / dim);
-  var ymap = Math.floor((ymappix - dragy) / dim);
-  var ymapmax = Math.floor(((ymappix - dragy + mapheight)) / dim);
-  var tilestodraw = tilelist.filter((value) => value.mapx >= xmap &&
-                                               value.mapx <= xmapmax &&
-                                               value.mapy >= ymap &&
-                                               value.mapy <= ymapmax
+  //Draw all tiles in range
+  tilecontext.clearRect(0, 0, map_width, map_height);
+  var tilestodraw = tilelist.filter((value) =>
+    value.mapx >= coords.MAP.x && value.mapy >= coords.MAP.y &&
+    value.mapx <= coords.MAP.x + Math.floor(coords.map_width / coords.tile_width) &&
+    value.mapy <= coords.MAP.y + Math.floor(coords.map_height / coords.tile_height)
   );
+  var xoffset = 0;
+  var yoffset = 0;
+  if (coords.map_leftclick && activemode() == 0) {
+    //Offset while dragging
+    offsetx = coords.canvas_drag.x;
+    offsety = coords.canvas_drag.y;
+  }
   tilestodraw.forEach((value) => {
-    tilecontext.drawImage(tiles, value.tilex * dim, value.tiley * dim, dim, dim,
-                         (value.mapx - xmap) * dim - mod(xmappix - dragx, dim),
-                         (value.mapy - ymap) * dim - mod(ymappix - dragy, dim), dim, dim);
+    tilecontext.drawImage(
+      tiles, value.tilex * coords.map_width, value.tiley * coords.tile_height,
+      coords.map_width, coords.tile_height,
+      (value.mapx - coords.MAP.x) * coords.map_width - mod(coords.map.x - offsetx, coords.tile_width),
+      (value.mapy - coords.MAP.y) * coords.map_height - mod(coords.map.y - offsety, coords.tile_height),
+      coords.tile_width, coords.tile_height);
   });
 }
 
@@ -435,29 +490,23 @@ function setradios(mode = 0) {
   jqueryradios[realmode].prop("checked", true);
 }
 
-function writecoords(x, y, showmouse = true) {
-  var offsetx = Math.floor(xmappix / dim);
-  var offsety = Math.floor(ymappix / dim);
-  if (showmouse) {
-    if (activemode() == 0 && mapclick == true) {
-      offsetx = Math.floor((xmappix - dragx) / dim);
-      offsety = Math.floor((ymappix - dragy) / dim);
-    }
-    $("#coordtext").html("Selection: (X: " + x + ", Y: " + y + "), Map: (X: " + offsetx + ", Y: " + offsety + ")");
+function writecoords(tile = false) {
+  if (tile !== false) {
+    $("#coordtext").html("Selection: (X: " + tile.x + ", Y: " + tile.y + "), Map: (X: " + coords.MAP.x + ", Y: " + coords.MAP.y + ")");
   }
   else {
-    $("#coordtext").html("Map: (X: " + offsetx + ", Y: " + offsety + ")");
+    $("#coordtext").html("Map: (X: " + coords.MAP.x + ", Y: " + coords.MAP.y + ")");
   }
 }
 
 function getgroup(x, y, delta = 0) {
   if (delta != 0) {
-    var id = rotatabletiles.find((value) => value.x == x && y >= value.y && y < value.y + value.count).id;
+    var id = tileset.find((value) => value.x == x && y >= value.y && y < value.y + value.count).id;
 
-    return rotatabletiles.find((value) => value.id == mod(id + delta, rotatabletiles.length));
+    return tileset.find((value) => value.id == mod(id + delta, tileset.length));
   }
   else {
-    return rotatabletiles.find((value) => value.x == x && y >= value.y && y < value.y + value.count);
+    return tileset.find((value) => value.x == x && y >= value.y && y < value.y + value.count);
   }
 }
 
