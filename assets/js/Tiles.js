@@ -26,48 +26,48 @@ $(document).ready(function() {
     set setactive(x) {
       this.active_TILE.x = this.canvas_TILE.x;
       this.active_TILE.y = this.canvas_TILE.y;
-	},
+    },
     set start(x) {
       this.canvas_start.x = this.canvas_map.x;
       this.canvas_start.y = this.canvas_map.y;
-	},
+    },
     set finish(x) {
       if (this.map_leftclick) {
         this.map.x -= this.canvas_drag.x;
         this.map.y -= this.canvas_drag.y;
       }
       this.map_click = -1;
-      this.canvas_start: { x: 0, y: 0 };
-	},
+      this.canvas_start = { x: 0, y: 0 };
+    },
     get no_drag() { return this.canvas_drag.x == 0 && this.canvas_drag.y == 0; },
     get MAP() { return { x: Math.floor(this.map / tile_width),
-	                     y: Math.floor(this.map / tile_height) }; },
+                         y: Math.floor(this.map / tile_height) }; },
     get offset() { return { x: mod(map.x, tile_width),
-	                        y: mod(map.y, tile_height) }; },
+                            y: mod(map.y, tile_height) }; },
 
     get canvas_tile() { var rect = $("#selectmap")[0].getBoundingClientRect();
                         return { x: this.mouse.x - rect.left,
-					             y: this.mouse.y - rect.top }; },
+                                 y: this.mouse.y - rect.top }; },
     get canvas_TILE() { return { x: Math.floor(this.canvas_tile.x / this.tile_width),
                                  y: Math.floor(this.canvas_tile.y / this.tile_height) }; },
 
     get canvas_map() { var rect = $("#foreground")[0].getBoundingClientRect();
                        return { x: this.mouse.x - rect.left,
-					            y: this.mouse.y - rect.top }; },
-    get canvas_MAP() { { return { x: Math.floor((this.canvas_map.x + offset.x) / this.tile_width),
+                                y: this.mouse.y - rect.top }; },
+    get canvas_MAP() { return { x: Math.floor((this.canvas_map.x + offset.x) / this.tile_width),
                                   y: Math.floor((this.canvas_map.y + offset.y) / this.tile_height) }; },
     get true_map() { return { x: this.map.x + this.canvas_map.x, y: this.map.y + this.canvas_map.y }; },
     get true_MAP() { return { x: Math.floor(this.true_map.x / tile_width),
-	                          y: Math.floor(this.true_map.y / tile_height) }; },
+                              y: Math.floor(this.true_map.y / tile_height) }; },
 
     get canvas_drag() { return { x: this.canvas_map.x - this.canvas_start.x,
-	                             y: this.canvas_map.y - this.canvas_start.y }; },
-    get canvas_START() { { return { x: Math.floor((this.canvas_start.x + offset.x) / this.tile_width),
+                                 y: this.canvas_map.y - this.canvas_start.y }; },
+    get canvas_START() { return { x: Math.floor((this.canvas_start.x + offset.x) / this.tile_width),
                                     y: Math.floor((this.canvas_start.y + offset.y) / this.tile_height) }; },
     get true_start() { return { x: this.map.x + this.canvas_start.x,
-	                            y: this.map.y + this.canvas_start.y }; },
+                                y: this.map.y + this.canvas_start.y }; },
     get true_START() { return { x: Math.floor(this.true_start.x / tile_width),
-	                            y: Math.floor(this.true_start.y / tile_height) }; },
+                                y: Math.floor(this.true_start.y / tile_height) }; },
   };
 
   //Images
@@ -445,7 +445,7 @@ function drawmapselection(map_tile = false) {
       if (activemode() != 2) {
         mapselectcontext.drawImage(
           tiles, coords.active_TILE.x * coords.tile_width, coords.active_TILE.y * coords.tile_height,
-		  coords.tile_width, coords.tile_height,
+          coords.tile_width, coords.tile_height,
           map_tile.x * coords.tile_width - coords.offset.x,
           map_tile.y * coords.tile_height - coords.offset.y,
           coords.tile_width, coords.tile_height);
@@ -526,7 +526,7 @@ function intify(array) {
   array.forEach((value) => {
     Object.keys(value).forEach((key) => {
       value[key] = parseInt(value[key]);
-	});
+    });
   });
 }
 
