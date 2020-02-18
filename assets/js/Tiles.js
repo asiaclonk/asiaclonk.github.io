@@ -323,6 +323,7 @@ $(document).ready(function() {
     clipboard = [];
   });
 
+  $("#importbutton").button({ icon: "ui-icon-pencil" });
   $("#importbutton").click(function() {
     //Load map
     var importtiles = JSON.parse($("#importtext").val());
