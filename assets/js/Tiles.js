@@ -179,6 +179,7 @@ $(document).ready(function() {
           copy.forEach((value) => {
             placetile(selectedmapx + value.mapx, selectedmapy + value.mapy, false, value.tilex, value.tiley);
           });
+          $("#exporttext").val(JSON.stringify(tilelist));
           playsound(2);
           drawmap();
         }
@@ -294,21 +295,14 @@ $(document).ready(function() {
   $("#map").mousemove();
 
   $("#importbutton").click(function() {
-    $("#importtext")[0].select();
+    $("#importtext")[0].focus();
     document.execCommand("paste");
-    var importtiles = JSON.parse($("#importtext").val(), function(key, value) {
-      return parseInt(value);
-    });
+    var importtiles = JSON.parse($("#importtext").val());
     tilelist = importtiles;
     drawmap();
   });
-  $("#exportbutton").click(function() {
-    var exportstring = JSON.stringify(tilelist);
-    $("#exporttext").val(exportstring);
-  });
   $("#copybutton").click(function() {
     $("#exporttext")[0].select();
-    $("#exporttext")[0].setSelectionRange(0, 999999);
     document.execCommand("copy");
   });
 
@@ -327,6 +321,7 @@ function placetile(x, y, clear = false, tilex = -1, tiley = -1) {
     if (clear || (realtilex == 0 && realtiley == 0)) {
       var index = tilelist.indexOf(selectedtile);
       tilelist.splice(index, 1);
+      $("#exporttext").val(JSON.stringify(tilelist));
       playsound(getgroup(selectedtile.tilex, selectedtile.tiley).remove);
       drawmap();
     }
@@ -334,6 +329,7 @@ function placetile(x, y, clear = false, tilex = -1, tiley = -1) {
       selectedtile.tilex = realtilex;
       selectedtile.tiley = realtiley;
       if (activemode() != 2) {
+        $("#exporttext").val(JSON.stringify(tilelist));
         playsound(getgroup(realtilex, realtiley).build);
         drawmap();
       }
@@ -342,6 +338,7 @@ function placetile(x, y, clear = false, tilex = -1, tiley = -1) {
   else if (!clear && (realtilex != 0 || realtiley != 0)) {
     tilelist.push({ tilex: realtilex, tiley: realtiley, mapx: x, mapy: y });
     if (activemode() != 2) {
+      $("#exporttext").val(JSON.stringify(tilelist));
       playsound(getgroup(realtilex, realtiley).build);
       drawmap();
     }
