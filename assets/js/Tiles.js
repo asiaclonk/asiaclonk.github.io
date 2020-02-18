@@ -245,6 +245,7 @@ $(document).ready(function() {
             $("#exporttext").val(JSON.stringify(tilelist));
             playsound(2);
           }
+          $("#clipclearer").button("option", "disabled", true);
         }
         else {
           //Else copy selection

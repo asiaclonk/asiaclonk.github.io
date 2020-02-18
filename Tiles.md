@@ -43,7 +43,7 @@ description: Something to quickly tile a map with.
     <input type="radio" name="mode" id="radiotile">
     <label for="radiocopy">Copy</label>
     <input type="radio" name="mode" id="radiocopy">
-    <button id="clipclearer" style="padding: 2px 5px;" disabled>Clear</button>
+    <button id="clipclearer" style="padding: 2px 5px;" disabled></button>
   </fieldset>
 </div>
 <br>
