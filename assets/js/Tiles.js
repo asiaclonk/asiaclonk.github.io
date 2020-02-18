@@ -40,8 +40,10 @@ $(document).ready(function() {
       this.canvas_start = { x: 0, y: 0 };
     },
     get no_drag() { return this.canvas_drag.x == 0 && this.canvas_drag.y == 0; },
-    get map() { return { x: this.undraggedmap.x - this.canvas_drag.x,
-                         y: this.undraggedmap.y - this.canvas_drag.y }; },
+    get map() { return this.map_leftclick && activemode() == 0 ?
+                  { x: this.undraggedmap.x - this.canvas_drag.x,
+                    y: this.undraggedmap.y - this.canvas_drag.y }
+                : undraggedmap; },
     get MAP() { return { x: Math.floor(this.map.x / this.tile_width),
                          y: Math.floor(this.map.y / this.tile_height) }; },
     get offset() { return { x: mod(this.map.x, this.tile_width),
@@ -63,7 +65,7 @@ $(document).ready(function() {
     get true_MAP() { return { x: Math.floor(this.true_map.x / this.tile_width),
                               y: Math.floor(this.true_map.y / this.tile_height) }; },
 
-    get canvas_drag() { return this.map_leftclick && activemode() == 0 ?
+    get canvas_drag() { return this.map_leftclick && activemode() != 1 ?
                           { x: this.canvas_map.x - this.canvas_start.x,
                             y: this.canvas_map.y - this.canvas_start.y }
                           : { x: 0, y: 0 }; },
@@ -478,8 +480,8 @@ function drawmap() {
     tilecontext.drawImage(
       tiles, value.tilex * coords.tile_width, value.tiley * coords.tile_height,
       coords.tile_width, coords.tile_height,
-      (value.mapx - coords.MAP.x) * coords.tile_width - mod(coords.map.x, coords.tile_width),
-      (value.mapy - coords.MAP.y) * coords.tile_height - mod(coords.map.y, coords.tile_height),
+      (value.mapx - coords.MAP.x) * coords.tile_width - coords.offset.x,
+      (value.mapy - coords.MAP.y) * coords.tile_height - coords.offset.y,
       coords.tile_width, coords.tile_height);
   });
 }
