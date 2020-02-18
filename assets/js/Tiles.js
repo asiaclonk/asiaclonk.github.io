@@ -235,14 +235,16 @@ $(document).ready(function() {
       }
       if (activemode() == 2) {
         if (coords.no_drag) {
-          //No drag? Place down your clipboard
-          var copy = _.cloneDeep(clipboard);
-          copy.forEach((value) => {
-            placetile({ x: coords.true_MAP.x + value.mapx, y: coords.true_MAP.y + value.mapy },
-                      { x: value.tilex, y: value.tiley });
-          });
-          $("#exporttext").val(JSON.stringify(tilelist));
-          playsound(2);
+          if (clipboard.length > 0) {
+            //No drag? Place down your clipboard
+            var copy = _.cloneDeep(clipboard);
+            copy.forEach((value) => {
+              placetile({ x: coords.true_MAP.x + value.mapx, y: coords.true_MAP.y + value.mapy },
+                        { x: value.tilex, y: value.tiley });
+            });
+            $("#exporttext").val(JSON.stringify(tilelist));
+            playsound(2);
+          }
         }
         else {
           //Else copy selection
@@ -261,7 +263,7 @@ $(document).ready(function() {
             value.mapy = value.mapy - miny - offsety;
           });
           if (clipboard.length > 0) {
-            $("#clipclearer").prop("disabled", false);
+            $("#clipclearer").button("option", "disabled", false);
           }
         }
       }
@@ -317,9 +319,10 @@ $(document).ready(function() {
     }
   });
 
+  $("#clipclearer").button({ icon: "ui-icon-trash" });
   $("#clipclearer").click(function() {
     //Clear clipboard
-    $("#clipclearer").prop("disabled", true);
+    $("#clipclearer").button("option", "disabled", true);
     clipboard = [];
   });
 

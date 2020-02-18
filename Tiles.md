@@ -22,12 +22,12 @@ description: Something to quickly tile a map with.
   <fieldset class="ui-widget-content ui-corner-all">
     <legend>Import</legend>
     <input type="text" id="importtext">
-    <button id="importbutton">Paste</button>
+    <button id="importbutton" style="padding: 2px 5px;"></button>
   </fieldset>
   <fieldset class="ui-widget-content ui-corner-all">
     <legend>Export</legend>
     <input type="text" id="exporttext">
-    <button id="copybutton" style="width: 25px; height: 25px;" data-clipboard-target="#exporttext"></button>
+    <button id="copybutton" style="padding: 2px 5px;" data-clipboard-target="#exporttext"></button>
   </fieldset>
 </div>
 <div style="display: flex; justify-content: center;">
@@ -43,7 +43,7 @@ description: Something to quickly tile a map with.
     <input type="radio" name="mode" id="radiotile">
     <label for="radiocopy">Copy</label>
     <input type="radio" name="mode" id="radiocopy">
-    <button id="clipclearer" style="margin-top: 4px;" disabled>Clear</button>
+    <button id="clipclearer" style="padding: 2px 5px;" disabled>Clear</button>
   </fieldset>
 </div>
 <br>
