@@ -17,7 +17,7 @@ description: Something to quickly tile a map with.
   <fieldset class="ui-widget-content ui-corner-all">
     <legend>Import</legend>
     <input type="text" id="importtext">
-    <button id="importbutton">Enter</button>
+    <button id="importbutton">Paste</button>
   </fieldset>
   <fieldset class="ui-widget-content ui-corner-all">
     <legend>Export</legend>
