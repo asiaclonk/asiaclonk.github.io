@@ -21,7 +21,7 @@ $(document).ready(function() {
     get map_rightclick() { return this.map_click == 2 },
     mouse: { x: 0, y: 0 },
     canvas_start: { x: 0, y: 0 },
-    map: { x: 0, y: 0 },
+    undraggedmap: { x: 0, y: 0 },
     active_TILE: { x: 0, y: 0 },
     set setactive(x) {
       this.active_TILE.x = this.canvas_TILE.x;
@@ -32,14 +32,16 @@ $(document).ready(function() {
       this.canvas_start.y = this.canvas_map.y;
     },
     set finish(x) {
-      if (this.map_leftclick) {
-        this.map.x -= this.canvas_drag.x;
-        this.map.y -= this.canvas_drag.y;
+      if (this.map_leftclick && activemode() == 0) {
+        this.undraggedmap.x -= this.canvas_drag.x;
+        this.undraggedmap.y -= this.canvas_drag.y;
       }
       this.map_click = -1;
       this.canvas_start = { x: 0, y: 0 };
     },
     get no_drag() { return this.canvas_drag.x == 0 && this.canvas_drag.y == 0; },
+    get map() { return { x: this.undraggedmap.x - this.canvas_drag.x,
+                         y: this.undraggedmap.y - this.canvas_drag.y }; },
     get MAP() { return { x: Math.floor(this.map.x / this.tile_width),
                          y: Math.floor(this.map.y / this.tile_height) }; },
     get offset() { return { x: mod(this.map.x, this.tile_width),
@@ -56,12 +58,15 @@ $(document).ready(function() {
                                 y: this.mouse.y - rect.top }; },
     get canvas_MAP() { return { x: Math.floor((this.canvas_map.x + this.offset.x) / this.tile_width),
                                   y: Math.floor((this.canvas_map.y + this.offset.y) / this.tile_height) }; },
-    get true_map() { return { x: this.map.x + this.canvas_map.x, y: this.map.y + this.canvas_map.y }; },
+    get true_map() { return { x: this.map.x + this.canvas_map.x,
+                              y: this.map.y + this.canvas_map.y }; },
     get true_MAP() { return { x: Math.floor(this.true_map.x / this.tile_width),
                               y: Math.floor(this.true_map.y / this.tile_height) }; },
 
-    get canvas_drag() { return { x: this.canvas_map.x - this.canvas_start.x,
-                                 y: this.canvas_map.y - this.canvas_start.y }; },
+    get canvas_drag() { return this.map_leftclick && activemode() == 0 ?
+                          { x: this.canvas_map.x - this.canvas_start.x,
+                            y: this.canvas_map.y - this.canvas_start.y }
+                          : { x: 0, y: 0 }; },
     get canvas_START() { return { x: Math.floor((this.canvas_start.x + this.offset.x) / this.tile_width),
                                     y: Math.floor((this.canvas_start.y + this.offset.y) / this.tile_height) }; },
     get true_start() { return { x: this.map.x + this.canvas_start.x,
@@ -236,7 +241,6 @@ $(document).ready(function() {
           });
           $("#exporttext").val(JSON.stringify(tilelist));
           playsound(2);
-          drawmap();
         }
         else {
           //Else copy selection
@@ -261,6 +265,7 @@ $(document).ready(function() {
       }
     }
     coords.finish = true;
+    drawmap();
     drawmapselection(coords.canvas_MAP);
   });
   $("#foreground")[0].addEventListener("wheel", function (e) {
@@ -463,17 +468,9 @@ function drawmap() {
     value.mapy <= coords.MAP.y + Math.floor(coords.map_height / coords.tile_height)
   );
 
-  var dragoffsetx = 0;
-  var dragoffsety = 0;
-  if (coords.map_leftclick && activemode() == 0) {
-    //Offset while dragging
-    dragoffsetx = coords.canvas_drag.x;
-    dragoffsety = coords.canvas_drag.y;
-  }
-
   //Draw background
-  backcontext.setTransform(1,0,0,1, (coords.map.x - dragoffsetx + coords.offset.x) % 512,
-                                    (coords.map.y - dragoffsety + coords.offset.y) % 32);
+  backcontext.setTransform(1,0,0,1, -coords.map.x % 512,
+                                    -coords.map.y % 32);
   backcontext.fill();
 
   //Draw tiles
@@ -481,8 +478,8 @@ function drawmap() {
     tilecontext.drawImage(
       tiles, value.tilex * coords.tile_width, value.tiley * coords.tile_height,
       coords.tile_width, coords.tile_height,
-      (value.mapx - coords.MAP.x) * coords.tile_width - mod(coords.map.x - coords.offset.x + dragoffsetx, coords.tile_width),
-      (value.mapy - coords.MAP.y) * coords.tile_height - mod(coords.map.y - coords.offset.y + dragoffsety, coords.tile_height),
+      (value.mapx - coords.MAP.x) * coords.tile_width - mod(coords.map.x, coords.tile_width),
+      (value.mapy - coords.MAP.y) * coords.tile_height - mod(coords.map.y, coords.tile_height),
       coords.tile_width, coords.tile_height);
   });
 }
@@ -494,13 +491,7 @@ function setradios(mode = 0) {
 
 function writecoords(tile = false) {
   var mousetext = tile !== false ? "Selection: (X: " + tile.x + ", Y: " + tile.y + "), " : "";
-  if (coords.map_leftclick && activemode() == 0) {
-    var maptext = "Map: (X: " + Math.floor((coords.map.x - coords.canvas_drag.x) / coords.tile_width) +
-	                  ", Y: " + Math.floor((coords.map.y - coords.canvas_drag.y) / coords.tile_height) + ")";
-  }
-  else {
-    var maptext = "Map: (X: " + coords.MAP.x + ", Y: " + coords.MAP.y + ")";
-  }
+  var maptext = "Map: (X: " + coords.MAP.x + ", Y: " + coords.MAP.y + ")";
   $("#coordtext").html(mousetext + maptext);
 }
 
