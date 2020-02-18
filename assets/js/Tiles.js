@@ -329,6 +329,7 @@ $(document).ready(function() {
     tilelist = importtiles;
     drawmap();
   });
+  $("#copybutton").button({ icon: "ui-icon-clipboard" });
   $("#copybutton").click(function() {
     //Export map
     $("#exporttext")[0].select();
