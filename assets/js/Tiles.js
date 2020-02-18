@@ -40,10 +40,10 @@ $(document).ready(function() {
       this.canvas_start = { x: 0, y: 0 };
     },
     get no_drag() { return this.canvas_drag.x == 0 && this.canvas_drag.y == 0; },
-    get MAP() { return { x: Math.floor(this.map / tile_width),
-                         y: Math.floor(this.map / tile_height) }; },
-    get offset() { return { x: mod(map.x, tile_width),
-                            y: mod(map.y, tile_height) }; },
+    get MAP() { return { x: Math.floor(this.map / this.tile_width),
+                         y: Math.floor(this.map / this.tile_height) }; },
+    get offset() { return { x: mod(this.map.x, this.tile_width),
+                            y: mod(this.map.y, this.tile_height) }; },
 
     get canvas_tile() { var rect = $("#selectmap")[0].getBoundingClientRect();
                         return { x: this.mouse.x - rect.left,
@@ -54,20 +54,20 @@ $(document).ready(function() {
     get canvas_map() { var rect = $("#foreground")[0].getBoundingClientRect();
                        return { x: this.mouse.x - rect.left,
                                 y: this.mouse.y - rect.top }; },
-    get canvas_MAP() { return { x: Math.floor((this.canvas_map.x + offset.x) / this.tile_width),
-                                  y: Math.floor((this.canvas_map.y + offset.y) / this.tile_height) }; },
+    get canvas_MAP() { return { x: Math.floor((this.canvas_map.x + this.offset.x) / this.tile_width),
+                                  y: Math.floor((this.canvas_map.y + this.offset.y) / this.tile_height) }; },
     get true_map() { return { x: this.map.x + this.canvas_map.x, y: this.map.y + this.canvas_map.y }; },
-    get true_MAP() { return { x: Math.floor(this.true_map.x / tile_width),
-                              y: Math.floor(this.true_map.y / tile_height) }; },
+    get true_MAP() { return { x: Math.floor(this.true_map.x / this.tile_width),
+                              y: Math.floor(this.true_map.y / this.tile_height) }; },
 
     get canvas_drag() { return { x: this.canvas_map.x - this.canvas_start.x,
                                  y: this.canvas_map.y - this.canvas_start.y }; },
-    get canvas_START() { return { x: Math.floor((this.canvas_start.x + offset.x) / this.tile_width),
-                                    y: Math.floor((this.canvas_start.y + offset.y) / this.tile_height) }; },
+    get canvas_START() { return { x: Math.floor((this.canvas_start.x + this.offset.x) / this.tile_width),
+                                    y: Math.floor((this.canvas_start.y + this.offset.y) / this.tile_height) }; },
     get true_start() { return { x: this.map.x + this.canvas_start.x,
                                 y: this.map.y + this.canvas_start.y }; },
-    get true_START() { return { x: Math.floor(this.true_start.x / tile_width),
-                                y: Math.floor(this.true_start.y / tile_height) }; },
+    get true_START() { return { x: Math.floor(this.true_start.x / this.tile_width),
+                                y: Math.floor(this.true_start.y / this.tile_height) }; },
   };
 
   //Images
@@ -173,7 +173,7 @@ $(document).ready(function() {
       pincette(coords.true_MAP);
       e.preventDefault();
     }
-    if (map_click == 2) {
+    if (coords.map_rightclick) {
       //Remove tile
       placetile(coords.true_MAP);
     }
@@ -407,7 +407,7 @@ function drawselection(tile = false) {
 }
 
 function drawmapselection(map_tile = false) {
-  mapselectcontext.clearRect(0, 0, map_width, map_height);
+  mapselectcontext.clearRect(0, 0, coords.map_width, coords.map_height);
   if(map_tile !== false) {
     if (activemode() == 2 && coords.map_leftclick) {
       //Draw the copy selection
@@ -462,7 +462,7 @@ function drawmapselection(map_tile = false) {
 
 function drawmap() {
   //Draw all tiles in range
-  tilecontext.clearRect(0, 0, map_width, map_height);
+  tilecontext.clearRect(0, 0, coords.map_width, coords.map_height);
   var tilestodraw = tilelist.filter((value) =>
     value.mapx >= coords.MAP.x && value.mapy >= coords.MAP.y &&
     value.mapx <= coords.MAP.x + Math.floor(coords.map_width / coords.tile_width) &&
