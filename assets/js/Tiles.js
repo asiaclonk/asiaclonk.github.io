@@ -472,8 +472,8 @@ function drawmap() {
   }
 
   //Draw background
-  backcontext.setTransform(1,0,0,1, (dragoffsetx - coords.offset.x - coords.map.x) % 512,
-                                    (dragoffsety - coords.offset.y - coords.map.y) % 32);
+  backcontext.setTransform(1,0,0,1, (coords.map.x - dragoffsetx + coords.offset.x) % 512,
+                                    (coords.map.y - dragoffsety + coords.offset.y) % 32);
   backcontext.fill();
 
   //Draw tiles
@@ -481,8 +481,8 @@ function drawmap() {
     tilecontext.drawImage(
       tiles, value.tilex * coords.tile_width, value.tiley * coords.tile_height,
       coords.tile_width, coords.tile_height,
-      (value.mapx - coords.MAP.x) * coords.tile_width - mod(coords.map.x - coords.offset.x - dragoffsetx, coords.tile_width),
-      (value.mapy - coords.MAP.y) * coords.tile_height - mod(coords.map.y - coords.offset.y - dragoffsety, coords.tile_height),
+      (value.mapx - coords.MAP.x) * coords.tile_width - mod(coords.map.x - coords.offset.x + dragoffsetx, coords.tile_width),
+      (value.mapy - coords.MAP.y) * coords.tile_height - mod(coords.map.y - coords.offset.y + dragoffsety, coords.tile_height),
       coords.tile_width, coords.tile_height);
   });
 }
