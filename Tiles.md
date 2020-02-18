@@ -22,7 +22,6 @@ description: Something to quickly tile a map with.
   <fieldset class="ui-widget-content ui-corner-all">
     <legend>Export</legend>
     <input type="text" id="exporttext">
-    <button id="exportbutton">Create</button>
     <button id="copybutton">Copy</button>
   </fieldset>
 </div>
