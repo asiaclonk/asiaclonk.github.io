@@ -347,7 +347,7 @@ function placetile(map_tile, tile = false) {
   var selectedtile = tilelist.find((value) => value.mapx == map_tile.x &&
                                               value.mapy == map_tile.y);
   if (typeof selectedtile !== "undefined") {
-    if (tile === false)) {
+    if (tile === false) {
       //No tile given? Clear it
       var index = tilelist.indexOf(selectedtile);
       tilelist.splice(index, 1);
@@ -366,7 +366,7 @@ function placetile(map_tile, tile = false) {
       }
     }
   }
-  else if (tile !== false)) {
+  else if (tile !== false) {
     //Place down a new tile
     tilelist.push({ tilex: tile.x, tiley: tile.y, mapx: map_tile.x, mapy: map_tile.y });
     if (activemode() != 2) {

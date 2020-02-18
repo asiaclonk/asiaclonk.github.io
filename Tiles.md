@@ -27,8 +27,8 @@ description: Something to quickly tile a map with.
   <fieldset class="ui-widget-content ui-corner-all">
     <legend>Export</legend>
     <input type="text" id="exporttext">
-    <button id="copybutton" data-clipboard-target="#exporttext">
-      <image src="assets/images/clippy.svg" width="20" height="20" alt="Copy">
+    <button id="copybutton" style="width: 20px, height: 20px" data-clipboard-target="#exporttext">
+      <image src="assets/images/clippy.svg" alt="Copy"></image>
     </button>
   </fieldset>
 </div>
