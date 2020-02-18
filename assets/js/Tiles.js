@@ -188,9 +188,6 @@ $(document).ready(function() {
       if (activemode() == 0) {
         //Drag map
         $("#foreground").css("cursor", "move");
-        backcontext.setTransform(1,0,0,1, (coords.canvas_drag.x - coords.map.x) % 512,
-                                          (coords.canvas_drag.y - coords.map.y) % 32);
-        backcontext.fill();
         drawmap();
         drawmapselection();
         writecoords(coords.true_START);
@@ -458,7 +455,7 @@ function drawmapselection(map_tile = false) {
 }
 
 function drawmap() {
-  //Draw all tiles in range
+  //Get tiles in range
   tilecontext.clearRect(0, 0, coords.map_width, coords.map_height);
   var tilestodraw = tilelist.filter((value) =>
     value.mapx >= coords.MAP.x && value.mapy >= coords.MAP.y &&
@@ -466,20 +463,26 @@ function drawmap() {
     value.mapy <= coords.MAP.y + Math.floor(coords.map_height / coords.tile_height)
   );
 
-  var xoffset = 0;
-  var yoffset = 0;
+  var dragoffsetx = 0;
+  var dragoffsety = 0;
   if (coords.map_leftclick && activemode() == 0) {
     //Offset while dragging
-    offsetx = coords.canvas_drag.x;
-    offsety = coords.canvas_drag.y;
+    dragoffsetx = coords.canvas_drag.x;
+    dragoffsety = coords.canvas_drag.y;
   }
 
+  //Draw background
+  backcontext.setTransform(1,0,0,1, (dragoffsetx - coords.offset.x - coords.map.x) % 512,
+                                    (dragoffsety - coords.offset.y - coords.map.y) % 32);
+  backcontext.fill();
+
+  //Draw tiles
   tilestodraw.forEach((value) => {
     tilecontext.drawImage(
       tiles, value.tilex * coords.tile_width, value.tiley * coords.tile_height,
       coords.tile_width, coords.tile_height,
-      (value.mapx - coords.MAP.x) * coords.tile_width - mod(coords.map.x - offsetx, coords.tile_width),
-      (value.mapy - coords.MAP.y) * coords.tile_height - mod(coords.map.y - offsety, coords.tile_height),
+      (value.mapx - coords.MAP.x) * coords.tile_width - mod(coords.map.x - coords.offset.x - dragoffsetx, coords.tile_width),
+      (value.mapy - coords.MAP.y) * coords.tile_height - mod(coords.map.y - coords.offset.y - dragoffsety, coords.tile_height),
       coords.tile_width, coords.tile_height);
   });
 }
@@ -490,12 +493,15 @@ function setradios(mode = 0) {
 }
 
 function writecoords(tile = false) {
-  if (tile !== false) {
-    $("#coordtext").html("Selection: (X: " + tile.x + ", Y: " + tile.y + "), Map: (X: " + coords.MAP.x + ", Y: " + coords.MAP.y + ")");
+  var mousetext = tile !== false ? "Selection: (X: " + tile.x + ", Y: " + tile.y + "), " : "";
+  if (coords.map_leftclick && activemode() == 0) {
+    var maptext = "Map: (X: " + Math.floor((coords.map.x - coords.canvas_drag.x) / coords.tile_width) +
+	                  ", Y: " + Math.floor((coords.map.y - coords.canvas_drag.y) / coords.tile_height) + ")";
   }
   else {
-    $("#coordtext").html("Map: (X: " + coords.MAP.x + ", Y: " + coords.MAP.y + ")");
+    var maptext = "Map: (X: " + coords.MAP.x + ", Y: " + coords.MAP.y + ")";
   }
+  $("#coordtext").html(mousetext + maptext);
 }
 
 function getgroup(x, y, delta = 0) {
