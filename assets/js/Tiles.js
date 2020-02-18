@@ -43,7 +43,7 @@ $(document).ready(function() {
     get map() { return this.map_leftclick && activemode() == 0 ?
                   { x: this.undraggedmap.x - this.canvas_drag.x,
                     y: this.undraggedmap.y - this.canvas_drag.y }
-                : undraggedmap; },
+                : this.undraggedmap; },
     get MAP() { return { x: Math.floor(this.map.x / this.tile_width),
                          y: Math.floor(this.map.y / this.tile_height) }; },
     get offset() { return { x: mod(this.map.x, this.tile_width),
