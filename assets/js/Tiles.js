@@ -40,8 +40,8 @@ $(document).ready(function() {
       this.canvas_start = { x: 0, y: 0 };
     },
     get no_drag() { return this.canvas_drag.x == 0 && this.canvas_drag.y == 0; },
-    get MAP() { return { x: Math.floor(this.map / this.tile_width),
-                         y: Math.floor(this.map / this.tile_height) }; },
+    get MAP() { return { x: Math.floor(this.map.x / this.tile_width),
+                         y: Math.floor(this.map.y / this.tile_height) }; },
     get offset() { return { x: mod(this.map.x, this.tile_width),
                             y: mod(this.map.y, this.tile_height) }; },
 
