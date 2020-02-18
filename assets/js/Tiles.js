@@ -196,26 +196,23 @@ $(document).ready(function() {
         writecoords(coords.true_START);
       }
       else {
+        drawmapselection(coords.canvas_MAP);
         if (activemode() == 1) {
           //Tile the map
           placetile(coords.true_MAP, coords.active_TILE);
-          drawmapselection(coords.canvas_MAP);
-        }
-        if (activemode() == 2) {
-          //Show copy selection
-          drawmapselection(coords.canvas_MAP);
         }
       }
     }
-    else if (coords.map_middleclick) {
-      //Copy tile selection
-      pincette(coords.true_MAP);
+    else {
       drawmapselection(coords.canvas_MAP);
-    }
-    else if (coords.map_rightclick) {
-      //Remove tiles
-      placetile(coords.true_MAP);
-      drawmapselection(coords.canvas_MAP);
+      if (coords.map_middleclick) {
+        //Copy tile selection
+        pincette(coords.true_MAP);
+      }
+      else if (coords.map_rightclick) {
+        //Remove tiles
+        placetile(coords.true_MAP);
+      }
     }
   });
   $("#foreground").mouseleave(function() {
@@ -468,6 +465,7 @@ function drawmap() {
     value.mapx <= coords.MAP.x + Math.floor(coords.map_width / coords.tile_width) &&
     value.mapy <= coords.MAP.y + Math.floor(coords.map_height / coords.tile_height)
   );
+
   var xoffset = 0;
   var yoffset = 0;
   if (coords.map_leftclick && activemode() == 0) {
@@ -475,12 +473,13 @@ function drawmap() {
     offsetx = coords.canvas_drag.x;
     offsety = coords.canvas_drag.y;
   }
+
   tilestodraw.forEach((value) => {
     tilecontext.drawImage(
-      tiles, value.tilex * coords.map_width, value.tiley * coords.tile_height,
-      coords.map_width, coords.tile_height,
-      (value.mapx - coords.MAP.x) * coords.map_width - mod(coords.map.x - offsetx, coords.tile_width),
-      (value.mapy - coords.MAP.y) * coords.map_height - mod(coords.map.y - offsety, coords.tile_height),
+      tiles, value.tilex * coords.tile_width, value.tiley * coords.tile_height,
+      coords.tile_width, coords.tile_height,
+      (value.mapx - coords.MAP.x) * coords.tile_width - mod(coords.map.x - offsetx, coords.tile_width),
+      (value.mapy - coords.MAP.y) * coords.tile_height - mod(coords.map.y - offsety, coords.tile_height),
       coords.tile_width, coords.tile_height);
   });
 }
