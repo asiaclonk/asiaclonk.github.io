@@ -121,7 +121,7 @@ $(document).ready(function() {
     //Resize check
     var newwidth = $("#map").width();
     var newheight = $("#map").height();
-    if (newwidth != coods.map_width || newheight != coods.map_height) {
+    if (newwidth != coords.map_width || newheight != coords.map_height) {
       setCookie("map_width", newwidth, 730);
       setCookie("map_height", newheight, 730);
       coords.map_width = newwidth;
