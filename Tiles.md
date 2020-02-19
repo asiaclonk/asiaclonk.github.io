@@ -38,11 +38,20 @@ description: Something to quickly tile a map with.
   <fieldset class="ui-widget-content ui-corner-all" style="min-width: 60px; max-width: 60px; margin: 0 20px;">
     <legend>Mode</legend>
     <label for="radiomove">Move</label>
-    <input type="radio" name="mode" id="radiomove">
+    <input type="radio" name="mode" id="radiomove" checked>
     <label for="radiotile">Tile</label>
     <input type="radio" name="mode" id="radiotile">
     <label for="radiocopy">Copy</label>
     <input type="radio" name="mode" id="radiocopy">
+  </fieldset>
+  <fieldset class="ui-widget-content ui-corner-all" style="min-width: 60px; max-width: 60px; margin: 0 20px;">
+    <legend>Place over</legend>
+    <label for="radiodeny">Deny</label>
+    <input type="radio" name="place" id="radiodeny" checked>
+    <label for="radioempty">Empty</label>
+    <input type="radio" name="place" id="radioempty">
+    <label for="radioreplace">Replace</label>
+    <input type="radio" name="place" id="radioreplace">
     <button id="clipclearer" style="padding: 2px 5px;" disabled></button>
   </fieldset>
 </div>
