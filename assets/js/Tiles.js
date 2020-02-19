@@ -184,7 +184,15 @@ $(document).ready(function() {
       //Start drag
       coords.start = true;
       if (activemode() == 1) {
-        placetile(coords.true_MAP, coords.active_TILE);
+        if (clipboard.length > 0) {
+          //Tile your entire inventory
+          placeclipboard();
+          drawmap();
+        }
+        else {
+          //Tile the map
+          placetile(coords.true_MAP, coords.active_TILE);
+        }
       }
     }
     if (coords.map_middleclick) {
@@ -216,7 +224,8 @@ $(document).ready(function() {
         if (activemode() == 1) {
           if (clipboard.length > 0) {
             //Tile your entire inventory
-
+            placeclipboard();
+            drawmap();
           }
           else {
             //Tile the map
@@ -382,7 +391,7 @@ function placetile(map_tile, tile = false) {
         //Or replace
         selectedtile.tilex = tile.x;
         selectedtile.tiley = tile.y;
-        if (activemode() != 2) {
+        if (clipboard.length == 0) {
           $("#exporttext").val(JSON.stringify(tilelist));
           playsound(getgroup(tile.x, tile.y).build);
           drawmap();
@@ -400,7 +409,7 @@ function placetile(map_tile, tile = false) {
   else if (tile !== false) {
     //Place down a new tile
     tilelist.push({ tilex: tile.x, tiley: tile.y, mapx: map_tile.x, mapy: map_tile.y });
-    if (activemode() != 2) {
+    if (clipboard.length == 0) {
       $("#exporttext").val(JSON.stringify(tilelist));
       playsound(getgroup(tile.x, tile.y).build);
       drawmap();
@@ -411,11 +420,13 @@ function placetile(map_tile, tile = false) {
 
 function placeclipboard() {
   //Check tiles
-  if (placemode == 0 && clipboard.some((value) => tilelist.find((tile) =>
-    tile.mapx == value.mapx && tile.mapy == value.mapy &&
+  if (placemode == 0 && clipboard.some((value) => tilelist.some((tile) =>
+    tile.mapx == coords.true_MAP.x + value.mapx && tile.mapy == coords.true_MAP.y + value.mapy &&
     (tile.tilex != value.tilex || tile.tiley != value.tiley)))) {
       //Deny placement
-      playsound(3);
+      if (activemode() != 1) {
+        playsound(3);
+      }
   }
   else {
     //Place down your clipboard
@@ -434,7 +445,9 @@ function placeclipboard() {
       playsound(2);
     }
     else {
-      playsound(3);
+      if (activemode() != 1) {
+        playsound(3);
+      }
     }
   }
 }
@@ -514,8 +527,8 @@ function drawonemapselection(x, y, tx = false, ty = false) {
 
     //Now color
     var color = "lightgreen";
-    var blocked = tileset.some((tile) =>
-      tile.mapx == x + coords.MAP.x && tile.mapy == x + coords.MAP.y &&
+    var blocked = tilelist.some((tile) =>
+      tile.mapx == x + coords.MAP.x && tile.mapy == y + coords.MAP.y &&
       (tile.tilex != tx || tile.tiley != ty));
     if (blocked) {
       color = "red";
@@ -543,8 +556,8 @@ function drawmap() {
   tilecontext.clearRect(0, 0, coords.map_width, coords.map_height);
   var tilestodraw = tilelist.filter((value) =>
     value.mapx >= coords.MAP.x && value.mapy >= coords.MAP.y &&
-    value.mapx <= coords.MAP.x + Math.floor(coords.map_width / coords.tile_width) &&
-    value.mapy <= coords.MAP.y + Math.floor(coords.map_height / coords.tile_height)
+    value.mapx <= coords.MAP.x + Math.floor(coords.map_width / coords.tile_width) + 1 &&
+    value.mapy <= coords.MAP.y + Math.floor(coords.map_height / coords.tile_height) + 1
   );
 
   //Draw background

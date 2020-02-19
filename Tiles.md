@@ -44,15 +44,15 @@ description: Something to quickly tile a map with.
     <label for="radiocopy">Copy</label>
     <input type="radio" name="mode" id="radiocopy">
   </fieldset>
-  <fieldset class="ui-widget-content ui-corner-all" style="min-width: 60px; max-width: 60px; margin: 0 20px;">
-    <legend>Place over</legend>
+  <fieldset class="ui-widget-content ui-corner-all" style="min-width: 65px; max-width: 65px;">
+    <legend>Replace</legend>
     <label for="radiodeny">Deny</label>
     <input type="radio" name="place" id="radiodeny" checked>
     <label for="radioempty">Empty</label>
     <input type="radio" name="place" id="radioempty">
     <label for="radioreplace">Replace</label>
     <input type="radio" name="place" id="radioreplace">
-    <button id="clipclearer" style="padding: 2px 5px;" disabled></button>
+    <button id="clipclearer" style="padding: 1px 15px; margin: 3px 12px 0;" disabled></button>
   </fieldset>
 </div>
 <br>
