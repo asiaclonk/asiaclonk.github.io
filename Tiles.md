@@ -44,7 +44,7 @@ description: Something to quickly tile a map with.
     <label for="radiocopy">Copy</label>
     <input type="radio" name="mode" id="radiocopy">
   </fieldset>
-  <fieldset class="ui-widget-content ui-corner-all" style="min-width: 65px; max-width: 65px;">
+  <fieldset class="ui-widget-content ui-corner-all" style="min-width: 70px; max-width: 70px;">
     <legend>Replace</legend>
     <label for="radiodeny">Deny</label>
     <input type="radio" name="place" id="radiodeny" checked>

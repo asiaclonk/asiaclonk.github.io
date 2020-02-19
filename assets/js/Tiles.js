@@ -215,6 +215,10 @@ $(document).ready(function() {
       if (activemode() == 0) {
         //Drag map
         $("#foreground").css("cursor", "move");
+        //Draw background
+        backcontext.setTransform(1,0,0,1, -coords.map.x % 512,
+                                          -coords.map.y % 32);
+        backcontext.fill();
         drawmap();
         drawmapselection();
         writecoords(coords.true_START);
@@ -225,7 +229,6 @@ $(document).ready(function() {
           if (clipboard.length > 0) {
             //Tile your entire inventory
             placeclipboard();
-            drawmap();
           }
           else {
             //Tile the map
@@ -293,6 +296,9 @@ $(document).ready(function() {
       }
     }
     coords.finish = true;
+    backcontext.setTransform(1,0,0,1, -coords.map.x % 512,
+                                      -coords.map.y % 32);
+    backcontext.fill();
     drawmap();
     drawmapselection(coords.canvas_MAP);
   });
@@ -559,11 +565,6 @@ function drawmap() {
     value.mapx <= coords.MAP.x + Math.floor(coords.map_width / coords.tile_width) + 1 &&
     value.mapy <= coords.MAP.y + Math.floor(coords.map_height / coords.tile_height) + 1
   );
-
-  //Draw background
-  backcontext.setTransform(1,0,0,1, -coords.map.x % 512,
-                                    -coords.map.y % 32);
-  backcontext.fill();
 
   //Draw tiles
   tilestodraw.forEach((value) => {
