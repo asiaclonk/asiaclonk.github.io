@@ -187,11 +187,17 @@ $(document).ready(function() {
         if (clipboard.length > 0) {
           //Tile your entire inventory
           placeclipboard();
-          drawmap();
         }
         else {
           //Tile the map
-          placetile(coords.true_MAP, coords.active_TILE);
+          var result = placetile(coords.true_MAP, coords.active_TILE);
+          if (result !== false) {
+            $("#exporttext").val(JSON.stringify(tilelist));
+            playsound(getgroup(result.tilex, result.tiley).build);
+          }
+          else {
+            playsound(3);
+          }
         }
       }
     }
@@ -202,7 +208,11 @@ $(document).ready(function() {
     }
     if (coords.map_rightclick) {
       //Remove tile
-      placetile(coords.true_MAP);
+      var result = placetile(coords.true_MAP);
+      if (result !== false) {
+        $("#exporttext").val(JSON.stringify(tilelist));
+        playsound(getgroup(result.tilex, result.tiley).remove);
+      }
     }
   });
   $("#foreground").contextmenu(function(e) {
@@ -232,7 +242,11 @@ $(document).ready(function() {
           }
           else {
             //Tile the map
-            placetile(coords.true_MAP, coords.active_TILE);
+            var result = placetile(coords.true_MAP, coords.active_TILE);
+            if (result !== false) {
+              $("#exporttext").val(JSON.stringify(tilelist));
+              playsound(getgroup(result.tilex, result.tiley).build);
+            }
           }
         }
       }
@@ -245,7 +259,11 @@ $(document).ready(function() {
       }
       else if (coords.map_rightclick) {
         //Remove tiles
-        placetile(coords.true_MAP);
+        var result = placetile(coords.true_MAP);
+        if (result !== false) {
+          $("#exporttext").val(JSON.stringify(tilelist));
+          playsound(getgroup(result.tilex, result.tiley).remove);
+        }
       }
     }
   });
@@ -262,7 +280,14 @@ $(document).ready(function() {
         }
         else if (activemode() == 0) {
           //Place down tile
-          placetile(coords.true_MAP, coords.active_TILE);
+          var result = placetile(coords.true_MAP, coords.active_TILE);
+          if (result !== false) {
+            $("#exporttext").val(JSON.stringify(tilelist));
+            playsound(getgroup(result.tilex, result.tiley).build);
+          }
+          else {
+            playsound(3);
+          }
         }
       }
       else {
@@ -386,41 +411,28 @@ function placetile(map_tile, tile = false) {
     if (tile === false) {
       //No tile given? Clear it
       var index = tilelist.indexOf(selectedtile);
-      tilelist.splice(index, 1);
-      $("#exporttext").val(JSON.stringify(tilelist));
-      playsound(getgroup(selectedtile.tilex, selectedtile.tiley).remove);
-      drawmap();
-      return true;
+      return tilelist.splice(index, 1)[0];
     }
     else if (tile.x != selectedtile.tilex || tile.y != selectedtile.tiley) {
       if (placemode == 2) {
         //Or replace
         selectedtile.tilex = tile.x;
         selectedtile.tiley = tile.y;
-        if (clipboard.length == 0) {
-          $("#exporttext").val(JSON.stringify(tilelist));
-          playsound(getgroup(tile.x, tile.y).build);
-          drawmap();
-        }
-        return true;
+        return selectedtile;
       }
       else {
-        if (clipboard.length == 0) {
-          playsound(3);
-        }
         return false;
       }
     }
   }
   else if (tile !== false) {
     //Place down a new tile
-    tilelist.push({ tilex: tile.x, tiley: tile.y, mapx: map_tile.x, mapy: map_tile.y });
-    if (clipboard.length == 0) {
-      $("#exporttext").val(JSON.stringify(tilelist));
-      playsound(getgroup(tile.x, tile.y).build);
-      drawmap();
-    }
-    return true;
+    var newtile = { tilex: tile.x, tiley: tile.y, mapx: map_tile.x, mapy: map_tile.y };
+    tilelist.push(newtile);
+    return newtile;
+  }
+  else {
+    return false;
   }
 }
 
@@ -441,7 +453,7 @@ function placeclipboard() {
     copy.forEach((value) => {
       var result = placetile({ x: coords.true_MAP.x + value.mapx, y: coords.true_MAP.y + value.mapy },
       { x: value.tilex, y: value.tiley });
-      if (result) {
+      if (result !== false) {
         confirm = true;
       }
     });
@@ -449,6 +461,7 @@ function placeclipboard() {
     if (confirm) {
       $("#exporttext").val(JSON.stringify(tilelist));
       playsound(2);
+      drawmap();
     }
     else {
       if (activemode() != 1) {
