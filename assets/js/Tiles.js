@@ -246,6 +246,7 @@ $(document).ready(function() {
             if (result !== false) {
               $("#exporttext").val(JSON.stringify(tilelist));
               playsound(getgroup(result.tilex, result.tiley).build);
+              drawmap();
             }
           }
         }
@@ -420,9 +421,6 @@ function placetile(map_tile, tile = false) {
         selectedtile.tiley = tile.y;
         return selectedtile;
       }
-      else {
-        return false;
-      }
     }
   }
   else if (tile !== false) {
@@ -431,9 +429,7 @@ function placetile(map_tile, tile = false) {
     tilelist.push(newtile);
     return newtile;
   }
-  else {
-    return false;
-  }
+  return false;
 }
 
 function placeclipboard() {
@@ -448,9 +444,8 @@ function placeclipboard() {
   }
   else {
     //Place down your clipboard
-    var copy = _.cloneDeep(clipboard);
     var confirm = false;
-    copy.forEach((value) => {
+    clipboard.forEach((value) => {
       var result = placetile({ x: coords.true_MAP.x + value.mapx, y: coords.true_MAP.y + value.mapy },
       { x: value.tilex, y: value.tiley });
       if (result !== false) {
