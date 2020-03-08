@@ -1,6 +1,6 @@
 ---
 title: Kirara Fantasia Charts
-description: Some charts that reference a snapshot from the Miraheze wiki.
+description: Some charts that reference a snapshot from a Kirara Fantasia gitlab database.
 ---
 
 <script src="assets/js/Chart.min.js"></script>
