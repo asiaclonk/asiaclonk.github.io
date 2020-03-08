@@ -7,8 +7,8 @@ description: Some charts that reference a snapshot from the Miraheze wiki.
 <script src="assets/js/lodash.min.js"></script>
 <script src="assets/js/KiraraStats.js"></script>
 
-# Some charts that reference a snapshot from [the Miraheze wiki.](https://kirarafantasia.miraheze.org/wiki/Main_Page)
-Last updated: 10.02.2020
+# Some charts that reference a snapshot from [a Kirara Fantasia gitlab database.](https://gitlab.com/kirafan)
+Last updated: 08.03.2020
 
 <div style="text-align:center">
   <label for="chartselect">Select Chart: </label>
