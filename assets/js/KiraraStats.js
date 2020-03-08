@@ -13,8 +13,8 @@ $(document).ready(function() {
 
   var objectlist1 = series.map(seriesname => ({ series: seriesname,
                           cards: fivestar.filter(value => value["series"] == seriesname).length,
-                          weapons: fivestar.filter(value => value["series"] == seriesname && value["skill name en"] != "").length,
-                          evos: fivestar.filter(value => value["series"] == seriesname && value["skill evo name en"] != "").length,
+                          weapons: fivestar.filter(value => value["series"] == seriesname && value["weaponevo"] == "3").length,
+                          evos: fivestar.filter(value => value["series"] == seriesname && value["weaponevo"] == "4").length,
                           }))
   objectlist1.sort(function(a,b) {
     return b["cards"] - a["cards"] || b["weapons"] - a["weapons"] || b["evos"] - a["evos"];
