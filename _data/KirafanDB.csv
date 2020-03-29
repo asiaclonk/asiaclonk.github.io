@@ -191,7 +191,7 @@ name,series,class,attribute,rarity,weaponevo
 大垣 千明,Yuru Camp,Priest,Wind,4,0
 犬山 あおい,Yuru Camp,Knight,Earth,4,0
 巽 紺,Urara Meirochou,Warrior,Sun,5,0
-藤川 歌夜,Stella no Mahou,Alchemist,Water,5,0
+藤川 歌夜,Stella no Mahou,Alchemist,Water,5,3
 百武 照,Stella no Mahou,Mage,Moon,4,0
 大宮 忍,Kin`iro Mosaic,Priest,Fire,5,0
 長谷川 ふみ,Yuyushiki,Mage,Earth,4,0
@@ -266,7 +266,7 @@ name,series,class,attribute,rarity,weaponevo
 チノ,Gochuumon Usagi desu ka?,Mage,Sun,5,4
 ココア,Gochuumon Usagi desu ka?,Warrior,Fire,4,0
 チノ,Gochuumon Usagi desu ka?,Mage,Water,4,0
-百地 たまて,Slow Start,Warrior,Water,5,0
+百地 たまて,Slow Start,Warrior,Water,5,3
 鳩谷 こはね,Anima Yell,Mage,Fire,5,4
 鳩谷 こはね,Anima Yell,Mage,Sun,4,0
 有馬 ひづめ,Anima Yell,Knight,Fire,4,0
@@ -398,3 +398,11 @@ name,series,class,attribute,rarity,weaponevo
 志温【ひな祭り】,Slow Start,Warrior,Water,5,0
 ひでり【ひな祭り】,Blend S,Knight,Earth,5,0
 良子【ひな祭り】,Machikado Mazoku,Alchemist,Earth,4,0
+関 あやめ,Stella no Mahou,Warrior,Moon,5,0
+池谷 乃々,Stella no Mahou,Mage,Fire,5,0
+鶴瀬 まつり,Stella no Mahou,Knight,Moon,4,0
+木ノ幡 みら,Koisuru Asteroid,Alchemist,Moon,5,0
+真中 あお,Koisuru Asteroid,Mage,Fire,4,0
+木ノ幡 みら,Koisuru Asteroid,Alchemist,Wind,4,0
+モカ,Gochuumon Usagi desu ka?,Knight,Wind,5,0
+フェンネル,Kirara Fantasia,Knight,Moon,5,0

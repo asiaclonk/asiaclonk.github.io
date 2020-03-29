@@ -8,7 +8,7 @@ description: Some charts that reference a snapshot from a Kirara Fantasia gitlab
 <script src="assets/js/KiraraStats.js"></script>
 
 # Some charts that reference a snapshot from [a Kirara Fantasia gitlab database.](https://gitlab.com/kirafan)
-Last updated: 08.03.2020
+Last updated: 29.03.2020
 
 <div style="text-align:center">
   <label for="chartselect">Select Chart: </label>

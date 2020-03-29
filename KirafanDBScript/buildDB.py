@@ -44,7 +44,8 @@ seriesname = { "Hidamari": "Hidamari Sketch",
                "Hitugi": "Hitsugi Katsugi no Kuro. ~Kaichuu Tabi no Wa~",
                "Matikado": "Machikado Mazoku",
                "Harumination": "Harumination",
-               "Koufuku": "Koufuku Graffitti" }
+               "Koufuku": "Koufuku Graffitti",
+               "Koiasu": "Koisuru Asteroid" }
 
 #Load card data
 with urllib.request.urlopen(path + "CharacterList.csv") as response:
