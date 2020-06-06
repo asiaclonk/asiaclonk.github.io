@@ -1,114 +1,147 @@
----
-layout: blank
----
+//---
+//layout: blank
+//---
 
 $(document).ready(function() {
-  //Tiledata
-  tileset = {{ site.data.tiles | jsonify }};
-  intify(tileset);
-  tilelist = [];
+
+  // Tiledata
+  // #debug tileSet = {{ site.data.tiles | jsonify }};
+  Intify(tileSet);
+  tileList = [];
   clipboard = [];
 
-  //Mouse coordinates
-  coords = {
-    tile_width: 32,
-    tile_height: 32,
-    map_width: 0,
-    map_height: 0,
-    map_click: -1,
-    get map_leftclick() { return ![-1, 1, 2].some((n) => n == this.map_click) },
-    get map_middleclick() { return this.map_click == 1 },
-    get map_rightclick() { return this.map_click == 2 },
-    mouse: { x: 0, y: 0 },
-    canvas_start: { x: 0, y: 0 },
-    undraggedmap: { x: 0, y: 0 },
-    active_TILE: { x: 0, y: 0 },
-    set setactive(x) {
-      this.active_TILE.x = this.canvas_TILE.x;
-      this.active_TILE.y = this.canvas_TILE.y;
-    },
-    set start(x) {
-      this.canvas_start.x = this.canvas_map.x;
-      this.canvas_start.y = this.canvas_map.y;
-    },
-    set finish(x) {
-      if (this.map_leftclick && activemode() == 0) {
-        this.undraggedmap.x -= this.canvas_drag.x;
-        this.undraggedmap.y -= this.canvas_drag.y;
-      }
-      this.map_click = -1;
-      this.canvas_start = { x: 0, y: 0 };
-    },
-    get no_drag() { return this.canvas_drag.x == 0 && this.canvas_drag.y == 0; },
-    get map() { return this.map_leftclick && activemode() == 0 ?
-                  { x: this.undraggedmap.x - this.canvas_drag.x,
-                    y: this.undraggedmap.y - this.canvas_drag.y }
-                : this.undraggedmap; },
-    get MAP() { return { x: Math.floor(this.map.x / this.tile_width),
-                         y: Math.floor(this.map.y / this.tile_height) }; },
-    get offset() { return { x: mod(this.map.x, this.tile_width),
-                            y: mod(this.map.y, this.tile_height) }; },
+  // Constants
+  const _tileWidth = 32;
+  const _tileHeight = 32;
+  const _backGroundWidth = 512;
+  const _backGroundHeight = 32;
+  const _tileDataCount = tileSet.count;
 
-    get canvas_tile() { var rect = $("#selectmap")[0].getBoundingClientRect();
-                        return { x: this.mouse.x - rect.left,
-                                 y: this.mouse.y - rect.top }; },
-    get canvas_TILE() { return { x: Math.floor(this.canvas_tile.x / this.tile_width),
-                                 y: Math.floor(this.canvas_tile.y / this.tile_height) }; },
+  // Mouse 
+  mouseData = {
+    WindowLocation: { x: 0, y: 0 },
+    ClickMode: -1,
 
-    get canvas_map() { var rect = $("#foreground")[0].getBoundingClientRect();
-                       return { x: this.mouse.x - rect.left,
-                                y: this.mouse.y - rect.top }; },
-    get canvas_MAP() { return { x: Math.floor((this.canvas_map.x + this.offset.x) / this.tile_width),
-                                  y: Math.floor((this.canvas_map.y + this.offset.y) / this.tile_height) }; },
-    get true_map() { return { x: this.map.x + this.canvas_map.x,
-                              y: this.map.y + this.canvas_map.y }; },
-    get true_MAP() { return { x: Math.floor(this.true_map.x / this.tile_width),
-                              y: Math.floor(this.true_map.y / this.tile_height) }; },
+    // Button info
+    get IsLeftClick() { return ![-1, 1, 2].some((n) => n == this.ClickMode) },
+    get IsMiddleClick() { return this.ClickMode == 1 },
+    get IsRightClick() { return this.ClickMode == 2 },
 
-    get canvas_drag() { return this.map_leftclick && activemode() != 1 ?
-                          { x: this.canvas_map.x - this.canvas_start.x,
-                            y: this.canvas_map.y - this.canvas_start.y }
-                          : { x: 0, y: 0 }; },
-    get canvas_START() { return { x: Math.floor((this.canvas_start.x + this.offset.x) / this.tile_width),
-                                    y: Math.floor((this.canvas_start.y + this.offset.y) / this.tile_height) }; },
-    get true_start() { return { x: this.map.x + this.canvas_start.x,
-                                y: this.map.y + this.canvas_start.y }; },
-    get true_START() { return { x: Math.floor(this.true_start.x / this.tile_width),
-                                y: Math.floor(this.true_start.y / this.tile_height) }; },
+    // Tileset info
+    get TileSetLocation() { var rect = $("#selectionGrid")[0].getBoundingClientRect();
+                   return { x: this.WindowLocation.x - rect.left,
+                            y: this.WindowLocation.y - rect.top }; },
+    get TileSetTile() { return { x: Math.floor(mouseData.TileSetLocation.x / _tileWidth),
+                                 y: Math.floor(mouseData.TileSetLocation.y / _tileHeight) }; },
+  
+    // Drag info
+    WindowDragStart: { x: 0, y: 0 },
+    get NoDrag() { return this.WindowDrag.x == 0 && this.WindowDrag.y == 0; },
+    get WindowDrag() { return this.IsLeftClick && GetPlacementMode() != 1 ?
+                         { x: this.WindowLocation.x - this.WindowDragStart.x,
+                           y: this.WindowLocation.y - this.WindowDragStart.y }
+                       : { x: 0, y: 0 }; },
+
+    // Map drag info
+    CanvasDragStart: { x: 0, y: 0 },
+    get CanvasDragStartTile() { return { x: Math.floor((this.CanvasDragStart.x + mapData.TileOffset.x) / _tileWidth),
+                                         y: Math.floor((this.CanvasDragStart.y + mapData.TileOffset.y) / _tileHeight) }; },
+
+    // Map info
+    get CanvasLocation() { var rect = $("#foreground")[0].getBoundingClientRect();
+                  return { x: this.WindowLocation.x - rect.left,
+                           y: this.WindowLocation.y - rect.top }; },
+    get CanvasTile() { return { x: Math.floor((this.CanvasLocation.x + mapData.TileOffset.x) / _tileWidth),
+                                y: Math.floor((this.CanvasLocation.y + mapData.TileOffset.y) / _tileHeight) }; },
+  }
+
+  // Map & Tileset
+  mapData = {
+
+    // From the tileset
+    SelectedTileSetTile: { x: 0, y: 0 },
+
+    // Ingame map info
+    MapWidth: 0,  // Will be set on load
+    MapHeight: 0, // Will be set on load
+
+    // Top left location info
+    CurrentLocation: { x: 0, y: 0 },
+    get DraggedLocation() { return { x: this.CurrentLocation.x - mouseData.WindowDrag.x,
+                                     y: this.CurrentLocation.y - mouseData.WindowDrag.y } },
+
+    get CurrentTile() { return { x: Math.floor(this.CurrentLocation.x / _tileWidth),
+                                 y: Math.floor(this.CurrentLocation.y / _tileHeight) }; },
+    get DraggedTile() { return { x: Math.floor(this.DraggedLocation.x / _tileWidth),
+                                 y: Math.floor(this.DraggedLocation.y / _tileHeight) }; },
+
+    get TileOffset() { return { x: Mod(this.map.x, _tileWidth),
+                                y: Mod(this.map.y, _tileHeight) }; },
+
+    // Moused tile info
+    get MousedLocation() { return { x: this.CurrentLocation.x + mouseData.CanvasLocation.x,
+                                    y: this.CurrentLocation.y + mouseData.CanvasLocation.y }; },
+    get MousedTile() { return { x: Math.floor(this.MousedLocation.x / _tileWidth),
+                                y: Math.floor(this.MousedLocation.y / _tileHeight) }; },
+
+    // Drag info
+    get DragStart() { return { x: this.CurrentLocation.x + mouseData.CanvasDragStart.x,
+                               y: this.CurrentLocation.y + mouseData.CanvasDragStart.y }; },
+    get DragStartTile() { return { x: Math.floor(this.DragStart.x / _tileWidth),
+                                   y: Math.floor(this.DragStart.y / _tileHeight) }; },
   };
 
-  //Images
-  tiles = $("#tiles")[0];
-  backgroundtiles = $("#backgroundtiles")[0];
-
   //Tileset canvas
-  selectcanvas = $("#selectmap")[0];
-  selectcontext = selectcanvas.getContext("2d");
+  tileSetCanvas = $("#tileSet")[0];
+  tileSetContext = tileSetCanvas.getContext("2d");
+  selectionTileSetCanvas = $("#selectionGrid")[0];
+  selectionTileSetContext = selectionTileSetCanvas.getContext("2d");
 
   //Map canvas and size settings
   $("#map").resizable();
   $(".wrapper").css("max-width", "100%");
   $("section").css("max-width", "100%");
-  if (checkCookie("map_width") && checkCookie("map_height")) {
-    $("#map").width(parseInt(getCookie("map_width")));
-    $("#map").height(parseInt(getCookie("map_height")));
+  if (checkCookie("MapWidth") && checkCookie("MapHeight")) {
+    $("#map").width(parseInt(getCookie("MapWidth")));
+    $("#map").height(parseInt(getCookie("MapHeight")));
   }
-  backcontext = $("#background")[0].getContext("2d");
-  tilecontext = $("#tilemap")[0].getContext("2d");
-  mapselectcontext = $("#foreground")[0].getContext("2d");
+  backcontext = $("#backGround")[0].getContext("2d", { alpha: false });
+  mapcontext = $("#worldMap")[0].getContext("2d");
+  mapselectionTileSetContext = $("#foreground")[0].getContext("2d");
+
+  //Prepare toolbox on load
+  tiles = new Image()
+  tilecache = [];
+  tiles.onload = function() {
+    $("#worldMap")[0].width = _tileDataCount * _tileWidth;
+    $("#selectionGrid")[0].width = _tileDataCount * _tileWidth;
+    for (let i = 0; i < _tileDataCount; i++) {
+      let columncache = [];
+      for (let j = 0; j < getgroup().count; j++) {
+        let cacheblock = createCanvas(32, 32);
+        let cachecontext = cacheblock.getContext("2d");
+        cachecontext.drawImage(
+        tiles, i * _tileWidth, j * _tileHeight,
+        _tileWidth, _tileHeight, 0, 0,
+        _tileWidth, _tileHeight);
+        columncache.push(cacheblock);
+      }
+    tilecache.push(columncache);
+    }
+  }
 
   //Draw background on load
   backgroundtiles = new Image(512,32);
   backgroundtiles.onload = function() {
     backcontext.beginPath();
     backcontext.fillStyle = backcontext.createPattern(backgroundtiles, "repeat");
-    backcontext.rect(0, 0, coords.map_width, coords.map_height);
+    backcontext.rect(0, 0, mapData.MapWidth, mapData.MapHeight);
     backcontext.fill();
   };
   backgroundtiles.src = "assets/images/tilebackground.png";
 
   //Sounds
-  sounds = {{ site.data.sounds | jsonify }};
+  // #debug sounds = {{ site.data.sounds | jsonify }};
 
   //Radiobuttons for tilemodes
   selectedmode = 0;
@@ -131,6 +164,7 @@ $(document).ready(function() {
     placemode = parseInt(getCookie("placemode"));
     placeradios[placemode].prop("checked", true);
   }
+
   placeradios[0].click(function() { placemode = 0; setCookie("placemode", placemode, 730); });
   placeradios[1].click(function() { placemode = 1; setCookie("placemode", placemode, 730); });
   placeradios[2].click(function() { placemode = 2; setCookie("placemode", placemode, 730); });
@@ -138,80 +172,81 @@ $(document).ready(function() {
   //Update mouse position and check mapsize
   $(document).mousemove(function(e) {
     //Resize check
-    var newwidth = $("#map").width();
-    var newheight = $("#map").height();
-    if (newwidth != coords.map_width || newheight != coords.map_height) {
-      setCookie("map_width", newwidth, 730);
-      setCookie("map_height", newheight, 730);
-      coords.map_width = newwidth;
-      coords.map_height = newheight;
-      $("#background")[0].width = newwidth;
-      $("#tilemap")[0].width = newwidth;
+    var newwidth = Math.floor($("#map").width());
+    var newheight = Math.floor($("#map").height());
+    if (newwidth != mapData.MapWidth || newheight != mapData.MapHeight) {
+      setCookie("MapWidth", newwidth, 730);
+      setCookie("MapHeight", newheight, 730);
+      mapData.MapWidth = newwidth;
+      mapData.MapHeight = newheight;
+      $("#backGround")[0].width = newwidth;
+      $("#worldMap")[0].width = newwidth;
       $("#foreground")[0].width = newwidth;
-      $("#background")[0].height = newheight;
-      $("#tilemap")[0].height = newheight;
+      $("#backGround")[0].height = newheight;
+      $("#worldMap")[0].height = newheight;
       $("#foreground")[0].height = newheight;
       backcontext.beginPath();
       backcontext.fillStyle = backcontext.createPattern(backgroundtiles, "repeat");
       backcontext.rect(0, 0, newwidth, newheight);
       backcontext.fill();
-      drawmap();
+      drawMap();
     }
 
     //Update mouse
     if (typeof e !== "undefined") {
-      coords.mouse = { x: e.clientX, y: e.clientY };
+      mouseData.WindowLocation = { x: Math.floor(e.clientX), y: Math.floor(e.clientY) };
     }
   })
 
-  //Tileset functions
-  $("#selectmap").mousemove(function() {
-    drawselection(coords.canvas_TILE);
+  // Tileset functions
+  $("#selectionGrid").mousemove(function() {
+    drawselection(mouseData.TileSetTile);
   });
-  $("#selectmap").click(function() {
-    coords.setactive = true;
-    drawselection(coords.active_TILE);
-    playsound(6);
-  });
-  $("#selectmap").mouseleave(drawselection());
 
-  //Map functions
+  $("#selectionGrid").click(function() {
+    mapData.setactive = true;
+    drawselection(mapData.SelectedTileSetTile);
+    PlaySound(6);
+  });
+  $("#selectionGrid").mouseleave(drawselection());
+
+  // Mouse functions
   $("#foreground").mousedown(function(e) {
-    //Update button
-    coords.map_click = e.button;
+    // Update button
+    mouseData.mode = e.button;
 
-    if (coords.map_leftclick) {
+    if (mouseData.IsLeftClick) {
       //Start drag
-      coords.start = true;
-      if (activemode() == 1) {
+      mapData.start = true;
+      if (GetPlacementMode() == 1) {
         if (clipboard.length > 0) {
           //Tile your entire inventory
           placeclipboard();
         }
         else {
           //Tile the map
-          var result = placetile(coords.true_MAP, coords.active_TILE);
+          var result = placetile(mapData.MousedTile, mapData.SelectedTileSetTile);
           if (result !== false) {
-            $("#exporttext").val(JSON.stringify(tilelist));
-            playsound(getgroup(result.tilex, result.tiley).build);
+            $("#exporttext").val(JSON.stringify(tileList));
+            PlaySound(getgroup(result.tx, result.ty).build);
           }
           else {
-            playsound(3);
+            PlaySound(3);
           }
         }
       }
     }
-    if (coords.map_middleclick) {
+    if (mouseData.IsMiddleClick) {
       //Copy tile selection, no scroller
-      pincette(coords.true_MAP);
+      Pincette(mapData.MousedTile);
       e.preventDefault();
     }
-    if (coords.map_rightclick) {
+    if (mouseData.IsRightClick) {
       //Remove tile
-      var result = placetile(coords.true_MAP);
+      var result = placetile(mapData.MousedTile);
       if (result !== false) {
-        $("#exporttext").val(JSON.stringify(tilelist));
-        playsound(getgroup(result.tilex, result.tiley).remove);
+        $("#exporttext").val(JSON.stringify(tileList));
+        PlaySound(getgroup(result.tx, result.ty).remove);
       }
     }
   });
@@ -220,97 +255,97 @@ $(document).ready(function() {
     e.preventDefault();
   });
   $("#foreground").mousemove(function() {
-    writecoords(coords.true_MAP);
-    if (coords.map_leftclick) {
-      if (activemode() == 0) {
+    writeCoordText(mapData.MousedTile);
+    if (mouseData.IsLeftClick) {
+      if (GetPlacementMode() == 0) {
         //Drag map
         $("#foreground").css("cursor", "move");
         //Draw background
-        backcontext.setTransform(1,0,0,1, -coords.map.x % 512,
-                                          -coords.map.y % 32);
+        backcontext.setTransform(1,0,0,1, -mapData.map.x % 512,
+                                          -mapData.map.y % 32);
         backcontext.fill();
-        drawmap();
+        drawMap();
         drawmapselection();
-        writecoords(coords.true_START);
+        writeCoordText(mapData.DragStartTile);
       }
       else {
-        drawmapselection(coords.canvas_MAP);
-        if (activemode() == 1) {
+        drawmapselection(mouseData.CanvasTile);
+        if (GetPlacementMode() == 1) {
           if (clipboard.length > 0) {
             //Tile your entire inventory
             placeclipboard();
           }
           else {
             //Tile the map
-            var result = placetile(coords.true_MAP, coords.active_TILE);
+            var result = placetile(mapData.MousedTile, mapData.SelectedTileSetTile);
             if (result !== false) {
-              $("#exporttext").val(JSON.stringify(tilelist));
-              playsound(getgroup(result.tilex, result.tiley).build);
-              drawmap();
+              $("#exporttext").val(JSON.stringify(tileList));
+              PlaySound(getgroup(result.tx, result.ty).build);
+              drawMap();
             }
           }
         }
       }
     }
     else {
-      drawmapselection(coords.canvas_MAP);
-      if (coords.map_middleclick) {
+      drawmapselection(mouseData.CanvasTile);
+      if (mouseData.IsMiddleClick) {
         //Copy tile selection
-        pincette(coords.true_MAP);
+        Pincette(mapData.MousedTile);
       }
-      else if (coords.map_rightclick) {
+      else if (mouseData.IsRightClick) {
         //Remove tiles
-        var result = placetile(coords.true_MAP);
+        var result = placetile(mapData.MousedTile);
         if (result !== false) {
-          $("#exporttext").val(JSON.stringify(tilelist));
-          playsound(getgroup(result.tilex, result.tiley).remove);
+          $("#exporttext").val(JSON.stringify(tileList));
+          PlaySound(getgroup(result.tx, result.ty).remove);
         }
       }
     }
   });
   $("#foreground").mouseleave(function() {
     drawmapselection();
-    writecoords();
+    writeCoordText();
   });
   $("#foreground").mouseup(function(e) {
-    if (coords.map_leftclick) {
-      if (coords.no_drag) {
-        if (clipboard.length > 0 && (activemode() == 0 || activemode() == 2)) {
+    if (mouseData.IsLeftClick) {
+      if (mouseData.NoDrag) {
+        if (clipboard.length > 0 && (GetPlacementMode() == 0 || GetPlacementMode() == 2)) {
           //Place the clipboard
           placeclipboard();
         }
-        else if (activemode() == 0) {
+        else if (GetPlacementMode() == 0) {
           //Place down tile
-          var result = placetile(coords.true_MAP, coords.active_TILE);
+          var result = placetile(mapData.MousedTile, mapData.SelectedTileSetTile);
           if (result !== false) {
-            $("#exporttext").val(JSON.stringify(tilelist));
-            playsound(getgroup(result.tilex, result.tiley).build);
+            $("#exporttext").val(JSON.stringify(tileList));
+            PlaySound(getgroup(result.tx, result.ty).build);
           }
           else {
-            playsound(3);
+            PlaySound(3);
           }
         }
       }
       else {
-        if (activemode() == 0) {
+        if (GetPlacementMode() == 0) {
           //Stop drag
           $("#foreground").css("cursor", "default");
         }
-        else if (activemode() == 2) {
+        else if (GetPlacementMode() == 2) {
           //Else copy selection
-          var absx = Math.abs(coords.true_MAP.x - coords.true_START.x);
-          var absy = Math.abs(coords.true_MAP.y - coords.true_START.y);
-          var offsetx = Math.floor(absx / 2);
-          var offsety = Math.floor(absy / 2);
-          var minx = Math.min(coords.true_START.x, coords.true_MAP.x);
-          var miny = Math.min(coords.true_START.y, coords.true_MAP.y);
-          var filtered = tilelist.filter((value) =>
-            value.mapx >= minx && value.mapx <= minx + absx &&
-            value.mapy >= miny && value.mapy <= miny + absy);
+          var absx = Math.abs(mapData.MousedTile.x - mapData.DragStartTile.x);
+          var absy = Math.abs(mapData.MousedTile.y - mapData.DragStartTile.y);
+          var TileOffsetx = Math.floor(absx / 2);
+          var TileOffsety = Math.floor(absy / 2);
+          var minx = Math.min(mapData.DragStartTile.x, mapData.MousedTile.x);
+          var miny = Math.min(mapData.DragStartTile.y, mapData.MousedTile.y);
+          var filtered = tileList.filter((value) =>
+            value.x >= minx && value.x <= minx + absx &&
+            value.y >= miny && value.y <= miny + absy);
           clipboard = _.cloneDeep(filtered);
           clipboard.forEach((value) => {
-            value.mapx = value.mapx - minx - offsetx;
-            value.mapy = value.mapy - miny - offsety;
+            value.x = value.x - minx - TileOffsetx;
+            value.y = value.y - miny - TileOffsety;
           });
           if (clipboard.length > 0) {
             $("#clipclearer").button("option", "disabled", false);
@@ -321,22 +356,22 @@ $(document).ready(function() {
         }
       }
     }
-    coords.finish = true;
-    backcontext.setTransform(1,0,0,1, -coords.map.x % 512,
-                                      -coords.map.y % 32);
+    mapData.finish = true;
+    backcontext.setTransform(1,0,0,1, -mapData.map.x % 512,
+                                      -mapData.map.y % 32);
     backcontext.fill();
-    drawmap();
-    drawmapselection(coords.canvas_MAP);
+    drawMap();
+    drawmapselection(mouseData.CanvasTile);
   });
   $("#foreground")[0].addEventListener("wheel", function (e) {
     //Select next tile
     var delta = Math.sign(e.deltaY);
-    var group = getgroup(coords.active_TILE.x, coords.active_TILE.y, delta);
-    coords.active_TILE.x = group.x;
-    coords.active_TILE.y = (coords.active_TILE.y % group.count) + group.y;
+    var group = getgroup(mapData.SelectedTileSetTile.x, mapData.SelectedTileSetTile.y, delta);
+    mapData.SelectedTileSetTile.x = group.x;
+    mapData.SelectedTileSetTile.y = (mapData.SelectedTileSetTile.y % group.count) + group.y;
     drawselection();
-    drawmapselection(coords.canvas_MAP);
-    playsound(7);
+    drawmapselection(mouseData.CanvasTile);
+    PlaySound(7);
     e.preventDefault();
   });
 
@@ -344,21 +379,21 @@ $(document).ready(function() {
     //Quick select tilemode
     if (e.which == 16) {
       keymode = 1;
-      setradios(1);
+      setRadioButtons(1);
     }
     if (e.which == 17) {
       keymode = 2;
-      setradios(2);
+      setRadioButtons(2);
     }
     if (e.which == 82) {
       //Or rotate tile
-      var group = tileset.find((value) => coords.active_TILE.x == value.x &&
-                                          coords.active_TILE.y >= value.y &&
-                                          coords.active_TILE.y <  value.y + value.count);
+      var group = tileSet.find((value) => mapData.SelectedTileSetTile.x == value.x &&
+                                          mapData.SelectedTileSetTile.y >= value.y &&
+                                          mapData.SelectedTileSetTile.y <  value.y + value.count);
       if (typeof group !== "undefined") {
-        coords.active_TILE.y = ((coords.active_TILE.y - group.y + 1) % group.count) + group.y;
+        mapData.SelectedTileSetTile.y = ((mapData.SelectedTileSetTile.y - group.y + 1) % group.count) + group.y;
         drawselection();
-        drawmapselection(coords.canvas_MAP);
+        drawmapselection(mouseData.CanvasTile);
       }
     }
   });
@@ -367,11 +402,11 @@ $(document).ready(function() {
     //Finish quick select
     if (e.which == 16) {
       keymode = 0;
-      setradios();
+      setRadioButtons();
     }
     if (e.which == 17) {
       keymode = 0;
-      setradios();
+      setRadioButtons();
     }
   });
 
@@ -386,8 +421,8 @@ $(document).ready(function() {
   $("#importbutton").click(function() {
     //Load map
     var importtiles = JSON.parse($("#importtext").val());
-    tilelist = importtiles;
-    drawmap();
+    tileList = importtiles;
+    drawMap();
   });
   $("#copybutton").button({ icon: "ui-icon-clipboard" });
   $("#copybutton").click(function() {
@@ -398,35 +433,34 @@ $(document).ready(function() {
 
   $(document).click(function() {
     //Welcome
-    playsound(8);
+    PlaySound(8);
     $(document).unbind("click");
   });
 
   drawselection();
 });
 
-function placetile(map_tile, tile = false) {
-  var selectedtile = tilelist.find((value) => value.mapx == map_tile.x &&
-                                              value.mapy == map_tile.y);
+function placetile(map_location, tile = false) {
+  var selectedtile = tileList.find((value) => value.x == map_location.x &&
+                                              value.y == map_location.y);
+  //Already a tile on the position?
   if (typeof selectedtile !== "undefined") {
-    if (tile === false) {
+    if (tile === false || tile.x == 0) {
       //No tile given? Clear it
-      var index = tilelist.indexOf(selectedtile);
-      return tilelist.splice(index, 1)[0];
+      var index = tileList.indexOf(selectedtile);
+      return tileList.splice(index, 1)[0];
     }
-    else if (tile.x != selectedtile.tilex || tile.y != selectedtile.tiley) {
-      if (placemode == 2) {
-        //Or replace
-        selectedtile.tilex = tile.x;
-        selectedtile.tiley = tile.y;
-        return selectedtile;
-      }
+    else if (placemode == 2 && tile.x != selectedtile.tx || tile.y != selectedtile.ty) {
+      //Or replace
+      selectedtile.tx = tile.x;
+      selectedtile.ty = tile.y;
+      return selectedtile;
     }
   }
-  else if (tile !== false) {
+  else if (tile !== false && tile.x != 0) {
     //Place down a new tile
-    var newtile = { tilex: tile.x, tiley: tile.y, mapx: map_tile.x, mapy: map_tile.y };
-    tilelist.push(newtile);
+    var newtile = { x: tile.x, y: tile.y, x: map_location.x, y: map_location.y };
+    tileList.push(newtile);
     return newtile;
   }
   return false;
@@ -434,180 +468,193 @@ function placetile(map_tile, tile = false) {
 
 function placeclipboard() {
   //Check tiles
-  if (placemode == 0 && clipboard.some((value) => tilelist.some((tile) =>
-    tile.mapx == coords.true_MAP.x + value.mapx && tile.mapy == coords.true_MAP.y + value.mapy &&
-    (tile.tilex != value.tilex || tile.tiley != value.tiley)))) {
+  if (placemode == 0 && clipboard.some((value) => tileList.some((tile) =>
+    tile.x == mapData.MousedTile.x + value.x && tile.y == mapData.MousedTile.y + value.y &&
+    (tile.tx != value.tx || tile.ty != value.ty)))) {
       //Deny placement
-      if (activemode() != 1) {
-        playsound(3);
+      if (GetPlacementMode() != 1) {
+        PlaySound(3);
       }
   }
   else {
     //Place down your clipboard
     var confirm = false;
     clipboard.forEach((value) => {
-      var result = placetile({ x: coords.true_MAP.x + value.mapx, y: coords.true_MAP.y + value.mapy },
-      { x: value.tilex, y: value.tiley });
+      var result = placetile({ x: mapData.MousedTile.x + value.x, y: mapData.MousedTile.y + value.y },
+      { x: value.tx, y: value.ty });
       if (result !== false) {
         confirm = true;
       }
     });
 
     if (confirm) {
-      $("#exporttext").val(JSON.stringify(tilelist));
-      playsound(2);
-      drawmap();
+      $("#exporttext").val(JSON.stringify(tileList));
+      PlaySound(2);
+      drawMap();
     }
     else {
-      if (activemode() != 1) {
-        playsound(3);
+      if (GetPlacementMode() != 1) {
+        PlaySound(3);
       }
     }
   }
 }
 
-function pincette(map_tile) {
-  var selectedtile = tilelist.find((value) => value.mapx == map_tile.x && value.mapy == map_tile.y);
+function Pincette(map_tile) {
+  var selectedtile = tileList.find((value) => value.x == map_tile.x && value.y == map_tile.y);
   if (typeof selectedtile !== "undefined") {
-    if (coords.active_TILE.x != selectedtile.tilex || coords.active_TILE.y != selectedtile.tiley) {
-      coords.active_TILE.x = selectedtile.tilex;
-      coords.active_TILE.y = selectedtile.tiley;
+    if (mapData.SelectedTileSetTile.x != selectedtile.tx || mapData.SelectedTileSetTile.y != selectedtile.ty) {
+      mapData.SelectedTileSetTile.x = selectedtile.tx;
+      mapData.SelectedTileSetTile.y = selectedtile.ty;
       drawselection();
-      playsound(7);
+      PlaySound(7);
     }
   }
 }
 
 function drawselection(tile = false) {
-  selectcontext.clearRect(0, 0, selectcanvas.width, selectcanvas.height);
+  selectionTileSetContext.clearRect(0, 0, selectionTileSetCanvas.width, selectionTileSetCanvas.height);
   if(tile !== false) {
-    selectcontext.beginPath();
-    selectcontext.strokeStyle = "yellow";
-    selectcontext.rect(tile.x * coords.tile_width, tile.y * coords.tile_height,
-                       coords.tile_width, coords.tile_height);
-    selectcontext.stroke();
+    selectionTileSetContext.beginPath();
+    selectionTileSetContext.strokeStyle = "yellow";
+    selectionTileSetContext.rect(tile.x * _tileWidth, tile.y * _tileHeight,
+                       _tileWidth, _tileHeight);
+    selectionTileSetContext.stroke();
   }
-  selectcontext.beginPath();
-  selectcontext.strokeStyle = "lightgreen";
-  selectcontext.rect(coords.active_TILE.x * coords.tile_width,
-                     coords.active_TILE.y * coords.tile_height,
-                     coords.tile_width, coords.tile_height);
-  selectcontext.stroke();
+  selectionTileSetContext.beginPath();
+  selectionTileSetContext.strokeStyle = "lightgreen";
+  selectionTileSetContext.rect(mapData.SelectedTileSetTile.x * _tileWidth,
+                     mapData.SelectedTileSetTile.y * _tileHeight,
+                     _tileWidth, _tileHeight);
+  selectionTileSetContext.stroke();
 }
 
 function drawmapselection(map_tile = false) {
-  mapselectcontext.clearRect(0, 0, coords.map_width, coords.map_height);
+  mapselectionTileSetContext.clearRect(0, 0, mapData.MapWidth, mapData.MapHeight);
   if(map_tile !== false) {
-    if (activemode() == 2 && coords.map_leftclick) {
+    if (GetPlacementMode() == 2 && mouseData.IsLeftClick) {
       //Draw the copy selection
-      var absx = Math.abs(coords.canvas_MAP.x - coords.canvas_START.x);
-      var absy = Math.abs(coords.canvas_MAP.y - coords.canvas_START.y);
-      var minx = Math.min(coords.canvas_MAP.x, coords.canvas_START.x);
-      var miny = Math.min(coords.canvas_MAP.y, coords.canvas_START.y);
-      mapselectcontext.beginPath();
-      mapselectcontext.strokeStyle = "lightgreen";
-      mapselectcontext.rect(minx * coords.tile_width - coords.offset.x,
-                            miny * coords.tile_height - coords.offset.y,
-                            (absx + 1) * coords.tile_width, (absy + 1) * coords.tile_height);
-      mapselectcontext.stroke();
+      var absx = Math.abs(mouseData.CanvasTile.x - mouseData.CanvasDragStartTile.x);
+      var absy = Math.abs(mouseData.CanvasTile.y - mouseData.CanvasDragStartTile.y);
+      var minx = Math.min(mouseData.CanvasTile.x, mouseData.CanvasDragStartTile.x);
+      var miny = Math.min(mouseData.CanvasTile.y, mouseData.CanvasDragStartTile.y);
+      mapselectionTileSetContext.beginPath();
+      mapselectionTileSetContext.strokeStyle = "lightgreen";
+      mapselectionTileSetContext.rect(minx * _tileWidth - mapData.TileOffset.x,
+                            miny * _tileHeight - mapData.TileOffset.y,
+                            (absx + 1) * _tileWidth, (absy + 1) * _tileHeight);
+      mapselectionTileSetContext.stroke();
     }
     else if (clipboard.length > 0) {
       //Draw the copied selection
       clipboard.forEach((value) => {
-        drawonemapselection((map_tile.x + value.mapx), (map_tile.y + value.mapy), value.tilex, value.tiley);
+        drawOneHoverTile((map_tile.x + value.x), (map_tile.y + value.y), value.tx, value.ty);
       });
     }
     else {
       //Or just draw one tile if not in copy mode
-      if (activemode() != 2) {
-        drawonemapselection(map_tile.x, map_tile.y, coords.active_TILE.x, coords.active_TILE.y);
+      if (GetPlacementMode() != 2) {
+        drawOneHoverTile(map_tile.x, map_tile.y, mapData.SelectedTileSetTile.x, mapData.SelectedTileSetTile.y);
       }
       else {
-        drawonemapselection(map_tile.x, map_tile.y);
+        drawOneHoverTile(map_tile.x, map_tile.y);
       }
     }
   }
 }
 
-function drawonemapselection(x, y, tx = false, ty = false) {
+function drawOneHoverTile(x, y, tx = false, ty = false) {
+
+  // Draw tile preview if one is given
   if (tx !== false && ty !== false) {
-    //First the icon
-    mapselectcontext.drawImage(
-      tiles, tx * coords.tile_width, ty * coords.tile_height,
-      coords.tile_width, coords.tile_height,
-      x * coords.tile_width - coords.offset.x,
-      y * coords.tile_height - coords.offset.y,
-      coords.tile_width, coords.tile_height);
+    //First the icon, TODO: use cached image
+    mapselectionTileSetContext.drawImage(
+      tiles, tx * _tileWidth, ty * _tileHeight,
+      _tileWidth, _tileHeight,
+      x * _tileWidth - mapData.TileOffset.x,
+      y * _tileHeight - mapData.TileOffset.y,
+      _tileWidth, _tileHeight);
 
     //Now color
     var color = "lightgreen";
-    var blocked = tilelist.some((tile) =>
-      tile.mapx == x + coords.MAP.x && tile.mapy == y + coords.MAP.y &&
-      (tile.tilex != tx || tile.tiley != ty));
+    var blocked = tileList.some((tile) =>
+      tile.x == x + mapData.CurrentTile.x &&
+      tile.y == y + mapData.CurrentTile.y &&
+      (tile.tx != tx || tile.ty != ty));
+
     if (blocked) {
       color = "red";
     }
-    mapselectcontext.fillStyle = color;
-    mapselectcontext.globalAlpha = 0.4;
-    mapselectcontext.globalCompositeOperation = "source-atop";
-    mapselectcontext.fillRect(x * coords.tile_width - coords.offset.x,
-                              y * coords.tile_height - coords.offset.y,
-                              coords.tile_width, coords.tile_height);
+
+    mapselectionTileSetContext.fillStyle = color;
+    mapselectionTileSetContext.globalAlpha = 0.4;
+    mapselectionTileSetContext.globalCompositeOperation = "source-atop";
+    mapselectionTileSetContext.fillRect(x * _tileWidth - mapData.TileOffset.x,
+                              y * _tileHeight - mapData.TileOffset.y,
+                              _tileWidth, _tileHeight);
     //Finish
-    mapselectcontext.globalAlpha = 1;
-    mapselectcontext.globalCompositeOperation = "source-over";
+    mapselectionTileSetContext.globalAlpha = 1;
+    mapselectionTileSetContext.globalCompositeOperation = "source-over";
   }
-  mapselectcontext.beginPath();
-  mapselectcontext.strokeStyle = "yellow";
-  mapselectcontext.rect(x * coords.tile_width - coords.offset.x,
-                        y * coords.tile_height - coords.offset.y,
-                        coords.tile_width, coords.tile_height);
-  mapselectcontext.stroke();
+
+  mapselectionTileSetContext.beginPath();
+  mapselectionTileSetContext.strokeStyle = "yellow";
+  mapselectionTileSetContext.rect(x * _tileWidth - mapData.TileOffset.x,
+                        y * _tileHeight - mapData.TileOffset.y,
+                        _tileWidth, _tileHeight);
+  mapselectionTileSetContext.stroke();
 }
 
-function drawmap() {
+function drawMap() {
   //Get tiles in range
-  tilecontext.clearRect(0, 0, coords.map_width, coords.map_height);
-  var tilestodraw = tilelist.filter((value) =>
-    value.mapx >= coords.MAP.x && value.mapy >= coords.MAP.y &&
-    value.mapx <= coords.MAP.x + Math.floor(coords.map_width / coords.tile_width) + 1 &&
-    value.mapy <= coords.MAP.y + Math.floor(coords.map_height / coords.tile_height) + 1
+  mapcontext.clearRect(0, 0, mapData.MapWidth, mapData.MapHeight);
+  var tilestodraw = tileList.filter((value) =>
+    value.x >= mapData.CurrentTile.x && value.y >= mapData.CurrentTile.y &&
+    value.x <= mapData.CurrentTile.x + Math.floor(mapData.MapWidth / _tileWidth) + 1 &&
+    value.y <= mapData.CurrentTile.y + Math.floor(mapData.MapHeight / _tileHeight) + 1
   );
 
-  //Draw tiles
+  //Draw tiles, TODO: use cached images
   tilestodraw.forEach((value) => {
-    tilecontext.drawImage(
-      tiles, value.tilex * coords.tile_width, value.tiley * coords.tile_height,
-      coords.tile_width, coords.tile_height,
-      (value.mapx - coords.MAP.x) * coords.tile_width - coords.offset.x,
-      (value.mapy - coords.MAP.y) * coords.tile_height - coords.offset.y,
-      coords.tile_width, coords.tile_height);
+    mapcontext.drawImage(
+      tiles, value.tx * _tileWidth, value.ty * _tileHeight,
+      _tileWidth, _tileHeight,
+      (value.x - mapData.CurrentTile.x) * _tileWidth - mapData.TileOffset.x,
+      (value.y - mapData.CurrentTile.y) * _tileHeight - mapData.TileOffset.y,
+      _tileWidth, _tileHeight);
   });
 }
 
-function setradios(mode = 0) {
+function setRadioButtons(mode = 0) {
   var realmode = mode == 0 ? selectedmode : mode;
   moderadios[realmode].prop("checked", true);
 }
 
-function writecoords(tile = false) {
+function writeCoordText(tile = false) {
   var mousetext = tile !== false ? "Selection: (X: " + tile.x + ", Y: " + tile.y + "), " : "";
-  var maptext = "Map: (X: " + coords.MAP.x + ", Y: " + coords.MAP.y + ")";
+  var maptext = "Map: (X: " + mapData.CurrentTile.x + ", Y: " + mapData.CurrentTile.y + ")";
   $("#coordtext").html(mousetext + maptext);
 }
 
-function getgroup(x, y, delta = 0) {
-  if (delta != 0) {
-    var id = tileset.find((value) => value.x == x && y >= value.y && y < value.y + value.count).id;
+function createCanvas(width, height) {
+    var canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    return canvas;
+}
 
-    return tileset.find((value) => value.id == mod(id + delta, tileset.length));
+function GetGroup(x, y, delta = 0) {
+  if (delta != 0) {
+    var id = tileSet.find((value) => value.x == x && y >= value.y && y < value.y + value.count).id;
+
+    return tileSet.find((value) => value.id == Mod(id + delta, tileSet.length));
   }
   else {
-    return tileset.find((value) => value.x == x && y >= value.y && y < value.y + value.count);
+    return tileSet.find((value) => value.x == x && y >= value.y && y < value.y + value.count);
   }
 }
 
-function playsound(index = 0) {
+function PlaySound(index = 0) {
   var sound = new Audio();
   sound.addEventListener("canplaythrough", function() {
     sound.addEventListener("ended", function() {
@@ -619,7 +666,32 @@ function playsound(index = 0) {
   sound.src = sounds[index].sound;
 }
 
-function intify(array) {
+function StartMouseDrag() {
+  mouseData.WindowDragStart.x = mouseData.WindowLocation.x;
+  mouseData.WindowDragStart.y = mouseData.WindowLocation.y;
+  mouseData.CanvasDragStart.x = mouseData.CanvasLocation.x;
+  mouseData.CanvasDragStart.y = mouseData.CanvasLocation.y;
+}
+
+function FinishMouseDrag() {
+  if (mouseData.IsLeftClick && GetPlacementMode() == 0) {
+    mapData.CurrentLocation.x -= mouseData.WindowDrag.x;
+    mapData.CurrentLocation.y -= mouseData.WindowDrag.x;
+  }
+
+  mouseData.ClickMode = -1;
+  mouseData.WindowDragStart.x = 0;
+  mouseData.WindowDragStart.y = 0;
+  mouseData.CanvasDragStart.x = 0;
+  mouseData.CanvasDragStart.y = 0;
+}
+
+function SetSelectedTileSetTile() {
+  mapData.selectedTile.x = mouseData.TileSetTile.x
+  mapData.selectedTile.y = mouseData.TileSetTile.y
+}
+
+function Intify(array) {
   array.forEach((value) => {
     Object.keys(value).forEach((key) => {
       value[key] = parseInt(value[key]);
@@ -627,10 +699,10 @@ function intify(array) {
   });
 }
 
-function activemode() {
+function GetPlacementMode() {
   return keymode ? keymode : selectedmode;
 }
 
-function mod(n, m) {
-  return ((n % m) + m) % m;
+function Mod(n, m) {
+  return Math.floor(((n % m) + m) % m);
 }

@@ -18,24 +18,18 @@ description: Something to quickly tile a map with.
 [MouseWheel: Switch]
 [MouseRight: Deconstruct]`
 
-<div style="display: flex; justify-content: center; margin-bottom: 5px;">
+<div style="display: flex; justify-content: center; flex-wrap: wrap;">
   <fieldset class="ui-widget-content ui-corner-all">
     <legend>Import</legend>
-    <input type="text" id="importtext">
+    <input type="text" class="ui-corner-all" id="importtext">
     <button id="importbutton" style="padding: 2px 5px;"></button>
   </fieldset>
   <fieldset class="ui-widget-content ui-corner-all">
     <legend>Export</legend>
-    <input type="text" id="exporttext">
+    <input type="text" class="ui-corner-all" id="exporttext">
     <button id="copybutton" style="padding: 2px 5px;" data-clipboard-target="#exporttext"></button>
   </fieldset>
-</div>
-<div style="display: flex; justify-content: center;">
-  <div style="position: relative; width: 384px; height: 128px; overflow: auto;">
-    <image id="tiles" src="assets/images/tiles.png" class="backgroundimage" width="384" height="128" style="max-width: none;"></image>
-    <canvas id="selectmap" class="foregroundimage" width="384" height="128"></canvas>
-  </div>
-  <fieldset class="ui-widget-content ui-corner-all" style="min-width: 60px; max-width: 60px; margin: 0 20px;">
+  <fieldset class="ui-widget-content ui-corner-all" style="margin-right: 10px;">
     <legend>Mode</legend>
     <label for="radiomove">Move</label>
     <input type="radio" name="mode" id="radiomove" checked>
@@ -44,7 +38,7 @@ description: Something to quickly tile a map with.
     <label for="radiocopy">Copy</label>
     <input type="radio" name="mode" id="radiocopy">
   </fieldset>
-  <fieldset class="ui-widget-content ui-corner-all" style="min-width: 70px; max-width: 70px;">
+  <fieldset class="ui-widget-content ui-corner-all">
     <legend>Replace</legend>
     <label for="radiodeny">Deny</label>
     <input type="radio" name="place" id="radiodeny" checked>
@@ -52,13 +46,17 @@ description: Something to quickly tile a map with.
     <input type="radio" name="place" id="radioempty">
     <label for="radioreplace">Replace</label>
     <input type="radio" name="place" id="radioreplace">
-    <button id="clipclearer" style="padding: 1px 15px; margin: 3px 12px 0;" disabled></button>
+    <button id="clipclearer" style="padding: 0 15px; margin-left: 2px" disabled></button>
   </fieldset>
 </div>
 <br>
 <p style="text-align: center;" id="coordtext">Map</p>
 <div style="display: flex; justify-content: center;">
-  <div id="map" style="position: relative; width: 640px; height: 640px;">
+  <div id="map" style="position: relative; min-width: 320px; width: 640px; height: 640px; display: flex; align-items: flex-end; overflow: hidden;">
+    <div id="toolbox" class="ui-widget-content ui-corner-all" style="z-index: 30; position: absolute; min-width: 160px; width: 50%; left: 25%; height: 49px; overflow: scroll;">
+      <canvas id="tiles" src="assets/images/tiles.png" class="backgroundimage" height="32"></canvas>
+      <canvas id="selectmap" class="foregroundimage" height="32"></canvas>
+    </div>
     <canvas id="background" class="backgroundimage" width="100%" height="100%"></canvas>
     <canvas id="tilemap" class="foregroundimage" width="100%" height="100%"></canvas>
     <canvas id="foreground" class="forestgroundimage" width="100%" height="100%"></canvas>
