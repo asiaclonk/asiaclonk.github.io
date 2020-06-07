@@ -2,186 +2,230 @@
 //layout: blank
 //---
 
-$(document).ready(function () {
-  // Tiledata
-  // #debug tileSet = {{ site.data.tiles | jsonify }};
-  Intify(tileSet);
-  tileList = [];
-  clipboard = [];
+//#region Global variables
 
-  // Constants
-  const _tileWidth = 32;
-  const _tileHeight = 32;
-  const _backGroundWidth = 512;
-  const _backGroundHeight = 32;
-  const _tileDataCount = tileSet.count;
+// Tileset data
+// #DEBUG var tileSet = {{ site.data.tiles | jsonify }};
+Intify(tileSet);
 
-  // Mouse 
-  mouseData = {
-    WindowLocation: { x: 0, y: 0 },
-    ClickMode: -1,
+// Other tile data
+const _tileDataCount = tileSet.length;
+var tileList = [];
+var clipboard = [];
 
-    // Button info
-    get IsLeftClick() { return ![-1, 1, 2].some((n) => n == this.ClickMode) },
-    get IsMiddleClick() { return this.ClickMode == 1 },
-    get IsRightClick() { return this.ClickMode == 2 },
+// Constants
+const _tileWidth = 32;
+const _tileHeight = 32;
+const _backgroundWidth = 512;
+const _backgroundHeight = 32;
 
-    // Tileset info
-    get TilesetLocation() {
-      var rect = $("#selectionGrid")[0].getBoundingClientRect();
-      return {
-        x: this.WindowLocation.x - rect.left,
-        y: this.WindowLocation.y - rect.top
-      };
-    },
-    get TilesetTile() {
-      return {
-        x: Math.floor(mouseData.TilesetLocation.x / _tileWidth),
-        y: Math.floor(mouseData.TilesetLocation.y / _tileHeight)
-      };
-    },
-    PreviousTilesetTile: { x: 0, y: 0 },
+// Caches
+var cacheIndex = {};
+var cacheIndexGreen = {};
+var cacheIndexRed = {};
 
-    // Drag info
-    WindowDragStart: { x: 0, y: 0 },
-    get NoDrag() { return this.WindowDrag.x == 0 && this.WindowDrag.y == 0; },
-    get WindowDrag() {
-      return this.IsLeftClick && GetToolMode() != 1 ?
-        {
-          x: this.WindowLocation.x - this.WindowDragStart.x,
-          y: this.WindowLocation.y - this.WindowDragStart.y
-        }
-        : { x: 0, y: 0 };
-    },
+var cacheCanvas = new OffscreenCanvas(_tileWidth * _tileDataCount, _tileHeight * 4);
+var cacheCanvasGreen = new OffscreenCanvas(_tileWidth * _tileDataCount, _tileHeight * 4);
+var cacheCanvasRed = new OffscreenCanvas(_tileWidth * _tileDataCount, _tileHeight * 4);
 
-    // Map drag info
-    CanvasDragStart: { x: 0, y: 0 },
-    get CanvasDragStartTile() {
-      return {
-        x: Math.floor((this.CanvasDragStart.x + mapData.TileOffset.x) / _tileWidth),
-        y: Math.floor((this.CanvasDragStart.y + mapData.TileOffset.y) / _tileHeight)
-      };
-    },
+var cacheContext = cacheCanvas.getContext("2d");
+var cacheContextGreen = cacheCanvasGreen.getContext("2d");
+var cacheContextRed = cacheCanvasRed.getContext("2d");
 
-    // Map info
-    get CanvasLocation() {
-      var rect = $("#mapSelectionGrid")[0].getBoundingClientRect();
-      return {
-        x: this.WindowLocation.x - rect.left,
-        y: this.WindowLocation.y - rect.top
-      };
-    },
-    get CanvasTile() {
-      return {
-        x: Math.floor((this.CanvasLocation.x + mapData.TileOffset.x) / _tileWidth),
-        y: Math.floor((this.CanvasLocation.y + mapData.TileOffset.y) / _tileHeight)
-      };
-    },
-    PreviousCanvasTile: { x: 0, y: 0 },
-  }
+// Drawing contextx
+var tilesetSelectionContext;
+var backgroundContext;
+var worldMapContext;
+var mapSelectionContext;
 
-  // Map & Tileset
-  mapData = {
+// Images
+var tilesetImage;
+var backgroundImage;
 
-    // From the tileset
-    SelectedTilesetTile: { x: 0, y: 0 },
+// Interaction modes
+var keyMode = 0;
+var toolMode = 0;
+var placementMode = 0;
 
-    // Ingame map info
-    MapWidth: 0,  // Will be set on load
-    MapHeight: 0, // Will be set on load
+// Radiobuttons
+var toolModeButtons;
+var placementModeButtons;
 
-    // Top left location info
-    CurrentLocation: { x: 0, y: 0 },
-    get DraggedLocation() {
-      return {
-        x: this.CurrentLocation.x - mouseData.WindowDrag.x,
-        y: this.CurrentLocation.y - mouseData.WindowDrag.y
+/**
+ * Mouse data
+ */
+var mouseData = {
+  WindowLocation: { x: 0, y: 0 },
+  ClickMode: -1,
+
+  // Button info
+  get IsLeftClick() { return ![-1, 1, 2].some((n) => n == this.ClickMode) },
+  get IsMiddleClick() { return this.ClickMode == 1 },
+  get IsRightClick() { return this.ClickMode == 2 },
+
+  // Tileset info
+  get TilesetLocation() {
+    var rect = $("#tilesetSelectionGrid")[0].getBoundingClientRect();
+    return {
+      x: this.WindowLocation.x - rect.left,
+      y: this.WindowLocation.y - rect.top
+    };
+  },
+  get TilesetTile() {
+    return {
+      x: Math.floor(mouseData.TilesetLocation.x / _tileWidth),
+      y: Math.floor(mouseData.TilesetLocation.y / _tileHeight)
+    };
+  },
+  PreviousTilesetTile: { x: 0, y: 0 },
+
+  // Drag info
+  WindowDragStart: { x: 0, y: 0 },
+  get NoDrag() { return this.WindowDrag.x == 0 && this.WindowDrag.y == 0; },
+  get WindowDrag() {
+    return this.IsLeftClick && GetToolMode() != 1 ?
+      {
+        x: this.WindowLocation.x - this.WindowDragStart.x,
+        y: this.WindowLocation.y - this.WindowDragStart.y
       }
-    },
+      : { x: 0, y: 0 };
+  },
 
-    get CurrentTile() {
-      return {
-        x: Math.floor(this.CurrentLocation.x / _tileWidth),
-        y: Math.floor(this.CurrentLocation.y / _tileHeight)
-      };
-    },
-    get DraggedTile() {
-      return {
-        x: Math.floor(this.DraggedLocation.x / _tileWidth),
-        y: Math.floor(this.DraggedLocation.y / _tileHeight)
-      };
-    },
+  // Map drag info
+  CanvasDragStart: { x: 0, y: 0 },
+  get CanvasDragStartTile() {
+    return {
+      x: Math.floor((this.CanvasDragStart.x + mapData.TileOffset.x) / _tileWidth),
+      y: Math.floor((this.CanvasDragStart.y + mapData.TileOffset.y) / _tileHeight)
+    };
+  },
 
-    get TileOffset() {
-      return {
-        x: Mod(this.map.x, _tileWidth),
-        y: Mod(this.map.y, _tileHeight)
-      };
-    },
+  // Local map info
+  get CanvasLocation() {
+    var rect = $("#mapSelectionGrid")[0].getBoundingClientRect();
+    return {
+      x: this.WindowLocation.x - rect.left,
+      y: this.WindowLocation.y - rect.top
+    };
+  },
+  get CanvasTile() {
+    return {
+      x: Math.floor((this.CanvasLocation.x + mapData.TileOffset.x) / _tileWidth),
+      y: Math.floor((this.CanvasLocation.y + mapData.TileOffset.y) / _tileHeight)
+    };
+  },
+  PreviousCanvasTile: { x: 0, y: 0 },
+};
 
-    // Moused tile info
-    get MousedLocation() {
-      return {
-        x: this.CurrentLocation.x + mouseData.CanvasLocation.x,
-        y: this.CurrentLocation.y + mouseData.CanvasLocation.y
-      };
-    },
-    get MousedTile() {
-      return {
-        x: Math.floor(this.MousedLocation.x / _tileWidth),
-        y: Math.floor(this.MousedLocation.y / _tileHeight)
-      };
-    },
+/**
+ * Map and tileset data
+ */
+var mapData = {
 
-    // Drag info
-    get DragStart() {
-      return {
-        x: this.CurrentLocation.x + mouseData.CanvasDragStart.x,
-        y: this.CurrentLocation.y + mouseData.CanvasDragStart.y
-      };
-    },
-    get DragStartTile() {
-      return {
-        x: Math.floor(this.DragStart.x / _tileWidth),
-        y: Math.floor(this.DragStart.y / _tileHeight)
-      };
-    },
-  };
+  // From the tileset
+  SelectedTilesetTile: { x: 0, y: 0 },
+
+  // Ingame map info
+  MapWidth: 0,  // Will be set on load
+  MapHeight: 0, // Will be set on load
+
+  // Top left location info
+  CurrentLocation: { x: 0, y: 0 },
+  get DraggedLocation() {
+    return {
+      x: this.CurrentLocation.x - mouseData.WindowDrag.x,
+      y: this.CurrentLocation.y - mouseData.WindowDrag.y
+    }
+  },
+
+  get CurrentTile() {
+    return {
+      x: Math.floor(this.CurrentLocation.x / _tileWidth),
+      y: Math.floor(this.CurrentLocation.y / _tileHeight)
+    };
+  },
+  get DraggedTile() {
+    return {
+      x: Math.floor(this.DraggedLocation.x / _tileWidth),
+      y: Math.floor(this.DraggedLocation.y / _tileHeight)
+    };
+  },
+
+  get TileOffset() {
+    return {
+      x: Mod(this.map.x, _tileWidth),
+      y: Mod(this.map.y, _tileHeight)
+    };
+  },
+
+  // Moused tile info
+  get MousedLocation() {
+    return {
+      x: this.CurrentLocation.x + mouseData.CanvasLocation.x,
+      y: this.CurrentLocation.y + mouseData.CanvasLocation.y
+    };
+  },
+  get MousedTile() {
+    return {
+      x: Math.floor(this.MousedLocation.x / _tileWidth),
+      y: Math.floor(this.MousedLocation.y / _tileHeight)
+    };
+  },
+
+  // Drag info
+  get DragStart() {
+    return {
+      x: this.CurrentLocation.x + mouseData.CanvasDragStart.x,
+      y: this.CurrentLocation.y + mouseData.CanvasDragStart.y
+    };
+  },
+  get DragStartTile() {
+    return {
+      x: Math.floor(this.DragStart.x / _tileWidth),
+      y: Math.floor(this.DragStart.y / _tileHeight)
+    };
+  },
+};
+
+//#endregion
+
+/**
+ * Prepares variables and functions that require onpage elements.
+ */
+$(document).ready(function () {
 
   // Tileset canvas
-  selectionTilesetCanvas = $("#selectionGrid")[0];
-  selectionTilesetContext = selectionTilesetCanvas.getContext("2d");
+  tilesetSelectionContext = $("#tilesetSelectionGrid")[0].getContext("2d");
 
-  // Map canvas
-  $("#mapArea").resizable();
-  $(".wrapper").css("max-width", "100%");
-  $("section").css("max-width", "100%");
-
-  backGroundContext = $("#backGround")[0].getContext("2d", { alpha: false });
+  // Map context
+  backgroundContext = $("#background")[0].getContext("2d", { alpha: false });
   worldMapContext = $("#worldMap")[0].getContext("2d");
   mapSelectionContext = $("#mapSelectionGrid")[0].getContext("2d");
 
-  // Caches
-  tileCache = {};
-  tileCacheGreen = {};
-  tileCacheRed = {};
+  // Get the tileset image
+  tilesetImage = $("#background")[0];
 
-  // Draw background on load
+  // Prepare background
   backgroundImage = new Image(512, 32);
   backgroundImage.onload = function () {
-    backGroundContext.beginPath();
-    backGroundContext.fillStyle = backGroundContext.createPattern(backgroundImage, "repeat");
-    backGroundContext.rect(0, 0, mapData.MapWidth, mapData.MapHeight);
-    backGroundContext.fill();
+    backgroundContext.beginPath();
+    backgroundContext.fillStyle = backgroundContext.createPattern(backgroundImage, "repeat");
+    backgroundContext.rect(0, 0, mapData.MapWidth, mapData.MapHeight);
+    backgroundContext.fill();
   };
+
+  // Load background
   backgroundImage.src = "assets/images/tilebackground.png";
+
+  // Map canvas settings
+  $("#mapArea").resizable();
+  $(".wrapper").css("max-width", "100%");
+  $("section").css("max-width", "100%");
 
   // Sounds
   // #debug sounds = {{ site.data.sounds | jsonify }};
 
   // Radiobuttons for tool mode
-  keyMode = 0;
-  toolMode = 0;
   toolModeButtons = [
     $("#radiomove"),
     $("#radiotile"),
@@ -192,7 +236,6 @@ $(document).ready(function () {
   toolModeButtons[2].click(function () { toolMode = 2; });
 
   // Radiobuttons for placement mode
-  placementMode = 0;
   placementModeButtons = [
     $("#radiodeny"),
     $("#radioempty"),
@@ -217,16 +260,16 @@ $(document).ready(function () {
       // Resize area and redraw everything
       mapData.MapWidth = newwidth;
       mapData.MapHeight = newheight;
-      $("#backGround")[0].width = newwidth;
+      $("#background")[0].width = newwidth;
       $("#worldMap")[0].width = newwidth;
       $("#mapSelectionGrid")[0].width = newwidth;
-      $("#backGround")[0].height = newheight;
+      $("#background")[0].height = newheight;
       $("#worldMap")[0].height = newheight;
       $("#mapSelectionGrid")[0].height = newheight;
-      backGroundContext.beginPath();
-      backGroundContext.fillStyle = backGroundContext.createPattern(backgroundImage, "repeat");
-      backGroundContext.rect(0, 0, newwidth, newheight);
-      backGroundContext.fill();
+      backgroundContext.beginPath();
+      backgroundContext.fillStyle = backgroundContext.createPattern(backgroundImage, "repeat");
+      backgroundContext.rect(0, 0, newwidth, newheight);
+      backgroundContext.fill();
       DrawMap();
     }
 
@@ -240,7 +283,7 @@ $(document).ready(function () {
    * Tileset functions
    ********************/
 
-  $("#selectionGrid").mousemove(function () {
+  $("#tilesetSelectionGrid").mousemove(function () {
     // Update tileset draw if selection changed
     if (mouseData.TilesetTile != mouseData.PreviousTilesetTile) {
       DrawTilesetSelection(mouseData.TilesetTile);
@@ -251,14 +294,14 @@ $(document).ready(function () {
     mouseData.PreviousTilesetTile.y = mouseData.TilesetTile.y;
   });
 
-  $("#selectionGrid").click(function () {
+  $("#tilesetSelectionGrid").click(function () {
     // Set the new active tile
     SetSelectedTilesetTile();
     DrawTilesetSelection(mapData.SelectedTilesetTile);
-    PlaySound(6);
+    PlaySound(soundsEnum.GUI_CLICK);
   });
 
-  $("#selectionGrid").mouseleave(DrawTilesetSelection());
+  $("#tilesetSelectionGrid").mouseleave(DrawTilesetSelection());
 
   /***************
    * Map functions
@@ -273,7 +316,7 @@ $(document).ready(function () {
       // Start drag
       StartMouseDrag();
 
-      // Is it the placement tool?
+      // Is it the simple placement tool?
       if (GetToolMode() == 1) {
 
         // Got anything in your clipboard?
@@ -286,10 +329,10 @@ $(document).ready(function () {
           var result = PlaceTile(mapData.MousedTile, mapData.SelectedTilesetTile);
           if (result !== false) {
             $("#exporttext").val(JSON.stringify(tileList));
-            PlaySound(getgroup(result.tx, result.ty).build);
+            PlaySound(GetTileGroup(result.tx, result.ty).build);
           }
           else {
-            PlaySound(3);
+            PlaySound(soundsEnum.ERROR);
           }
         }
       }
@@ -306,7 +349,7 @@ $(document).ready(function () {
       var result = PlaceTile(mapData.MousedTile);
       if (result !== false) {
         $("#exporttext").val(JSON.stringify(tileList));
-        PlaySound(getgroup(result.tx, result.ty).remove);
+        PlaySound(GetTileGroup(result.tx, result.ty).removeSound);
       }
     }
   });
@@ -317,7 +360,7 @@ $(document).ready(function () {
   });
 
   $("#mapSelectionGrid").mousemove(function () {
-    writeCoordText(mapData.MousedTile);
+    WriteCoordText(mapData.MousedTile);
     // A leftclick?
     if (mouseData.IsLeftClick) {
       // Dragging the map?
@@ -326,12 +369,10 @@ $(document).ready(function () {
         $("#mapSelectionGrid").css("cursor", "move");
 
         // Redraw everything
-        backGroundContext.setTransform(1, 0, 0, 1, -mapData.map.x % 512,
-          -mapData.map.y % 32);
-        backGroundContext.fill();
+        DrawBackgroundOffset();
         DrawMap();
         DrawMapSelection();
-        writeCoordText(mapData.DragStartTile);
+        WriteCoordText(mapData.DragStartTile);
       }
       // Or placing down some things? Only if on a new tile though
       else if (GetToolMode() == 1 && mouseData.CanvasTile != mouseData.PreviousCanvasTile) {
@@ -344,8 +385,7 @@ $(document).ready(function () {
           var result = PlaceTile(mapData.MousedTile, mapData.SelectedTilesetTile);
           if (result !== false) {
             $("#exporttext").val(JSON.stringify(tileList));
-            PlaySound(getgroup(result.tx, result.ty).build);
-            DrawMap();
+            PlaySound(GetTileGroup(result.tx, result.ty).build);
           }
         }
       }
@@ -361,7 +401,7 @@ $(document).ready(function () {
         var result = PlaceTile(mapData.MousedTile);
         if (result !== false) {
           $("#exporttext").val(JSON.stringify(tileList));
-          PlaySound(getgroup(result.tx, result.ty).remove);
+          PlaySound(GetTileGroup(result.tx, result.ty).remove);
         }
       }
     }
@@ -377,7 +417,7 @@ $(document).ready(function () {
   });
   $("#mapSelectionGrid").mouseleave(function () {
     DrawMapSelection();
-    writeCoordText();
+    WriteCoordText();
   });
   $("#mapSelectionGrid").mouseup(function (e) {
     // Finished with a leftclick?
@@ -394,7 +434,7 @@ $(document).ready(function () {
           var result = PlaceTile(mapData.MousedTile, mapData.SelectedTilesetTile);
           if (result !== false) {
             $("#exporttext").val(JSON.stringify(tileList));
-            PlaySound(getgroup(result.tx, result.ty).build);
+            PlaySound(GetTileGroup(result.tx, result.ty).build);
           }
           else {
             PlaySound(soundsEnum.ERROR);
@@ -436,59 +476,78 @@ $(document).ready(function () {
       }
     }
 
-    // I guess nothing happens if it wasn't a leftclick
+    // One final render pass
     FinishMouseDrag();
-    backGroundContext.setTransform(1, 0, 0, 1, -mapData.map.x % 512, -mapData.map.y % 32);
-    backGroundContext.fill();
+    DrawBackgroundOffset();
     DrawMap();
     DrawMapSelection(mouseData.CanvasTile);
   });
   $("#mapSelectionGrid")[0].addEventListener("wheel", function (e) {
-    //Select next tile
+    // Select next tile
     var delta = Math.sign(e.deltaY);
-    var group = getgroup(mapData.SelectedTilesetTile.x, mapData.SelectedTilesetTile.y, delta);
+    var group = GetTileGroup(mapData.SelectedTilesetTile.x, mapData.SelectedTilesetTile.y, delta);
     mapData.SelectedTilesetTile.x = group.x;
     mapData.SelectedTilesetTile.y = (mapData.SelectedTilesetTile.y % group.count) + group.y;
+
+    // Redraw selection
     DrawTilesetSelection();
     DrawMapSelection(mouseData.CanvasTile);
+
     PlaySound(soundsEnum.GUI_SWITCH);
     e.preventDefault();
   });
 
+  /***************
+   * Keyboard functions
+   ***************/
+
   $(document).keydown(function (e) {
-    //Quick select tilemode
-    if (e.which == 16) {
-      keyMode = 1;
-      setRadioButtons(1);
-    }
-    if (e.which == 17) {
-      keyMode = 2;
-      setRadioButtons(2);
-    }
-    if (e.which == 82) {
-      //Or rotate tile
-      var group = tileSet.find((tileData) => mapData.SelectedTilesetTile.x == tileData.x &&
-        mapData.SelectedTilesetTile.y >= tileData.y &&
-        mapData.SelectedTilesetTile.y < tileData.y + tileData.count);
-      if (typeof group !== "undefined") {
-        mapData.SelectedTilesetTile.y = ((mapData.SelectedTilesetTile.y - group.y + 1) % group.count) + group.y;
-        DrawTilesetSelection();
-        DrawMapSelection(mouseData.CanvasTile);
+    switch (e.which) {
+      case 16: {
+        // Shift
+        keyMode = 1;
+        SetRadioButtons(1);
+        break;
+      }
+      case 17: {
+        // CTRL
+        keyMode = 2;
+        SetRadioButtons(2);
+      }
+      case 82: {
+        // Or rotate tile with R
+        // TODO: allow rotation of clipboard
+        var group = tileSet.find((tileData) => mapData.SelectedTilesetTile.x == tileData.x &&
+          mapData.SelectedTilesetTile.y >= tileData.y &&
+          mapData.SelectedTilesetTile.y < tileData.y + tileData.count);
+        if (typeof group !== "undefined") {
+          mapData.SelectedTilesetTile.y = ((mapData.SelectedTilesetTile.y - group.y + 1) % group.count) + group.y;
+          DrawTilesetSelection();
+          DrawMapSelection(mouseData.CanvasTile);
+        }
       }
     }
   });
 
   $(document).keyup(function (e) {
-    // Finish quick select
-    if (e.which == 16) {
-      keyMode = 0;
-      setRadioButtons();
-    }
-    if (e.which == 17) {
-      keyMode = 0;
-      setRadioButtons();
+    switch (e.which) {
+      case 16: {
+        // Shift
+        keyMode = 0;
+        SetRadioButtons();
+        break;
+      }
+      case 17: {
+        // CTRL
+        keyMode = 0;
+        SetRadioButtons();
+      }
     }
   });
+
+  /***************
+   * UI functions
+   ***************/
 
   $("#clipclearer").button({ icon: "ui-icon-trash" });
   $("#clipclearer").click(function () {
@@ -606,20 +665,20 @@ function Pincette(map_tile) {
 }
 
 function DrawTilesetSelection(tile = false) {
-  selectionTilesetContext.clearRect(0, 0, selectionTilesetCanvas.width, selectionTilesetCanvas.height);
+  tilesetSelectionContext.clearRect(0, 0, selectionTilesetCanvas.width, selectionTilesetCanvas.height);
   if (tile !== false) {
-    selectionTilesetContext.beginPath();
-    selectionTilesetContext.strokeStyle = "yellow";
-    selectionTilesetContext.rect(tile.x * _tileWidth, tile.y * _tileHeight,
+    tilesetSelectionContext.beginPath();
+    tilesetSelectionContext.strokeStyle = "yellow";
+    tilesetSelectionContext.rect(tile.x * _tileWidth, tile.y * _tileHeight,
       _tileWidth, _tileHeight);
-    selectionTilesetContext.stroke();
+    tilesetSelectionContext.stroke();
   }
-  selectionTilesetContext.beginPath();
-  selectionTilesetContext.strokeStyle = "lightgreen";
-  selectionTilesetContext.rect(mapData.SelectedTilesetTile.x * _tileWidth,
+  tilesetSelectionContext.beginPath();
+  tilesetSelectionContext.strokeStyle = "lightgreen";
+  tilesetSelectionContext.rect(mapData.SelectedTilesetTile.x * _tileWidth,
     mapData.SelectedTilesetTile.y * _tileHeight,
     _tileWidth, _tileHeight);
-  selectionTilesetContext.stroke();
+  tilesetSelectionContext.stroke();
 }
 
 function DrawMapSelection(map_tile = false) {
@@ -657,10 +716,9 @@ function DrawMapSelection(map_tile = false) {
 }
 
 function drawOneHoverTile(x, y, tx = false, ty = false) {
-
   // Draw tile preview if one is given
   if (tx !== false && ty !== false) {
-    //First the icon, TODO: use cached image
+    // First the icon, TODO: use cached image
     mapSelectionContext.drawImage(
       tilesImage, tx * _tileWidth, ty * _tileHeight,
       _tileWidth, _tileHeight,
@@ -668,16 +726,12 @@ function drawOneHoverTile(x, y, tx = false, ty = false) {
       y * _tileHeight - mapData.TileOffset.y,
       _tileWidth, _tileHeight);
 
-    //Now color
-    var color = "lightgreen";
+    // Now color
     var blocked = tileList.some((tile) =>
       tile.x == x + mapData.CurrentTile.x &&
       tile.y == y + mapData.CurrentTile.y &&
       (tile.tx != tx || tile.ty != ty));
-
-    if (blocked) {
-      color = "red";
-    }
+    var color = blocked ? colorsEnum.RED : colorsEnum.LIGHT_GREEN;
 
     mapSelectionContext.fillStyle = color;
     mapSelectionContext.globalAlpha = 0.4;
@@ -698,48 +752,139 @@ function drawOneHoverTile(x, y, tx = false, ty = false) {
   mapSelectionContext.stroke();
 }
 
-function DrawMap() {
+/**
+ * Redraws the entire worldmap.
+ * 
+ * @param {boolean} clearMap Set to false if the whole map doesn't need to be cleared.
+ */
+function DrawMap(clearMap = true) {
+  // Clear map if needed
+  if (clearMap) {
+    worldMapContext.clearRect(0, 0, mapData.MapWidth, mapData.MapHeight);
+  }
+
   //Get tiles in range
-  worldMapContext.clearRect(0, 0, mapData.MapWidth, mapData.MapHeight);
-  var tilestodraw = tileList.filter((tileData) =>
+  var tilesToDraw = tileList.filter((tileData) =>
     tileData.x >= mapData.CurrentTile.x && tileData.y >= mapData.CurrentTile.y &&
     tileData.x <= mapData.CurrentTile.x + Math.floor(mapData.MapWidth / _tileWidth) + 1 &&
     tileData.y <= mapData.CurrentTile.y + Math.floor(mapData.MapHeight / _tileHeight) + 1
   );
 
-  //Draw tiles, TODO: use cached images
-  tilestodraw.forEach((tileData) => {
-    worldMapContext.drawImage(
-      tilesImage, tileData.tx * _tileWidth, tileData.ty * _tileHeight,
-      _tileWidth, _tileHeight,
+  // Draw tiles
+  DrawTilesOnMap(tilesToDraw);
+}
+
+/**
+ * Draws the given tiles on the worldmap. Only the areas around those tiles are redrawn to imrpove performance.
+ * 
+ * @param {{ x: number, y: number, tx: number, ty: number}[]} list The collection of tiles to draw.
+ */
+function DrawTilesOnMap(list) {
+  list.forEach((tileData) => {
+    worldMapContext.clearRect(
       (tileData.x - mapData.CurrentTile.x) * _tileWidth - mapData.TileOffset.x,
       (tileData.y - mapData.CurrentTile.y) * _tileHeight - mapData.TileOffset.y,
-      _tileWidth, _tileHeight);
+      _tileWidth, _tileHeight
+    );
+
+    DrawAndCacheTile(worldMapContext,
+      (tileData.x - mapData.CurrentTile.x) * _tileWidth - mapData.TileOffset.x,
+      (tileData.y - mapData.CurrentTile.y) * _tileHeight - mapData.TileOffset.y,
+      tileData.tx, tileData.ty);
   });
 }
 
-function setRadioButtons(mode = 0) {
+/**
+ * Draws one tile. Caches the image into a spare canvas if drawn for the first time.
+ * 
+ * @param {CanvasRenderingContext2D} context The context to draw on.
+ * @param {number} x The x coordinate on the canvas.
+ * @param {number} y The y coordinate on the canvas.
+ * @param {number} id The id of the tiledata to draw, formally known as tx.
+ * @param {number} variant The variant of the tiledata to draw, formally known as ty.
+ * @param {string} color The color to tint the tile with, if any.
+ */
+function DrawAndCacheTile(context, x, y, id, variant, color = colorsEnum.NONE) {
+
+  var cacheToCheck;
+  var cacheToUse;
+
+  switch (color) {
+    case colorsEnum.NONE:
+      cacheToCheck = cacheIndex;
+      cacheToUse = cacheContext;
+      break;
+    case colorsEnum.LIGHT_GREEN:
+      cacheToCheck = cacheIndexGreen;
+      cacheToUse = cacheContextGreen;
+      break;
+    case colorsEnum.RED:
+      cacheToCheck = cacheIndexRed;
+      cacheToUse = cacheContextRed;
+      break;
+  }
+
+  // Create the cache if not yet created
+  if (cacheToCheck[id, variant] !== true) {
+    cacheToUse.drawImage(tilesetImage, id * _tileWidth, variant * _tileHeight, _tileWidth, _tileHeight,
+      id * _tileWidth, variant * _tileHeight, _tileWidth, _tileHeight)
+    cacheToCheck[id, variant] = true;
+
+    // Color the thing if a color is given
+    if (color != colorsEnum.NONE) {
+      cacheToUse.fillStyle = color;
+      cacheToUse.globalAlpha = 0.4;
+      cacheToUse.globalCompositeOperation = "source-atop";
+      cacheToUse.fillRect(id * _tileWidth, variant * _tileHeight, _tileWidth, _tileHeight);
+      cacheToUse.globalAlpha = 1;
+      cacheToUse.globalCompositeOperation = "source-over";
+    }
+  }
+
+  // Copy from cache to context
+  context.drawImage(cacheToUse, id * _tileWidth, variant * _tileHeight,
+    _tileWidth, _tileHeight, x, y, _tileWidth, _tileHeight);
+}
+
+/**
+ * Adjusts the background offset to the current map offset.
+ */
+function DrawBackgroundOffset() {
+  backgroundContext.setTransform(1, 0, 0, 1, -mapData.map.x % 512, -mapData.map.y % 32);
+  backgroundContext.fill();
+}
+
+/**
+ * Set the currently selected radiobutton in the toolmode group.
+ * 
+ * @param {number} mode The mode to be set. Sets it back to the currently selected mode if empty.
+ */
+function SetRadioButtons(mode = 0) {
   var realmode = mode == 0 ? toolMode : mode;
   toolModeButtons[realmode].prop("checked", true);
 }
 
-function writeCoordText(tile = false) {
-  var mousetext = tile !== false ? "Selection: (X: " + tile.x + ", Y: " + tile.y + "), " : "";
+/**
+ * Writes the current map location and moused over coordinate into the responsible GUI element.
+ * 
+ * @param {{ x: number, y: number}} location If given, writes the mouse location in addition to the map location.
+ */
+function WriteCoordText(location = false) {
+  var mousetext = location !== false ? "Selection: (X: " + location.x + ", Y: " + location.y + "), " : "";
   var maptext = "Map: (X: " + mapData.CurrentTile.x + ", Y: " + mapData.CurrentTile.y + ")";
   $("#coordtext").html(mousetext + maptext);
 }
 
-function createCanvas(width, height) {
-  var canvas = document.createElement('canvas');
-  canvas.width = width;
-  canvas.height = height;
-  return canvas;
-}
-
-function GetGroup(x, y, delta = 0) {
+/**
+ * Returns the tiledata for the given ID, or the neighbour if a delta is given.
+ * 
+ * @param {number} id The ID of the tiledata to retrieve.
+ * @param {number} delta Makes the function return the previous or next tiledata around the given ID.
+ * @returns {{ id: number, count: number, build: number, remove: number }} The tiledata given by the id + delta
+ */
+function GetTileGroup(id, delta = 0) {
   if (delta != 0) {
     var id = tileSet.find((tileData) => tileData.x == x && y >= tileData.y && y < tileData.y + tileData.count).id;
-
     return tileSet.find((tileData) => tileData.id == Mod(id + delta, tileSet.length));
   }
   else {
@@ -751,7 +896,7 @@ function GetGroup(x, y, delta = 0) {
  * Plays the sound file indicated by the given index. Plays sound 0 by default.
  * Use soundsEnum to select.
  * 
- * @param {Number} index The index of the sound to play.
+ * @param {number} index The index of the sound to play.
  */
 function PlaySound(index = 0) {
   var sound = new Audio();
@@ -805,18 +950,20 @@ function SetSelectedTilesetTile() {
 /**
  * Converts the strings representing integers in a dictionary into actual integers.
  * 
- * @param {{}} dictionary The dictionary containing the strings.
+ * @param {[{}]} dictionary The dictionary containing the strings.
  */
 function Intify(dictionary) {
-  dictionary.forEach((pair) => {
-    Object.keys(pair).forEach((key) => {
-      pair[key] = parseInt(pair[key]);
+  dictionary.forEach((row) => {
+    Object.keys(row).forEach((key) => {
+      row[key] = parseInt(row[key]);
     });
   });
 }
 
 /**
  * Returns the current tool functionality to be used. Dependent on keyboard keys being held.
+ * 
+ * @returns {number} The current toolmode, or keymode if a specific key is being held.
  */
 function GetToolMode() {
   return keyMode ? keyMode : toolMode;
@@ -825,8 +972,9 @@ function GetToolMode() {
 /**
  * Obtains the remaining integer of n when divided by m
  * 
- * @param {Number} n The number to be divided.
- * @param {Number} m The number that divides.
+ * @param {number} n The number to be divided.
+ * @param {number} m The number that divides.
+ * @returns {number} The remainder of n divided by m.
  */
 function Mod(n, m) {
   return Math.floor(((n % m) + m) % m);
@@ -835,7 +983,7 @@ function Mod(n, m) {
 /**
  * Contains the index entries for sound files.
  */
-const soundsEnum = {
+const soundsEnum = Object.freeze({
   'BUILD_SMALL': 0,
   'BUILD_MEDIUM': 1,
   'BUILD_LARGE': 2,
@@ -846,4 +994,11 @@ const soundsEnum = {
   'GUI_CLICK': 7,
   'GUI_SWITCH': 8,
   'MAIN_THEME': 9
-}
+});
+
+const colorsEnum = Object.freeze({
+  'NONE': "none",
+  'RED': "red",
+  'LIGHT_GREEN': "lightgreen",
+  'YELLOW': "yellow",
+});

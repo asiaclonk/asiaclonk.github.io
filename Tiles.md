@@ -54,8 +54,8 @@ description: Something to quickly tile a map with.
 <div style="display: flex; justify-content: center;">
   <div id="mapArea" style="position: relative; min-width: 320px; width: 640px; height: 640px; display: flex; align-items: flex-end; overflow: hidden;">
     <div id="toolbox" class="ui-widget-content ui-corner-all" style="z-index: 30; position: absolute; min-width: 160px; width: 50%; left: 25%; height: 49px; overflow: scroll;">
-      <canvas src="assets/images/tiles.png" class="backgroundimage" height="32"></canvas>
-      <canvas id="selectionGrid" class="foregroundimage" height="32"></canvas>
+      <image id="tilesetGrid" src="assets/images/tiles.png" class="backgroundimage" height="32"></image>
+      <canvas id="tilesetSelectionGrid" class="foregroundimage" height="32"></canvas>
     </div>
     <canvas id="backGround" class="backgroundimage" width="100%" height="100%"></canvas>
     <canvas id="worldMap" class="foregroundimage" width="100%" height="100%"></canvas>
