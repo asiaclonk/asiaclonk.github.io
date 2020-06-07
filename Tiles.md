@@ -52,13 +52,13 @@ description: Something to quickly tile a map with.
 <br>
 <p style="text-align: center;" id="coordtext">Map</p>
 <div style="display: flex; justify-content: center;">
-  <div id="map" style="position: relative; min-width: 320px; width: 640px; height: 640px; display: flex; align-items: flex-end; overflow: hidden;">
+  <div id="mapArea" style="position: relative; min-width: 320px; width: 640px; height: 640px; display: flex; align-items: flex-end; overflow: hidden;">
     <div id="toolbox" class="ui-widget-content ui-corner-all" style="z-index: 30; position: absolute; min-width: 160px; width: 50%; left: 25%; height: 49px; overflow: scroll;">
-      <canvas id="tiles" src="assets/images/tiles.png" class="backgroundimage" height="32"></canvas>
-      <canvas id="selectmap" class="foregroundimage" height="32"></canvas>
+      <canvas src="assets/images/tiles.png" class="backgroundimage" height="32"></canvas>
+      <canvas id="selectionGrid" class="foregroundimage" height="32"></canvas>
     </div>
-    <canvas id="background" class="backgroundimage" width="100%" height="100%"></canvas>
-    <canvas id="tilemap" class="foregroundimage" width="100%" height="100%"></canvas>
-    <canvas id="foreground" class="forestgroundimage" width="100%" height="100%"></canvas>
+    <canvas id="backGround" class="backgroundimage" width="100%" height="100%"></canvas>
+    <canvas id="worldMap" class="foregroundimage" width="100%" height="100%"></canvas>
+    <canvas id="mapSelectionGrid" class="forestgroundimage" width="100%" height="100%"></canvas>
   </div>
 </div>
