@@ -1,13 +1,49 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="script/party_management.js"></script>
-        <script src="script/world_entity.js"></script>
-        <script src="script/utility.js"></script>
-        <script src="data/vtubers.js"></script>
+        <link rel="stylesheet" href="index.css">
     </head>
     <body>
-        <button onclick="summon_vtuber()">Roll</button>
-        <span id="vtuber">Hello World!</span>
+        <div>
+            <button id="roll">Roll</button>
+            <span>Hello World!</span>
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td id="name"></td>
+                </tr>
+                <tr>
+                    <td>JP name</td>
+                    <td id="jpname"></td>
+                </tr>
+                <tr>
+                    <td>Oshi mark</td>
+                    <td id="oshimark"></td>
+                </tr>
+                <tr>
+                    <td>Agency</td>
+                    <td id="agency"></td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td id="desc"></td>
+                </tr>
+                <tr>
+                    <td>Links</td>
+                    <td id="links"></td>
+                </tr>
+                <tr>
+                    <td>Min STR</td>
+                    <td id="minstr"></td>
+                </tr>
+                <tr>
+                    <td>Max STR</td>
+                    <td id="maxstr"></td>
+                </tr>
+            </table>
+        </div>
+        <script type="module" src="./out/script/main.js"></script>
     </body>
 </html>
