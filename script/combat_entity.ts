@@ -1,4 +1,4 @@
-import { StatusType, ResultType } from "./combat_enum.js";
+import { ResultType, StatusType } from "../common/enum"
 
 /**
  * Instanced VTubers and enemies for use in the battle simulator.

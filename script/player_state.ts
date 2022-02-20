@@ -1,3 +1,8 @@
 class PlayerState {
-    VTuber
+    /**
+     * List of parties
+     */
+    Parties: Party[];
+
+    VTubers: VTuberInstance[];
 }

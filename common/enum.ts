@@ -1,9 +1,9 @@
-import { EnumType } from "../common/base_classes.js";
+import { EnumType } from "./base_classes";
 
 /**
  * Collection of types of possible action results.
  */
-export class ResultType extends EnumType {
+ export class ResultType extends EnumType {
     /**
      * The acting entity is dealing damage.
      */
@@ -29,55 +29,55 @@ export class ResultType extends EnumType {
 /**
  * Collection of possible targets for skill targeting descriptions.
  */
-export class ResultTarget extends EnumType {
+export class SkillTarget extends EnumType {
     /**
-     * @type {ResultTarget} Front player character.
+     * @type {SkillTarget} Front player character.
      */
-    static PlayerFront = new ResultTarget("Front player character", "The player character at the front of your party.");
+    static PlayerFront = new SkillTarget("Front player character", "The player character at the front of your party.");
     /**
-     * @type {ResultTarget} Back player character.
+     * @type {SkillTarget} Back player character.
      */
-    static PlayerBack = new ResultTarget("Back player character", "The player character at the back of your party.");
+    static PlayerBack = new SkillTarget("Back player character", "The player character at the back of your party.");
     /**
-     * @type {ResultTarget} Front enemy character.
+     * @type {SkillTarget} Front enemy character.
      */
-    static EnemyFront = new ResultTarget("Front enemy character", "The enemy character at the front of their party.");
+    static EnemyFront = new SkillTarget("Front enemy character", "The enemy character at the front of their party.");
     /**
-     * @type {ResultTarget} Back enemy character.
+     * @type {SkillTarget} Back enemy character.
      */
-    static EnemyBack = new ResultTarget("Back enemy character", "The enemy character at the back of their party.");
+    static EnemyBack = new SkillTarget("Back enemy character", "The enemy character at the back of their party.");
     /**
-     * @type {ResultTarget} Any character. Skill description only.
+     * @type {SkillTarget} Any character.
      */
-     static Any = new ResultTarget("Any character", "Any character.");
+     static Any = new SkillTarget("Any character", "Any character.");
     /**
-     * @type {ResultTarget} Any player character. Skill description only.
+     * @type {SkillTarget} Any player character.
      */
-     static PlayerAny = new ResultTarget("Any player character", "Any player character in your party.");
+     static PlayerAny = new SkillTarget("Any player character", "Any player character in your party.");
     /**
-     * @type {ResultTarget} Any single target. Skill description only.
+     * @type {SkillTarget} Any single target.
      */
-     static EnemyAny = new ResultTarget("Any enemy character", "Any enemy character in their party.");
+     static EnemyAny = new SkillTarget("Any enemy character", "Any enemy character in their party.");
      /**
-     * @type {ResultTarget} The entire player party. Skill description only.
+     * @type {SkillTarget} The entire player party.
      */
-    static PlayerParty = new ResultTarget("Player party", "The entire player party.");
+    static PlayerParty = new SkillTarget("Player party", "The entire player party.");
     /**
-     * @type {ResultTarget} The entire enemy party. Skill description only.
+     * @type {SkillTarget} The entire enemy party.
      */
-    static EnemyParty = new ResultTarget("Enemy party", "The entire enemy party.");
+    static EnemyParty = new SkillTarget("Enemy party", "The entire enemy party.");
     /**
-     * @type {ResultTarget} True random. Skill description only.
+     * @type {SkillTarget} True random.
      */
-    static Random = new ResultTarget("Random", "A random player or enemy character.");
+    static Random = new SkillTarget("Random", "A random player or enemy character.");
     /**
-     * @type {ResultTarget} Random player character. Skill description only.
+     * @type {SkillTarget} Random player character.
      */
-    static PlayerRandom = new ResultTarget("Random player character", "A random player character.");
+    static PlayerRandom = new SkillTarget("Random player character", "A random player character.");
     /**
-     * @type {ResultTarget} Random enemy character. Skill description only.
+     * @type {SkillTarget} Random enemy character.
      */
-    static EnemyRandom = new ResultTarget("Random enemy character", "A random enemy character.");
+    static EnemyRandom = new SkillTarget("Random enemy character", "A random enemy character.");
 }
 
 /**
