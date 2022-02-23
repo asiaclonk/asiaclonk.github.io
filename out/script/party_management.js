@@ -1,5 +1,5 @@
 import { VTuber } from "../data/vtubers.js";
-import { random_zerobase } from "./utility.js";
+import { random_zerobase } from "../common/utility.js";
 /**
  * Rolls a VTuber
  */

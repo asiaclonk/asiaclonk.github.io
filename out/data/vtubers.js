@@ -1,5 +1,5 @@
-import { DataTemplate, DataType } from "../common/base_classes.js";
-import { ActiveSkill } from "./skills_active.js";
+import { DataTemplate } from "../common/base_classes.js";
+import { ActiveSkill } from "./skill_active.js";
 /**
  * Data definitions of VTubers.
  */
@@ -17,34 +17,31 @@ export class VTuber extends DataTemplate {
      * @param links A list of links to the VTuber's social media presence of choice.
     */
     constructor(id, nameEN, nameJP, oshimark, description, xpcurve, strcurve, activeskills, links) {
-        super(id, nameEN, description, DataType.VTuber);
-        this.Name = nameEN;
-        this.NameJP = nameJP;
-        this.OshiMark = oshimark;
-        this.XPCurve = xpcurve;
-        this.StrengthCurve = strcurve;
-        this.ActiveSkills = activeskills;
-        this.Links = links;
+        super(id, nameEN !== null && nameEN !== void 0 ? nameEN : "Undefined", description !== null && description !== void 0 ? description : "This is as mysterious as it gets.");
+        this.NameJP = nameJP !== null && nameJP !== void 0 ? nameJP : "None";
+        this.OshiMark = oshimark !== null && oshimark !== void 0 ? oshimark : "None";
+        this.XPCurve = xpcurve !== null && xpcurve !== void 0 ? xpcurve : function (lvl) { return lvl * 100; };
+        this.StrengthCurve = strcurve !== null && strcurve !== void 0 ? strcurve : function (lvl) { return lvl * 5; };
+        this.ActiveSkills = activeskills !== null && activeskills !== void 0 ? activeskills : [ActiveSkill.ID_0000_Strike];
+        this.Links = links !== null && links !== void 0 ? links : [];
+    }
+    /**
+     * Fetches the VTuber by their ID from the list.
+     * @param id The ID of the data entry to return.
+     * @returns A VTuber.
+     */
+    static get_by_id(id) {
+        var _a;
+        return (_a = this.List.find(vtub => vtub.ID == id)) !== null && _a !== void 0 ? _a : new VTuber(id);
     }
 }
-//#region
-/**
- * Kagura Suzu
- */
-VTuber.ID_0000_KaguraSuzu = new VTuber(0, "Kagura Suzu", "神楽すず", "🍋", "Plays the violin.", function (level) {
-    return level * 100;
-}, function (level) {
-    return level * 5;
-}, [ActiveSkill.ID_0000_Strike], ["https://www.youtube.com/channel/UCUZ5AlC3rTlM-rA2cj5RP6w", "https://twitter.com/kagura_suzu"]);
-VTuber.ID_0001_MokotaMememe = new VTuber(0, "Mokota Mememe", "もこ田めめめ", "🐏", "A human-sheep-alpaca chimera.", function (level) {
-    return level * 100;
-}, function (level) {
-    return level * 5;
-}, [ActiveSkill.ID_0000_Strike], ["https://www.youtube.com/channel/UCz6Gi81kE6p5cdW1rT0ixqw", "https://twitter.com/mokomeme_ch"]);
+//#region VTuber entries
+/** Kagura Suzu from .LIVE */
+VTuber.ID_0000_KaguraSuzu = new VTuber(0, "Kagura Suzu", "神楽すず", "🍋", "Plays the violin.", function (level) { return level * 100; }, function (level) { return level * 5; }, [ActiveSkill.ID_0000_Strike], ["https://www.youtube.com/channel/UCUZ5AlC3rTlM-rA2cj5RP6w", "https://twitter.com/kagura_suzu"]);
+/** Mokota Mememe from .LIVE */
+VTuber.ID_0001_MokotaMememe = new VTuber(0, "Mokota Mememe", "もこ田めめめ", "🐏", "A human-sheep-alpaca chimera.", function (level) { return level * 100; }, function (level) { return level * 5; }, [ActiveSkill.ID_0000_Strike], ["https://www.youtube.com/channel/UCz6Gi81kE6p5cdW1rT0ixqw", "https://twitter.com/mokomeme_ch"]);
 //#endregion
-/**
- * List of VTubers.
- */
+/** List of VTubers. */
 VTuber.List = [
     VTuber.ID_0000_KaguraSuzu,
     VTuber.ID_0001_MokotaMememe
@@ -61,7 +58,7 @@ class Agency extends DataTemplate {
      * @param members The members of this agency.
      */
     constructor(id, name, description, members) {
-        super(id, name, description, DataType.Agency);
+        super(id, name, description);
         this.Members = members;
         members.forEach((tuber) => tuber.Agency = this);
     }
@@ -84,7 +81,7 @@ class VTuberSynergy extends DataTemplate {
      * @param members The members of this synergy.
      */
     constructor(id, name, description, members) {
-        super(id, name, description, DataType.Agency);
+        super(id, name, description);
         this.Members = members;
         members.forEach((tuber) => tuber.Agency = this);
     }

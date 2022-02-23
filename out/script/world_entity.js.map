@@ -1,1 +1,1 @@
-{"version":3,"file":"world_entity.js","sourceRoot":"","sources":["../../script/world_entity.ts"],"names":[],"mappings":"AAAA,MAAM,cAAc;CAEnB"}
+{"version":3,"file":"world_entity.js","sourceRoot":"","sources":["../../script/world_entity.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,MAAM,iBAAiB,CAAC;AAEzC,MAAM,cAAc;IAMhB,IAAI,KAAK;QAAa,MAAM,CAAC,SAAS,CAAC,EAAE,CAAC,CAAC,CAAC,CAAA;IAE5C,CAAC;CAEJ;AAED,MAAM,KAAK;IAcP;;OAEG;IACH,aAAa;QACT,IAAI,CAAC,OAAO,CAAC,MAAM,CAAC,CAAC,IAAI,EAAE,EAAE,CAAC,IAAI,CAAC,CAAC,CAAA;IACxC,CAAC;CACJ"}

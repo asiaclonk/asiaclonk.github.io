@@ -1,15 +1,23 @@
-import { VTuber } from "../data/vtubers";
+import { VTuber } from "../data/vtuber.js";
 
 class VTuberInstance {
-    /**
-     * ID of this player instanced VTuber. Must be unique within the player state.
-     */
+    /** ID of this player instanced VTuber. Must be unique within the player state. */
     ID: number;
+    /** Accumulated experience of this VTuber. */
     XP: number;
-    get Level(): number { VTuber.get_by_id(ID).x
+    
+    get Level(): number {
+        var curve = VTuber.get_by_id(this.ID, VTuber.List).XPCurve;
+        var required_xp = curve(1);
+        var current_level = 1;
+        while (required_xp <= this.XP) {
+            required_xp += curve(++current_level);
+        }
+        return current_level;
+    }
+    get Strength(): number {
 
     }
-    BaseStrength():
 }
 
 class Party {

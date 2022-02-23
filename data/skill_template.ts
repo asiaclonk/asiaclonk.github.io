@@ -1,16 +1,16 @@
 // Collection of generic skills for ease of reuse
 
-import { DataTemplate } from "../common/base_classes";
-import { ResultType } from "../common/enum";
-import { CombatActor, ResultPart, Status } from "../script/combat_entity";
-import { CombatState } from "../script/combat_state";
+import { ResultType } from "../common/enum.js";
+import { ActiveSkillTemplate, PassiveSkillTemplate } from "../common/interface.js";
+import { CombatActor, ResultPart, Status } from "../script/combat_entity.js";
+import { CombatState } from "../script/combat_state.js";
 
-/**
- * Interface for skills that produce results.
- */
-export interface ActiveSkillTemplate {
-    /** Generates a list of skill result parts */
-    Result(actor: CombatActor, targets: CombatActor[], combatstate: CombatState): ResultPart[];
+/** Empty skill effect */
+export class EmptyActiveSkill implements ActiveSkillTemplate {
+    constructor() {}
+    result(actor: CombatActor, targets: CombatActor[], combatState: CombatState): ResultPart[] {
+        return [];
+    }
 }
 
 /** Simple skill to apply fixed values. */
@@ -28,17 +28,47 @@ export class FixedValueSkill implements ActiveSkillTemplate {
         this._type = type;
     }
 
-    Result(actor: CombatActor, targets: CombatActor[], combatstate: CombatState): ResultPart[] {
-        var newtargets = evaluate_targets(targets, combatstate);
-        return [new ResultPart(actor, this._type, this._fixedValue, newtargets)];
+    result(actor: CombatActor, targets: CombatActor[], combatstate: CombatState): ResultPart[] {
+        return [new ResultPart(actor, this._type, this._fixedValue, targets)];
     }
 }
 
-/**
- * Evaluates the targetlist based on the current combat state and returns an updated list of targets with target changing effects taken into account.
- * @param targets The current list of targets as desired by a skill.
- * @param combatstate The current combat state.
- */
-function evaluate_targets (targets: CombatActor[], combatstate: CombatState): CombatActor[] {
-    throw new Error("Method not implemented.");
+/** Empty passive effect */
+export class EmptyPassiveSkill implements PassiveSkillTemplate {
+    constructor() {}
+    trigger_combat_act(actor: CombatActor, result: ResultPart[], combatState: CombatState): ResultPart[] {
+        return [];
+    }
+    trigger_combat_turn(actor: CombatActor, combatState: CombatState): ResultPart[] {
+        return [];
+    }
+    trigger_world_tick() {
+        return [];
+    }
+}
+
+/** Simple passive to provide status effects at the start of combat. */
+export class FixedValueCombatPassive implements PassiveSkillTemplate {
+    private _fixedValue: number | Status[];
+    private _type: ResultType;
+
+    /**
+     * Simple passive to provide status effects at the start of combat.
+     * @param value Fixed value of this skill. Either a number or a list of status effects.
+     * @param type Type of effect that this skill has.
+     */
+    constructor (value: number | Status[], type: ResultType) {
+        this._fixedValue = value;
+        this._type = type;
+    }
+
+    trigger_combat_act(actor: CombatActor, result: ResultPart[], combatstate: CombatState): ResultPart[] {
+        return [];
+    }
+    trigger_combat_turn(actor: CombatActor, combatstate: CombatState): ResultPart[] {
+        return [new ResultPart(actor, this._type, this._fixedValue, [actor])];
+    }
+    trigger_world_tick() {
+        return [];
+    }
 }

@@ -1,4 +1,5 @@
 declare interface String {
+    /** The familiar format function that replaces {0} inserts. */
     format(...args: string[]): string;
 }
 

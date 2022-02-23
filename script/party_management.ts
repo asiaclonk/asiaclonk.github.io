@@ -1,11 +1,12 @@
-import { VTuber } from "../data/vtubers.js";
+import { VTuber } from "../data/vtuber.js";
 import { random_zerobase } from "../common/utility.js";
+import { Database } from "../data/database.js";
 
 /**
  * Rolls a VTuber
  */
 export function summon_vtuber(): void {
-    var vtuber = VTuber.List[random_zerobase(VTuber.List.length)];
+    var vtuber = Database.VTubers.List[random_zerobase(Database.VTubers.List.length)];
     document.getElementById("name").innerHTML = vtuber.Name;
     document.getElementById("jpname").innerHTML = vtuber.NameJP;
     document.getElementById("oshimark").innerHTML = vtuber.OshiMark;
