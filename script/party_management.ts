@@ -1,4 +1,3 @@
-import { VTuber } from "../data/vtuber.js";
 import { random_zerobase } from "../common/utility.js";
 import { Database } from "../data/database.js";
 

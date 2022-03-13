@@ -1,4 +1,5 @@
-import { CombatActor, ResultPart } from "../script/combat_entity.js";
+import { ResultPart } from "../entity_combat/action_result.js";
+import { CombatActor } from "../entity_combat/combat_actor.js";
 import { CombatState } from "../script/combat_state.js";
 
 /**

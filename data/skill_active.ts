@@ -8,8 +8,9 @@ import { EmptyActiveSkill, FixedValueSkill } from "./skill_template.js";
  */
 export class ActiveSkill extends DataTemplate {
     //#region
-    /** Basic 6 damage skill, 10 cost. */
+    /** Basic 6 damage skill. 10 cost. Front only. */
     static ID_0000_InaccurateStrike = new ActiveSkill(0, new FixedValueSkill(6, ResultType.Damage), "Inaccurate Strike", "Strike the frontmost enemy for 6 damage.", "A familiar move for many veteran adventurers, but hard to master for newcomers.", "", 5, [SkillTarget.EnemyFront], 0, 0, -1, 3);
+    /** Basic 6 damage skill. 10 cost. */
     static ID_0001_Strike = new ActiveSkill(0, new FixedValueSkill(6, ResultType.Damage), "Strike", "Strike any enemy for 6 damage.", "Practice and experience.", "", 8, [SkillTarget.EnemyAny], 0, 0, -1, 3);
     //#endregion
 

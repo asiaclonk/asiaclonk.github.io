@@ -1,4 +1,4 @@
-import { CombatActor } from "./combat_entity.js";
+import { CombatActor } from "../entity_combat/combat_actor.js";
 import { CombatState } from "./combat_state.js";
 
 /**
@@ -6,7 +6,7 @@ import { CombatState } from "./combat_state.js";
  * @param targets The current list of targets as desired by a skill.
  * @param combatstate The current combat state.
  */
-function evaluate_targets (targets: CombatActor[], combatstate: CombatState): CombatActor[] {
+function evaluate_targets (aggressor: CombatActor, targets: CombatActor[], combatstate: CombatState): CombatActor[] {
     // TODO: implement
     return targets;
 }

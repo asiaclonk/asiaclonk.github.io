@@ -3,7 +3,7 @@ import { EnumType } from "./base_classes";
 /**
  * Collection of types of possible action results.
  */
- export class ResultType extends EnumType {
+export class ResultType extends EnumType {
     /** The acting entity is dealing damage. */
     static Damage = new ResultType("Damage", "The acting entity is dealing damage.");
     /** The acting entity is applying block. */
@@ -98,4 +98,34 @@ export class StatusType extends EnumType {
     static Rage = new StatusType("Rage", "Increases damage of the next offensive skill by the stack amount times two.");
     /** Prevents the stack amount of block from expiring next turn. */
     static OnGuard = new StatusType("On guard", "Prevents the stack amount of block from expiring next turn.");
+}
+
+/**
+ * Collection of common rarity descriptors.
+ */
+export class RarityText {
+    static Broken = "broken";
+    static Common = "common";
+    static Uncommon = "uncommon";
+    static Rare = "rare";
+    static Unique = "unique";
+}
+
+/**
+ * Collection of common item categories.
+ */
+export class CategoryText {
+    static Material = "material";
+    static Currency = "currency";
+    static Book = "book";
+    static Equipment = "equipment";
+}
+
+/**
+ * Collection of common descriptions.
+ */
+export class Descriptions {
+    static Book = "Read to gain its benefits.";
+    static Currency = "Spend it somewhere.";
+    static Material = "Used in recipes.";
 }

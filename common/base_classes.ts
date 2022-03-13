@@ -46,6 +46,16 @@ export class DataTemplate extends EnumType {
 }
 
 /**
+ * Base class for instanced entities.
+ */
+export class DataInstance {
+    /** The ID of this instance. Must be unique within its respective list. */
+    ID: number;
+    /** The Database ID that this instance is based on. */
+    DataID: number;
+}
+
+/**
  * Class for data collections.
  */
 export class DataCollection<T extends DataTemplate> {

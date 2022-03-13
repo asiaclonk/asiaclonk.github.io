@@ -2,7 +2,9 @@
 
 import { ResultType } from "../common/enum.js";
 import { ActiveSkillTemplate, PassiveSkillTemplate } from "../common/interface.js";
-import { CombatActor, ResultPart, Status } from "../script/combat_entity.js";
+import { ResultPart } from "../entity_combat/action_result.js";
+import { CombatActor } from "../entity_combat/combat_actor.js";
+import { Status } from "../entity_combat/status.js";
 import { CombatState } from "../script/combat_state.js";
 
 /** Empty skill effect */

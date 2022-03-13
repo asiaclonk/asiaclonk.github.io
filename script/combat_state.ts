@@ -1,5 +1,5 @@
-import { CombatActor } from "./combat_entity.js"
-import { ActionResult } from "./combat_entity.js"
+import { ActionResult } from "../entity_combat/action_result.js"
+import { CombatActor } from "../entity_combat/combat_actor.js"
 
 /**
  * An isolated instance of combat.
@@ -36,7 +36,7 @@ export class CombatState {
     }
 
     reset() {
-
+        //TODO: implement
     }
 }
 

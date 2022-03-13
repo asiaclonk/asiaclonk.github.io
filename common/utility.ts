@@ -22,29 +22,9 @@ export function random_zerobase(max: number): number {
 }
 
 /**
- * Object for holding coordinates.
- */
-export class Coordinate {
-    /** The X position. */
-    XPos: number;
-    /** The Y position. */
-    YPos: number;
-
-    /**
-     * Creates a new coordinate.
-     * @param x The X position.
-     * @param y The Y position.
-     */
-    constructor (x: number, y: number) {
-        this.XPos = x;
-        this.YPos = y;
-    }
-}
-
-/**
  * Object for bundling skills and level requirements.
  */
-export class SkillRequirement {
+export class SkillLevelRequirement {
     /** The level requirement for unlocking the accompanying skill. */
     RequiredLevel: number;
     /** The skill being locked behind the level requirement. */

@@ -1,8 +1,7 @@
 import { DataTemplate } from "../common/base_classes.js";
-import { SkillTarget, ResultType, StatusType } from "../common/enum.js";
+import { ResultType } from "../common/enum.js";
 import { PassiveSkillTemplate } from "../common/interface.js";
-import { Status } from "../script/combat_entity.js";
-import { EmptyPassiveSkill, FixedValueCombatPassive, FixedValueSkill } from "./skill_template.js";
+import { EmptyPassiveSkill, FixedValueCombatPassive } from "./skill_template.js";
 
 /**
  * Skills that provide passive bonuses.
