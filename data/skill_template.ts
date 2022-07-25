@@ -1,27 +1,27 @@
 // Collection of generic skills for ease of reuse
 
-import { ResultType } from "../common/enum.js";
-import { ActiveSkillTemplate, PassiveSkillTemplate } from "../common/interface.js";
-import { ResultPart } from "../entity_combat/action_result.js";
+import { ResultType, SkillTarget } from "../common/enum.js";
+import { ActiveSkillTemplate, GameEvent, PassiveSkillTemplate } from "../common/interface.js";
+import { CombatResultPart } from "../entity_combat/combat_result.js";
 import { CombatActor } from "../entity_combat/combat_actor.js";
-import { Status } from "../entity_combat/status.js";
-import { CombatState } from "../script/combat_state.js";
+import { Status } from "../entity_combat/combat_status.js";
+import { CombatState } from "../script_combat/combat_state.js";
 
 /** Empty skill effect */
 export class EmptyActiveSkill implements ActiveSkillTemplate {
     constructor() {}
-    result(actor: CombatActor, targets: CombatActor[], combatState: CombatState): ResultPart[] {
+    result(_actor: CombatActor, _targets: CombatActor[], _combatState: CombatState): CombatResultPart[] {
         return [];
     }
 }
 
-/** Simple skill to apply fixed values. */
+/** Simple skill to apply a single fixed value. */
 export class FixedValueSkill implements ActiveSkillTemplate {
     private _fixedValue: number | Status[];
     private _type: ResultType;
 
     /**
-     * Simple skill to apply fixed values.
+     * Simple skill to apply a single fixed value.
      * @param value Fixed value of this skill. Either a number or a list of status effects.
      * @param type Type of effect that this skill has.
      */
@@ -30,32 +30,33 @@ export class FixedValueSkill implements ActiveSkillTemplate {
         this._type = type;
     }
 
-    result(actor: CombatActor, targets: CombatActor[], combatstate: CombatState): ResultPart[] {
-        return [new ResultPart(actor, this._type, this._fixedValue, targets)];
+    result(actor: CombatActor, targets: CombatActor[], _combatstate: CombatState): CombatResultPart[] {
+        return [new CombatResultPart(actor, this._type, this._fixedValue, targets)];
     }
 }
 
 /** Empty passive effect */
 export class EmptyPassiveSkill implements PassiveSkillTemplate {
     constructor() {}
-    trigger_combat_act(actor: CombatActor, result: ResultPart[], combatState: CombatState): ResultPart[] {
+    triggerOnAction(_actor: CombatActor, _result: CombatResultPart[], _combatState: CombatState): CombatResultPart[] {
         return [];
     }
-    trigger_combat_turn(actor: CombatActor, combatState: CombatState): ResultPart[] {
+    triggerOnTurn(_actor: CombatActor, _combatState: CombatState): CombatResultPart[] {
         return [];
     }
-    trigger_world_tick() {
+    triggerOnTick() {
         return [];
     }
 }
 
-/** Simple passive to provide status effects at the start of combat. */
+/** Simple passive to provide status effects. */
 export class FixedValueCombatPassive implements PassiveSkillTemplate {
     private _fixedValue: number | Status[];
     private _type: ResultType;
+    private _targets: SkillTarget;
 
     /**
-     * Simple passive to provide status effects at the start of combat.
+     * Simple passive to provide status effects.
      * @param value Fixed value of this skill. Either a number or a list of status effects.
      * @param type Type of effect that this skill has.
      */
@@ -64,13 +65,16 @@ export class FixedValueCombatPassive implements PassiveSkillTemplate {
         this._type = type;
     }
 
-    trigger_combat_act(actor: CombatActor, result: ResultPart[], combatstate: CombatState): ResultPart[] {
+    triggerOnAction(_actor: CombatActor, _result: CombatResultPart[], _combatstate: CombatState): CombatResultPart[] {
         return [];
     }
-    trigger_combat_turn(actor: CombatActor, combatstate: CombatState): ResultPart[] {
-        return [new ResultPart(actor, this._type, this._fixedValue, [actor])];
+    triggerOnTurn(actor: CombatActor, _combatstate: CombatState): CombatResultPart[] {
+        return [new CombatResultPart(actor, this._type, this._fixedValue, [actor])];
     }
-    trigger_world_tick() {
-        return [];
+    triggerOnTick(): void {
+        return;
+    }
+    triggerOnEvent(_event: GameEvent): void {
+        return;
     }
 }

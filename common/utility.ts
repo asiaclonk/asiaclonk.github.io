@@ -1,5 +1,14 @@
-import { ActiveSkill } from "../data/skill_active.js";
-import { PassiveSkill } from "../data/skill_passive.js";
+import { GameEvent } from "./interface.js";
+
+/**
+ * Sum function for use in reduce.
+ * @param a Summand 1.
+ * @param b Summand 2.
+ * @returns The sum of a and b.
+ */
+export function sum(a: number, b: number) {
+    return a + b;
+}
 
 /**
  * Rolls a random integer between a and b, both inclusive.
@@ -7,7 +16,7 @@ import { PassiveSkill } from "../data/skill_passive.js";
  * @param b The other limit.
  * @returns A random integer between a and b.
  */
-export function random_int(a: number, b: number): number {
+export function randomInt(a: number, b: number): number {
     var range = Math.abs(b - a) + 1;
     return Math.min(a, b) + Math.floor(Math.random() * range);
 }
@@ -17,26 +26,31 @@ export function random_int(a: number, b: number): number {
  * @param max The upper limit.
  * @returns A random integer between 0 and max, not inclusive.
  */
-export function random_zerobase(max: number): number {
+export function randomZero(max: number): number {
     return Math.floor(Math.random() * max);
 }
 
 /**
- * Object for bundling skills and level requirements.
+ * Class for object oriented programming events.
  */
-export class SkillLevelRequirement {
-    /** The level requirement for unlocking the accompanying skill. */
-    RequiredLevel: number;
-    /** The skill being locked behind the level requirement. */
-    Skill: ActiveSkill | PassiveSkill;
+export class ClassEvent {
+    /** List of registered callbacks */
+    private _callbacks: ((eventArgs: any) => void)[];
 
-    /**
-     * Creates a new skill with a level requirement.
-     * @param requirement The level requirement for unlocking the accompanying skill.
-     * @param skill The skill being locked behind the level requirement.
-     */
-    constructor (requirement: number, skill: ActiveSkill | PassiveSkill) {
-        this.RequiredLevel = requirement;
-        this.Skill = skill;
+    /** Registers the given function to be called when the event is raised. */
+    register(callback: (eventArgs: any) => void): void {
+        this._callbacks.push(callback);
+    }
+
+    /** Removes the given function from the registered entries. */
+    unregister(callback: (eventArgs: any) => void): void {
+        let index = this._callbacks.indexOf(callback);
+        if (index != -1)
+            this._callbacks.splice(index);
+    }
+
+    /** Raises the event, calling all functions that have been registered so far */
+    raise(eventArgs: any): void {
+        this._callbacks.forEach(callback => callback(eventArgs));
     }
 }

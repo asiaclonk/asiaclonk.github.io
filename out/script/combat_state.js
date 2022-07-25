@@ -10,6 +10,7 @@ export class CombatState {
         this.Enemies = enemies;
     }
     reset() {
+        //TODO: implement
     }
 }
 /**

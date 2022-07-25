@@ -1,4 +1,4 @@
-import { Status } from "./status.js";
+import { Status } from "./combat_status.js";
 
 /**
  * Instanced VTubers and enemies for use in the battle simulator.
@@ -6,6 +6,8 @@ import { Status } from "./status.js";
 export class CombatActor {
     /** The display name of this actor. */
     Name: string;
+    /** A link to the Icon of this actor. */
+    Icon: string;
     /** The base strength of this actor, including equipment. This also acts as their base maximum health. */
     BaseStrength: number;
     /** The current strength of this actor, including status effects. This is used each turn to allocate usable skills. */
@@ -14,8 +16,10 @@ export class CombatActor {
     MaxHealth: number;
     /** The current health of this actor. Actors become incapacitated if it falls to 0. */
     Health: number;
-    /** Collection of status effects currently applied to this actor. */
+    /** A Collection of status effects currently applied to this actor. */
     Status: Status[];
+    /** The current position of this actor. */
+    Position: number; // TODO: define position
 
     /**
      * Creates a new CombatActor.

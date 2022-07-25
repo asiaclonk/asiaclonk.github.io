@@ -1,4 +1,4 @@
-import { EnumType } from "./base_classes";
+import { EnumType } from "./base_classes.js";
 
 /**
  * Collection of types of possible action results.
@@ -19,7 +19,7 @@ export class ResultType extends EnumType {
 }
 
 /**
- * Collection of possible targets for skill targeting descriptions.
+ * Collection of possible targets for skill targeting notes.
  */
 export class SkillTarget extends EnumType {
     /** The front player character. */
@@ -87,7 +87,9 @@ export class ExpirationTrigger extends EnumType {
     /** Expiration triggers when the entity makes an attack. */
     static Attacking = new ExpirationTrigger("Attacking", "Expiration triggers when the entity makes an attack.");
     /** Expiration triggers when the entity makes an attack. */
-    static StatusApplied = new ExpirationTrigger("Status applied", "Expiration triggers when another status is applied on the entity."); /** * @type {ExpirationTrigger} No expiration occurs. */ static None = new ExpirationTrigger("None", "No expiration occurs.");
+    static StatusApplied = new ExpirationTrigger("Status applied", "Expiration triggers when another status is applied on the entity.");
+    /** No expiration occurs. */
+    static None = new ExpirationTrigger("None", "No expiration occurs.");
 }
 
 /**
@@ -98,6 +100,24 @@ export class StatusType extends EnumType {
     static Rage = new StatusType("Rage", "Increases damage of the next offensive skill by the stack amount times two.");
     /** Prevents the stack amount of block from expiring next turn. */
     static OnGuard = new StatusType("On guard", "Prevents the stack amount of block from expiring next turn.");
+}
+
+/**
+ * Event types for skills and systems in the overworld.
+ */
+export class EventType extends EnumType {
+    /** An item was gained as loot. */
+    static ItemDrop = new EventType("Item looted", "An item was gained as loot.");
+    /** An item was bought from a vendor. */
+    static ItemBuy = new EventType("Purchase", "An item was bought from a vendor.");
+    /** An item was sold to a vendor. */
+    static ItemSell = new EventType("Sale", "An item was sold to a vendor.");
+    /** An item has been consumed. */
+    static ItemUse = new EventType("Item used", "An item has been consumed.");
+    /** A character has gained a level. */
+    static LevelUp = new EventType("Level up", "A character has gained a level.");
+    /** A character has gained experience. */
+    static XPGain = new EventType("Experience gain", "A character has gained experience points.");
 }
 
 /**
@@ -122,9 +142,9 @@ export class CategoryText {
 }
 
 /**
- * Collection of common descriptions.
+ * Collection of common Descriptions.
  */
-export class Descriptions {
+export class NoteText {
     static Book = "Read to gain its benefits.";
     static Currency = "Spend it somewhere.";
     static Material = "Used in recipes.";

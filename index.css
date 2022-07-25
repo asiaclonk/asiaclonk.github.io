@@ -1,0 +1,86 @@
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#map {
+    flex: 1 1 auto;
+    background-color: darkgreen;
+}
+
+#header, #bottom-menu {
+    z-index: 500;
+}
+
+#bottom-menu {
+    display: flex;
+    background-color: grey;
+    justify-content: space-evenly;
+    overflow: visible;
+}
+
+.bottom-tab {
+    flex: 1 1 auto;
+    background-color: antiquewhite;
+    margin-left: .5rem;
+    margin-right: .5rem;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
+    border-color: darkgray;
+    border-width: .2rem;
+    border-bottom: 0;
+    align-self: flex-end;
+    height: 90%;
+}
+
+.bottom-tab-extra {
+    display: none;
+}
+
+.bottom-tab-selected {
+    background-color: aquamarine;
+    height: 130%;    
+}
+
+[class*="bottom-tab"]:hover {
+    background-color: cadetblue;
+    height: 130%;
+}
+
+[class*="bottom-tab"]:active {
+    background-color: aquamarine;
+}
+
+.menu-header {
+    height: 2rem;
+    cursor: move;
+    z-index: 10;
+    background-color: #2196F3;
+    color: #fff;
+}
+
+.menu-body {
+    position: absolute;
+    background-color: antiquewhite;
+    border-radius: .5rem;
+    border-width: .2rem;
+    border-color: darkgray;
+    text-align: center;
+    overflow: hidden;
+}
+
+.animate {
+    transition-property: all;
+    transition-duration: .2s;
+}
+
+@media only screen and (min-width: 780px)
+{
+    .bottom-tab-extra { display: block; }
+}

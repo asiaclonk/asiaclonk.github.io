@@ -1,4 +1,13 @@
 /**
+ * Sum function for use in reduce.
+ * @param a Summand 1.
+ * @param b Summand 2.
+ * @returns The sum of a and b.
+ */
+export function sum(a, b) {
+    return a + b;
+}
+/**
  * Rolls a random integer between a and b, both inclusive.
  * @param a One of the limits.
  * @param b The other limit.
