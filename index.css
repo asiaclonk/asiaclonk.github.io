@@ -1,3 +1,11 @@
+* {
+    user-select: none;
+}
+
+img {
+    pointer-events: none;
+}
+
 html, body {
     height: 100%;
     width: 100%;
@@ -9,13 +17,19 @@ body {
     overflow: hidden;
 }
 
-#map {
-    flex: 1 1 auto;
-    background-color: darkgreen;
-}
-
 #header, #bottom-menu {
     z-index: 500;
+}
+
+#map {
+    flex: 1 1 auto;
+    background-image: url("./media/images/space.jpg");
+    background-repeat: repeat;
+    overflow: hidden;
+}
+
+#header {
+    background-color: cadetblue;
 }
 
 #bottom-menu {
@@ -59,13 +73,40 @@ body {
 
 .menu-header {
     height: 2rem;
-    cursor: move;
     z-index: 10;
+    display: flex;
+    padding-left: 10px;
+    font-weight: bold;
+    align-items: center;
     background-color: #2196F3;
-    color: #fff;
+}
+
+.menu-header-title {
+    flex: 1 1 auto;
+    cursor: move;
+    color: gainsboro;
+}
+
+.menu-close-button {
+    border: none;
+    width: 40px;
+    height: 100%;
+    background-color: darkred;
+}
+
+.menu-close-button:hover {
+    box-shadow: 0px 0px 3px 3px red inset;
+}
+
+.menu-close-button:active {
+    background-color: red;
 }
 
 .menu-body {
+    height: 70%;
+    width: 80%;
+    top: 10%;
+    left: 10%;
     position: absolute;
     background-color: antiquewhite;
     border-top-left-radius: .5rem;
@@ -73,25 +114,42 @@ body {
     border-bottom-left-radius: .2rem;
     border-bottom-right-radius: .2rem;
     border-width: .1rem;
-    border-color: darkgray;
     overflow: hidden;
     display: flex;
-    flex-direction: hidden;
-    opacity: 0;
-    transform: scale(.8,.8);
+    flex-direction: column;
 }
 
-.menu-show {
-    opacity: 1;
-    transform: scale(1,1);
+.menu-content {
+    background-color: orange;
+    flex: 1 1 auto;
 }
 
 .animate {
+    animation-duration: .2s;
+    animation-fill-mode: forwards;
+}
+
+.transition {
     transition-property: all;
     transition-duration: .2s;
+}
+
+.menu-body.show {
+    animation-name: popup;
+}
+
+.menu-body.hide {
+    animation-name: popup;
+    animation-direction: reverse;
 }
 
 @media only screen and (min-width: 600px)
 {
     .bottom-tab-extra { display: block; }
+    .menu-body { top: auto; left: auto; width: auto; height: auto; }
+}
+
+@keyframes popup {
+    from { transform: scale(.9,.9); opacity: 0; }
+    to { transform: scale(1,1); opacity: 1; }
 }

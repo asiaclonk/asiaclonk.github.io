@@ -1,4 +1,5 @@
 import { DataTemplate } from "../common/base_classes.js";
+import { Data_VTuber } from "../data/vtuber.js";
 import { VTuber } from "./vtuber.js";
 
 /**
@@ -8,7 +9,7 @@ import { VTuber } from "./vtuber.js";
     //#region Agency entries
     /** .LIVE, AppLand */
     static ID_0000_DOTLIVE = new Agency(0, ".LIVE", "VTuber group owned by AppLand. Home of Cyber Girl Siro and the former Idol Club.",
-        [VTuber.ID_0000_KaguraSuzu, VTuber.ID_0001_MokotaMememe]);
+        [Data_VTuber.ID_0000_KaguraSuzu, Data_VTuber.ID_0001_MokotaMememe]);
     //#endregion
 
     //#region Class definition

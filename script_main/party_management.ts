@@ -3,7 +3,7 @@ import { Data_VTuber } from "../data/vtuber.js";
 /**
  * Rolls a VTuber
  */
-export function summon_vtuber(): void {
+export function summonVtuber(): void {
     let vtuber = Data_VTuber.List.getRandom();
     document.getElementById("name").innerHTML = vtuber.Name;
     document.getElementById("jpname").innerHTML = vtuber.NameJP;

@@ -1,0 +1,1 @@
+{"version":3,"file":"combat_status.js","sourceRoot":"","sources":["../../entity_combat/combat_status.ts"],"names":[],"mappings":"AAEA;;GAEG;AACH,MAAM,OAAO,MAAM;IAQf;;;;;OAKG;IACH,YAAa,IAAgB,EAAE,UAAmB,EAAE,MAAc;QAC9D,IAAI,CAAC,UAAU,GAAG,UAAU,CAAC;QAC7B,IAAI,CAAC,MAAM,GAAG,MAAM,CAAC;QACrB,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;IACrB,CAAC;CACJ"}

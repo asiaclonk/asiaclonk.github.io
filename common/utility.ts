@@ -46,7 +46,7 @@ export class ClassEvent {
     unregister(callback: (eventArgs: any) => void): void {
         let index = this._callbacks.indexOf(callback);
         if (index != -1)
-            this._callbacks.splice(index);
+            this._callbacks.splice(index, 1);
     }
 
     /** Raises the event, calling all functions that have been registered so far */

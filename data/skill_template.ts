@@ -47,6 +47,9 @@ export class EmptyPassiveSkill implements PassiveSkillTemplate {
     triggerOnTick() {
         return [];
     }
+    triggerOnEvent(_event: GameEvent): void {
+        return;
+    }
 }
 
 /** Simple passive to provide status effects. */

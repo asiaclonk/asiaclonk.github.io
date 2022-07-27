@@ -5,7 +5,7 @@ import { ClassEvent } from "../common/utility.js";
 /** Lets all objects register and listen to events in a central location. */
 export class EventHub {
     /** List of registered listener functions. */
-    private static _listeners = new Map<string, ((eventArgs: GameEvent) => void)[]>;
+    private static _listeners = new Map<string, ((eventArgs: GameEvent) => void)[]>();
 
     /**
      * Lets the hub listen to your event.
@@ -50,7 +50,7 @@ export class EventHub {
 
             let index = group.indexOf(callback);
             while (index != -1) {
-                group.splice(index);
+                group.splice(index, 1);
                 index = group.indexOf(callback);
             }
         });
@@ -71,6 +71,6 @@ export class EventHub {
         });
 
         // Remove listeners that don't exist anymore
-        expired.forEach(callback => group.splice(group.indexOf(callback)));
+        expired.forEach(callback => group.splice(group.indexOf(callback), 1));
     }
 }

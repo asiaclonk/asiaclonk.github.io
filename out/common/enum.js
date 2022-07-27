@@ -96,6 +96,23 @@ StatusType.Rage = new StatusType("Rage", "Increases damage of the next offensive
 /** Prevents the stack amount of block from expiring next turn. */
 StatusType.OnGuard = new StatusType("On guard", "Prevents the stack amount of block from expiring next turn.");
 /**
+ * Event types for skills and systems in the overworld.
+ */
+export class EventType extends EnumType {
+}
+/** An item was gained as loot. */
+EventType.ItemDrop = new EventType("Item looted", "An item was gained as loot.");
+/** An item was bought from a vendor. */
+EventType.ItemBuy = new EventType("Purchase", "An item was bought from a vendor.");
+/** An item was sold to a vendor. */
+EventType.ItemSell = new EventType("Sale", "An item was sold to a vendor.");
+/** An item has been consumed. */
+EventType.ItemUse = new EventType("Item used", "An item has been consumed.");
+/** A character has gained a level. */
+EventType.LevelUp = new EventType("Level up", "A character has gained a level.");
+/** A character has gained experience. */
+EventType.XPGain = new EventType("Experience gain", "A character has gained experience points.");
+/**
  * Collection of common rarity descriptors.
  */
 export class RarityText {

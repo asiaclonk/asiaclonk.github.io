@@ -1,16 +1,16 @@
 // Collection of generic skills for ease of reuse
-import { ResultPart } from "../entity_combat/action_result.js";
+import { CombatResultPart } from "../entity_combat/combat_result.js";
 /** Empty skill effect */
 export class EmptyActiveSkill {
     constructor() { }
-    result(actor, targets, combatState) {
+    result(_actor, _targets, _combatState) {
         return [];
     }
 }
-/** Simple skill to apply fixed values. */
+/** Simple skill to apply a single fixed value. */
 export class FixedValueSkill {
     /**
-     * Simple skill to apply fixed values.
+     * Simple skill to apply a single fixed value.
      * @param value Fixed value of this skill. Either a number or a list of status effects.
      * @param type Type of effect that this skill has.
      */
@@ -18,27 +18,30 @@ export class FixedValueSkill {
         this._fixedValue = value;
         this._type = type;
     }
-    result(actor, targets, combatstate) {
-        return [new ResultPart(actor, this._type, this._fixedValue, targets)];
+    result(actor, targets, _combatstate) {
+        return [new CombatResultPart(actor, this._type, this._fixedValue, targets)];
     }
 }
 /** Empty passive effect */
 export class EmptyPassiveSkill {
     constructor() { }
-    trigger_combat_act(actor, result, combatState) {
+    triggerOnAction(_actor, _result, _combatState) {
         return [];
     }
-    trigger_combat_turn(actor, combatState) {
+    triggerOnTurn(_actor, _combatState) {
         return [];
     }
-    trigger_world_tick() {
+    triggerOnTick() {
         return [];
+    }
+    triggerOnEvent(_event) {
+        return;
     }
 }
-/** Simple passive to provide status effects at the start of combat. */
+/** Simple passive to provide status effects. */
 export class FixedValueCombatPassive {
     /**
-     * Simple passive to provide status effects at the start of combat.
+     * Simple passive to provide status effects.
      * @param value Fixed value of this skill. Either a number or a list of status effects.
      * @param type Type of effect that this skill has.
      */
@@ -46,14 +49,17 @@ export class FixedValueCombatPassive {
         this._fixedValue = value;
         this._type = type;
     }
-    trigger_combat_act(actor, result, combatstate) {
+    triggerOnAction(_actor, _result, _combatstate) {
         return [];
     }
-    trigger_combat_turn(actor, combatstate) {
-        return [new ResultPart(actor, this._type, this._fixedValue, [actor])];
+    triggerOnTurn(actor, _combatstate) {
+        return [new CombatResultPart(actor, this._type, this._fixedValue, [actor])];
     }
-    trigger_world_tick() {
-        return [];
+    triggerOnTick() {
+        return;
+    }
+    triggerOnEvent(_event) {
+        return;
     }
 }
 //# sourceMappingURL=skill_template.js.map
