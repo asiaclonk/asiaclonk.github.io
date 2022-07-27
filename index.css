@@ -68,11 +68,22 @@ body {
 .menu-body {
     position: absolute;
     background-color: antiquewhite;
-    border-radius: .5rem;
-    border-width: .2rem;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
+    border-bottom-left-radius: .2rem;
+    border-bottom-right-radius: .2rem;
+    border-width: .1rem;
     border-color: darkgray;
-    text-align: center;
     overflow: hidden;
+    display: flex;
+    flex-direction: hidden;
+    opacity: 0;
+    transform: scale(.8,.8);
+}
+
+.menu-show {
+    opacity: 1;
+    transform: scale(1,1);
 }
 
 .animate {
@@ -80,7 +91,7 @@ body {
     transition-duration: .2s;
 }
 
-@media only screen and (min-width: 780px)
+@media only screen and (min-width: 600px)
 {
     .bottom-tab-extra { display: block; }
 }
