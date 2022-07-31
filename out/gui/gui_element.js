@@ -1,7 +1,7 @@
 export class GUIElement {
     constructor(displayType = "flex") {
         this.Container = document.createElement("div");
-        this.Container.className = "menu-content";
+        this.Container.className = "menu-content menu-content-kagurasuzu"; // TODO: themes
         this.Container.style.display = displayType;
     }
     show() {

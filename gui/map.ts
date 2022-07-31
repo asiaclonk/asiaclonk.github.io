@@ -10,22 +10,27 @@ export class GUIMap {
     static enableDrag(): void {
         var map = document.getElementById("map");
         map.onmousedown = dragMapStart;
+        map.ontouchstart = dragMapStart;
 
-        function dragMapStart(e: MouseEvent): void {
+        function dragMapStart(e: UIEvent): void {
             if (e.target != map)
                 return;
 
             e.preventDefault();
-            let initX = e.clientX, initY = e.clientY;
+            let initX = e.type === "mousedown" ? (<MouseEvent>e).clientX : (<TouchEvent>e).targetTouches[0].pageX;
+            let initY = e.type === "mousedown" ? (<MouseEvent>e).clientY : (<TouchEvent>e).targetTouches[0].pageY;
             let initMapX = GUIMap._viewX, initMapY = GUIMap._viewY;
 
-            document.onmouseup = dragWindowEnd;
-            document.onmousemove = dragWindow;
+            document.onmouseup = dragMapEnd;
+            document.onmousemove = dragMap;
+            document.ontouchend = dragMapEnd;
+            document.ontouchmove = dragMap;
     
-            function dragWindow(e: DragEvent): void {
-                e.preventDefault();
-                let diffX = initX - e.clientX;
-                let diffY = initY - e.clientY;
+            function dragMap(e: UIEvent): void {
+                let newX = e.type === "mousemove" ? (<DragEvent>e).clientX : (<TouchEvent>e).targetTouches[0].pageX;
+                let newY = e.type === "mousemove" ? (<DragEvent>e).clientY : (<TouchEvent>e).targetTouches[0].pageY;
+                let diffX = initX - newX;
+                let diffY = initY - newY;
                 let left = Math.max(Math.min(initMapX + diffX, GUIMap._maxX - map.offsetWidth), 0);
                 let top = Math.max(Math.min(initMapY + diffY, GUIMap._maxY - map.offsetHeight), 0);
 
@@ -36,9 +41,11 @@ export class GUIMap {
                 map.style.backgroundPosition = bgX + "px " + bgY + "px";
             }
         
-            function dragWindowEnd(e: MouseEvent): void {
+            function dragMapEnd(): void {
                 document.onmouseup = null;
                 document.onmousemove = null;
+                document.ontouchend = null;
+                document.ontouchmove = null;
             }
         }
     }

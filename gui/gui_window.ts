@@ -63,11 +63,16 @@ export class GUIWindow {
         this._window.style.height = height + "px";
         this._width = width;
         this._height = height;
-        this._window.onmousedown = () => GUIManager.moveToTop(this);
+        this._window.onmousedown = (e) => { e.stopPropagation(); GUIManager.moveToTop(this); }
+        this._window.ontouchstart = (e) => { e.stopPropagation(); GUIManager.moveToTop(this); }
 
         let header = document.createElement("div");
         header.className = "menu-header";
         this._window.appendChild(header);
+
+        let headerStart = document.createElement("div");
+        headerStart.className = "menu-header-start";
+        header.appendChild(headerStart);
 
         let headerText = document.createElement("div");
         headerText.innerHTML = title;
@@ -81,18 +86,22 @@ export class GUIWindow {
 
         this.pushTab(firstTab);
 
-        this.enableDrag(headerText, this._window);
+        this.enableDrag(header, this._window, this._button);
 
         GUIManager.addWindow(this);
     }
 
-    private enableDrag(header: HTMLElement, body: HTMLElement): void {
+    private enableDrag(header: HTMLElement, body: HTMLElement, button: HTMLElement): void {
         header.onmousedown = dragWindowStart;
+        header.ontouchstart = dragWindowStart;
 
-        function dragWindowStart(e: MouseEvent): void {
-            e.stopPropagation();
+        function dragWindowStart(e: UIEvent): void {
+            if (e.target == button)
+                return;
+
             e.preventDefault();
-            let initX = e.clientX, initY = e.clientY;
+            let initX = e.type === "mousedown" ? (<MouseEvent>e).clientX : (<TouchEvent>e).targetTouches[0].pageX;
+            let initY = e.type === "mousedown" ? (<MouseEvent>e).clientY : (<TouchEvent>e).targetTouches[0].pageY;
             let initBodyX = body.offsetLeft, initBodyY = body.offsetTop;
             let headerHeight = document.getElementById("header").clientHeight;
             let right = document.getElementById("map").clientWidth;
@@ -100,12 +109,15 @@ export class GUIWindow {
 
             document.onmouseup = dragWindowEnd;
             document.onmousemove = dragWindow;
+            document.ontouchend = dragWindowEnd;
+            document.ontouchmove = dragWindow;
     
-            function dragWindow(e: DragEvent): void {
+            function dragWindow(e: UIEvent): void {
                 e.stopPropagation();
-                e.preventDefault();
-                let diffX = e.clientX - initX;
-                let diffY = e.clientY - initY;
+                let newX = e.type === "mousemove" ? (<DragEvent>e).clientX : (<TouchEvent>e).targetTouches[0].pageX;
+                let newY = e.type === "mousemove" ? (<DragEvent>e).clientY : (<TouchEvent>e).targetTouches[0].pageY;
+                let diffX = newX - initX;
+                let diffY = newY - initY;
                 let left = Math.max(Math.min(initBodyX + diffX, right - body.clientWidth), 0);
                 let top = Math.max(Math.min(initBodyY + diffY, bottom - body.clientHeight), 0 + headerHeight);
 
@@ -113,9 +125,11 @@ export class GUIWindow {
                 body.style.top = top + "px";
             }
         
-            function dragWindowEnd(e: MouseEvent): void {
+            function dragWindowEnd(): void {
                 document.onmouseup = null;
                 document.onmousemove = null;
+                document.ontouchend = null;
+                document.ontouchmove = null;
             }
         }
     }

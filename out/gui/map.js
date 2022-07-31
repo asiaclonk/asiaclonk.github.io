@@ -5,18 +5,23 @@ export class GUIMap {
     static enableDrag() {
         var map = document.getElementById("map");
         map.onmousedown = dragMapStart;
+        map.ontouchstart = dragMapStart;
         function dragMapStart(e) {
             if (e.target != map)
                 return;
             e.preventDefault();
-            let initX = e.clientX, initY = e.clientY;
+            let initX = e.type === "mousedown" ? e.clientX : e.targetTouches[0].pageX;
+            let initY = e.type === "mousedown" ? e.clientY : e.targetTouches[0].pageY;
             let initMapX = GUIMap._viewX, initMapY = GUIMap._viewY;
-            document.onmouseup = dragWindowEnd;
-            document.onmousemove = dragWindow;
-            function dragWindow(e) {
-                e.preventDefault();
-                let diffX = initX - e.clientX;
-                let diffY = initY - e.clientY;
+            document.onmouseup = dragMapEnd;
+            document.onmousemove = dragMap;
+            document.ontouchend = dragMapEnd;
+            document.ontouchmove = dragMap;
+            function dragMap(e) {
+                let newX = e.type === "mousemove" ? e.clientX : e.targetTouches[0].pageX;
+                let newY = e.type === "mousemove" ? e.clientY : e.targetTouches[0].pageY;
+                let diffX = initX - newX;
+                let diffY = initY - newY;
                 let left = Math.max(Math.min(initMapX + diffX, GUIMap._maxX - map.offsetWidth), 0);
                 let top = Math.max(Math.min(initMapY + diffY, GUIMap._maxY - map.offsetHeight), 0);
                 GUIMap._viewX = left;
@@ -25,9 +30,11 @@ export class GUIMap {
                 let bgY = -top % 1280;
                 map.style.backgroundPosition = bgX + "px " + bgY + "px";
             }
-            function dragWindowEnd(e) {
+            function dragMapEnd() {
                 document.onmouseup = null;
                 document.onmousemove = null;
+                document.ontouchend = null;
+                document.ontouchmove = null;
             }
         }
     }
