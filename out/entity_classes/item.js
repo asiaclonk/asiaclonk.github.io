@@ -1,5 +1,5 @@
-import { DataTemplate } from "../common/base_classes.js";
-import { CategoryText, RarityText } from "../common/enum.js";
+import { DataTemplate } from '../common/base_classes.js';
+import { CategoryText, RarityText } from '../common/enum.js';
 /** Base class for items that can be used, equipped and traded */
 export class Item extends DataTemplate {
     /**

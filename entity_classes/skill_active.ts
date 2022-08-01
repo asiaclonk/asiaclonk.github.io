@@ -1,7 +1,7 @@
-import { DataCollection, DataTemplate } from "../common/base_classes.js";
-import { SkillTarget, ResultType } from "../common/enum.js";
-import { ActiveSkillTemplate } from "../common/interface.js";
-import { EmptyActiveSkill, FixedValueSkill } from "../data/skill_template.js";
+import { DataCollection, DataTemplate } from '../common/base_classes.js';
+import { SkillTarget, ResultType } from '../common/enum.js';
+import { ActiveSkillTemplate } from '../common/interface.js';
+import { EmptyActiveSkill, FixedValueSkill } from '../data/skill_template.js';
 
 /**
  * Skills used in the battle simulator.

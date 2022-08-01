@@ -1,5 +1,5 @@
-import { CombatResult } from "../entity_combat/combat_result.js"
-import { CombatActor } from "../entity_combat/combat_actor.js"
+import { CombatResult } from '../entity_combat/combat_result.js'
+import { CombatActor } from '../entity_combat/combat_actor.js'
 
 /**
  * An isolated instance of combat.
@@ -42,7 +42,7 @@ export class CombatState {
      */
     addResult(result: CombatResult): void {
         if (!this._active){
-            console.log("Combat not active.");
+            console.log('Combat not active.');
             return;
         }
 

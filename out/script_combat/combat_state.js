@@ -24,7 +24,7 @@ export class CombatState {
      */
     addResult(result) {
         if (!this._active) {
-            console.log("Combat not active.");
+            console.log('Combat not active.');
             return;
         }
         this.CombatLog.push(result);

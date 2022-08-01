@@ -1,4 +1,4 @@
-import { randomZero } from "./utility.js";
+import { randomZero } from './utility.js';
 
 /**
  * Base class for defining enums.
@@ -15,8 +15,8 @@ export class EnumType {
      * @param note The Note of this enum entry.
      */
     constructor(name: string, note: string) {
-        this.Name = name ?? "Undefined";
-        this.Note = note ?? "This is as mysterious as it gets.";
+        this.Name = name ?? 'Undefined';
+        this.Note = note ?? 'This is as mysterious as it gets.';
     }
 }
 
@@ -42,8 +42,8 @@ export class DataTemplate extends EnumType {
     constructor (id: number, name?: string, note?: string, lore?: string, icon?: string) {
         super(name, note);
         this.ID = id;
-        this.Lore = lore ?? "Legend has it that the world beyond the boundaries of this land are rather... broken.";
-        this.Icon = icon ?? ""; //TODO: missing texture
+        this.Lore = lore ?? 'Legend has it that the world beyond the boundaries of this land are rather... broken.';
+        this.Icon = icon ?? ''; //TODO: missing texture
     }
 }
 
@@ -82,7 +82,7 @@ export class DataCollection<T extends DataTemplate> extends Array {
      */
     getById (id: number): T {
         if (this.length == 0)
-            throw new RangeError("This DataCollection is empty.");
+            throw new RangeError('This DataCollection is empty.');
 
         return this.find(entry => entry.ID == id) ?? this[0];
     }
@@ -93,7 +93,7 @@ export class DataCollection<T extends DataTemplate> extends Array {
      */
     getRandom(): T {
         if (this.length == 0)
-            throw new RangeError("This DataCollection is empty.");
+            throw new RangeError('This DataCollection is empty.');
         
         return this[randomZero(this.length)];
     }
@@ -105,7 +105,7 @@ export class DataCollection<T extends DataTemplate> extends Array {
      */
     getRandomList(amount: number): T[] {
         if (this.length == 0)
-            throw new RangeError("This DataCollection is empty.");
+            throw new RangeError('This DataCollection is empty.');
         
         let list = [];
         for (let i = 0; i < amount; i++) {
@@ -122,7 +122,7 @@ export class DataCollection<T extends DataTemplate> extends Array {
      */
     getRandomBag(amount: number): T[] {
         if (this.length == 0)
-            throw new RangeError("This DataCollection is empty.");
+            throw new RangeError('This DataCollection is empty.');
         if (this.length < amount)
             throw new RangeError(`This DataCollection has less elements (${this.length}) than the requested amount (${amount}).`);
 

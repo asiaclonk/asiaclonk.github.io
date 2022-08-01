@@ -1,6 +1,6 @@
-import { VTuberInstance } from "../entity_instance/vtuber.js";
-import { EventType } from "./enum.js";
-import { GameEvent } from "./interface.js";
+import { VTuberInstance } from '../entity_instance/vtuber.js';
+import { EventType } from './enum.js';
+import { GameEvent } from './interface.js';
 
 /** Notifies that a VTuber gains a level. */
 export class LevelUpEvent implements GameEvent {

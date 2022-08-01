@@ -1,6 +1,6 @@
-import { DataTemplate } from "../common/base_classes.js";
-import { Agency } from "./agency.js";
-import { VTuber } from "./vtuber.js";
+import { DataTemplate } from '../common/base_classes.js';
+import { Agency } from './agency.js';
+import { VTuber } from './vtuber.js';
 
 /**
  * Synergies for certain groups of VTubers that provide bonuses.
@@ -8,7 +8,7 @@ import { VTuber } from "./vtuber.js";
  export class VTuberSynergy extends DataTemplate {
     //#region
     /** Independent VTubers. */
-    static ID_0000_Gorillas = new Agency(0, "Gorillas", "Primal strength of modern society.", []);
+    static ID_0000_Gorillas = new Agency(0, 'Gorillas', 'Primal strength of modern society.', []);
     //#endregion
 
     //#region
@@ -25,7 +25,7 @@ import { VTuber } from "./vtuber.js";
      * @param members The members of this synergy.
      */
     constructor(id: number, name?: string, note?: string, members?: VTuber[]) {
-        super(id, name ?? "Undefined", note ?? "This is as mysterious as it gets.");
+        super(id, name ?? 'Undefined', note ?? 'This is as mysterious as it gets.');
         this.Members = members ?? [];
         this.Members.forEach((tuber) => tuber.Agency = this);
     }

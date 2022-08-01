@@ -1,6 +1,5 @@
-import { sum } from "../common/utility.js";
-import { Position } from "../common/struct.js";
-import { VTuberInstance } from "./vtuber.js";
+import { Position, sum } from '../common/utility.js';
+import { VTuberInstance } from './vtuber.js';
 
 export class Party {
     /** Current position of the Party. */

@@ -34,7 +34,7 @@ export class EventHub {
     static unregisterListener(callback, ...types) {
         types.forEach(type => {
             let group = this._listeners.get(type.Name);
-            if (typeof group === "undefined")
+            if (typeof group === 'undefined')
                 return;
             let index = group.indexOf(callback);
             while (index != -1) {
@@ -51,7 +51,7 @@ export class EventHub {
         let group = this._listeners.get(eventArgs.EventType.Name);
         let expired = [];
         group.forEach(callback => {
-            if (typeof callback === "function")
+            if (typeof callback === 'function')
                 callback(eventArgs);
             else
                 expired.push(callback);

@@ -1,28 +1,24 @@
-import { DataCollection, DataTemplate } from "../common/base_classes.js";
-import { MapTile } from "./map_tile.js";
+import { DataTemplate } from '../common/base_classes.js';
 
 /**
- * 
+ * Class for defining map properties such as gold gain and movement speed.
  */
 export class WorldMap extends DataTemplate {
-    //#region Map entries
-    /** The main world map. */
-    static ID_0000_WorldMap = new WorldMap([
-        []
-    ], 0, "World Map", "", "A world torn by isolation. Ripe with dungeons and loot!", "");
-    //#endregion
+    /** The matrix of movespeed multipliers. */
+    Move: number[][];
+    /** The matrix of XP gain per second. */
+    XP: number[][];
+    /** The matrix of gold gain per second. */
+    Gold: number[][];
+    /** The matrix of strength requirements. */
+    Danger: number[][];
+    /** The matrix of blocking tiles. */
+    Block: boolean[][];
 
-    /** The list of all maps. */
-    static Maps = new DataCollection<WorldMap>([
-        WorldMap.ID_0000_WorldMap
-    ]);
+    /** A link to the image of the map. */
+    Image: string;
 
-    //#region Class definition
-    /** The matrix of tiledata. */
-    MapData: MapTile[][];
-
-    constructor(mapData: MapTile[][], id: number, name?: string, note?: string, lore?: string, icon?: string) {
+    constructor(id: number, name?: string, note?: string, lore?: string, icon?: string) {
         super(id, name, note, lore, icon);
     }
-    //#endregion
 }

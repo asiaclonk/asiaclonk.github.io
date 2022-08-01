@@ -1,4 +1,4 @@
-import { DataTemplate } from "./base_classes.js";
+import { DataTemplate } from './base_classes.js';
 /**
  * Special enum of gamestate flags.
  */

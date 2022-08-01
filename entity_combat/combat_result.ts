@@ -1,6 +1,6 @@
-import { ResultType } from "../common/enum.js";
-import { CombatActor } from "./combat_actor.js";
-import { Status } from "./combat_status.js";
+import { ResultType } from '../common/enum.js';
+import { CombatActor } from './combat_actor.js';
+import { Status } from './combat_status.js';
 
 /**
  * One of many results from a skill activation.

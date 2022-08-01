@@ -1,6 +1,6 @@
-import { Item } from "../entity_classes/item.js";
-import { Party } from "./party.js";
-import { VTuberInstance } from "./vtuber.js";
+import { Item } from '../entity_classes/item.js';
+import { Party } from './party.js';
+import { VTuberInstance } from './vtuber.js';
 
 /**
  * Persistent player data.

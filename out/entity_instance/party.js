@@ -1,4 +1,4 @@
-import { sum } from "../common/utility.js";
+import { sum } from '../common/utility.js';
 export class Party {
     /** Combined strength of all party members. */
     get TotalStrength() {

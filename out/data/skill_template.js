@@ -1,5 +1,5 @@
 // Collection of generic skills for ease of reuse
-import { CombatResultPart } from "../entity_combat/combat_result.js";
+import { CombatResultPart } from '../entity_combat/combat_result.js';
 /** Empty skill effect */
 export class EmptyActiveSkill {
     constructor() { }

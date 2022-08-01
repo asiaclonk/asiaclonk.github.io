@@ -1,6 +1,6 @@
-import { DataCollection } from "../common/base_classes.js";
-import { CategoryText, NoteText, RarityText } from "../common/enum.js";
-import { Item } from "./item.js";
+import { DataCollection } from '../common/base_classes.js';
+import { CategoryText, NoteText, RarityText } from '../common/enum.js';
+import { Item } from './item.js';
 /**
  * Item class specific for currencies.
  */
@@ -22,7 +22,7 @@ export class Material extends Item {
 }
 //#region Material entries
 /** Basic material. */
-Material.ID_0000_Wood = new Material(0, "Wood", "The next best thing after your bare hands.", "", RarityText.Common, 10, 5);
+Material.ID_0000_Wood = new Material(0, 'Wood', 'The next best thing after your bare hands.', '', RarityText.Common, 10, 5);
 //#endregion
 /** The list of all materials. */
 Material.Materials = new DataCollection([

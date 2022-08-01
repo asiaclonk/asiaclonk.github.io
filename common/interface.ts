@@ -1,7 +1,7 @@
-import { CombatResultPart } from "../entity_combat/combat_result.js";
-import { CombatActor } from "../entity_combat/combat_actor.js";
-import { CombatState } from "../script_combat/combat_state.js";
-import { EventType } from "./enum.js";
+import { CombatResultPart } from '../entity_combat/combat_result.js';
+import { CombatActor } from '../entity_combat/combat_actor.js';
+import { CombatState } from '../script_combat/combat_state.js';
+import { EventType } from './enum.js';
 
 /**
  * Interface for skills that produce results.

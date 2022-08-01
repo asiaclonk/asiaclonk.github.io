@@ -1,7 +1,7 @@
-import { DataTemplate } from "../common/base_classes.js";
-import { CategoryText, RarityText } from "../common/enum.js";
-import { ActiveSkill } from "./skill_active.js";
-import { PassiveSkill } from "./skill_passive.js";
+import { DataTemplate } from '../common/base_classes.js';
+import { CategoryText, RarityText } from '../common/enum.js';
+import { ActiveSkill } from './skill_active.js';
+import { PassiveSkill } from './skill_passive.js';
 
 /** Base class for items that can be used, equipped and traded */
 export class Item extends DataTemplate {

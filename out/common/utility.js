@@ -44,4 +44,82 @@ export class ClassEvent {
         this._callbacks.forEach(callback => callback(eventArgs));
     }
 }
+/**
+ * A point in a two dimensional space.
+ */
+export class Point {
+    constructor(x, y) {
+        this.X = x;
+        this.Y = y;
+    }
+}
+/**
+ * A line between two points.
+ */
+export class Edge {
+}
+/**
+ * Class that defines a shape made of multiple edges.
+ */
+export class Shape {
+    checkPoint(first, second) {
+        if (first instanceof Point) {
+            return this.checkPoint_intern(first);
+        }
+        else if (typeof first === 'number' && typeof second === 'number') {
+            let point = new Point(first, second);
+            return this.checkPoint_intern(point);
+        }
+    }
+    checkPoint_intern(point) {
+        return false; // TODO: calculate
+    }
+}
+/** Grouping of all kinds of different things. */
+export class StateRequirement {
+}
+/**
+ * Grouping of skills and level requirements.
+ */
+export class SkillLevelRequirement {
+    /**
+     * Creates a new skill with a level requirement.
+     * @param requirement The level requirement for unlocking the accompanying skill.
+     * @param skill The skill being locked behind the level requirement.
+     */
+    constructor(requirement, skill) {
+        this.RequiredLevel = requirement;
+        this.Skill = skill;
+    }
+}
+/**
+ * Grouping of item and drop probability.
+ */
+export class ItemDrop {
+    /**
+     * Creates a new item drop.
+     * @param amount The amount of stacks that drops from this.
+     * @param item The item in question.
+     * @param weight The dropweight of the item compared to others.
+     */
+    constructor(item, amount, weight) {
+        this.Item = item;
+        this.Amount = amount;
+        this.Weight = weight;
+    }
+}
+/**
+ * Defines the position of a party in the game, on the map and inside dungeons.
+ */
+export class Position {
+    /**
+     * Creates a new position.
+     * @param x The X position on the current map.
+     * @param y The Y position on the current map.
+     */
+    constructor(x, y) {
+        this.XPos = x;
+        this.YPos = y;
+    }
+}
 //# sourceMappingURL=utility.js.map

@@ -1,0 +1,49 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Delete Out",
+            "command": "rm",
+            "args": [
+                "-force",
+                "-r",
+                "${workspaceFolder}\\out\\"
+            ]
+        },
+        {
+            "type": "typescript",
+            "tsconfig": "tsconfig.json",
+            "problemMatcher": [
+                "$tsc"
+            ],
+            "group": "build",
+            "label": "Compile TypeScript"
+        },
+        {
+            "type": "shell",
+            "label": "Copy Media",
+            "command": "cp",
+            "args": [
+                "-force",
+                "-r",
+                "${workspaceFolder}\\media\\",
+                "${workspaceFolder}\\out\\media\\"
+            ]
+        },
+        {
+            "label": "Full Rebuild",
+            "dependsOn": [
+                "Delete Out",
+                "Compile TypeScript",
+                "Copy Media"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

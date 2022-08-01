@@ -1,4 +1,4 @@
-import { Status } from "./combat_status.js";
+import { Status } from './combat_status.js';
 
 /**
  * Instanced VTubers and enemies for use in the battle simulator.

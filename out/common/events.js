@@ -1,4 +1,4 @@
-import { EventType } from "./enum.js";
+import { EventType } from './enum.js';
 /** Notifies that a VTuber gains a level. */
 export class LevelUpEvent {
     constructor(sender, gainedLevels) {

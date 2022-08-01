@@ -1,4 +1,4 @@
-import { DataInstance } from "../common/base_classes.js";
+import { DataInstance } from '../common/base_classes.js';
 /**
  *
  */

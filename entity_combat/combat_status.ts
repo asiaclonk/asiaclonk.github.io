@@ -1,4 +1,4 @@
-import { StatusType } from "../common/enum.js";
+import { StatusType } from '../common/enum.js';
 
 /**
  * Instanced status effects currently applied to an actor.

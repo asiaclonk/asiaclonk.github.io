@@ -1,6 +1,5 @@
-import { ItemDrop } from "../common/struct.js";
-import { randomInt, sum } from "../common/utility.js";
-import { Material } from "./item_material.js";
+import { ItemDrop, randomInt, sum } from '../common/utility.js';
+import { Material } from './item_material.js';
 /**
  * Grouping of items, dropweight and time to harvest.
  */

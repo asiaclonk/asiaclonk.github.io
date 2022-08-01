@@ -1,11 +1,11 @@
 // Collection of generic skills for ease of reuse
 
-import { ResultType, SkillTarget } from "../common/enum.js";
-import { ActiveSkillTemplate, GameEvent, PassiveSkillTemplate } from "../common/interface.js";
-import { CombatResultPart } from "../entity_combat/combat_result.js";
-import { CombatActor } from "../entity_combat/combat_actor.js";
-import { Status } from "../entity_combat/combat_status.js";
-import { CombatState } from "../script_combat/combat_state.js";
+import { ResultType, SkillTarget } from '../common/enum.js';
+import { ActiveSkillTemplate, GameEvent, PassiveSkillTemplate } from '../common/interface.js';
+import { CombatResultPart } from '../entity_combat/combat_result.js';
+import { CombatActor } from '../entity_combat/combat_actor.js';
+import { Status } from '../entity_combat/combat_status.js';
+import { CombatState } from '../script_combat/combat_state.js';
 
 /** Empty skill effect */
 export class EmptyActiveSkill implements ActiveSkillTemplate {

@@ -1,7 +1,7 @@
-import { DataInstance } from "../common/base_classes.js";
-import { ExperienceGainEvent, LevelUpEvent } from "../common/events.js";
-import { ClassEvent } from "../common/utility.js";
-import { Data_VTuber } from "../data/vtuber.js";
+import { DataInstance } from '../common/base_classes.js';
+import { ExperienceGainEvent, LevelUpEvent } from '../common/events.js';
+import { ClassEvent } from '../common/utility.js';
+import { Data_VTuber } from '../data/vtuber.js';
 
 export class VTuberInstance extends DataInstance {
     // Persistent

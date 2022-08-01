@@ -7,7 +7,7 @@ export class GUIManager {
      * @param window The new window.
      */
     static addWindow(window) {
-        window.setPosition(32 * (this._windows.length + 1), 32 * (this._windows.length + 1) + document.getElementById("header").clientHeight);
+        window.setPosition(32 * (this._windows.length + 1), 32 * (this._windows.length + 1) + document.getElementById('header').clientHeight);
         window.setIndex(this.startIndex + this._windows.length);
         this._windows.push(window);
         window.show();
@@ -43,28 +43,28 @@ GUIManager.startIndex = 100;
  * A window.
  */
 export class GUIWindow {
-    constructor(title = "Sample text", width, height, firstTab) {
+    constructor(title = 'Sample text', width, height, firstTab) {
         this._backendStack = [];
-        this._window = document.createElement("div");
-        this._window.className = "menu-body animate";
-        this._window.style.width = width + "px";
-        this._window.style.height = height + "px";
+        this._window = document.createElement('div');
+        this._window.className = 'menu-body animate';
+        this._window.style.width = width + 'px';
+        this._window.style.height = height + 'px';
         this._width = width;
         this._height = height;
         this._window.onmousedown = (e) => { e.stopPropagation(); GUIManager.moveToTop(this); };
         this._window.ontouchstart = (e) => { e.stopPropagation(); GUIManager.moveToTop(this); };
-        let header = document.createElement("div");
-        header.className = "menu-header";
+        let header = document.createElement('div');
+        header.className = 'menu-header';
         this._window.appendChild(header);
-        let headerStart = document.createElement("div");
-        headerStart.className = "menu-header-start";
+        let headerStart = document.createElement('div');
+        headerStart.className = 'menu-header-start';
         header.appendChild(headerStart);
-        let headerText = document.createElement("div");
+        let headerText = document.createElement('div');
         headerText.innerHTML = title;
-        headerText.className = "menu-header-title";
+        headerText.className = 'menu-header-title';
         header.appendChild(headerText);
-        this._button = document.createElement("button");
-        this._button.className = "menu-close-button transition";
+        this._button = document.createElement('button');
+        this._button.className = 'menu-close-button transition';
         this._button.onclick = () => GUIManager.removeWindow(this);
         header.appendChild(this._button);
         this.pushTab(firstTab);
@@ -78,26 +78,26 @@ export class GUIWindow {
             if (e.target == button)
                 return;
             e.preventDefault();
-            let initX = e.type === "mousedown" ? e.clientX : e.targetTouches[0].pageX;
-            let initY = e.type === "mousedown" ? e.clientY : e.targetTouches[0].pageY;
+            let initX = e.type === 'mousedown' ? e.clientX : e.targetTouches[0].pageX;
+            let initY = e.type === 'mousedown' ? e.clientY : e.targetTouches[0].pageY;
             let initBodyX = body.offsetLeft, initBodyY = body.offsetTop;
-            let headerHeight = document.getElementById("header").clientHeight;
-            let right = document.getElementById("map").clientWidth;
-            let bottom = document.getElementById("map").clientHeight + headerHeight;
+            let headerHeight = document.getElementById('header').clientHeight;
+            let right = document.getElementById('map').clientWidth;
+            let bottom = document.getElementById('map').clientHeight + headerHeight;
             document.onmouseup = dragWindowEnd;
             document.onmousemove = dragWindow;
             document.ontouchend = dragWindowEnd;
             document.ontouchmove = dragWindow;
             function dragWindow(e) {
                 e.stopPropagation();
-                let newX = e.type === "mousemove" ? e.clientX : e.targetTouches[0].pageX;
-                let newY = e.type === "mousemove" ? e.clientY : e.targetTouches[0].pageY;
+                let newX = e.type === 'mousemove' ? e.clientX : e.targetTouches[0].pageX;
+                let newY = e.type === 'mousemove' ? e.clientY : e.targetTouches[0].pageY;
                 let diffX = newX - initX;
                 let diffY = newY - initY;
                 let left = Math.max(Math.min(initBodyX + diffX, right - body.clientWidth), 0);
                 let top = Math.max(Math.min(initBodyY + diffY, bottom - body.clientHeight), 0 + headerHeight);
-                body.style.left = left + "px";
-                body.style.top = top + "px";
+                body.style.left = left + 'px';
+                body.style.top = top + 'px';
             }
             function dragWindowEnd() {
                 document.onmouseup = null;
@@ -121,39 +121,39 @@ export class GUIWindow {
             this._backendStack[-1].show();
     }
     show() {
-        document.getElementById("map").appendChild(this._window);
+        document.getElementById('map').appendChild(this._window);
         this._window.onanimationend = () => this.finishAnimation();
-        this._window.classList.add("show");
+        this._window.classList.add('show');
     }
     hide() {
         this._window.onanimationend = () => this.finishAnimation();
-        this._window.classList.add("hide");
+        this._window.classList.add('hide');
     }
     dispose() {
         this._window.onanimationend = () => this.disposeInternal();
         this._window.onmousedown = null;
         this._button.onclick = null;
-        this._window.classList.add("hide");
+        this._window.classList.add('hide');
     }
     setIndex(index) {
         this._window.style.zIndex = index.toString();
     }
     setPosition(left, top) {
-        let headerHeight = document.getElementById("header").clientHeight;
-        let right = document.getElementById("map").clientWidth;
-        let bottom = document.getElementById("map").clientHeight + headerHeight;
+        let headerHeight = document.getElementById('header').clientHeight;
+        let right = document.getElementById('map').clientWidth;
+        let bottom = document.getElementById('map').clientHeight + headerHeight;
         let boundLeft = Math.max(Math.min(left, right - this._width), 0);
         let boundTop = Math.max(Math.min(top, bottom - this._height), 0 + headerHeight);
-        this._window.style.left = boundLeft + "px";
-        this._window.style.top = boundTop + "px";
+        this._window.style.left = boundLeft + 'px';
+        this._window.style.top = boundTop + 'px';
     }
     finishAnimation() {
         this._window.onanimationend = null;
-        this._window.classList.remove("show", "hide");
+        this._window.classList.remove('show', 'hide');
     }
     disposeInternal() {
         this._window.onanimationend = null;
-        document.getElementById("map").removeChild(this._window);
+        document.getElementById('map').removeChild(this._window);
     }
 }
 //# sourceMappingURL=gui_window.js.map

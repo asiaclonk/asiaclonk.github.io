@@ -23,7 +23,7 @@ body {
 
 #map {
     flex: 1 1 auto;
-    background-image: url("./media/images/space.jpg");
+    background-image: url('./media/images/space.jpg');
     background-repeat: repeat;
     overflow: hidden;
 }
@@ -61,12 +61,12 @@ body {
     height: 130%;    
 }
 
-[class*="bottom-tab"]:hover {
+[class*='bottom-tab']:hover {
     background-color: cadetblue;
     height: 130%;
 }
 
-[class*="bottom-tab"]:active {
+[class*='bottom-tab']:active {
     background-color: aquamarine;
 }
 
@@ -159,21 +159,21 @@ body {
 /* Menu themes */
 
 .theme-kagurasuzu .menu-header {
-    background-image: url("./media/images/menu/kagurasuzu_header.png");
+    background-image: url('./media/images/menu/kagurasuzu_header.png');
 }
 
 .theme-kagurasuzu .menu-header-start {
-    background-image: url("./media/images/menu/kagurasuzu_header_start.png");
+    background-image: url('./media/images/menu/kagurasuzu_header_start.png');
 }
 
 .theme-kagurasuzu .menu-content {
     color: white;
-    border-image-source: url("./media/images/menu/kagurasuzu_window.png");
+    border-image-source: url('./media/images/menu/kagurasuzu_window.png');
 }
 
 .theme-kagurasuzu .menu-close-button {
     background-color: #fbf236;
-    background-image: url("./media/images/menu/kagurasuzu_close.png");
+    background-image: url('./media/images/menu/kagurasuzu_close.png');
 }
 
 .theme-kagurasuzu .menu-close-button:hover {

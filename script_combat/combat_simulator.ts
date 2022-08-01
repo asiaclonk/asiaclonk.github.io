@@ -1,6 +1,6 @@
-import { ActiveSkillTemplate } from "../common/interface.js";
-import { CombatActor } from "../entity_combat/combat_actor.js";
-import { CombatState } from "./combat_state.js";
+import { ActiveSkillTemplate } from '../common/interface.js';
+import { CombatActor } from '../entity_combat/combat_actor.js';
+import { CombatState } from './combat_state.js';
 
 export class CombatSimulator {
     /**

@@ -1,6 +1,6 @@
-import { EventType } from "../common/enum.js";
-import { GameEvent } from "../common/interface.js";
-import { ClassEvent } from "../common/utility.js";
+import { EventType } from '../common/enum.js';
+import { GameEvent } from '../common/interface.js';
+import { ClassEvent } from '../common/utility.js';
 
 /** Lets all objects register and listen to events in a central location. */
 export class EventHub {
@@ -45,7 +45,7 @@ export class EventHub {
     static unregisterListener(callback: (eventArgs: GameEvent) => void, ...types: EventType[]) {
         types.forEach(type => {
             let group = this._listeners.get(type.Name);
-            if (typeof group === "undefined")
+            if (typeof group === 'undefined')
                 return;
 
             let index = group.indexOf(callback);
@@ -64,7 +64,7 @@ export class EventHub {
         let group = this._listeners.get(eventArgs.EventType.Name);
         let expired: ((eventArgs: GameEvent) => void)[] = [];
         group.forEach(callback => {
-            if (typeof callback === "function")
+            if (typeof callback === 'function')
                 callback(eventArgs);
             else
                 expired.push(callback);

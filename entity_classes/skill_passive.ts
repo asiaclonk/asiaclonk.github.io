@@ -1,6 +1,6 @@
-import { DataTemplate } from "../common/base_classes.js";
-import { PassiveSkillTemplate } from "../common/interface.js";
-import { EmptyPassiveSkill } from "../data/skill_template.js";
+import { DataTemplate } from '../common/base_classes.js';
+import { PassiveSkillTemplate } from '../common/interface.js';
+import { EmptyPassiveSkill } from '../data/skill_template.js';
 
 /**
  * Skills that provide passive bonuses.

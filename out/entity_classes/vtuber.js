@@ -1,4 +1,4 @@
-import { DataTemplate } from "../common/base_classes.js";
+import { DataTemplate } from '../common/base_classes.js';
 /**
  * Data definitions of VTubers.
  */
@@ -19,8 +19,8 @@ export class VTuber extends DataTemplate {
     */
     constructor(id, nameEN, nameJP, oshimark, note, lore, xpCurve, strCurve, activeSkills, passiveSkills, links) {
         super(id, nameEN, note, lore);
-        this.NameJP = nameJP !== null && nameJP !== void 0 ? nameJP : "None";
-        this.OshiMark = oshimark !== null && oshimark !== void 0 ? oshimark : "None";
+        this.NameJP = nameJP !== null && nameJP !== void 0 ? nameJP : 'None';
+        this.OshiMark = oshimark !== null && oshimark !== void 0 ? oshimark : 'None';
         this.XPCurve = xpCurve !== null && xpCurve !== void 0 ? xpCurve : function (lvl) { return lvl * 100; };
         this.StrengthCurve = strCurve !== null && strCurve !== void 0 ? strCurve : function (lvl) { return lvl * 5; };
         this.ActiveSkills = activeSkills !== null && activeSkills !== void 0 ? activeSkills : [];

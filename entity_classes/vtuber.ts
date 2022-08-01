@@ -1,7 +1,6 @@
-import { DataCollection, DataTemplate } from "../common/base_classes.js";
-import { SkillLevelRequirement } from "../common/struct.js";
-import { Agency } from "./agency.js";
-import { ActiveSkill } from "./skill_active.js";
+import { DataTemplate } from '../common/base_classes.js';
+import { SkillLevelRequirement } from '../common/utility.js';
+import { Agency } from './agency.js';
 
 /**
  * A function type that should take a desired level and return the corresponding stat.
@@ -46,8 +45,8 @@ export class VTuber extends DataTemplate {
     */
     constructor(id: number, nameEN?: string, nameJP?: string, oshimark?: string, note?: string, lore?: string, xpCurve?: LevelCurve, strCurve?: LevelCurve, activeSkills?: SkillLevelRequirement[], passiveSkills?: SkillLevelRequirement[], links?: string[]) {
         super(id, nameEN, note, lore);
-        this.NameJP = nameJP ?? "None";
-        this.OshiMark = oshimark ?? "None";
+        this.NameJP = nameJP ?? 'None';
+        this.OshiMark = oshimark ?? 'None';
         this.XPCurve = xpCurve ?? function (lvl) { return lvl * 100 };
         this.StrengthCurve = strCurve ?? function (lvl) { return lvl * 5 };
         this.ActiveSkills = activeSkills ?? [];
