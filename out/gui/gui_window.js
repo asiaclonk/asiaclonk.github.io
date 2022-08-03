@@ -7,7 +7,7 @@ export class GUIManager {
      * @param window The new window.
      */
     static addWindow(window) {
-        window.setPosition(32 * (this._windows.length + 1), 32 * (this._windows.length + 1) + document.getElementById('header').clientHeight);
+        window.setPosition(32 * (this._windows.length + 1), 32 * (this._windows.length + 1));
         window.setIndex(this.startIndex + this._windows.length);
         this._windows.push(window);
         window.show();
@@ -69,6 +69,7 @@ export class GUIWindow {
         header.appendChild(this._button);
         this.pushTab(firstTab);
         this.enableDrag(header, this._window, this._button);
+        document.getElementById('map').appendChild(this._window);
         GUIManager.addWindow(this);
     }
     enableDrag(header, body, button) {
@@ -81,9 +82,8 @@ export class GUIWindow {
             let initX = e.type === 'mousedown' ? e.clientX : e.targetTouches[0].pageX;
             let initY = e.type === 'mousedown' ? e.clientY : e.targetTouches[0].pageY;
             let initBodyX = body.offsetLeft, initBodyY = body.offsetTop;
-            let headerHeight = document.getElementById('header').clientHeight;
             let right = document.getElementById('map').clientWidth;
-            let bottom = document.getElementById('map').clientHeight + headerHeight;
+            let bottom = document.getElementById('map').clientHeight;
             document.onmouseup = dragWindowEnd;
             document.onmousemove = dragWindow;
             document.ontouchend = dragWindowEnd;
@@ -95,7 +95,7 @@ export class GUIWindow {
                 let diffX = newX - initX;
                 let diffY = newY - initY;
                 let left = Math.max(Math.min(initBodyX + diffX, right - body.clientWidth), 0);
-                let top = Math.max(Math.min(initBodyY + diffY, bottom - body.clientHeight), 0 + headerHeight);
+                let top = Math.max(Math.min(initBodyY + diffY, bottom - body.clientHeight), 0);
                 body.style.left = left + 'px';
                 body.style.top = top + 'px';
             }
@@ -121,7 +121,6 @@ export class GUIWindow {
             this._backendStack[-1].show();
     }
     show() {
-        document.getElementById('map').appendChild(this._window);
         this._window.onanimationend = () => this.finishAnimation();
         this._window.classList.add('show');
     }
@@ -139,11 +138,10 @@ export class GUIWindow {
         this._window.style.zIndex = index.toString();
     }
     setPosition(left, top) {
-        let headerHeight = document.getElementById('header').clientHeight;
         let right = document.getElementById('map').clientWidth;
-        let bottom = document.getElementById('map').clientHeight + headerHeight;
+        let bottom = document.getElementById('map').clientHeight;
         let boundLeft = Math.max(Math.min(left, right - this._width), 0);
-        let boundTop = Math.max(Math.min(top, bottom - this._height), 0 + headerHeight);
+        let boundTop = Math.max(Math.min(top, bottom - this._height), 0);
         this._window.style.left = boundLeft + 'px';
         this._window.style.top = boundTop + 'px';
     }

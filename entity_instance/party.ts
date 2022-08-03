@@ -1,14 +1,19 @@
-import { Position, sum } from '../common/utility.js';
+import { Point, sum } from '../common/utility.js';
 import { VTuberInstance } from './vtuber.js';
 
 export class Party {
-    /** Current position of the Party. */
-    Position: Position;
-    /** List of references to VTuber instances from the player state. */
-    MemberIDs: number[];
-
-    /** List of VTuber instances to be filled at runtime. */
+    /** Current map where the party is on. */
+    MapId: number;
+    /** Coordinates where the party is currently on */
+    Coordinates: Point;
+    /** List of VTuber instances. */
     Members: VTuberInstance[]
+
+    constructor(coordinates: Point, mapId: number, members?: VTuberInstance[]) {
+        this.Coordinates = coordinates;
+        this.MapId = mapId,
+        this.Members = members ?? [];
+    }
 
     /** Combined strength of all party members. */
     get TotalStrength(): number {

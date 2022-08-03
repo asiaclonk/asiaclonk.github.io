@@ -43,7 +43,7 @@ export class DataTemplate extends EnumType {
         super(name, note);
         this.ID = id;
         this.Lore = lore ?? 'Legend has it that the world beyond the boundaries of this land are rather... broken.';
-        this.Icon = icon ?? ''; //TODO: missing texture
+        this.Icon = icon ?? './media/images/common/missing64x64.png';
     }
 }
 

@@ -1,6 +1,6 @@
 import { DataCollection } from '../common/base_classes.js';
 import { ResultType } from '../common/enum.js';
-import { PassiveSkill } from '../entity_classes/skill_passive.js';
+import { PassiveSkill } from '../entity_classes/skill.js';
 import { FixedValueCombatPassive } from './skill_template.js';
 
 export class Data_PassiveSkill {

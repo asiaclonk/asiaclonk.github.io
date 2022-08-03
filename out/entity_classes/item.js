@@ -1,6 +1,8 @@
 import { DataTemplate } from '../common/base_classes.js';
-import { CategoryText, RarityText } from '../common/enum.js';
-/** Base class for items that can be used, equipped and traded */
+import { CategoryText, NoteText, RarityText } from '../common/enum.js';
+/**
+ * Base class for items that can be used, equipped and traded.
+ */
 export class Item extends DataTemplate {
     /**
      * Creates a new item entry.
@@ -30,6 +32,58 @@ export class Item extends DataTemplate {
         this.DefaultSellValue = defaultSellValue !== null && defaultSellValue !== void 0 ? defaultSellValue : 0;
         this.ActiveSkills = activeSkills !== null && activeSkills !== void 0 ? activeSkills : [];
         this.PassiveSkills = passiveSkills !== null && passiveSkills !== void 0 ? passiveSkills : [];
+    }
+}
+/**
+ * Item class specific for currencies.
+ */
+export class Material extends Item {
+    /**
+     * Creates a new currency entry.
+     * @param id The ID of this item.
+     * @param name The name of this item.
+     * @param lore The flavor text of this item.
+     * @param icon The link to an image that represents this item.
+     * @param rarityText The rarity note of this item.
+     * @param defaultBuyValue The cost of this item to buy from shops if not explicitely set. Given in copper coins.
+     * @param defaultSellValue The value of this item when sold to a shop if not explicitely set. Given in copper coins.
+     */
+    constructor(id, name, lore, icon, rarityText, defaultBuyValue, defaultSellValue) {
+        super(id, name, NoteText.Material, lore, icon, rarityText, CategoryText.Material, true, true, false, defaultBuyValue, defaultSellValue);
+    }
+}
+/**
+ * Item class specific for key items.
+ */
+export class KeyItem extends Item {
+    /**
+     * Creates a new currency entry.
+     * @param id The ID of this item.
+     * @param name The name of this item.
+     * @param note The note of this item.
+     * @param lore The flavor text of this item.
+     * @param icon The link to an image that represents this item.
+     * @param rarityText The rarity note of this item.
+     * @param categoryText The category note of this item.
+     */
+    constructor(id, name, note, lore, icon, rarityText, categoryText, usable) {
+        super(id, name, note, lore, icon, rarityText, categoryText, true, false, usable);
+    }
+}
+/**
+ * Item class specific for currencies.
+ */
+export class Currency extends Item {
+    /**
+     * Creates a new currency entry.
+     * @param id The ID of this item.
+     * @param name The name of this item.
+     * @param lore The flavor text of this item.
+     * @param icon The link to an image that represents this item.
+     * @param rarityText The rarity note of this item.
+     */
+    constructor(id, name, lore, icon, rarityText) {
+        super(id, name, NoteText.Currency, lore, icon, rarityText, CategoryText.Currency, true, false, false);
     }
 }
 //# sourceMappingURL=item.js.map

@@ -7,9 +7,9 @@ import { VTuberInstance } from './vtuber.js';
  */
 export class PlayerState {
     /** The list of parties. */
-    Parties: Party[];
+    static Parties: Party[] = [];
     /** The list of VTubers. */
-    VTubers: VTuberInstance[];
+    static VTubers: VTuberInstance[] = [];
     /** The list of global items. */
-    Items: Item[];
+    static Items: Item[] = [];
 }

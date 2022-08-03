@@ -1,6 +1,6 @@
 import { DataCollection } from '../common/base_classes.js';
 import { ResultType, SkillTarget } from '../common/enum.js';
-import { ActiveSkill } from '../entity_classes/skill_active.js';
+import { ActiveSkill } from '../entity_classes/skill.js';
 import { FixedValueSkill } from './skill_template.js';
 export class Data_ActiveSkill {
 }

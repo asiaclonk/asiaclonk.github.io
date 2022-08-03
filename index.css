@@ -9,34 +9,92 @@ img {
 html, body {
     height: 100%;
     width: 100%;
+    font-family: sans-serif;
 }
 
 body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    margin: 0;
 }
 
-#header, #bottom-menu {
-    z-index: 500;
+.animate {
+    animation-duration: .2s;
+    animation-fill-mode: forwards;
 }
 
-#map {
-    flex: 1 1 auto;
-    background-image: url('./media/images/space.jpg');
-    background-repeat: repeat;
-    overflow: hidden;
+.transition {
+    transition-property: all;
+    transition-duration: .2s;
 }
+
+/* Header */
 
 #header {
     background-color: cadetblue;
+    z-index: 500;
+    display: flex;
 }
+
+#log {
+    flex: 1 1 auto;
+}
+
+#mouse-map {
+    font-weight: bold;
+}
+
+/* Map */
+
+#map {
+    flex: 1 1 auto;
+    background-image: url('./media/images/map/space.jpg');
+    background-repeat: repeat;
+    overflow: hidden;
+    position: relative;
+}
+
+#map-container {
+    position: inherit;
+}
+
+.place-node {
+    width: 4rem;
+    height: 4rem;
+    overflow: visible;
+    position: absolute;
+    background-repeat: no-repeat;
+    border-radius: .6rem;
+    cursor: pointer;
+}
+
+.place-node:hover {
+    box-shadow: 0 0 .3rem .3rem black inset;
+}
+
+.place-text {
+    top: 4rem;
+    left: 2rem;
+    transform: translateX(-50%);
+    text-align: center;
+    position: inherit;
+    border-radius: .3rem;
+    padding: .25rem;
+}
+
+.place-node:hover .place-text {
+    background-color: antiquewhite;
+}
+
+/* Bottom menu */
 
 #bottom-menu {
     display: flex;
     background-color: grey;
     justify-content: space-evenly;
     overflow: visible;
+    z-index: 500;
 }
 
 .bottom-tab {
@@ -70,27 +128,6 @@ body {
     background-color: aquamarine;
 }
 
-.animate {
-    animation-duration: .2s;
-    animation-fill-mode: forwards;
-}
-
-.transition {
-    transition-property: all;
-    transition-duration: .2s;
-}
-
-@media only screen and (min-width: 600px)
-{
-    .bottom-tab-extra-1 { display: block; }
-    .menu-body { top: auto; left: auto; width: auto; height: auto; }
-}
-
-@media only screen and (min-width: 768px)
-{
-    .bottom-tab-extra-2 { display: block; }
-}
-
 /* Menu */
 
 .menu-header {
@@ -108,9 +145,12 @@ body {
 }
 
 .menu-header-title {
-    padding-left: .3rem;
     flex: 1 1 auto;
     cursor: move;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .menu-close-button {
@@ -182,4 +222,17 @@ body {
 
 .theme-kagurasuzu .menu-close-button:active {
     background-color: red;
+}
+
+/* Scaling */
+
+@media only screen and (min-width: 600px)
+{
+    .bottom-tab-extra-1 { display: block; }
+    .menu-body { top: auto; left: auto; width: auto; height: auto; }
+}
+
+@media only screen and (min-width: 768px)
+{
+    .bottom-tab-extra-2 { display: block; }
 }

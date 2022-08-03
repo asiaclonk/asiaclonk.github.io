@@ -1,5 +1,5 @@
 import { DataInstance } from '../common/base_classes.js';
-import { ExperienceGainEvent, LevelUpEvent } from '../common/events.js';
+import { ExperienceGainEvent, LevelUpEvent } from '../common/event.js';
 import { ClassEvent } from '../common/utility.js';
 import { Data_VTuber } from '../data/vtuber.js';
 export class VTuberInstance extends DataInstance {
